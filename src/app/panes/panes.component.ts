@@ -1,0 +1,99 @@
+import {
+  AfterContentInit,
+  Component,
+  ContentChildren, ElementRef, HostBinding, Input, OnChanges,
+  OnInit,
+  QueryList, Renderer2, SimpleChanges,
+  ViewChild,
+  ViewContainerRef
+} from '@angular/core';
+import {PaneComponent} from '../pane/pane.component';
+import {Align, RelativeAlign, toAlign, toRelativeAlign} from './rtl-utils';
+
+@Component({
+  selector: 'ngx-panes',
+  templateUrl: './panes.component.html',
+  styleUrls: ['./panes.component.scss']
+})
+export class PanesComponent implements OnInit, AfterContentInit, OnChanges {
+  private _selectedPane: PaneComponent = null;
+  private _align: Align;
+  private _relativeAlign: RelativeAlign;
+
+  @ContentChildren(PaneComponent) panes: QueryList<PaneComponent>;
+
+  @Input() toggleable = true;
+  @Input()
+  set positionMode(value: RelativeAlign|Align){
+    console.log('setter called');
+    this._align = toAlign(value, this.getDir());
+    this._relativeAlign = toRelativeAlign(value, this.getDir());
+  }
+  get positionMode() {
+    return this._align;
+  }
+
+  @ViewChild('content', {read: ViewContainerRef}) contentHost: ViewContainerRef;
+  constructor(private $el: ElementRef, private renderer: Renderer2) { }
+
+  ngAfterContentInit(): void {
+    console.log('ngAfterContentInit', this.panes.toArray()[0], this.panes);
+    this.panesChanged();
+    this.panes.changes.subscribe(tabs => this.panesChanged());
+  }
+  ngOnInit() {
+    console.log('ngOnInit');
+    if (!this.positionMode) {
+      this.positionMode = 'start';
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+
+  }
+
+  public select(pane: PaneComponent) {
+    if (this._selectedPane !== pane) {
+      this.contentHost.clear();
+      this.contentHost.createEmbeddedView(pane.content);
+      this._selectedPane = pane;
+    }
+  }
+  public close() {
+    this.contentHost.clear();
+    this._selectedPane = null;
+  }
+
+  get width() {
+    if (this._selectedPane === null) {
+      return 0;
+    }
+    console.log('this._selectedPane.width', this._selectedPane.width);
+    return this._selectedPane.width;
+  }
+  private paneTabClicked(pane) {
+    if (this._selectedPane === pane && this.toggleable) {
+      this.close();
+    } else {
+      this.select(pane);
+    }
+  }
+
+  private panesChanged() {
+    if (!this._selectedPane) {
+      this.select(this.panes.first);
+    }
+  }
+
+  private getDir(): 'rtl'|'ltr' {
+    // TODO: revise
+    let el = this.$el.nativeElement.parentElement;
+    while (el && el.parentElement !== el) {
+      if (el.dir || el.style.direction) {
+        return el.dir || el.style.direction;
+      }
+      el = el.parentElement;
+    }
+    return 'ltr';
+  }
+}

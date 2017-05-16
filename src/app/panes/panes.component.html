@@ -1,0 +1,12 @@
+<div fxLayout="row" fxLayoutAlign="start stretch" class="wrapper" [ngClass]="[_align, _relativeAlign]">
+  <div fxLayout="column" class="tabs">
+    <div *ngFor="let pane of panes" class="tab" role="button" [class.active]="pane === _selectedPane"
+         (click)="paneTabClicked(pane)">
+      <span class="rotated">{{pane.title}}</span>
+    </div>
+  </div>
+  <div [style.width.px]="width" class="content-container">
+    <div class="header"></div>
+    <ng-container #content></ng-container>
+  </div>
+</div>

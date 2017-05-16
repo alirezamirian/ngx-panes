@@ -111,7 +111,7 @@
     "component-selector": [
       true,
       "element",
-      "app",
+      "ngx",
       "kebab-case"
     ],
     "use-input-property-decorator": true,

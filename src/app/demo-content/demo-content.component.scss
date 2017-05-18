@@ -1,0 +1,14 @@
+@import "~sass-bidi/main";
+.line{
+  margin: 10px;
+  height: 20px;
+  background: #eee;
+  &:nth-child(odd){
+    @include bidi-value(margin-left, 10px, 20px);
+    @include bidi-value(margin-right, 20px, 10px);
+  }
+  &:nth-child(even){
+    @include bidi-value(margin-left, 10px, 50px);
+    @include bidi-value(margin-right, 50px, 10px);
+  }
+}

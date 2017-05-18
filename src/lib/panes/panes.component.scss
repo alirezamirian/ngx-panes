@@ -1,18 +1,44 @@
-@mixin panes-theme($color-primary){
+@import '../scss/mixins';
+@import '../scss/functions/pick-visible-color';
+$border: 1px solid rgba(0, 0, 0, .1);
+$light-text-color: #eee;
+$dark-text-color: #333;
+
+@mixin panes-theme($color-primary, $color-background){
+  $tab-fg-color: lighten($light-text-color, 10%);
   .tab.active{
     background: $color-primary;
-    color: #fff;
+    color: pick-visible-color($color-primary, $dark-text-color, $tab-fg-color);
+  }
+  .tabs{
+    background: $color-background;
+    color: pick-visible-color($color-background, $dark-text-color, $tab-fg-color);
+  }
+  .header{
+    $bg: darken($color-background, 5%);
+    background: $bg;
+    color: pick-visible-color($bg, $dark-text-color, $light-text-color);
+  }
+  .wrapper{
+    background: lighten($color-background, 7%);
+    color: pick-visible-color($color-background, $dark-text-color, $light-text-color);
   }
 }
 
-@include panes-theme(#4756bf);
+@include panes-theme(#4756bf, #e9e9e9); // TODO: create a theming structure
+
 .tabs {
   width: 22px;
   line-height: 22px;
-  background: rgba(0,0,0,.1);
   overflow: hidden;
-  .wrapper.end &{
+  @include inside-end-aligned-pane{
     order: 1;
+  }
+  @include inside-left-aligned-pane{
+    border-right: $border;
+  }
+  @include inside-right-aligned-pane{
+    border-left: $border;
   }
 }
 
@@ -35,7 +61,7 @@
     float: left;
     margin-top: 100%;
   }
-  .wrapper.left &{
+  @include inside-left-aligned-pane {
     transform: rotate(-90deg);
     /*
     ┌────────┐                  ┌────────┐
@@ -45,8 +71,7 @@
     └────────┘                  └────────┘
   */
   }
-
-  .wrapper.right &{
+  @include inside-right-aligned-pane {
     transform: rotate(90deg);
     /*
     ┌────────┐                  ┌────────┐
@@ -78,8 +103,20 @@
 
 .wrapper {
   height: 100%;
+  @include if-left-aligned {
+    border-right: $border;
+  }
+  @include if-right-aligned {
+    border-left: $border;
+  }
 }
 
 .content-container {
-  overflow: hidden;
+  overflow: auto;
+}
+
+.header {
+  padding: 3px 5px;
+  border-bottom: $border;
+  @extend %border-bottom-shadow;
 }

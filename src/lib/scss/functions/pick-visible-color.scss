@@ -1,0 +1,16 @@
+@import 'luma';
+
+@function pick-visible-color($bg, $c1, $c2) {
+  $bg-luma: luma($bg);
+  $c1-luma: luma($c1);
+  $c2-luma: luma($c2);
+
+  $c1-diff: abs($bg-luma - $c1-luma);
+  $c2-diff: abs($bg-luma - $c2-luma);
+
+  @if $c1-diff > $c2-diff {
+    @return $c1;
+  } @else {
+    @return $c2;
+  }
+}

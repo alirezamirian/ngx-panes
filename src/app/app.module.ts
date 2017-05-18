@@ -6,15 +6,17 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {MdToolbarModule} from '@angular/material';
 
 import {AppComponent} from './app.component';
-import {PanesComponent} from './panes/panes.component';
+import {PanesComponent} from '../lib/panes/panes.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { PaneComponent } from './pane/pane.component';
+import { PaneComponent } from '../lib/pane/pane.component';
+import { DemoContentComponent } from './demo-content/demo-content.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PanesComponent,
-    PaneComponent
+    PaneComponent,
+    DemoContentComponent
   ],
   imports: [
     BrowserModule,

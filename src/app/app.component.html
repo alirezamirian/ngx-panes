@@ -1,11 +1,11 @@
-<div fxLayout="column" style="min-height: calc(100vh - 1px);">
+<div fxLayout="column" class="container">
   <md-toolbar color="primary">ngx-pane Demo</md-toolbar>
   <div fxFlex fxFlex="row" fxLayoutAlign="start stretch">
     <ngx-panes [positionMode]="'start'">
-      <ngx-pane title="npm">
-        start
+      <ngx-pane title="npm" [width]="300">
+        <ngx-demo-content lines="60"></ngx-demo-content>
       </ngx-pane>
-      <ngx-pane title="Project">
+      <ngx-pane title="Project" [width]="330">
         <div class="tab-content">Pane 1 {{title}}</div>
       </ngx-pane>
       <ngx-pane title="Structure" [width]="300">

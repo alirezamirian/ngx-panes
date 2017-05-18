@@ -5,8 +5,10 @@
       <span class="rotated">{{pane.title}}</span>
     </div>
   </div>
-  <div [style.width.px]="width" class="content-container">
-    <div class="header"></div>
-    <ng-container #content></ng-container>
+  <div [style.width.px]="width" fxLayout="column">
+    <div class="header">{{_selectedPane.title}}</div>
+    <div fxFlex class="content-container">
+      <ng-container #content></ng-container>
+    </div>
   </div>
 </div>

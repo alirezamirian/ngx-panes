@@ -5,8 +5,10 @@
       <ngx-pane title="npm" [width]="300">
         <ngx-demo-content lines="60"></ngx-demo-content>
       </ngx-pane>
-      <ngx-pane title="Project" [width]="330">
-        <div class="tab-content">Pane 1 {{title}}</div>
+      <ngx-pane id="test" title="Project" [width]="330" [resizable]="false">
+        <div class="pane-content">
+          This pane is not a resizable pane. it's fixed at <code>330px</code> width
+        </div>
       </ngx-pane>
       <ngx-pane title="Structure" [width]="300">
         Pane 2
@@ -17,10 +19,12 @@
     </div>
     <ngx-panes [positionMode]="'end'">
       <ngx-pane title="npm">
-        end
+        <div class="pane-content">
+          This pane is first pane in the set of "end attached" panes
+        </div>
       </ngx-pane>
       <ngx-pane title="Project">
-        <div class="tab-content">Pane 1 {{title}}</div>
+        <div class="pane-content">Pane 1 {{title}}</div>
       </ngx-pane>
       <ngx-pane title="Structure" [width]="300">
         Pane 2

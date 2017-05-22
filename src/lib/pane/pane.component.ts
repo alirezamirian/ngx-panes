@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, TemplateRef, ViewChild, ViewContainerRef} from '@angular/core';
+import {Component, Input, OnInit, TemplateRef, ViewChild} from '@angular/core';
 
 @Component({
   selector: 'ngx-pane',
@@ -9,6 +9,8 @@ export class PaneComponent implements OnInit {
 
   @Input() title: string;
   @Input() width: number;
+  @Input() resizable = true;
+  @Input() id: string;
 
   @ViewChild('content', {read: TemplateRef}) content;
   constructor() { }

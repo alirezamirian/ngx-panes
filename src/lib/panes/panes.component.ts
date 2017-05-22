@@ -1,9 +1,14 @@
 import {
   AfterContentInit,
   Component,
-  ContentChildren, ElementRef, HostBinding, Input, OnChanges,
+  ContentChildren,
+  ElementRef,
+  Input,
+  OnChanges,
   OnInit,
-  QueryList, Renderer2, SimpleChanges,
+  QueryList,
+  Renderer2,
+  SimpleChanges,
   ViewChild,
   ViewContainerRef
 } from '@angular/core';
@@ -31,6 +36,14 @@ export class PanesComponent implements OnInit, AfterContentInit, OnChanges {
   }
   get positionMode() {
     return this._align;
+  }
+
+  get selectedPane(): PaneComponent | null {
+    return this._selectedPane;
+  }
+
+  public isHorizontal(): boolean {
+    return this._align === 'left' || this._align === 'right';
   }
 
   @ViewChild('content', {read: ViewContainerRef}) contentHost: ViewContainerRef;
@@ -68,8 +81,12 @@ export class PanesComponent implements OnInit, AfterContentInit, OnChanges {
     if (this._selectedPane === null) {
       return 0;
     }
-    console.log('this._selectedPane.width', this._selectedPane.width);
     return this._selectedPane.width;
+  }
+
+  public getEffectivePaneWidth(): number {
+    console.log(this.contentHost.element.nativeElement);
+    return this.contentHost.element.nativeElement.parentElement.offsetWidth;
   }
   private paneTabClicked(pane) {
     if (this._selectedPane === pane && this.toggleable) {

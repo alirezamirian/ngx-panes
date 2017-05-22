@@ -5,10 +5,11 @@
       <span class="rotated">{{pane.title}}</span>
     </div>
   </div>
-  <div [style.width.px]="width" fxLayout="column">
+  <div [style.width.px]="isHorizontal() ? width : null" fxLayout="column" class="content-container">
     <div class="header">{{_selectedPane.title}}</div>
-    <div fxFlex class="content-container">
+    <div fxFlex class="content-wrapper">
       <ng-container #content></ng-container>
     </div>
+    <ngx-pane-resizer *ngIf="_selectedPane.resizable"></ngx-pane-resizer>
   </div>
 </div>

@@ -105,18 +105,45 @@ $dark-text-color: #333;
   height: 100%;
   @include if-left-aligned {
     border-right: $border;
+    @extend %border-right-shadow;
   }
   @include if-right-aligned {
     border-left: $border;
+    @extend %border-left-shadow;
   }
 }
 
-.content-container {
+.content-wrapper {
   overflow: auto;
+}
+
+.content-container {
+  overflow: hidden;
 }
 
 .header {
   padding: 3px 5px;
   border-bottom: $border;
   @extend %border-bottom-shadow;
+}
+
+ngx-pane-resizer {
+  $resizer-length: 6px;
+  position: absolute;
+  @include inside-horizontal-pane {
+    top: 0;
+    bottom: 0;
+    width: $resizer-length;
+  }
+  @include inside-left-aligned-pane {
+    cursor: e-resize;
+    left: 100%;
+    margin-left: -$resizer-length/2;
+  }
+  @include inside-right-aligned-pane {
+    cursor: w-resize;
+    right: 100%;
+    margin-right: -$resizer-length/2;
+  }
+  // TODO: handle vertical
 }

@@ -9,6 +9,12 @@
   }
 }
 
+@mixin inside-horizontal-pane {
+  .wrapper.right &, .wrapper.left & {
+    @content;
+  }
+}
+
 @mixin inside-start-aligned-pane {
   .wrapper.start &{
     @content;
@@ -27,6 +33,12 @@
 }
 @mixin if-right-aligned {
   &.right{
+    @content;
+  }
+}
+
+@mixin if-horizontal {
+  &.left, &.right {
     @content;
   }
 }

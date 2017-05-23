@@ -25,6 +25,8 @@ export class PanesComponent implements OnInit, AfterContentInit, OnChanges {
   private _align: Align;
   private _relativeAlign: RelativeAlign;
 
+  @ViewChild('contentContainer') private _contentContainer: ElementRef;
+
   @ContentChildren(PaneComponent) panes: QueryList<PaneComponent>;
 
   @Input() toggleable = true;
@@ -112,5 +114,9 @@ export class PanesComponent implements OnInit, AfterContentInit, OnChanges {
       el = el.parentElement;
     }
     return 'ltr';
+  }
+
+  public directResize(size) {
+    this._contentContainer.nativeElement.style.width = size + 'px';
   }
 }

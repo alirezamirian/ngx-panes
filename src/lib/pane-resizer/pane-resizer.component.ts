@@ -1,4 +1,4 @@
-import {Component, HostListener, OnInit} from '@angular/core';
+import {Component, HostListener, NgZone, OnInit} from '@angular/core';
 import {PanesComponent} from '../panes/panes.component';
 
 @Component({
@@ -10,8 +10,9 @@ export class PaneResizerComponent implements OnInit {
 
   private startPos: { x: number, y: number };
   private initialWidth: number;
+  private _lastSize: number;
 
-  constructor(private panes: PanesComponent) {
+  constructor(private panes: PanesComponent, private zone: NgZone) {
   }
 
   ngOnInit() {
@@ -30,8 +31,11 @@ export class PaneResizerComponent implements OnInit {
     };
     this.initialWidth = this.panes.getEffectivePaneWidth();
     $event.preventDefault();
-    document.addEventListener('mousemove', this.onMouseMove);
-    document.addEventListener('mouseup', this.onMouseUp);
+    this.zone.runOutsideAngular(() => {
+      document.addEventListener('mousemove', this.onMouseMove);
+    });
+
+    document.addEventListener('mouseup', this.onMouseUp, <any>{once: true} /*is it cross-browser?*/);
   }
 
   private onMouseMove(event: MouseEvent) {
@@ -51,13 +55,14 @@ export class PaneResizerComponent implements OnInit {
           movement = this.startPos.y - event.pageY;
           break;
       }
-      console.log('movement', movement, this.initialWidth);
-      this.panes.selectedPane.width = this.initialWidth + movement;
+      this._lastSize = this.initialWidth + movement;
+      this.panes.directResize(this._lastSize);
     }
   }
 
   private onMouseUp(event: MouseEvent) {
-    console.log('mouseup');
+    this.panes.selectedPane.width = this._lastSize;
     document.removeEventListener('mousemove', this.onMouseMove);
+    document.removeEventListener('mouseup', this.onMouseUp);
   }
 }

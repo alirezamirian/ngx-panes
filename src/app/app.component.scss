@@ -4,3 +4,9 @@
 .container{
   height: calc(100vh - 1px);
 }
+
+file-tree /deep/ {
+  ul.file-tree {
+    margin: 7px 0;
+  }
+}

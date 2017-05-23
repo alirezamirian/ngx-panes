@@ -2,16 +2,19 @@
   <md-toolbar color="primary">ngx-pane Demo</md-toolbar>
   <div fxFlex fxFlex="row" fxLayoutAlign="start stretch">
     <ngx-panes [positionMode]="'start'">
+      <ngx-pane #firstPane id="test" title="Project" [width]="330">
+        <file-tree [tree]="fileTree"
+                   (onChange)="clickFileTree($event)"
+                   [keyboardWatch]="true">
+        </file-tree>
+      </ngx-pane>
       <ngx-pane title="npm" [width]="300">
         <ngx-demo-content lines="60"></ngx-demo-content>
       </ngx-pane>
-      <ngx-pane id="test" title="Project" [width]="330" [resizable]="false">
-        <div class="pane-content">
-          This pane is not a resizable pane. it's fixed at <code>330px</code> width
-        </div>
-      </ngx-pane>
-      <ngx-pane title="Structure" [width]="300">
-        Pane 2
+      <ngx-pane title="Structure" [width]="300" [resizable]="false">
+
+        This pane is not a resizable pane. it's fixed at <code>330px</code> width
+
       </ngx-pane>
     </ngx-panes>
     <div fxFlex>

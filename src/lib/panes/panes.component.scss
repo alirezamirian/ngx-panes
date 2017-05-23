@@ -20,12 +20,13 @@ $dark-text-color: #333;
     color: pick-visible-color($bg, $dark-text-color, $light-text-color);
   }
   .wrapper{
-    background: lighten($color-background, 7%);
+    background: lighten($color-background, 5%);
     color: pick-visible-color($color-background, $dark-text-color, $light-text-color);
   }
 }
 
-@include panes-theme(#4756bf, #e9e9e9); // TODO: create a theming structure
+//@include panes-theme(#2d2f30, #3c3f41); // dark theme
+@include panes-theme(#4756bf, #e8e8e8); // TODO: create a theming structure
 
 .tabs {
   width: 22px;

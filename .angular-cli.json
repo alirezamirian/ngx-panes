@@ -52,6 +52,8 @@
   },
   "defaults": {
     "styleExt": "scss",
-    "component": {}
+    "component": {
+      "spec": false
+    }
   }
 }

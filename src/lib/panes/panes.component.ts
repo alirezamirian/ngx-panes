@@ -55,7 +55,7 @@ export class PanesComponent implements OnInit, AfterContentInit, OnChanges {
 
   ngAfterContentInit(): void {
     this.panesChanged();
-    this.panes.changes.subscribe(tabs => this.panesChanged());
+    this.panes.changes.subscribe(panes => this.panesChanged());
   }
   ngOnInit() {
     if (!this.positionMode) {
@@ -103,8 +103,14 @@ export class PanesComponent implements OnInit, AfterContentInit, OnChanges {
   }
 
   private panesChanged() {
+    const selectedPaneExists = this.panes.some(pane => pane === this.selectedPane);
+    if (!selectedPaneExists) {
+      this._selectedPane = null;
+    }
+
+    // TODO: let user choose whether automatic selection should be done or not and how
     if (!this._selectedPane) {
-      this.select(this.panes.first);
+      this.select(this.panes.last);
     }
   }
 

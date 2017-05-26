@@ -8,13 +8,18 @@ import {FileType, TreeNode} from 'ng2-file-tree';
 })
 export class AppComponent implements OnInit, DoCheck {
   title = 'app works!';
-  tabs = [];
+  panes = [];
   fileTree = null;
-  addPaneTab() {
-    this.tabs.push({
-      title: `Dynamic tab ${this.tabs.length + 1}`,
-      content: `Content of dynamic tab ${this.tabs.length + 1}`
+
+  addPane() {
+    this.panes.push({
+      title: `Dynamic tab ${this.panes.length + 1}`,
+      content: `Content of dynamic tab ${this.panes.length + 1}`
     });
+  }
+
+  removePane(pane) {
+    this.panes.splice(this.panes.indexOf(pane), 1);
   }
 
   clickFileTree(fileNode: TreeNode): void {

@@ -4,6 +4,7 @@ import {PaneComponent} from './pane/pane.component';
 import {PaneResizerComponent} from './pane-resizer/pane-resizer.component';
 import {CommonModule} from '@angular/common';
 import {FlexLayoutModule} from '@angular/flex-layout';
+import {PaneHeaderDirective} from './pane-header.directive';
 /**
  * Created by alireza on 5/22/17.
  */
@@ -17,11 +18,13 @@ import {FlexLayoutModule} from '@angular/flex-layout';
   declarations: [
     PanesComponent,
     PaneComponent,
-    PaneResizerComponent
+    PaneResizerComponent,
+    PaneHeaderDirective
   ],
   exports: [
     PanesComponent,
-    PaneComponent
+    PaneComponent,
+    PaneHeaderDirective
   ]
 })
 export class NgxPanesModule {

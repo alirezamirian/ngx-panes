@@ -1,4 +1,5 @@
-import {Component, Input, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {Component, ContentChild, Input, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {PaneHeaderDirective} from '../pane-header.directive';
 
 @Component({
   selector: 'ngx-pane',
@@ -12,6 +13,7 @@ export class PaneComponent implements OnInit {
   @Input() resizable = true;
   @Input() id: string;
 
+  @ContentChild(PaneHeaderDirective) header: PaneHeaderDirective;
   @ViewChild('content', {read: TemplateRef}) content;
   constructor() { }
 

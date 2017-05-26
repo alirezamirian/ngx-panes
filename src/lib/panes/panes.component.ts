@@ -29,6 +29,10 @@ export class PanesComponent implements OnInit, AfterContentInit, OnChanges {
 
   @ContentChildren(PaneComponent) panes: QueryList<PaneComponent>;
 
+  @ViewChild('content', {read: ViewContainerRef}) contentHost: ViewContainerRef;
+  @ViewChild('header', {read: ViewContainerRef}) headerHost: ViewContainerRef;
+
+  @Input() defaultWidth: number | null = null;
   @Input() toggleable = true;
   @Input()
   set positionMode(value: RelativeAlign|Align){
@@ -48,7 +52,6 @@ export class PanesComponent implements OnInit, AfterContentInit, OnChanges {
     return this._align === 'left' || this._align === 'right';
   }
 
-  @ViewChild('content', {read: ViewContainerRef}) contentHost: ViewContainerRef;
   constructor(private $el: ElementRef, private renderer: Renderer2) { }
 
   ngAfterContentInit(): void {
@@ -71,6 +74,11 @@ export class PanesComponent implements OnInit, AfterContentInit, OnChanges {
     if (this._selectedPane !== pane) {
       this.contentHost.clear();
       this.contentHost.createEmbeddedView(pane.content);
+
+      this.headerHost.clear();
+      if (pane.header) {
+        this.headerHost.createEmbeddedView(pane.header.templateRef);
+      }
       this._selectedPane = pane;
     }
   }
@@ -83,7 +91,7 @@ export class PanesComponent implements OnInit, AfterContentInit, OnChanges {
     if (this._selectedPane === null) {
       return 0;
     }
-    return this._selectedPane.width;
+    return this._selectedPane.width || this.defaultWidth;
   }
 
   public getEffectivePaneWidth(): number {

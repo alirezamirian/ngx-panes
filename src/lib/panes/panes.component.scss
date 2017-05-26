@@ -125,6 +125,9 @@ $dark-text-color: #333;
 .header {
   padding: 3px 5px;
   border-bottom: $border;
+  height: 18px;
+  overflow: hidden;
+  white-space: nowrap;
   @extend %border-bottom-shadow;
 }
 

@@ -8,7 +8,10 @@
   <div [style.width.px]="isHorizontal() ? width : null" fxLayout="column"
        #contentContainer
        class="content-container">
-    <div class="header">{{_selectedPane?.title}}</div>
+    <div class="header">
+      <ng-container #header></ng-container>
+      <ng-container *ngIf="!_selectedPane?.header">{{_selectedPane?.title}}</ng-container>
+    </div>
     <div fxFlex class="content-wrapper">
       <ng-container #content></ng-container>
     </div>

@@ -3,6 +3,7 @@
   <div fxFlex fxFlex="row" fxLayoutAlign="start stretch">
     <ngx-panes [positionMode]="'start'">
       <ngx-pane #firstPane id="test" title="Project" [width]="330">
+        <ng-template ngxPaneHeader>custom header {{firstPane.width}}</ng-template>
         <file-tree [tree]="fileTree"
                    (onChange)="clickFileTree($event)"
                    [keyboardWatch]="true">
@@ -18,22 +19,39 @@
       </ngx-pane>
     </ngx-panes>
     <div fxFlex>
-      <button (click)="addPaneTab()">Add another pane to left</button>
+      <div class="main-content">
+        Main content
+      </div>
     </div>
-    <ngx-panes [positionMode]="'end'">
-      <ngx-pane title="npm">
+    <ngx-panes [positionMode]="'end'" [defaultWidth]="250">
+      <ngx-pane #myPane title="Dynamic Tabs">
+        <ng-template ngxPaneHeader>
+          <div class="custom-header" fxLayout="row">
+            <button (click)="addPane()" md-icon-button
+                    mdTooltip="Add a new pane">
+              <md-icon>add</md-icon>
+            </button>
+            <span fxFlex></span>
+            <span>{{myPane.title}}</span>
+          </div>
+        </ng-template>
         <div class="pane-content">
           This pane is first pane in the set of "end attached" panes
         </div>
       </ngx-pane>
-      <ngx-pane title="Project">
-        <div class="pane-content">Pane 1 {{title}}</div>
-      </ngx-pane>
-      <ngx-pane title="Structure" [width]="300">
-        Pane 2
-      </ngx-pane>
-      <ngx-pane *ngFor="let tab of tabs" [title]="tab.title">
-        {{tab.content}}
+      <ngx-pane *ngFor="let pane of panes" [title]="pane.title">
+        <ng-template ngxPaneHeader>
+          <div class="custom-header" fxLayout="row">
+            <button (click)="removePane(pane)"
+                    md-icon-button mdTooltip="Remove this pane">
+              <md-icon>delete</md-icon>
+            </button>
+            <span fxFlex></span>
+            <span>{{pane.title}}</span>
+          </div>
+        </ng-template>
+
+        {{pane.content}}
       </ngx-pane>
     </ngx-panes>
   </div>

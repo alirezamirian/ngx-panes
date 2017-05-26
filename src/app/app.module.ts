@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import {FlexLayoutModule} from '@angular/flex-layout';
-import {MdToolbarModule} from '@angular/material';
+import {MdButtonModule, MdIconModule, MdToolbarModule, MdTooltipModule} from '@angular/material';
 import {Ng2FileTreeModule} from 'ng2-file-tree';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
@@ -24,6 +24,9 @@ import {NgxPanesModule} from '../lib/panes.module';
     HttpModule,
     FlexLayoutModule,
     MdToolbarModule,
+    MdButtonModule,
+    MdIconModule,
+    MdTooltipModule,
     Ng2FileTreeModule
   ],
   providers: [],

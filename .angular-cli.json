@@ -19,7 +19,8 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "ngx",
       "styles": [
-        "styles.css"
+        "styles.css",
+        "../node_modules/codemirror/lib/codemirror.css"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",

@@ -1,5 +1,4 @@
-import {Component, DoCheck, OnInit} from '@angular/core';
-import {FileType, TreeNode} from 'ng2-file-tree';
+import {Component, DoCheck} from '@angular/core';
 
 @Component({
   selector: 'app-root',

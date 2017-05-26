@@ -11,3 +11,11 @@
     }
   }
 }
+
+.main-content {
+  overflow: auto;
+}
+
+.main-content > div, /deep/ .CodeMirror {
+  height: 100%;
+}

@@ -21,9 +21,9 @@ import {Align, RelativeAlign, toAlign, toRelativeAlign} from './rtl-utils';
   styleUrls: ['./panes.component.scss']
 })
 export class PanesComponent implements OnInit, AfterContentInit, OnChanges {
-  private _selectedPane: PaneComponent = null;
-  private _align: Align;
-  private _relativeAlign: RelativeAlign;
+  public _selectedPane: PaneComponent = null;
+  public _align: Align;
+  public _relativeAlign: RelativeAlign;
 
   @ViewChild('contentContainer') private _contentContainer: ElementRef;
 
@@ -43,7 +43,7 @@ export class PanesComponent implements OnInit, AfterContentInit, OnChanges {
     return this._align;
   }
 
-  get selectedPane(): PaneComponent | null {
+  public get selectedPane(): PaneComponent | null {
     return this._selectedPane;
   }
 

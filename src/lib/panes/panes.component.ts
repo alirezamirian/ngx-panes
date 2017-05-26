@@ -36,7 +36,6 @@ export class PanesComponent implements OnInit, AfterContentInit, OnChanges {
   @Input() toggleable = true;
   @Input()
   set positionMode(value: RelativeAlign|Align){
-    console.log('setter called');
     this._align = toAlign(value, this.getDir());
     this._relativeAlign = toRelativeAlign(value, this.getDir());
   }
@@ -55,12 +54,10 @@ export class PanesComponent implements OnInit, AfterContentInit, OnChanges {
   constructor(private $el: ElementRef, private renderer: Renderer2) { }
 
   ngAfterContentInit(): void {
-    console.log('ngAfterContentInit', this.panes.toArray()[0], this.panes);
     this.panesChanged();
     this.panes.changes.subscribe(tabs => this.panesChanged());
   }
   ngOnInit() {
-    console.log('ngOnInit');
     if (!this.positionMode) {
       this.positionMode = 'start';
     }
@@ -95,7 +92,6 @@ export class PanesComponent implements OnInit, AfterContentInit, OnChanges {
   }
 
   public getEffectivePaneWidth(): number {
-    console.log(this.contentHost.element.nativeElement);
     return this.contentHost.element.nativeElement.parentElement.offsetWidth;
   }
   private paneTabClicked(pane) {

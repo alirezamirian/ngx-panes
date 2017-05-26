@@ -1,33 +1,31 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import {FlexLayoutModule} from '@angular/flex-layout';
-import {MdButtonModule, MdIconModule, MdToolbarModule, MdTooltipModule} from '@angular/material';
-import {Ng2FileTreeModule} from 'ng2-file-tree';
+import {MdToolbarModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import {AppComponent} from './app.component';
-import {DemoContentComponent} from './demo-content/demo-content.component';
 import {NgxPanesModule} from '../lib/panes.module';
+import {DemosModule} from './demos/demos.module';
+import {RoutedDemoComponent} from './routed-demo/routed-demo.component';
+import {AppRoutingModule} from './app-routing.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DemoContentComponent
+    RoutedDemoComponent
   ],
   imports: [
+    FlexLayoutModule,
     BrowserModule,
     BrowserAnimationsModule,
     NgxPanesModule,
-    FormsModule,
     HttpModule,
-    FlexLayoutModule,
     MdToolbarModule,
-    MdButtonModule,
-    MdIconModule,
-    MdTooltipModule,
-    Ng2FileTreeModule
+
+    AppRoutingModule,
+    DemosModule
   ],
   providers: [],
   bootstrap: [AppComponent]

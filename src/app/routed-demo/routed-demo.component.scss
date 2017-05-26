@@ -1,0 +1,9 @@
+:host {
+  height: 100%;
+}
+
+.demo-container /deep/ {
+  > * {
+    width: 100%;
+  }
+}

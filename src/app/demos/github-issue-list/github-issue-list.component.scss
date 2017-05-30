@@ -1,0 +1,16 @@
+md-list {
+  margin: 0;
+  padding: 0;
+}
+
+md-list-item {
+  border-bottom: 1px solid rgba(0, 0, 0, .08);
+  background: #fff;
+  /deep/ .mat-list-item-content {
+    height: 60px !important;
+  }
+  &:hover {
+    background: #f6f6f6;
+  }
+
+}

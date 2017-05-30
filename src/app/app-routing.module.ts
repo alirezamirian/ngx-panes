@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {RoutedDemoComponent} from './routed-demo/routed-demo.component';
 import {DemoResolverService} from './demo-resolver.service';
+import {demos} from './demos/demos';
 
 const routes: Routes = [
   {
@@ -13,7 +14,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: '/demos/1',
+    redirectTo: '/demos/' + demos[0].metadata.id,
     pathMatch: 'full'
   },
 ];

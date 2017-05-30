@@ -1,0 +1,12 @@
+<md-list>
+  <md-list-item *ngFor="let issue of issues">
+    <md-icon md-list-icon>{{issue.state === 'open' ? 'info_outline' : 'close'}}</md-icon>
+    <!--<img [src]="issue.user.avatar_url" md-list-avatar />-->
+    <h4 md-line mdTooltip="{{issue.title}}">{{issue.title}}</h4>
+    <p md-line>
+      <a [href]="issue.html_url">#{{issue.number}}</a>
+      <span *ngIf="issue.closed_at; else openedAt">closed at {{issue.closed_at | date}}</span>
+      <ng-template #openedAt>opened at {{issue.created_at | date}}</ng-template>
+    </p>
+  </md-list-item>
+</md-list>

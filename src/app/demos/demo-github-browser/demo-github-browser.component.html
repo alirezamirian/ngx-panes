@@ -1,22 +1,26 @@
-<ngx-panes [positionMode]="'start'">
-  <ngx-pane #firstPane id="test" title="Project" [width]="330">
+<ngx-panes [positionMode]="'start'" [defaultWidth]="280">
+  <ngx-pane #firstPane id="test" title="Files" [width]="330">
     <ng-template ngxPaneHeader>custom header {{firstPane.width}}</ng-template>
-    <file-tree [tree]="fileTree"
-               (onChange)="clickFileTree($event)"
-               [keyboardWatch]="true">
-    </file-tree>
+    <ngx-github-file-tree slug="angular/angular" (fileSelected)="downloadSrc($event)"></ngx-github-file-tree>
   </ngx-pane>
-  <ngx-pane title="npm" [width]="300">
-    <ngx-demo-content lines="60"></ngx-demo-content>
+  <ngx-pane title="Issues" [width]="320">
+    <ngx-github-issue-list slug="angular/angular"></ngx-github-issue-list>
   </ngx-pane>
-  <ngx-pane title="Structure" [width]="300" [resizable]="false">
-
-    This pane is not a resizable pane. it's fixed at <code>330px</code> width
+  <ngx-pane title="Contributors">
 
   </ngx-pane>
+  <ngx-pane title="Dummy">
+    <ngx-demo-content lines="40"></ngx-demo-content>
+  </ngx-pane>
+  <!--  <ngx-pane title="Structure" [width]="300" [resizable]="false">
+      This pane is not a resizable pane. it's fixed at <code>330px</code> width
+    </ngx-pane>-->
 </ngx-panes>
 <div fxFlex class="main-content">
-  <div #code></div>
+  <div #code [hidden]="loading"></div>
+  <div *ngIf="loading">
+    <md-progress-spinner mode="indeterminate" [strokeWidth]="4"></md-progress-spinner>
+  </div>
 </div>
 <ngx-panes [positionMode]="'end'" [defaultWidth]="250">
   <ngx-pane #myPane title="Dynamic Tabs">

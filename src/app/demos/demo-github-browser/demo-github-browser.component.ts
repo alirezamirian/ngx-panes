@@ -4,21 +4,21 @@ import * as CodeMirror from 'codemirror';
 import {Demo} from '../demos';
 import {Http} from '@angular/http';
 @Demo({
-  id: '1',
+  id: 'github-browser',
   title: 'First Demo',
   tags: ['Dynamic']
 })
 @Component({
   selector: 'ngx-demo-1',
-  templateUrl: './demo-1.component.html',
-  styleUrls: ['./demo-1.component.scss']
+  templateUrl: './demo-github-browser.component.html',
+  styleUrls: ['./demo-github-browser.component.scss']
 })
 export class Demo1Component implements OnInit, AfterViewInit {
+  loading = false;
   _code = '';
   cm: any;
 
   panes = [];
-  fileTree = null;
 
   set code(value) {
     if (this.cm) {
@@ -34,37 +34,13 @@ export class Demo1Component implements OnInit, AfterViewInit {
 
   @ViewChild('code') codeEl: ElementRef;
 
-  constructor(private zone: NgZone, private http: Http) {
+  constructor(private http: Http, private zone: NgZone) {
   }
 
   ngOnInit(): void {
-    this.http.get('/app/demos/demo-1/demo-1.component.ts')
-      .subscribe(res => this.code = res.text());
 
-    setTimeout(() => { // setTimeout is for a bug in ng2-file-tree
-      this.fileTree = new TreeNode({
-        'name': 'photos',
-        'type': FileType.dir,
-        'children': [
-          {
-            'name': 'summer',
-            type: FileType.dir,
-            'children': [
-              {
-                'name': 'june',
-                type: FileType.dir,
-                'children': [
-                  {
-                    'name': 'windsurf.jpg',
-                    type: FileType.file,
-                    children: null
-                  }]
-              }
-            ]
-          }
-        ]
-      });
-    });
+    this.http.get('/app/demos/demo-github-browser/demo-github-browser.component.ts')
+      .subscribe(res => this.code = res.text());
   }
 
   ngAfterViewInit(): void {
@@ -81,6 +57,15 @@ export class Demo1Component implements OnInit, AfterViewInit {
     });
   }
 
+  downloadSrc(githubFileDto) {
+    this.loading = true;
+    this.http.get(githubFileDto.download_url).subscribe(res => {
+      this.code = res.text();
+      this.loading = false;
+      setTimeout(() => this.cm.refresh());
+    });
+  }
+
   addPane() {
     this.panes.push({
       title: `Dynamic tab ${this.panes.length + 1}`,
@@ -91,10 +76,5 @@ export class Demo1Component implements OnInit, AfterViewInit {
   removePane(pane) {
     this.panes.splice(this.panes.indexOf(pane), 1);
   }
-
-  clickFileTree(fileNode: TreeNode): void {
-    console.log(fileNode);
-    console.log(fileNode.getFullPath());
-  }
-
 }
+

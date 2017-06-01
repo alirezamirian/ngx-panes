@@ -29,7 +29,7 @@ export class PaneResizerComponent implements OnInit {
       x: $event.pageX,
       y: $event.pageY
     };
-    this.initialWidth = this.panes.getEffectivePaneWidth();
+    this.initialWidth = this.panes.paneView.getWidth();
     $event.preventDefault();
     this.zone.runOutsideAngular(() => {
       document.addEventListener('mousemove', this.onMouseMove);

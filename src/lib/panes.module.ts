@@ -5,6 +5,7 @@ import {PaneResizerComponent} from './pane-resizer/pane-resizer.component';
 import {CommonModule} from '@angular/common';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {PaneHeaderDirective} from './pane-header.directive';
+import {PaneViewComponent} from './pane-view.component';
 /**
  * Created by alireza on 5/22/17.
  */
@@ -19,7 +20,8 @@ import {PaneHeaderDirective} from './pane-header.directive';
     PanesComponent,
     PaneComponent,
     PaneResizerComponent,
-    PaneHeaderDirective
+    PaneHeaderDirective,
+    PaneViewComponent
   ],
   exports: [
     PanesComponent,

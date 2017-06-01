@@ -12,9 +12,8 @@
       <ng-container #header></ng-container>
       <ng-container *ngIf="!_selectedPane?.header">{{_selectedPane?.title}}</ng-container>
     </div>
-    <div fxFlex class="content-wrapper">
-      <ng-container #content></ng-container>
-    </div>
+    <ngx-pane-view fxFlex *ngIf="_selectedPane" [pane]="_selectedPane">
+    </ngx-pane-view>
     <ngx-pane-resizer *ngIf="_selectedPane?.resizable"></ngx-pane-resizer>
   </div>
 </div>

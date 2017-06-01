@@ -14,6 +14,7 @@ import {
 } from '@angular/core';
 import {PaneComponent} from '../pane/pane.component';
 import {Align, RelativeAlign, toAlign, toRelativeAlign} from './rtl-utils';
+import {PaneViewComponent} from '../pane-view.component';
 
 @Component({
   selector: 'ngx-panes',
@@ -29,7 +30,8 @@ export class PanesComponent implements OnInit, AfterContentInit, OnChanges {
 
   @ContentChildren(PaneComponent) panes: QueryList<PaneComponent>;
 
-  @ViewChild('content', {read: ViewContainerRef}) contentHost: ViewContainerRef;
+  @ViewChild(PaneViewComponent) paneView: PaneViewComponent;
+
   @ViewChild('header', {read: ViewContainerRef}) headerHost: ViewContainerRef;
 
   @Input() defaultWidth: number | null = null;
@@ -69,9 +71,6 @@ export class PanesComponent implements OnInit, AfterContentInit, OnChanges {
 
   public select(pane: PaneComponent) {
     if (this._selectedPane !== pane) {
-      this.contentHost.clear();
-      this.contentHost.createEmbeddedView(pane.content);
-
       this.headerHost.clear();
       if (pane.header) {
         this.headerHost.createEmbeddedView(pane.header.templateRef);
@@ -80,7 +79,6 @@ export class PanesComponent implements OnInit, AfterContentInit, OnChanges {
     }
   }
   public close() {
-    this.contentHost.clear();
     this._selectedPane = null;
   }
 
@@ -91,9 +89,6 @@ export class PanesComponent implements OnInit, AfterContentInit, OnChanges {
     return this._selectedPane.width || this.defaultWidth;
   }
 
-  public getEffectivePaneWidth(): number {
-    return this.contentHost.element.nativeElement.parentElement.offsetWidth;
-  }
   private paneTabClicked(pane) {
     if (this._selectedPane === pane && this.toggleable) {
       this.close();

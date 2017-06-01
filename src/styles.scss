@@ -5,4 +5,18 @@
 
 body{
   margin: 0;
+  color: #555;
+}
+
+a:link {
+  color: #0366d6;
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
 }

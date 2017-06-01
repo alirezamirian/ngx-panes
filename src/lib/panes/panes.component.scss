@@ -125,9 +125,10 @@ ngx-pane-view {
 .header {
   padding: 3px 5px;
   border-bottom: $border;
-  height: 18px;
+  height: 24px;
   overflow: hidden;
   white-space: nowrap;
+  box-sizing: border-box;
   @extend %border-bottom-shadow;
 }
 

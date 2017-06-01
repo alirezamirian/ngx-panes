@@ -1,0 +1,25 @@
+md-list {
+  margin: 0;
+  padding: 0;
+}
+
+md-list-item {
+  border-bottom: 1px solid rgba(0, 0, 0, .08);
+  background: #fff;
+  /deep/ {
+    .mat-list-item-content {
+      height: 55px !important;
+    }
+    .mat-list-text {
+      font-size: 15px !important;
+    }
+    .mat-line:nth-child(n+2) {
+      font-size: .7em !important;
+      line-height: 180%;
+    }
+  }
+
+  &:hover {
+    background: #f6f6f6;
+  }
+}

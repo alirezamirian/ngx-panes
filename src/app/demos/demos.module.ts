@@ -16,13 +16,16 @@ import {DemoGithubBrowserComponent} from './demo-github-browser/demo-github-brow
 import {GithubFileTreeComponent} from './github-file-tree/github-file-tree.component';
 import {NoopXSRFStrategy} from './noop-xsrf-strategy';
 import {GithubIssueListComponent} from './github-issue-list/github-issue-list.component';
+import {GithubContributorsComponent} from './github-contributors/github-contributors.component';
+import {SharedModule} from '../shared/shared.module';
 export const entryComponents = [
   DemoGithubBrowserComponent
 ];
 const declarations = [
   DemoContentComponent,
   GithubFileTreeComponent,
-  GithubIssueListComponent
+  GithubIssueListComponent,
+  GithubContributorsComponent
 ].concat(<any>entryComponents);
 
 console.log(entryComponents);
@@ -30,7 +33,7 @@ console.log(entryComponents);
 
 @NgModule({
   imports: [
-    CommonModule,
+    SharedModule,
     FormsModule,
     HttpModule,
     FlexLayoutModule,

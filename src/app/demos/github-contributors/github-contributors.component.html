@@ -1,0 +1,9 @@
+<md-list>
+  <a [href]="user.html_url" *ngFor="let user of contributors">
+    <md-list-item>
+      <img [src]="user.avatar_url" md-list-avatar/>
+      <h4 md-line>{{user.login}}</h4>
+      <p md-line>{{user.contributions}} contributions</p>
+    </md-list-item>
+  </a>
+</md-list>

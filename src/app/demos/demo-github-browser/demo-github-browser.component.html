@@ -1,13 +1,13 @@
 <ngx-panes [positionMode]="'start'" [defaultWidth]="280">
   <ngx-pane #firstPane id="test" title="Files" [width]="330">
     <ng-template ngxPaneHeader>custom header {{firstPane.width}}</ng-template>
-    <ngx-github-file-tree slug="angular/angular" (fileSelected)="downloadSrc($event)"></ngx-github-file-tree>
+    <ngx-github-file-tree [slug]="slug" (fileSelected)="downloadSrc($event)"></ngx-github-file-tree>
   </ngx-pane>
   <ngx-pane title="Issues" [width]="320">
-    <ngx-github-issue-list slug="angular/angular"></ngx-github-issue-list>
+    <ngx-github-issue-list [slug]="slug"></ngx-github-issue-list>
   </ngx-pane>
   <ngx-pane title="Contributors">
-
+    <ngx-github-contributors [slug]="slug"></ngx-github-contributors>
   </ngx-pane>
   <ngx-pane title="Dummy">
     <ngx-demo-content lines="40"></ngx-demo-content>

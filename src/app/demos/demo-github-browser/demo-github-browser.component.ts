@@ -1,5 +1,4 @@
 import {AfterViewInit, Component, ElementRef, OnInit, ViewChild, NgZone} from '@angular/core';
-import {FileType, TreeNode} from 'ng2-file-tree';
 import * as CodeMirror from 'codemirror';
 import {Demo} from '../demos';
 import {Http} from '@angular/http';
@@ -17,6 +16,7 @@ export class DemoGithubBrowserComponent implements OnInit, AfterViewInit {
   loading = false;
   _code = '';
   cm: any;
+  slug = 'angular/angular';
 
   panes = [];
 

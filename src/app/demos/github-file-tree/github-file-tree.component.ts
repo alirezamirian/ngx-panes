@@ -26,7 +26,7 @@ export class GithubFileTreeComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.slug) {
+    if (changes.slug && this.slug) {
       if (!this.fileTree) {
         setTimeout(() => { // due to buggy behaviour of ng-file-tree
           this.fileTree = new TreeNode({

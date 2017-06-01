@@ -1,16 +1,16 @@
 <ngx-panes [positionMode]="'start'" [defaultWidth]="280">
   <ngx-pane #firstPane id="test" title="Files" [width]="330">
     <ng-template ngxPaneHeader>custom header {{firstPane.width}}</ng-template>
-    <ngx-github-file-tree [slug]="slug" (fileSelected)="downloadSrc($event)"></ngx-github-file-tree>
+    <app-github-file-tree [slug]="slug" (fileSelected)="downloadSrc($event)"></app-github-file-tree>
   </ngx-pane>
   <ngx-pane title="Issues" [width]="320">
-    <ngx-github-issue-list [slug]="slug"></ngx-github-issue-list>
+    <app-github-issue-list [slug]="slug"></app-github-issue-list>
   </ngx-pane>
   <ngx-pane title="Contributors">
-    <ngx-github-contributors [slug]="slug"></ngx-github-contributors>
+    <app-github-contributors [slug]="slug"></app-github-contributors>
   </ngx-pane>
   <ngx-pane title="Dummy">
-    <ngx-demo-content lines="40"></ngx-demo-content>
+    <app-demo-content lines="40"></app-demo-content>
   </ngx-pane>
   <!--  <ngx-pane title="Structure" [width]="300" [resizable]="false">
       This pane is not a resizable pane. it's fixed at <code>330px</code> width

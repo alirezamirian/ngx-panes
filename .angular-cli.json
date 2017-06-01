@@ -5,6 +5,7 @@
   },
   "apps": [
     {
+      "name": "ngx-panes site",
       "root": "src",
       "outDir": "dist",
       "assets": [
@@ -17,7 +18,7 @@
       "test": "test.ts",
       "tsconfig": "tsconfig.app.json",
       "testTsconfig": "tsconfig.spec.json",
-      "prefix": "ngx",
+      "prefix": "app",
       "styles": [
         "styles.scss",
         "../node_modules/codemirror/lib/codemirror.css"

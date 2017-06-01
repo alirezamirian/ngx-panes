@@ -3,7 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {DemoModel} from '../demos/demos';
 
 @Component({
-  selector: 'ngx-routed-demo',
+  selector: 'app-routed-demo',
   templateUrl: './routed-demo.component.html',
   styleUrls: ['./routed-demo.component.scss']
 })

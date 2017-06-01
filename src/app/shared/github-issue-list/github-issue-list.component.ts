@@ -3,7 +3,7 @@ import {Http} from '@angular/http';
 import {AbstractGithubComponent} from '../abstract-github-component';
 
 @Component({
-  selector: 'ngx-github-issue-list',
+  selector: 'app-github-issue-list',
   templateUrl: './github-issue-list.component.html',
   styleUrls: ['./github-issue-list.component.scss']
 })

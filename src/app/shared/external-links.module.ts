@@ -1,5 +1,4 @@
 import {Directive, ElementRef, NgModule, OnInit, Optional, Renderer2} from '@angular/core';
-import {NgModel} from '@angular/forms';
 
 @Directive({
   selector: '[externalLinks]'

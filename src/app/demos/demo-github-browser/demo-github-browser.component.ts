@@ -8,7 +8,7 @@ import {Http} from '@angular/http';
   tags: ['Dynamic']
 })
 @Component({
-  selector: 'ngx-demo-1',
+  selector: 'app-demo-1',
   templateUrl: './demo-github-browser.component.html',
   styleUrls: ['./demo-github-browser.component.scss']
 })

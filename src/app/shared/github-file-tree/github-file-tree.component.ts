@@ -3,7 +3,7 @@ import {FileType, TreeNode} from 'ng2-file-tree';
 import {Http} from '@angular/http';
 
 @Component({
-  selector: 'ngx-github-file-tree',
+  selector: 'app-github-file-tree',
   templateUrl: './github-file-tree.component.html',
   styleUrls: ['./github-file-tree.component.scss']
 })

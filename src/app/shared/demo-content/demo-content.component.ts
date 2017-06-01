@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
-  selector: 'ngx-demo-content',
+  selector: 'app-demo-content',
   templateUrl: './demo-content.component.html',
   styleUrls: ['./demo-content.component.scss']
 })

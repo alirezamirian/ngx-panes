@@ -10,7 +10,7 @@ import {NgxPanesModule} from '../lib/panes.module';
 import {DemosModule} from './demos/demos.module';
 import {RoutedDemoComponent} from './routed-demo/routed-demo.component';
 import {AppRoutingModule} from './app-routing.module';
-import {ExternalLinksContainerDirective, ExternalLinksDirective} from './shared/external-links.module';
+import {ExternalLinksContainerDirective, ExternalLinksDirective} from './shared/external-links/external-links.module';
 import {SharedModule} from './shared/shared.module';
 
 @NgModule({

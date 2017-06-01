@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {ExternalLinksModule} from './external-links.module';
+import {ExternalLinksModule} from './external-links/external-links.module';
 import {GithubContributorsComponent} from './github-contributors/github-contributors.component';
 import {GithubIssueListComponent} from './github-issue-list/github-issue-list.component';
 import {GithubFileTreeComponent} from './github-file-tree/github-file-tree.component';
@@ -8,8 +8,15 @@ import {DemoContentComponent} from './demo-content/demo-content.component';
 import {HttpModule} from '@angular/http';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {Ng2FileTreeModule} from 'ng2-file-tree';
-import {MdButtonModule, MdIconModule, MdListModule, MdTooltipModule} from '@angular/material';
+import {
+  MdButtonModule,
+  MdIconModule,
+  MdListModule,
+  MdProgressSpinnerModule,
+  MdTooltipModule
+} from '@angular/material';
 import {NgxPanesModule} from '../../lib/panes.module';
+import {AppLoadingComponent} from './loading.component';
 
 @NgModule({
   imports: [
@@ -17,16 +24,18 @@ import {NgxPanesModule} from '../../lib/panes.module';
     FlexLayoutModule,
     Ng2FileTreeModule, // used in GithubFileTreeComponent
     MdListModule, // used in GithubIssueListComponent and GithubContributorsComponent
-    // MdProgressSpinnerModule,
+    MdProgressSpinnerModule,
     MdTooltipModule,
     MdIconModule,
     MdButtonModule,
+    MdProgressSpinnerModule
   ],
   declarations: [
     DemoContentComponent,
     GithubFileTreeComponent,
     GithubIssueListComponent,
-    GithubContributorsComponent
+    GithubContributorsComponent,
+    AppLoadingComponent
   ],
   exports: [
     CommonModule,
@@ -50,7 +59,8 @@ import {NgxPanesModule} from '../../lib/panes.module';
     DemoContentComponent,
     GithubFileTreeComponent,
     GithubIssueListComponent,
-    GithubContributorsComponent
+    GithubContributorsComponent,
+    AppLoadingComponent
   ]
 })
 export class SharedModule {

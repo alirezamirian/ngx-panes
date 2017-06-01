@@ -1,0 +1,12 @@
+file-tree /deep/ {
+  a:hover {
+    text-decoration: none;
+  }
+
+  li {
+    cursor: default;
+  }
+  li:hover > a.file-item > div {
+    background: rgba(0, 0, 0, .05);
+  }
+}

@@ -22,35 +22,5 @@
     <md-progress-spinner mode="indeterminate" [strokeWidth]="4"></md-progress-spinner>
   </div>
 </div>
-<ngx-panes [positionMode]="'end'" [defaultWidth]="250">
-  <ngx-pane #myPane title="Dynamic Tabs">
-    <ng-template ngxPaneHeader>
-      <div class="custom-header" fxLayout="row">
-        <button (click)="addPane()" md-icon-button
-                mdTooltip="Add a new pane">
-          <md-icon>add</md-icon>
-        </button>
-        <span fxFlex></span>
-        <span>{{myPane.title}}</span>
-      </div>
-    </ng-template>
-    <div class="pane-content">
-      This pane is first pane in the set of "end attached" panes
-    </div>
-  </ngx-pane>
-  <ngx-pane *ngFor="let pane of panes" [title]="pane.title">
-    <ng-template ngxPaneHeader>
-      <div class="custom-header" fxLayout="row">
-        <button (click)="removePane(pane)"
-                md-icon-button mdTooltip="Remove this pane">
-          <md-icon>delete</md-icon>
-        </button>
-        <span fxFlex></span>
-        <span>{{pane.title}}</span>
-      </div>
-    </ng-template>
 
-    {{pane.content}}
-  </ngx-pane>
-</ngx-panes>
 

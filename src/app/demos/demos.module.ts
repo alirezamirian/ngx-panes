@@ -1,6 +1,4 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {DemoContentComponent} from './demo-content/demo-content.component';
 import {NgxPanesModule} from '../../lib/panes.module';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {MdButtonModule, MdIconModule, MdListModule, MdProgressSpinnerModule, MdTooltipModule} from '@angular/material';
@@ -13,20 +11,12 @@ import {DemoService} from './demo.service';
 import {FormsModule} from '@angular/forms';
 import {HttpModule, XSRFStrategy} from '@angular/http';
 import {DemoGithubBrowserComponent} from './demo-github-browser/demo-github-browser.component';
-import {GithubFileTreeComponent} from './github-file-tree/github-file-tree.component';
 import {NoopXSRFStrategy} from './noop-xsrf-strategy';
-import {GithubIssueListComponent} from './github-issue-list/github-issue-list.component';
-import {GithubContributorsComponent} from './github-contributors/github-contributors.component';
 import {SharedModule} from '../shared/shared.module';
 export const entryComponents = [
   DemoGithubBrowserComponent
 ];
-const declarations = [
-  DemoContentComponent,
-  GithubFileTreeComponent,
-  GithubIssueListComponent,
-  GithubContributorsComponent
-].concat(<any>entryComponents);
+const declarations = [].concat(<any>entryComponents);
 
 console.log(entryComponents);
 
@@ -34,18 +24,9 @@ console.log(entryComponents);
 @NgModule({
   imports: [
     SharedModule,
-    FormsModule,
-    HttpModule,
-    FlexLayoutModule,
-    MdButtonModule,
-    MdIconModule,
-    MdTooltipModule,
+    FormsModule, // used?
     MdProgressSpinnerModule,
-    MdListModule,
-    Ng2FileTreeModule,
     CodemirrorModule,
-
-    NgxPanesModule
   ],
   providers: [
     DemoService,

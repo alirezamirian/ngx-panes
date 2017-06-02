@@ -1,20 +1,19 @@
 import {NgModule} from '@angular/core';
-import {NgxPanesModule} from '../../lib/panes.module';
-import {FlexLayoutModule} from '@angular/flex-layout';
-import {MdButtonModule, MdIconModule, MdListModule, MdProgressSpinnerModule, MdTooltipModule} from '@angular/material';
-import {Ng2FileTreeModule} from 'ng2-file-tree';
+import {MdProgressSpinnerModule} from '@angular/material';
 import 'codemirror';
 import 'codemirror/mode/javascript/javascript';
 import {CodemirrorModule} from 'ng2-codemirror';
 
 import {DemoService} from './demo.service';
 import {FormsModule} from '@angular/forms';
-import {HttpModule, XSRFStrategy} from '@angular/http';
-import {DemoGithubBrowserComponent} from './demo-github-browser/demo-github-browser.component';
+import {XSRFStrategy} from '@angular/http';
+import {GithubBrowserDemoComponent} from './github-browser-demo/github-browser-demo.component';
 import {NoopXSRFStrategy} from './noop-xsrf-strategy';
 import {SharedModule} from '../shared/shared.module';
+import {ResizeDisabledDemoComponent} from './resize-disabled-demo/resize-disabled-demo.component';
 export const entryComponents = [
-  DemoGithubBrowserComponent
+  GithubBrowserDemoComponent,
+  ResizeDisabledDemoComponent
 ];
 const declarations = [].concat(<any>entryComponents);
 

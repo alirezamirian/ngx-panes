@@ -8,11 +8,11 @@ import {Http} from '@angular/http';
   tags: ['Dynamic']
 })
 @Component({
-  selector: 'app-demo-1',
-  templateUrl: './demo-github-browser.component.html',
-  styleUrls: ['./demo-github-browser.component.scss']
+  selector: 'app-github-browser-demo',
+  templateUrl: './github-browser-demo.component.html',
+  styleUrls: ['./github-browser-demo.component.scss']
 })
-export class DemoGithubBrowserComponent implements OnInit, AfterViewInit {
+export class GithubBrowserDemoComponent implements OnInit, AfterViewInit {
   loading = false;
   _code = '';
   cm: any;
@@ -39,7 +39,7 @@ export class DemoGithubBrowserComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
 
-    this.http.get('/app/demos/demo-github-browser/demo-github-browser.component.ts')
+    this.http.get('/app/demos/github-browser-demo/github-browser-demo.component.ts')
       .subscribe(res => this.code = res.text());
   }
 

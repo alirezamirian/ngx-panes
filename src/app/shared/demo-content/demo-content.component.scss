@@ -1,4 +1,8 @@
 @import "../../../../node_modules/sass-bidi/main";
+
+:host {
+  display: block;
+}
 .line{
   margin: 10px;
   height: 20px;

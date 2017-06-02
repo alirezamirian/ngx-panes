@@ -22,7 +22,7 @@ import {PaneViewComponent} from '../pane-view.component';
   styleUrls: ['./panes.component.scss']
 })
 export class PanesComponent implements OnInit, AfterContentInit, OnChanges {
-  public _selectedPane: PaneComponent = null;
+  private _selectedPane: PaneComponent = null;
   public _align: Align;
   public _relativeAlign: RelativeAlign;
 

@@ -1,6 +1,6 @@
 <div fxLayout="row" fxLayoutAlign="start stretch" class="wrapper" [ngClass]="[_align, _relativeAlign]">
   <div fxLayout="column" class="tabs">
-    <div *ngFor="let pane of panes" class="tab" role="button" [class.active]="pane === _selectedPane"
+    <div *ngFor="let pane of panes" class="tab" role="button" [class.active]="pane === selectedPane"
          (click)="paneTabClicked(pane)">
       <span class="rotated">{{pane.title}}</span>
     </div>
@@ -10,10 +10,10 @@
        class="content-container">
     <div class="header">
       <ng-container #header></ng-container>
-      <ng-container *ngIf="!_selectedPane?.header">{{_selectedPane?.title}}</ng-container>
+      <ng-container *ngIf="!selectedPane?.header">{{selectedPane?.title}}</ng-container>
     </div>
-    <ngx-pane-view fxFlex *ngIf="_selectedPane" [pane]="_selectedPane">
+    <ngx-pane-view fxFlex *ngIf="selectedPane" [pane]="selectedPane">
     </ngx-pane-view>
-    <ngx-pane-resizer *ngIf="_selectedPane?.resizable"></ngx-pane-resizer>
+    <ngx-pane-resizer *ngIf="selectedPane?.resizable"></ngx-pane-resizer>
   </div>
 </div>

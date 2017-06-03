@@ -1,8 +1,13 @@
 import {NgModule} from '@angular/core';
 import {MdProgressSpinnerModule} from '@angular/material';
 import 'codemirror';
-import 'codemirror/mode/javascript/javascript';
-import {CodemirrorModule} from 'ng2-codemirror';
+import 'codemirror/mode/javascript/javascript.js';
+import 'codemirror/addon/fold/foldcode.js';
+import 'codemirror/addon/fold/foldgutter.js';
+import 'codemirror/addon/fold/brace-fold.js';
+import 'codemirror/addon/fold/indent-fold.js';
+import 'codemirror/addon/edit/closebrackets.js';
+import 'codemirror/addon/edit/matchbrackets.js';
 
 import {DemoService} from './demo.service';
 import {FormsModule} from '@angular/forms';
@@ -24,8 +29,7 @@ console.log(entryComponents);
   imports: [
     SharedModule,
     FormsModule, // used?
-    MdProgressSpinnerModule,
-    CodemirrorModule,
+    MdProgressSpinnerModule
   ],
   providers: [
     DemoService,

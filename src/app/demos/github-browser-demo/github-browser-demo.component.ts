@@ -2,7 +2,7 @@ import {AfterViewInit, Component, ElementRef, OnInit, ViewChild, NgZone} from '@
 import * as CodeMirror from 'codemirror';
 import {Demo} from '../demos';
 import {Http} from '@angular/http';
-import {MdProgressSpinner, ProgressSpinnerMode} from '@angular/material';
+
 @Demo({
   id: 'github-browser',
   title: 'Github Browser',
@@ -54,8 +54,13 @@ export class GithubBrowserDemoComponent implements OnInit, AfterViewInit {
           name: 'javascript',
           typescript: true
         },
+        foldGutter: true,
+        gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
         lineNumbers: true,
+        autoCloseBrackets: true,
+        matchBrackets: true
       });
+      (<any>window).cm = this.cm;
     });
   }
 

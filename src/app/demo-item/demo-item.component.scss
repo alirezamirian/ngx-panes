@@ -1,0 +1,40 @@
+md-list-item {
+  &:hover {
+    background: #fafafa;
+  }
+  border-left: 2px solid transparent;
+  border-bottom: 1px solid rgba(0, 0, 0, .1);
+
+  &:focus, &:active {
+    outline: none;
+    border-left: 2px solid rgba(0, 0, 0, .1);
+  }
+}
+
+:host:last-child, :host:last-of-type /deep/ md-list-item {
+  border-bottom: 0;
+}
+
+md-chip-list {
+  margin: 8px 0 0 0;
+  display: block;
+  &:focus {
+    outline: none;
+  }
+}
+
+[md-list-icon] {
+  min-width: 24px;
+}
+
+md-chip {
+  cursor: pointer;
+  &:focus {
+    outline: none;
+  }
+  padding: 5px 10px !important;
+}
+
+.desc {
+  color: rgba(0, 0, 0, .5);
+}

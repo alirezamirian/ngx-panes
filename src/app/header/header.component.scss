@@ -1,0 +1,25 @@
+md-toolbar /deep/ md-toolbar-row:first-child {
+  display: none;
+}
+
+md-toolbar-row:nth-child(2) {
+  height: 30px;
+  font-size: .7em;
+  align-items: flex-end;
+}
+
+md-toolbar-row:nth-child(3) {
+  height: 55px;
+}
+
+a, :host /deep/ a {
+  color: rgba(255, 255, 255, .4);
+}
+
+app-breadcrumb /deep/ a {
+  color: #fff !important;
+}
+
+a {
+  margin-right: 20px;
+}

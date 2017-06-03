@@ -4,7 +4,8 @@ import {Demo} from '../demos';
 @Demo({
   id: 'resize-disabled',
   title: 'Resizable Disabled',
-  description: 'Demonstrates options regarding disabling pane resizing'
+  description: 'Demonstrates options regarding disabling pane resizing',
+  tags: ['Resizing']
 })
 @Component({
   selector: 'app-resize-disabled-demo',

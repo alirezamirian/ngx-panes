@@ -2,10 +2,12 @@ import {AfterViewInit, Component, ElementRef, OnInit, ViewChild, NgZone} from '@
 import * as CodeMirror from 'codemirror';
 import {Demo} from '../demos';
 import {Http} from '@angular/http';
+import {MdProgressSpinner, ProgressSpinnerMode} from '@angular/material';
 @Demo({
   id: 'github-browser',
-  title: 'First Demo',
-  tags: ['Dynamic']
+  title: 'Github Browser',
+  description: 'A small application of ngx-panes for browsing a github repo content',
+  tags: ['Basic Usage', 'Resizing']
 })
 @Component({
   selector: 'app-github-browser-demo',

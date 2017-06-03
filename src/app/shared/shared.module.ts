@@ -28,7 +28,7 @@ import {AppLoadingComponent} from './loading.component';
     MdTooltipModule,
     MdIconModule,
     MdButtonModule,
-    MdProgressSpinnerModule
+    ExternalLinksModule
   ],
   declarations: [
     DemoContentComponent,

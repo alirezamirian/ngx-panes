@@ -1,0 +1,20 @@
+<md-list-item>
+  <img style="padding: 0;"
+       src="https://ssl.gstatic.com/bt/C3341AA7A1A076756462EE2E5CD71C11/avatars/avatar_tile_d_60.png"
+       md-list-icon/>
+  <a routerLink="{{demo.metadata.id}}" md-icon-button>
+    <md-icon md-list-icon>play_circle_outline</md-icon>
+  </a>
+  <h4 md-line>{{demo.metadata.title}}</h4>
+  <div md-line class="desc">{{demo.metadata.description}}</div>
+  <div md-line>
+    <md-chip-list>
+      <md-chip role="button"
+               (click)="tagClicked.next(tag)"
+               *ngFor="let tag of demo.metadata.tags"
+               color="accent" [selected]="true">{{tag}}
+      </md-chip>
+    </md-chip-list>
+  </div>
+</md-list-item>
+

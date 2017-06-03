@@ -3,4 +3,4 @@
  */
 
 
-export type Tag = 'Resize' | 'Alignment' | 'Dynamic';
+export type Tag = 'Basic Usage' | 'Resizing' | 'Alignment' | 'Dynamic' | 'Rtl' | 'Theme';

@@ -1,7 +1,5 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewChild, NgZone} from '@angular/core';
-import * as CodeMirror from 'codemirror';
+import {Component, OnInit} from '@angular/core';
 import {Demo} from '../demos';
-import {Http} from '@angular/http';
 
 @Demo({
   id: 'github-browser',
@@ -14,63 +12,20 @@ import {Http} from '@angular/http';
   templateUrl: './github-browser-demo.component.html',
   styleUrls: ['./github-browser-demo.component.scss']
 })
-export class GithubBrowserDemoComponent implements OnInit, AfterViewInit {
-  loading = false;
-  _code = '';
-  cm: any;
+export class GithubBrowserDemoComponent implements OnInit {
+  sourceUrl = '/app/demo/demos/github-browser-demo/github-browser-demo.component.ts';
   slug = 'angular/angular';
 
   panes = [];
 
-  set code(value) {
-    if (this.cm) {
-      this.cm.getDoc().setValue(value);
-    } else {
-      this._code = value;
-    }
-  };
-
-  get code() {
-    return this._code;
-  }
-
-  @ViewChild('code') codeEl: ElementRef;
-
-  constructor(private http: Http, private zone: NgZone) {
+  constructor() {
   }
 
   ngOnInit(): void {
-
-    this.http.get('/app/demo/demos/github-browser-demo/github-browser-demo.component.ts')
-      .subscribe(res => this.code = res.text());
   }
 
-  ngAfterViewInit(): void {
-    // TODO: check for codemirror-related cleanup in ngDestroy
-    this.zone.runOutsideAngular(() => {
-      this.cm = new CodeMirror(this.codeEl.nativeElement, {
-        value: this.code,
-        mode: {
-          name: 'javascript',
-          typescript: true
-        },
-        foldGutter: true,
-        gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
-        lineNumbers: true,
-        autoCloseBrackets: true,
-        matchBrackets: true
-      });
-      (<any>window).cm = this.cm;
-    });
-  }
-
-  downloadSrc(githubFileDto) {
-    this.loading = true;
-    this.http.get(githubFileDto.download_url).subscribe(res => {
-      this.code = res.text();
-      this.loading = false;
-      setTimeout(() => this.cm.refresh());
-    });
+  setSourceUrl(githubFileDto) {
+    this.sourceUrl = githubFileDto.download_url;
   }
 
   addPane() {

@@ -1,7 +1,7 @@
 <ngx-panes [positionMode]="'start'" [defaultWidth]="280">
   <ngx-pane #firstPane id="test" title="Files" [width]="330">
     <ng-template ngxPaneHeader>custom header {{firstPane.width}}</ng-template>
-    <app-github-file-tree [slug]="slug" (fileSelected)="downloadSrc($event)"></app-github-file-tree>
+    <app-github-file-tree [slug]="slug" (fileSelected)="setSourceUrl($event)"></app-github-file-tree>
   </ngx-pane>
   <ngx-pane title="Issues" [width]="320">
     <app-github-issue-list [slug]="slug"></app-github-issue-list>
@@ -17,10 +17,7 @@
     </ngx-pane>-->
 </ngx-panes>
 <div fxFlex class="main-content">
-  <div #code [hidden]="loading"></div>
-  <div *ngIf="loading">
-    <md-progress-spinner mode="indeterminate" [strokeWidth]="4"></md-progress-spinner>
-  </div>
+  <app-code-editor [sourceUrl]="sourceUrl"></app-code-editor>
 </div>
 
 

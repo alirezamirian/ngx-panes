@@ -26,6 +26,7 @@ import 'codemirror/addon/fold/brace-fold.js';
 import 'codemirror/addon/fold/indent-fold.js';
 import 'codemirror/addon/edit/closebrackets.js';
 import 'codemirror/addon/edit/matchbrackets.js';
+import {CodeEditorComponent} from './code-editor/code-editor.component';
 
 export const entryComponents = [
   GithubBrowserDemoComponent,
@@ -56,6 +57,7 @@ console.log('entryComponents', entryComponents);
     GithubFileTreeComponent,
     GithubIssueListComponent,
     GithubContributorsComponent,
+    CodeEditorComponent
   ].concat(<any>entryComponents),
   entryComponents: entryComponents,
   providers: [

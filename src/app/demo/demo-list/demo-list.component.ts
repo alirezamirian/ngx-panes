@@ -3,7 +3,6 @@ import {DemoService} from '../demo.service';
 import {DemoModel} from '../demos/demos';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Tag} from '../tag';
-import {BreadcrumbItem, getBreadcrumbItems} from '../../breadcrumb/breadcrumb.component';
 
 @Component({
   selector: 'app-demo-list',
@@ -64,11 +63,3 @@ export class DemoListComponent implements OnInit, OnChanges {
   }
 }
 
-
-export const demoListBreadcrumb: getBreadcrumbItems = function () {
-  return <BreadcrumbItem>{
-    url: 'demos',
-    params: [],
-    label: 'Demos'
-  };
-};

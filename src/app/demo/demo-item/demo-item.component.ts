@@ -1,6 +1,4 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {ActivatedRouteSnapshot} from '@angular/router';
-import {getBreadcrumbItems} from '../../breadcrumb/breadcrumb.component';
 
 @Component({
   selector: 'app-demo-item',
@@ -19,19 +17,3 @@ export class DemoItemComponent implements OnInit {
   }
 
 }
-
-
-export const demoItemBreadcrumb: getBreadcrumbItems = function (route: ActivatedRouteSnapshot) {
-  return [
-    {
-      url: 'demos',
-      params: [],
-      label: 'Demos'
-    },
-    {
-      url: '/demos/' + route.data.demoModel.metadata.id,
-      params: [],
-      label: route.data.demoModel.metadata.title
-    }
-  ];
-};

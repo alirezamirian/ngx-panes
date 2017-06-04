@@ -41,7 +41,7 @@ export class GithubBrowserDemoComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
 
-    this.http.get('/app/demos/github-browser-demo/github-browser-demo.component.ts')
+    this.http.get('/app/demo/demos/github-browser-demo/github-browser-demo.component.ts')
       .subscribe(res => this.code = res.text());
   }
 

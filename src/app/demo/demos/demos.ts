@@ -2,7 +2,7 @@
  * Created by alireza on 5/26/17.
  */
 import {Type} from '@angular/core';
-import {Tag} from './tag';
+import {Tag} from '../tag';
 
 
 interface Demo {

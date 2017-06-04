@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {DemoModel, demos} from './demos';
+import {DemoModel, demos} from './demos/demos';
 /**
  * Created by alireza on 5/26/17.
  */

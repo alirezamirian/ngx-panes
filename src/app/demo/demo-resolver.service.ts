@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
 import {DemoModel} from './demos/demos';
 import {Observable} from 'rxjs/Observable';
-import {DemoService} from './demos/demo.service';
+import {DemoService} from './demo.service';
 
 @Injectable()
 export class DemoResolverService implements Resolve<DemoModel> {

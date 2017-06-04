@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Router, ActivatedRoute, NavigationEnd, Params, PRIMARY_OUTLET} from '@angular/router';
+import {Router, ActivatedRoute, NavigationEnd, Params, PRIMARY_OUTLET, ActivatedRouteSnapshot} from '@angular/router';
 import 'rxjs/add/operator/filter';
 
 export interface BreadcrumbItem {
@@ -7,10 +7,17 @@ export interface BreadcrumbItem {
   params: Params;
   url: string;
 }
-export interface BreadcrumbProvider {
-  getBreadcrumbItems(): BreadcrumbItem[];
-}
-const ROUTE_DATA_BREADCRUMB = 'breadcrumb';
+export type getBreadcrumbItems = (route?: ActivatedRouteSnapshot) => BreadcrumbItem | BreadcrumbItem[];
+
+const routeToBreadcrumbs = (breadcrumbs: BreadcrumbItem[], route: ActivatedRoute): BreadcrumbItem[] => {
+  if (route.children.length > 0) {
+    breadcrumbs = breadcrumbs.concat(route.children.reduce(routeToBreadcrumbs, []));
+  }
+  if (typeof route.snapshot.data['getBreadcrumbItems'] === 'function') {
+    return breadcrumbs.concat(route.snapshot.data['getBreadcrumbItems'](route.snapshot));
+  }
+  return breadcrumbs;
+};
 
 @Component({
   selector: 'app-breadcrumb',
@@ -41,13 +48,7 @@ export class BreadcrumbComponent implements OnInit {
     this.router.events.filter(event => event instanceof NavigationEnd).subscribe(event => {
       // set breadcrumbs
       // TODO: can we prevent hard-coded 'getBreadcrumbItems'?
-      this.breadcrumbs = this.activatedRoute.children.reduce(
-        (breadcrumbs: BreadcrumbItem[], route: ActivatedRoute): BreadcrumbItem[] => {
-          if (typeof route.snapshot.data['getBreadcrumbItems'] === 'function') {
-            return breadcrumbs.concat(route.snapshot.data['getBreadcrumbItems'](route.snapshot));
-          }
-          return breadcrumbs;
-        }, []);
+      this.breadcrumbs = this.activatedRoute.children.reduce(routeToBreadcrumbs, []);
     });
   }
 }

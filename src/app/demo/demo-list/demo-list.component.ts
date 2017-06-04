@@ -1,16 +1,16 @@
 import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {DemoService} from '../demos/demo.service';
+import {DemoService} from '../demo.service';
 import {DemoModel} from '../demos/demos';
-import {ActivatedRoute, ActivatedRouteSnapshot, Router} from '@angular/router';
-import {Tag} from '../demos/tag';
-import {BreadcrumbItem, BreadcrumbProvider} from '../breadcrumb/breadcrumb.component';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Tag} from '../tag';
+import {BreadcrumbItem, getBreadcrumbItems} from '../../breadcrumb/breadcrumb.component';
 
 @Component({
   selector: 'app-demo-list',
   templateUrl: './demo-list.component.html',
   styleUrls: ['./demo-list.component.scss']
 })
-export class DemoListComponent implements OnInit, OnChanges, BreadcrumbProvider {
+export class DemoListComponent implements OnInit, OnChanges {
   tags: Tag[];
 
   demos: DemoModel[];
@@ -33,17 +33,6 @@ export class DemoListComponent implements OnInit, OnChanges, BreadcrumbProvider 
     if (changes.demos) {
       this.updateFilteredDemos();
     }
-  }
-
-
-  getBreadcrumbItems(): BreadcrumbItem[] {
-    return [
-      {
-        params: [],
-        url: '/demos',
-        label: 'Demos'
-      }
-    ];
   }
 
   public removeTag(tag) {
@@ -74,3 +63,12 @@ export class DemoListComponent implements OnInit, OnChanges, BreadcrumbProvider 
     });
   }
 }
+
+
+export const demoListBreadcrumb: getBreadcrumbItems = function () {
+  return <BreadcrumbItem>{
+    url: 'demos',
+    params: [],
+    label: 'Demos'
+  };
+};

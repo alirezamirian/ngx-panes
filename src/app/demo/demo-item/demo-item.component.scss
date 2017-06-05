@@ -27,6 +27,10 @@ md-chip-list {
   min-width: 24px;
 }
 
+h4 a {
+  color: inherit;
+  text-decoration: none;
+}
 md-chip {
   cursor: pointer;
   &:focus {

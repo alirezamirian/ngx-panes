@@ -1,0 +1,140 @@
+<div [ngClass]="'theme-' + theme">
+  <ngx-panes #panes [defaultWidth]="330">
+    <ngx-pane #pane1 id="test" title="Foo">
+      <app-demo-content [lines]="40"></app-demo-content>
+    </ngx-pane>
+    <ngx-pane #pane2 title="Bar">
+      <app-demo-content [lines]="40"></app-demo-content>
+    </ngx-pane>
+    <ngx-pane #pane3 title="Foobar">
+      <app-demo-content style="min-width: 200px" [lines]="40"></app-demo-content>
+    </ngx-pane>
+  </ngx-panes>
+</div>
+
+
+<div fxFlex class="md-padding main-content">
+  <!--TODO: extract this content into a guide-->
+  <h1>Theming</h1>
+  <p>
+    To create a custom theme, you need to import <code>ngx-panes-theme</code> mixin and include it wherever you want.
+    <code>ngx-panes-theme</code> mixin currently accepts a configuration map (object) with the following keys:
+  </p>
+  <md-card class="table-responsive">
+    <table class="table table-condensed">
+      <thead>
+      <tr>
+        <th>Option</th>
+        <th>Required</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><code>primaryColor</code></td>
+        <td>
+          <md-icon>check</md-icon>
+        </td>
+        <td>
+          Used for active pane tab
+        </td>
+        <td> -</td>
+      </tr>
+      <tr>
+        <td><code>backgroundColor</code></td>
+        <td>
+          <md-icon>check</md-icon>
+        </td>
+        <td>
+          Used for pane background color. By default, background color of pane tabs and header will be set to a little
+          darkened version of the backgroundColor.
+        </td>
+        <td> -</td>
+      </tr>
+      <tr>
+        <td><code>tabsContrast</code></td>
+        <td>
+          <md-icon>close</md-icon>
+        </td>
+        <td>
+          Defines how much tabs background should be darker than background.
+        </td>
+        <td> 3%</td>
+      </tr>
+      <tr>
+        <td><code>headerContrast</code></td>
+        <td>
+          <md-icon>close</md-icon>
+        </td>
+        <td>
+          Defines how much pane header background should be darker than background.
+        </td>
+        <td> 5%</td>
+      </tr>
+      <tr>
+        <td><code>borderContrast</code></td>
+        <td>
+          <md-icon>close</md-icon>
+        </td>
+        <td>
+          border color is set to foreground color.
+          borderContrast defines how much the opacity of borders.
+        </td>
+        <td> 20%</td>
+      </tr>
+      <tr>
+        <td><code>lightTextColor</code></td>
+        <td>
+          <md-icon>close</md-icon>
+        </td>
+        <td>
+          The color to be used for text color, whenever <b>light</b> color is legible.
+        </td>
+        <td>#eee</td>
+      </tr>
+      <tr>
+        <td><code>darkTextColor</code></td>
+        <td>
+          <md-icon>close</md-icon>
+        </td>
+        <td>
+          The color to be used for text color, whenever <b>dark</b> color is legible.
+        </td>
+        <td>#333</td>
+      </tr>
+      </tbody>
+    </table>
+  </md-card>
+
+  <app-callout type="danger">
+    This configuration parameters for theming are experimental and subject to change in future.
+  </app-callout>
+
+  <app-callout type="info">
+    Wherever <i>ngx-panes-theme</i> is applying a background color to something, it's smart enough to apply a legible
+    <b>light</b> or <b>dark</b> text color based background color.
+  </app-callout>
+
+  <h2>Style encapsulation</h2>
+  <p>
+    When you define a theme by including <i>ngx-panes-theme</i> mixin, the scope of the theme completely depends on
+    the place you are including the mixin.
+    For example you can define a theme to be applied to all <code>ngx-panes</code> instances, by including the
+    <i>ngx-panes-theme</i> mixin in a global style. You can also include the mixin inside styles of a component
+    and it will be applied to all <code>ngx-panes</code> instances inside that component's view.
+    You can also define several themes within appropriate wrappers.
+  </p>
+
+  <div>
+    <br/>
+    <button md-button (click)="theme = 'default'">Default</button>
+    <button md-button (click)="theme = 'intellij'">Intellij</button>
+    <button md-button (click)="theme = 'light-orange'">Light Orange</button>
+    <button md-button (click)="theme = 'bluegrey'">Blue Gray</button>
+    <button md-button (click)="theme = 'darcula'">Darcula</button>
+  </div>
+
+
+  <!--TODO: add code for demo-->
+</div>

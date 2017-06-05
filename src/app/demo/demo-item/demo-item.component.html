@@ -5,7 +5,7 @@
   <a routerLink="{{demo.metadata.id}}" md-icon-button>
     <md-icon md-list-icon>play_circle_outline</md-icon>
   </a>
-  <h4 md-line>{{demo.metadata.title}}</h4>
+  <h4 md-line><a routerLink="{{demo.metadata.id}}">{{demo.metadata.title}}</a></h4>
   <div md-line class="desc">{{demo.metadata.description}}</div>
   <div md-line>
     <md-chip-list>

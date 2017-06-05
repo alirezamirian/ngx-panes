@@ -23,6 +23,7 @@
     "@angular/platform-browser": "^4.1.2",
     "@angular/platform-browser-dynamic": "^4.1.2",
     "@angular/router": "^4.1.2",
+    "bootstrap-sass": "^3.3.7",
     "codemirror": "^5.26.0",
     "core-js": "^2.4.1",
     "rxjs": "^5.1.0",

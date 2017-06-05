@@ -1,0 +1,43 @@
+@import '../../../../lib/theming';
+
+.theme-intellij {
+  @include ngx-panes-theme((
+    primaryColor: #b7b7b7,
+    backgroundColor: #fff,
+    tabsContrast: 9%,
+    headerContrast: 7%,
+    borderContrast: 30%
+  ));
+}
+
+.theme-darcula {
+  @include ngx-panes-theme((
+    primaryColor: #2d2f30,
+    backgroundColor: #3c3f41,
+    tabsContrast: 0%,
+  ));
+}
+
+.theme-light-orange {
+  @include ngx-panes-theme((
+    primaryColor: #ef6c00,
+    backgroundColor: #fff3e0
+  ));
+}
+
+.theme-bluegrey {
+  @include ngx-panes-theme((
+    primaryColor: #546e7a,
+    backgroundColor: #eceff1
+  ));
+}
+
+md-card table {
+  th {
+    border-top: none;
+  }
+  td:nth-child(2),
+  td:nth-child(4) {
+    text-align: center;
+  }
+}

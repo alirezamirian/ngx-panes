@@ -2,12 +2,12 @@
  * Created by alireza on 6/5/17.
  */
 
-import {BreadcrumbItem, getBreadcrumbItems} from '../../breadcrumb/breadcrumb.component';
+import {BreadcrumbItem} from '../../breadcrumb/breadcrumb.component';
 
-export let demoListBreadcrumb: getBreadcrumbItems = function () {
+export function demoListBreadcrumb() {
   return <BreadcrumbItem>{
     url: 'demos',
     params: [],
     label: 'Demos'
   };
-};
+}

@@ -27,10 +27,12 @@ import 'codemirror/addon/fold/indent-fold.js';
 import 'codemirror/addon/edit/closebrackets.js';
 import 'codemirror/addon/edit/matchbrackets.js';
 import {CodeEditorComponent} from './code-editor/code-editor.component';
+import {ThemingDemoComponent} from './demos/theming-demo/theming-demo.component';
 
 export const entryComponents = [
   GithubBrowserDemoComponent,
-  ResizeDisabledDemoComponent
+  ResizeDisabledDemoComponent,
+  ThemingDemoComponent
 ];
 console.log('entryComponents', entryComponents);
 

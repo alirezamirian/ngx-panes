@@ -10,7 +10,10 @@ import {Demo} from '../demos';
 @Component({
   selector: 'app-github-browser-demo',
   templateUrl: './github-browser-demo.component.html',
-  styleUrls: ['./github-browser-demo.component.scss']
+  styleUrls: [
+    '../../shared-demo-styles.scss',
+    './github-browser-demo.component.scss'
+  ]
 })
 export class GithubBrowserDemoComponent implements OnInit {
   sourceUrl = '/app/demo/demos/github-browser-demo/github-browser-demo.component.ts';

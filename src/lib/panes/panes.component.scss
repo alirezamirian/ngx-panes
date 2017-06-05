@@ -1,33 +1,21 @@
 @import '../scss/mixins';
-@import '../scss/functions/pick-visible-color';
-$border: 1px solid rgba(0, 0, 0, .1);
-$light-text-color: #eee;
-$dark-text-color: #333;
+@import '../theming';
 
-@mixin panes-theme($color-primary, $color-background){
-  $tab-fg-color: lighten($light-text-color, 10%);
-  .tab.active{
-    background: $color-primary;
-    color: pick-visible-color($color-primary, $dark-text-color, $tab-fg-color);
-  }
-  .tabs{
-    background: $color-background;
-    color: pick-visible-color($color-background, $dark-text-color, $tab-fg-color);
-  }
-  .header{
-    $bg: darken($color-background, 5%);
-    background: $bg;
-    color: pick-visible-color($bg, $dark-text-color, $light-text-color);
-  }
-  .wrapper{
-    background: lighten($color-background, 5%);
-    color: pick-visible-color($color-background, $dark-text-color, $light-text-color);
-  }
+$border: 1px solid; // border-color will be overridden by theme
+
+/deep/ {
+  @include ngx-panes-theme((
+    primaryColor: #4756bf,
+    backgroundColor: #eee
+  ));
 }
 
-//@include panes-theme(#2d2f30, #3c3f41); // dark theme
-@include panes-theme(#4756bf, #e8e8e8); // TODO: create a theming structure
-
+/deep/ .ngx-panes-theme-dark {
+  @include ngx-panes-theme((
+    primaryColor: #2d2f30,
+    backgroundColor: #3c3f41
+  ));
+}
 .tabs {
   width: 22px;
   line-height: 22px;
@@ -129,6 +117,7 @@ ngx-pane-view {
   overflow: hidden;
   white-space: nowrap;
   box-sizing: border-box;
+  font-size: .9em;
   @extend %border-bottom-shadow;
 }
 

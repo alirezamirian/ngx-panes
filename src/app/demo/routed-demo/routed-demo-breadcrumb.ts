@@ -1,7 +1,8 @@
 import {ActivatedRouteSnapshot} from '@angular/router';
-import {getBreadcrumbItems} from '../../breadcrumb/breadcrumb.component';
 
-export const routedDemoBreadcrumb: getBreadcrumbItems = function (route: ActivatedRouteSnapshot) {
+// defining type for function (which requires using function expression instead of statement)
+// leads to ERROR in Error encountered resolving symbol values statically...
+export function routedDemoBreadcrumb(route: ActivatedRouteSnapshot) {
   return [
     {
       url: 'demos',
@@ -14,4 +15,4 @@ export const routedDemoBreadcrumb: getBreadcrumbItems = function (route: Activat
       label: route.data.demoModel.metadata.title
     }
   ];
-};
+}

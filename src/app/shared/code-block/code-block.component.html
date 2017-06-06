@@ -1,0 +1,16 @@
+<md-card [style.padding.px]="loading ? 30: null">
+  <app-loading [loading]="loading">
+    <pre class="hljs" [ngClass]="language" *ngIf="source" [innerHtml]="sourceHtml"></pre>
+    <div #content [hidden]="sourceHtml">
+      <ng-content></ng-content>
+    </div>
+  </app-loading>
+  <button md-mini-fab class="copy"
+          (click)="copyToClipboard(tooltip)"
+          mdTooltip="Copy to clipboard"
+          #tooltip="mdTooltip"
+          mdTooltipPosition="before">
+    <md-icon>content_copy</md-icon>
+  </button>
+
+</md-card>

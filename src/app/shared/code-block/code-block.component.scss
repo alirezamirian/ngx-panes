@@ -1,0 +1,23 @@
+md-card {
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+pre {
+  background: none;
+  border: none;
+}
+
+.copy {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  opacity: 0;
+  transition: opacity .3s;
+  :host:hover & {
+    opacity: 1;
+  }
+  md-icon {
+    font-size: 18px;
+  }
+}

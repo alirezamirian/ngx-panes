@@ -26,12 +26,14 @@
     "bootstrap-sass": "^3.3.7",
     "codemirror": "^5.26.0",
     "core-js": "^2.4.1",
+    "highlight.js": "^9.12.0",
     "rxjs": "^5.1.0",
     "zone.js": "^0.8.4"
   },
   "devDependencies": {
     "@angular/cli": "1.0.3",
     "@angular/compiler-cli": "^4.1.2",
+    "@types/highlight.js": "^9.1.9",
     "@types/jasmine": "2.5.38",
     "@types/node": "~6.0.60",
     "codelyzer": "~2.0.0",

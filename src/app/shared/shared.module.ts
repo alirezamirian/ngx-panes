@@ -7,18 +7,24 @@ import {MdButtonModule, MdCardModule, MdIconModule, MdProgressSpinnerModule, MdT
 import {NgxPanesModule} from '../../lib/panes.module';
 import {AppLoadingComponent} from './loading.component';
 import {CalloutComponent} from './callout/callout.component';
+import {CodeBlockComponent} from './code-block/code-block.component';
+import {CodeBlockSourceUrlDirective} from './code-block/source-url.directive';
 
 @NgModule({
   imports: [
     CommonModule,
     MdCardModule,
     MdIconModule,
+    MdButtonModule,
+    MdTooltipModule,
     FlexLayoutModule,
     MdProgressSpinnerModule, // used in loading.component.ts
   ],
   declarations: [
     AppLoadingComponent,
-    CalloutComponent
+    CalloutComponent,
+    CodeBlockComponent,
+    CodeBlockSourceUrlDirective
   ],
   exports: [
     CommonModule,
@@ -40,7 +46,9 @@ import {CalloutComponent} from './callout/callout.component';
 
     NgxPanesModule,
     AppLoadingComponent,
-    CalloutComponent
+    CalloutComponent,
+    CodeBlockComponent,
+    CodeBlockSourceUrlDirective
   ]
 })
 export class SharedModule {

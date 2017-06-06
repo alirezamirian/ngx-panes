@@ -15,6 +15,7 @@
 
 <div fxFlex class="md-padding main-content">
   <!--TODO: extract this content into a guide-->
+
   <h1>Theming</h1>
   <p>
     To create a custom theme, you need to import <code>ngx-panes-theme</code> mixin and include it wherever you want.
@@ -118,13 +119,30 @@
 
   <h2>Style encapsulation</h2>
   <p>
-    When you define a theme by including <i>ngx-panes-theme</i> mixin, the scope of the theme completely depends on
+    When you define a theme by including <i>ngx-panes-theme</i> mixin, the scope of the theme depends on
     the place you are including the mixin.
-    For example you can define a theme to be applied to all <code>ngx-panes</code> instances, by including the
-    <i>ngx-panes-theme</i> mixin in a global style. You can also include the mixin inside styles of a component
-    and it will be applied to all <code>ngx-panes</code> instances inside that component's view.
-    You can also define several themes within appropriate wrappers.
+    You can define a theme to be applied to all <code>ngx-panes</code> instances, by including the
+    <i>ngx-panes-theme</i> mixin in a globally applied style.
   </p>
+  <app-code-block language="scss" [source]="samples.customTheme1"></app-code-block>
+
+  <p>
+    If you want to use multiple themes, you can simply wrap mixin inclusion in a wrapper class selector:
+  </p>
+  <app-code-block language="scss" [source]="samples.customTheme2"></app-code-block>
+
+  <p>
+    You can also include the mixin inside styles of a component
+    and it will be applied to all <code>ngx-panes</code> instances inside that component's view (Assuming you are not
+    disabling Angular's
+    <a href="https://angular.io/docs/ts/latest/guide/component-styles.html#!#view-encapsulation">view encapsulation</a>
+    ).
+  </p>
+
+
+  <!--<app-code-block [sourceUrl]="'https://raw.githubusercontent.com/angular/angular/master/gulpfile.js'"
+                  [source]="'var x = 10;'">
+  </app-code-block>-->
 
   <div>
     <br/>

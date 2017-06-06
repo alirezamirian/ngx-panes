@@ -20,9 +20,7 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.scss",
-        "../node_modules/codemirror/lib/codemirror.css",
-        "../node_modules/codemirror/addon/fold/foldgutter.css"
+        "styles.scss"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",

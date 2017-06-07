@@ -43,6 +43,7 @@ import {CodeBlockSourceUrlDirective} from './code-block/source-url.directive';
     MdIconModule,
     MdButtonModule,
     MdProgressSpinnerModule,
+    MdCardModule,
 
     NgxPanesModule,
     AppLoadingComponent,

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Router, ActivatedRoute, NavigationEnd, Params, PRIMARY_OUTLET, ActivatedRouteSnapshot} from '@angular/router';
+import {ActivatedRoute, ActivatedRouteSnapshot, NavigationEnd, Params, Router} from '@angular/router';
 import 'rxjs/add/operator/filter';
 
 export interface BreadcrumbItem {
@@ -14,7 +14,7 @@ const routeToBreadcrumbs = (breadcrumbs: BreadcrumbItem[], route: ActivatedRoute
     breadcrumbs = breadcrumbs.concat(route.children.reduce(routeToBreadcrumbs, []));
   }
   if (typeof route.snapshot.data['getBreadcrumbItems'] === 'function') {
-    return breadcrumbs.concat(route.snapshot.data['getBreadcrumbItems'](route.snapshot));
+    return [].concat(route.snapshot.data['getBreadcrumbItems'](route.snapshot)).concat(breadcrumbs);
   }
   return breadcrumbs;
 };

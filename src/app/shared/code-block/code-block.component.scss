@@ -13,9 +13,11 @@ pre {
   right: 15px;
   top: 15px;
   opacity: 0;
-  transition: opacity .3s;
+  transition: opacity .3s, transform .3s;
+  transform: scale(0);
   :host:hover & {
     opacity: 1;
+    transform: scale(1);
   }
   md-icon {
     font-size: 18px;

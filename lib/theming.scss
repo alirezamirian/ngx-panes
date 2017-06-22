@@ -1,4 +1,4 @@
-@import 'scss/functions/pick-visible-color';
+@import 'app/scss/functions/pick-visible-color';
 
 @function decimalize($value) {
   @if (unit($value) == '%') {

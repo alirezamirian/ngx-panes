@@ -5,9 +5,9 @@
   },
   "apps": [
     {
-      "name": "ngx-panes site",
-      "root": "src",
-      "outDir": "dist",
+      "name": "ngx-panes website",
+      "root": "website/src",
+      "outDir": "website/dist",
       "assets": [
         "assets",
         "favicon.ico"
@@ -28,27 +28,32 @@
         "dev": "environments/environment.ts",
         "prod": "environments/environment.prod.ts"
       }
+    },
+    {
+      "name": "ngx-panes",
+      "root": "lib",
+      "prefix": "ngx"
     }
   ],
   "e2e": {
     "protractor": {
-      "config": "./protractor.conf.js"
+      "config": "./website/protractor.conf.js"
     }
   },
   "lint": [
     {
-      "project": "src/tsconfig.app.json"
+      "project": "website/src/tsconfig.app.json"
     },
     {
-      "project": "src/tsconfig.spec.json"
+      "project": "website/src/tsconfig.spec.json"
     },
     {
-      "project": "e2e/tsconfig.e2e.json"
+      "project": "website/e2e/tsconfig.e2e.json"
     }
   ],
   "test": {
     "karma": {
-      "config": "./karma.conf.js"
+      "config": "./website/karma.conf.js"
     }
   },
   "defaults": {

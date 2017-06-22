@@ -1,4 +1,4 @@
-import { NgxPanesPage } from './app.po';
+import {NgxPanesPage} from './app.po';
 
 describe('ngx-panes App', () => {
   let page: NgxPanesPage;

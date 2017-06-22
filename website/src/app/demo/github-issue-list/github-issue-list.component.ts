@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {Http} from '@angular/http';
 import {AbstractGithubComponent} from '../abstract-github-component';
 

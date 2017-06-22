@@ -4,7 +4,7 @@ import {ExternalLinksModule} from './external-links/external-links.module';
 import {HttpModule} from '@angular/http';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {MdButtonModule, MdCardModule, MdIconModule, MdProgressSpinnerModule, MdTooltipModule} from '@angular/material';
-import {NgxPanesModule} from '../../lib/panes.module';
+import {NgxPanesModule} from '../../../../lib/panes.module';
 import {AppLoadingComponent} from './loading.component';
 import {CalloutComponent} from './callout/callout.component';
 import {CodeBlockComponent} from './code-block/code-block.component';

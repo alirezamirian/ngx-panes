@@ -6,8 +6,8 @@
 @import '~bootstrap-sass/assets/stylesheets/bootstrap/code';
 @import '~bootstrap-sass/assets/stylesheets/bootstrap/type';
 @import '~bootstrap-sass/assets/stylesheets/bootstrap/tables';
-@import '../node_modules/codemirror/lib/codemirror.css';
-@import '../node_modules/highlight.js/styles/tomorrow.css';
+@import '~codemirror/lib/codemirror.css';
+@import '~highlight.js/styles/tomorrow.css';
 
 body{
   margin: 0;

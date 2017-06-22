@@ -41,7 +41,7 @@ export class PaneResizerComponent implements OnInit {
   private onMouseMove(event: MouseEvent) {
     if (this.panes.selectedPane) {
       let movement = 0;
-      switch (this.panes.positionMode) {
+      switch (this.panes.align) {
         case 'left':
           movement = event.pageX - this.startPos.x;
           break;

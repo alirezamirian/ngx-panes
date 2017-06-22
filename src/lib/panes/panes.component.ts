@@ -34,17 +34,40 @@ export class PanesComponent implements OnInit, AfterContentInit, OnChanges {
 
   @ViewChild('header', {read: ViewContainerRef}) headerHost: ViewContainerRef;
 
+  /**
+   * Default width (in pixels) to be used for any child pane with an undefined width.
+   * If you don't specify a default width, child panes will **wrap they content**.
+   * @default null
+   * @type {number|null}
+   */
   @Input() defaultWidth: number | null = null;
+  /**
+   * Whether clicking on tabs toggles the selected panes or not. If toggleable is false, clicking on currently open
+   * pane's tab will do nothing.
+   * @type {boolean}
+   * @default true
+   */
   @Input() toggleable = true;
+
+  /**
+   * Direction which the ngx-panes is aligned. It can be a {@link RelativeAlign} or Align.
+   * @param value
+   * @default 'start'
+   */
   @Input()
-  set positionMode(value: RelativeAlign|Align){
+  set align(value: RelativeAlign | Align) {
     this._align = toAlign(value, this.getDir());
     this._relativeAlign = toRelativeAlign(value, this.getDir());
   }
-  get positionMode() {
+
+  get align() {
     return this._align;
   }
 
+  /**
+   * returns currently selected pane
+   * @returns {PaneComponent}
+   */
   public get selectedPane(): PaneComponent | null {
     return this._selectedPane;
   }
@@ -60,8 +83,8 @@ export class PanesComponent implements OnInit, AfterContentInit, OnChanges {
     this.panes.changes.subscribe(panes => this.panesChanged());
   }
   ngOnInit() {
-    if (!this.positionMode) {
-      this.positionMode = 'start';
+    if (!this.align) {
+      this.align = 'start';
     }
   }
 
@@ -69,6 +92,10 @@ export class PanesComponent implements OnInit, AfterContentInit, OnChanges {
 
   }
 
+  /**
+   * selects a child pane.
+   * @param pane
+   */
   public select(pane: PaneComponent) {
     if (this._selectedPane !== pane) {
       this.headerHost.clear();
@@ -78,6 +105,10 @@ export class PanesComponent implements OnInit, AfterContentInit, OnChanges {
       this._selectedPane = pane;
     }
   }
+
+  /**
+   * Closes currently selected pane. Does nothing if already closed.
+   */
   public close() {
     this._selectedPane = null;
   }

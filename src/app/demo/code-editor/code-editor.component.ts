@@ -13,25 +13,28 @@ export class CodeEditorComponent implements OnInit, AfterViewInit {
   cm: any;
 
   @Input() set sourceUrl(value: string) {
-    this.loading = true;
-    this.http.get(value).subscribe(res => {
-      this.code = res.text();
-      this.loading = false;
-      if (this.cm) {
-        setTimeout(() => this.cm.refresh());
-      }
-    });
+    if (value) {
+      this.loading = true;
+      this.http.get(value).subscribe(res => {
+        this.source = res.text();
+      }, null, () => this.loading = false);
+    }
   }
 
-  private set code(value) {
-    if (this.cm) {
-      this.cm.getDoc().setValue(value);
-    } else {
-      this._code = value;
+  @Input()
+  public set source(value) {
+    if (value) {
+      if (this.cm) {
+        this.cm.getDoc().setValue(value);
+      } else {
+        this._code = value;
+        this.initCodemirror();
+      }
+      setTimeout(() => this.cm.refresh());
     }
   };
 
-  private get code() {
+  public get source() {
     return this._code;
   }
 
@@ -46,9 +49,15 @@ export class CodeEditorComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     // TODO: check for codemirror-related cleanup in ngDestroy
+    if (this.source) {
+      this.initCodemirror();
+    }
+  }
+
+  private initCodemirror() {
     this.zone.runOutsideAngular(() => {
       this.cm = new CodeMirror(this.codeEl.nativeElement, {
-        value: this.code,
+        value: this.source,
         mode: {
           name: 'javascript',
           typescript: true

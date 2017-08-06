@@ -1,5 +1,12 @@
+:host {
+  flex: 1;
+}
 .guides {
   min-width: 300px;
   padding: 0;
   margin-top: 1px;
+}
+
+.wrapper {
+  height: 100%;
 }

@@ -1,5 +1,6 @@
 :host {
   flex: 1;
+  display: flex;
 }
 
 .guides {
@@ -10,4 +11,8 @@
 
 .wrapper {
   height: 100%;
+}
+
+.content {
+  overflow: auto;
 }

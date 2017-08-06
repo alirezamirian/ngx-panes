@@ -1,13 +1,13 @@
 <div fxLayout="column" fxLayout.gt-sm="row" class="wrapper">
   <md-card class="guides">
-    <md-list>
+    <md-list style="position: sticky">
       <md-list-item md-button *ngFor="let item of guides">
         <md-icon md-list-icon>navigate_next</md-icon>
         <a [routerLink]="['/guides', item.metadata.id]" routerLinkActive="active">{{item.metadata.title}}</a>
       </md-list-item>
     </md-list>
   </md-card>
-  <div fxFlex class="md-padding">
+  <div fxFlex class="md-padding content">
     <router-outlet></router-outlet>
   </div>
 </div>

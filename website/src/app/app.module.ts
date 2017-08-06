@@ -1,6 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {MdToolbarModule} from '@angular/material';
+import {MdListModule, MdToolbarModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import {AppComponent} from './app.component';
@@ -22,6 +22,7 @@ import {WithSidenavComponent} from './with-sidenav/with-sidenav.component';
     BrowserModule,
     BrowserAnimationsModule,
     MdToolbarModule,
+    MdListModule,
 
     AppRoutingModule
   ],

@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 
 import {GuideRoutingModule} from './guide-routing.module';
-import {ThemingGuideComponent} from './theming-guide/theming-guide.component';
+import {ThemingGuideComponent} from './guides/theming-guide/theming-guide.component';
 import {SharedModule} from '../shared/shared.module';
 import {GuideService} from './guide.service';
 import {RoutedGuideComponent} from './routed-guide/routed-guide.component';

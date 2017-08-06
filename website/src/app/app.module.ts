@@ -8,12 +8,14 @@ import {AppRoutingModule} from './app-routing.module';
 import {SharedModule} from './shared/shared.module';
 import {HeaderComponent} from './header/header.component';
 import {BreadcrumbComponent} from './breadcrumb/breadcrumb.component';
+import {WithSidenavComponent} from './with-sidenav/with-sidenav.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    BreadcrumbComponent
+    BreadcrumbComponent,
+    WithSidenavComponent
   ],
   imports: [
     SharedModule,

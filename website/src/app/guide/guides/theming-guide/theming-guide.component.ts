@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Guide} from '../guides';
+import {Guide} from '../../guides';
 
 
 @Guide({

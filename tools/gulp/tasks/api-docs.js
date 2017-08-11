@@ -1,9 +1,29 @@
 /**
  * Created by alireza on 6/23/17.
  */
-
-const Dgeni = require('dgeni');
+const doc = require('../../api-docs');
+const glob = require('glob');
 const gulp = require('gulp');
+const fs = require("fs");
+
+
+gulp.task('api-docs', getApiDocs);
+
+function getFileNames() {
+  return glob.sync('lib/**/*.ts', {
+    ignore: ['lib/**/*.spec.ts']
+  });
+}
+
+function getApiDocs() {
+  let docs = doc(getFileNames());
+  console.log(docs);
+  fs.writeFileSync('website/src/assets/api-docs.json', JSON.stringify(docs, null, 2));
+  return docs;
+}
+
+/*
+const Dgeni = require('dgeni');
 const dgeniApiDocsPackage = require('../../dgeni');
 
 
@@ -16,3 +36,4 @@ function apiDocs() {
     console.log(docs);
   });
 }
+*/

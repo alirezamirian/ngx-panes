@@ -1,4 +1,14 @@
-{
-  "version": "{{doc.version}}",
-  "items": "test"
-}
+{% for key, value in doc %}{{key}},{% endfor %}
+
+decorators: {% for decorator in doc.decorators %}
+{% if doc.isNgModule == true %}
+{{decorator.name}}: {{decorator.expression.getChildren | json}}
+{% for key, value in decorator.expression %} {{ key }}, {% endfor %}
+
+{% endif %}
+{% for key, value in decorator %} {{ key }}, {% endfor %}
+{% endfor %}
+{{doc.name}}
+module: {{doc.isNgModule}}
+directive: {{doc.isDirective}}
+{{doc.description}}

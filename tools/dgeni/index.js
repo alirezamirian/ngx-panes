@@ -34,6 +34,9 @@ const apiDocsPackage = new DgeniPackage('ngx-panes-api-docs', [
     writeFilesProcessor.outputFolder = outputDir;
   })
 
+  // Processor that appends categorization flags to the docs, e.g. `isDirective`, `isNgModule`, etc.
+  .processor(require('./processors/categorizer'))
+
 
   // Configure the processor for understanding TypeScript.
   .config(function (readTypeScriptModules) {
@@ -45,7 +48,10 @@ const apiDocsPackage = new DgeniPackage('ngx-panes-api-docs', [
     // Entry points for docs generation. All publically exported symbols found through these
     // files will have docs generated.
     readTypeScriptModules.sourceFiles = [
-      'panes.module.ts'
+      '**/*.component.ts',
+      '**/*.directive.ts',
+      '**/*.service.ts',
+      '**/*.module.ts',
     ];
   })
   // Configure processor for finding nunjucks templates.

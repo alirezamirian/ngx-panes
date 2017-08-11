@@ -1,11 +1,18 @@
 <div fxLayout="column" fxLayout.gt-sm="row" class="wrapper">
   <md-card class="guides">
-    <md-list style="position: sticky">
+    <md-nav-list>
+      <h3 md-subheader>Guides</h3>
       <md-list-item md-button *ngFor="let item of guides">
-        <md-icon md-list-icon>navigate_next</md-icon>
         <a [routerLink]="['/guides', item.metadata.id]" routerLinkActive="active">{{item.metadata.title}}</a>
       </md-list-item>
-    </md-list>
+      <h3 md-subheader>API Docs</h3>
+      <md-nav-list dense>
+        <h4 md-subheader>Components</h4>
+        <md-list-item style="padding-left: 15px;" md-button *ngFor="let item of apiDocs$ | async">
+          <a>{{item.className}}</a>
+        </md-list-item>
+      </md-nav-list>
+    </md-nav-list>
   </md-card>
   <div fxFlex class="md-padding content">
     <router-outlet></router-outlet>

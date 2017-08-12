@@ -2,13 +2,15 @@
   <md-card class="index">
     <md-nav-list>
       <h3 md-subheader>Guides</h3>
-      <md-list-item md-button *ngFor="let item of guides">
+      <md-list-item md-button *ngFor="let item of guides"
+                    [routerLink]="['/guides', item.metadata.id]">
         <a [routerLink]="['/guides', item.metadata.id]" routerLinkActive="active">{{item.metadata.title}}</a>
       </md-list-item>
       <h3 md-subheader>API Docs</h3>
       <md-nav-list dense>
         <h4 md-subheader>Components</h4>
-        <md-list-item style="padding-left: 15px;" md-button *ngFor="let item of apiDocs$ | async">
+        <md-list-item style="padding-left: 15px;" md-button *ngFor="let item of apiDocs$ | async"
+                      [routerLink]="['/api/NgxPanes', item.className]">
           <a [routerLink]="['/api/NgxPanes', item.className]">{{item.className}}</a>
         </md-list-item>
       </md-nav-list>

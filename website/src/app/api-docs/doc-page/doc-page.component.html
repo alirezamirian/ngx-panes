@@ -1,4 +1,10 @@
-<h1>{{docItem.className}}</h1>
+<h1>
+  <ng-container [ngSwitch]="docItem.type">
+    <ng-container *ngSwitchCase="'directive'">{{docItem.selector}}</ng-container>
+    <ng-container *ngSwitchDefault="">{{docItem.className}}</ng-container>
+  </ng-container>
+</h1>
+
 <p>
   {{docItem.description}}
 </p>

@@ -4,3 +4,4 @@
 
 
 require('./tasks/api-docs');
+require('./tasks/watch-api-docs');

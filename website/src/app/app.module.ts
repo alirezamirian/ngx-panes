@@ -9,6 +9,7 @@ import {SharedModule} from './shared/shared.module';
 import {HeaderComponent} from './header/header.component';
 import {BreadcrumbComponent} from './breadcrumb/breadcrumb.component';
 import {WithSidenavComponent} from './with-sidenav/with-sidenav.component';
+import {CoreModule} from './core/core.module';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import {WithSidenavComponent} from './with-sidenav/with-sidenav.component';
   ],
   imports: [
     SharedModule,
+    CoreModule,
     BrowserModule,
     BrowserAnimationsModule,
     MdToolbarModule,

@@ -16,6 +16,9 @@ import {PaneComponent} from '../pane/pane.component';
 import {Align, RelativeAlign, toAlign, toRelativeAlign} from './rtl-utils';
 import {PaneViewComponent} from '../pane-view.component';
 
+/**
+ * Renders a list of panes which are navigable via tabs
+ */
 @Component({
   selector: 'ngx-panes',
   templateUrl: './panes.component.html',
@@ -82,6 +85,7 @@ export class PanesComponent implements OnInit, AfterContentInit, OnChanges {
     this.panesChanged();
     this.panes.changes.subscribe(panes => this.panesChanged());
   }
+
   ngOnInit() {
     if (!this.align) {
       this.align = 'start';

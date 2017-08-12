@@ -1,5 +1,5 @@
 <div fxLayout="column" fxLayout.gt-sm="row" class="wrapper">
-  <md-card class="guides">
+  <md-card class="index">
     <md-nav-list>
       <h3 md-subheader>Guides</h3>
       <md-list-item md-button *ngFor="let item of guides">
@@ -9,7 +9,7 @@
       <md-nav-list dense>
         <h4 md-subheader>Components</h4>
         <md-list-item style="padding-left: 15px;" md-button *ngFor="let item of apiDocs$ | async">
-          <a>{{item.className}}</a>
+          <a [routerLink]="['/api/NgxPanes', item.className]">{{item.className}}</a>
         </md-list-item>
       </md-nav-list>
     </md-nav-list>

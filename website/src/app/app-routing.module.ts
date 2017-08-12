@@ -14,11 +14,13 @@ const routes: Routes = [
     component: WithSidenavComponent,
     children: [
       {
-        path: 'guides',
-        loadChildren: './guide/guide.module#GuideModule'
+        path: 'guides', loadChildren: './guide/guide.module#GuideModule'
+      },
+      {
+        path: 'api', loadChildren: './api-docs/api-docs.module.ts#ApiDocsModule'
       }
     ]
-  }
+  },
   /* {
     path: '',
     redirectTo: '/demos',

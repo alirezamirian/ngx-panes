@@ -3,5 +3,5 @@
  */
 
 
-require('./tasks/api-docs');
+require('./tasks/api-docs-task');
 require('./tasks/watch-api-docs');

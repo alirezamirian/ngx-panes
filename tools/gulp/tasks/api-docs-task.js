@@ -1,7 +1,7 @@
 /**
  * Created by alireza on 6/23/17.
  */
-const doc = require('../../api-docs');
+const doc = require('../../api-docs/api-docs');
 const glob = require('glob');
 const gulp = require('gulp');
 const fs = require("fs");

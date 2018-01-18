@@ -1,0 +1,28 @@
+<md-card class="table-responsite">
+  <table class="table table-condensed">
+    <thead>
+    <tr>
+      <th>{{strings.name || 'Name'}}</th>
+      <th>{{strings.type || 'Type'}}</th>
+      <th>{{strings.description || 'Description'}}</th>
+      <th>{{strings.defaultValue || 'Default Value'}}</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let input of params">
+      <td>
+        <b>{{input.name}}</b>
+      </td>
+      <td>
+        <i class="type">{{input.type}}</i>
+      </td>
+      <td [innerHtml]="input.description">
+      </td>
+      <td>
+        <code *ngIf="input.defaultValue">{{input.defaultValue}}</code>
+        <span *ngIf="!input.defaultValue">-</span>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</md-card>

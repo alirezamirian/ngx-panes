@@ -13,7 +13,7 @@ module.exports = function parseDocComment(classDeclaration, parsers) {
     return null;
   }
   return parsers
-    .map(parser => parser(allTags)) // get parser outputs
+    .map(parser => parser(allTags, classDeclaration)) // get parser outputs
     .reduce((soFar, output) => Object.assign(soFar, output), {}); // merge outputs
 };
 

@@ -9,6 +9,8 @@ import {AppLoadingComponent} from './loading.component';
 import {CalloutComponent} from './callout/callout.component';
 import {CodeBlockComponent} from './code-block/code-block.component';
 import {CodeBlockSourceUrlDirective} from './code-block/source-url.directive';
+import {SideAnchorOwnerDirective} from './side-anchor/side-anchor-owner.directive';
+import {SideAnchorComponent} from './side-anchor/side-anchor.component';
 
 @NgModule({
   imports: [
@@ -24,7 +26,9 @@ import {CodeBlockSourceUrlDirective} from './code-block/source-url.directive';
     AppLoadingComponent,
     CalloutComponent,
     CodeBlockComponent,
-    CodeBlockSourceUrlDirective
+    CodeBlockSourceUrlDirective,
+    SideAnchorOwnerDirective,
+    SideAnchorComponent
   ],
   exports: [
     CommonModule,
@@ -49,7 +53,9 @@ import {CodeBlockSourceUrlDirective} from './code-block/source-url.directive';
     AppLoadingComponent,
     CalloutComponent,
     CodeBlockComponent,
-    CodeBlockSourceUrlDirective
+    CodeBlockSourceUrlDirective,
+    SideAnchorOwnerDirective,
+    SideAnchorComponent
   ]
 })
 export class SharedModule {

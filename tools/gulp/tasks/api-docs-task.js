@@ -17,7 +17,6 @@ function getFileNames() {
 
 function getApiDocs() {
   let docs = doc(getFileNames());
-  console.log(docs);
   fs.writeFileSync('website/src/assets/api-docs.json', JSON.stringify(docs, null, 2));
   return docs;
 }

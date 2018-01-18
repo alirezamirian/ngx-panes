@@ -5,13 +5,45 @@
   </ng-container>
 </h1>
 
-<p [innerHtml]="docItem.description"></p>
+<div [innerHtml]="docItem.description"></div>
+<!-- TODO: handle examples -->
 
-<div>
-  <h2>Inputs</h2>
-  <table>
-    <thead>
+<ng-container *ngIf="docItem.usage">
+  <h2 id="usage">
+    <app-side-anchor></app-side-anchor>
+    Usage
+  </h2>
+  <app-code-block [source]="docItem.usage"></app-code-block>
+</ng-container>
 
-    </thead>
-  </table>
-</div>
+<ng-container *ngIf="docItem.inputs?.length">
+  <h2 id="inputs">
+    <app-side-anchor></app-side-anchor>
+    Inputs
+  </h2>
+  <app-params [params]="docItem.inputs"></app-params>
+</ng-container>
+
+<!-- TODO: handle outputs -->
+
+<ng-container *ngIf="docItem.methods?.length">
+  <h2 id="methods">
+    <app-side-anchor></app-side-anchor>
+    Methods
+  </h2>
+  <md-card class="method" *ngFor="let method of docItem.methods">
+    <h3 id="method-{{method.name}}">
+      <app-side-anchor></app-side-anchor>
+      {{method.name}}
+      <small>
+        (<span *ngFor="let arg of method.args; let index"><b>{{arg.name}}</b>:
+          <code>{{arg.type}}</code><span *ngIf="index < method.args.length">, </span></span>):
+        <code>{{method.returnType}}</code>
+      </small>
+    </h3>
+    <div [innerHtml]="method.description"></div>
+    <ng-container *ngIf="method.args.length > 0">
+      <app-params [params]="method.args" [strings]="{name: 'Parameter Name'}"></app-params>
+    </ng-container>
+  </md-card>
+</ng-container>

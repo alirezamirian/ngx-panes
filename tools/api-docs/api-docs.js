@@ -2,6 +2,8 @@
 
 // NOTE: this code is originally borrowed from https://github.com/ng-bootstrap/ng-bootstrap
 
+const {isDirectiveDecorator} = require("./utils");
+
 const ts = require('typescript');
 const fs = require('fs');
 const marked = require('marked');
@@ -99,7 +101,7 @@ class APIDocVisitor {
     let typeSpecificDoc = {};
     if (classDeclaration.decorators) {
       for (let i = 0; i < classDeclaration.decorators.length; i++) {
-        if (this.isDirectiveDecorator(classDeclaration.decorators[i])) {
+        if (isDirectiveDecorator(classDeclaration.decorators[i])) {
           const directiveInfo = this.visitDirectiveDecorator(classDeclaration.decorators[i]);
           typeSpecificDoc = {
             selector: directiveInfo.selector,
@@ -170,14 +172,18 @@ class APIDocVisitor {
 
   visitMethodDeclaration(method) {
     return {
-      name: method.name.text, description: ts.displayPartsToString(method.symbol.getDocumentationComment()),
+      name: method.name.text, description: getDocumentation(method),
       args: method.parameters ? method.parameters.map((prop) => this.visitArgument(prop)) : [],
       returnType: this.visitType(method.type)
     }
   }
 
   visitArgument(arg) {
-    return {name: arg.name.text, type: this.visitType(arg)}
+    return {
+      name: arg.name.text,
+      type: this.visitType(arg),
+      description: getDocumentation(arg)
+    }
   }
 
   visitInput(property, inDecorator) {
@@ -186,7 +192,7 @@ class APIDocVisitor {
       name: inArgs.length ? inArgs[0].text : property.name.text,
       defaultValue: property.initializer ? this.stringifyDefaultValue(property.initializer) : undefined,
       type: this.visitType(property),
-      description: ts.displayPartsToString(property.symbol.getDocumentationComment())
+      description: getDocumentation(property)
     };
   }
 
@@ -204,7 +210,7 @@ class APIDocVisitor {
     const outArgs = outDecorator.expression.arguments;
     return {
       name: outArgs.length ? outArgs[0].text : property.name.text,
-      description: ts.displayPartsToString(property.symbol.getDocumentationComment())
+      description: getDocumentation(property)
     };
   }
 
@@ -213,7 +219,7 @@ class APIDocVisitor {
       name: property.name.text,
       defaultValue: property.initializer ? this.stringifyDefaultValue(property.initializer) : undefined,
       type: this.visitType(property),
-      description: ts.displayPartsToString(property.symbol.getDocumentationComment())
+      description: getDocumentation(property)
     };
   }
 
@@ -221,10 +227,6 @@ class APIDocVisitor {
     return node ? this.typeChecker.typeToString(this.typeChecker.getTypeAtLocation(node)) : 'void';
   }
 
-  isDirectiveDecorator(decorator) {
-    const decoratorIdentifierText = decorator.expression.expression.text;
-    return decoratorIdentifierText === 'Directive' || decoratorIdentifierText === 'Component';
-  }
 
   isServiceDecorator(decorator) {
     return decorator.expression.expression.text === 'Injectable';
@@ -259,4 +261,7 @@ function parseOutApiDocs(programFiles) {
     {});
 }
 
+function getDocumentation(declaration) {
+  return marked(ts.displayPartsToString(declaration.symbol.getDocumentationComment()))
+}
 module.exports = parseOutApiDocs;

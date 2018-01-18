@@ -21,7 +21,11 @@ export class CodeBlockComponent implements OnInit, AfterContentChecked {
   @ViewChild('content') content: ElementRef;
   @Input() language: string;
 
+  @Input()
+  autoFormat = true;
+
   @Input() set source(value: string) {
+    value = value || '';
     const result = hljs.highlightAuto(value, this.language ? [this.language] : undefined);
     this._source = value;
     this.sourceHtml = result.value;

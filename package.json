@@ -39,22 +39,23 @@
     "codelyzer": "~2.0.0",
     "dgeni": "^0.4.9",
     "dgeni-packages": "^0.19.1",
+    "glob": "latest",
     "gulp": "^3.9.1",
     "jasmine-core": "~2.5.2",
     "jasmine-spec-reporter": "~3.2.0",
+    "js-beautify": "^1.7.5",
     "karma": "~1.4.1",
     "karma-chrome-launcher": "~2.1.1",
     "karma-cli": "~1.0.1",
     "karma-coverage-istanbul-reporter": "^0.2.0",
     "karma-jasmine": "~1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
+    "marked": "latest",
     "ng2-file-tree": "^0.4.3",
     "protractor": "~5.1.0",
     "sass-bidi": "^1.1.0",
     "ts-node": "~2.0.0",
     "tslint": "~4.5.0",
-    "typescript": "~2.2.0",
-    "glob": "latest",
-    "marked": "latest"
+    "typescript": "~2.2.0"
   }
 }

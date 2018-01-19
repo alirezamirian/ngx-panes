@@ -9,7 +9,7 @@ export class DocItemResolverGuard implements Resolve<any> {
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
-    return this.apiDocsService.getDocByClassName(route.params.className);
+    return this.apiDocsService.getDocItem(route.params.symbol);
   }
 
 }

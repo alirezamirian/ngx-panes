@@ -12,8 +12,21 @@
 
 .wrapper {
   height: 100%;
+  width: 100%;
 }
 
 .content {
   overflow: auto;
+}
+
+md-nav-list md-nav-list md-list-item {
+  padding-left: 15px;
+}
+
+md-nav-list md-nav-list md-nav-list md-list-item {
+  padding-left: 30px;
+}
+
+md-nav-list md-nav-list .mat-subheader {
+  padding-left: 32px;
 }

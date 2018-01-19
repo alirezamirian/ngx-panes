@@ -1,12 +1,13 @@
 <h1>
   <ng-container [ngSwitch]="docItem.type">
     <ng-container *ngSwitchCase="'directive'">{{docItem.selector}}</ng-container>
-    <ng-container *ngSwitchDefault="">{{docItem.className}}</ng-container>
+    <ng-container *ngSwitchDefault="">{{docItem.identifier}}</ng-container>
   </ng-container>
 </h1>
 
 <div [innerHtml]="docItem.description"></div>
 <!-- TODO: handle examples -->
+<!-- TODO(api-docs): convert @link elements to correct markdown link -->
 
 <ng-container *ngIf="docItem.usage">
   <h2 id="usage">

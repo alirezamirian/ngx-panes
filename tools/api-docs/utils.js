@@ -1,5 +1,7 @@
 module.exports = {
   isDirectiveDecorator,
+  isComponentDecorator,
+  isModuleDecorator,
   isDirectiveClass
 };
 
@@ -7,6 +9,16 @@ module.exports = {
 function isDirectiveDecorator(decorator) {
   const decoratorIdentifierText = decorator.expression.expression.text;
   return decoratorIdentifierText === 'Directive' || decoratorIdentifierText === 'Component';
+}
+
+function isComponentDecorator(decorator) {
+  const decoratorIdentifierText = decorator.expression.expression.text;
+  return decoratorIdentifierText === 'Component';
+}
+
+function isModuleDecorator(decorator) {
+  const decoratorIdentifierText = decorator.expression.expression.text;
+  return decoratorIdentifierText === 'NgModule';
 }
 
 function isDirectiveClass(classDeclaration) {

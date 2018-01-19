@@ -15,7 +15,7 @@ export class DocPageComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe(data => {
       if (data.docItem) {
-        this.docItem = data.docItem;
+        this.docItem = data.docItem[0];
       }
     });
   }

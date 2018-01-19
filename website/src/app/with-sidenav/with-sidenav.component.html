@@ -7,12 +7,24 @@
         <a [routerLink]="['/guides', item.metadata.id]" routerLinkActive="active">{{item.metadata.title}}</a>
       </md-list-item>
       <h3 md-subheader>API Docs</h3>
-      <md-nav-list dense>
-        <h4 md-subheader>Components</h4>
-        <md-list-item style="padding-left: 15px;" md-button *ngFor="let item of apiDocs$ | async"
-                      [routerLink]="['/api/NgxPanes', item.className]">
-          <a [routerLink]="['/api/NgxPanes', item.className]">{{item.className}}</a>
-        </md-list-item>
+      <md-nav-list dense *ngFor="let item of (apiDocs$ | async)?.modules">
+        <a [routerLink]="['/api', item.identifier]">
+          <md-list-item md-button
+                        [routerLink]="['/api', item.identifier]">{{item.identifier}}
+          </md-list-item>
+        </a>
+        <md-nav-list dense>
+          <h4 md-subheader>Components</h4>
+          <a *ngFor="let component of item.components" [routerLink]="['/api', component.identifier]">
+            <md-list-item>{{component.identifier}}</md-list-item>
+          </a>
+        </md-nav-list>
+        <md-nav-list dense>
+          <h4 md-subheader>Directives</h4>
+          <a *ngFor="let directive of item.directives" [routerLink]="['/api', directive.identifier]">
+            <md-list-item>{{directive.identifier}}</md-list-item>
+          </a>
+        </md-nav-list>
       </md-nav-list>
     </md-nav-list>
   </md-card>

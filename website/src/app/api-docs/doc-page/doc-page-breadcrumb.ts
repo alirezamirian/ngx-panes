@@ -7,8 +7,8 @@ import {ActivatedRouteSnapshot} from '@angular/router';
 
 export function docPageBreadcrumb(route: ActivatedRouteSnapshot) {
   return <BreadcrumbItem>{
-    url: `api/NgxPanes/${route.data.docItem.className}`,
+    url: `api/${route.data.docItem.identifier}`,
     params: [],
-    label: route.data.docItem.className
+    label: route.data.docItem.identifier
   };
 }

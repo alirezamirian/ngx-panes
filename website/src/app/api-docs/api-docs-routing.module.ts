@@ -7,13 +7,13 @@ import {docPageBreadcrumb} from './doc-page/doc-page-breadcrumb';
 
 const routes: Routes = [
   {
-    path: 'NgxPanes',
+    path: '',
     data: {
       getBreadcrumbItems: apiDocsBreadcrumb
     },
     children: [
       {
-        path: ':className',
+        path: ':symbol',
         data: {
           getBreadcrumbItems: docPageBreadcrumb
         },

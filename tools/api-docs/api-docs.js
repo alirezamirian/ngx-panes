@@ -2,14 +2,16 @@
 
 // NOTE: this code is originally borrowed from https://github.com/ng-bootstrap/ng-bootstrap
 
-const {isDirectiveDecorator} = require("./utils");
+const {isDirectiveDecorator, isModuleDecorator} = require("./utils");
 
 const ts = require('typescript');
+const path = require('path');
 const fs = require('fs');
 const marked = require('marked');
 
 const commentParsers = require('./parsers');
 const parseDocComment = require('./parse-doc-comment');
+const isComponentDecorator = require("./utils").isComponentDecorator;
 
 function getNamesCompareFn(name) {
   name = name || 'name';
@@ -71,44 +73,62 @@ class APIDocVisitor {
       throw new Error(`File doesn't exist: ${fileName}.`)
     }
 
-    return sourceFile.statements.reduce((directivesSoFar, statement) => {
+    return sourceFile.statements.reduce((elementsSoFar, statement) => {
       if (statement.kind === ts.SyntaxKind.ClassDeclaration) {
-        return directivesSoFar.concat(this.visitClassDeclaration(fileName, statement));
+        return elementsSoFar.concat(this.visitClassDeclaration(fileName, statement));
       } else if (statement.kind === ts.SyntaxKind.InterfaceDeclaration) {
-        return directivesSoFar.concat(this.visitInterfaceDeclaration(fileName, statement));
+        return elementsSoFar.concat(this.visitInterfaceDeclaration(fileName, statement));
       }
 
-      return directivesSoFar;
+      return elementsSoFar;
     }, []);
   }
 
   visitInterfaceDeclaration(fileName, interfaceDeclaration) {
     const symbol = this.program.getTypeChecker().getSymbolAtLocation(interfaceDeclaration.name);
     const description = marked(ts.displayPartsToString(symbol.getDocumentationComment()));
-    const className = interfaceDeclaration.name.text;
+    const identifier = interfaceDeclaration.name.text;
     const members = this.visitMembers(interfaceDeclaration.members);
 
-    return [{fileName, className, description, methods: members.methods, properties: members.properties}];
+    return [{
+      fileName,
+      type: 'type',
+      identifier,
+      description,
+      methods: members.methods,
+      properties: members.properties
+    }];
   }
 
   visitClassDeclaration(fileName, classDeclaration) {
     const symbol = this.program.getTypeChecker().getSymbolAtLocation(classDeclaration.name);
     const description = marked(ts.displayPartsToString(symbol.getDocumentationComment()));
-    const className = classDeclaration.name.text;
+    const identifier = classDeclaration.name.text;
     const members = this.visitMembers(classDeclaration.members);
 
-    let doc = {fileName, className, description, methods: members.methods, properties: members.properties};
+    let doc = {fileName, identifier, description, methods: members.methods, properties: members.properties};
     let typeSpecificDoc = {};
     if (classDeclaration.decorators) {
       for (let i = 0; i < classDeclaration.decorators.length; i++) {
         if (isDirectiveDecorator(classDeclaration.decorators[i])) {
           const directiveInfo = this.visitDirectiveDecorator(classDeclaration.decorators[i]);
           typeSpecificDoc = {
+            type: 'directive',
+            isComponent: isComponentDecorator(classDeclaration.decorators[i]),
             selector: directiveInfo.selector,
             exportAs: directiveInfo.exportAs,
             inputs: members.inputs,
             outputs: members.outputs,
           };
+        }
+        if (isModuleDecorator(classDeclaration.decorators[i])) {
+          const ngModuleInfo = this.visitModuleDecorator(classDeclaration.decorators[i]);
+          typeSpecificDoc = {
+            type: 'ngModule',
+            declarations: ngModuleInfo.declarations,
+            services: ngModuleInfo.services
+            //  TODO: add dependencies (imports)
+          }
         }
       }
     }
@@ -243,6 +263,31 @@ class APIDocVisitor {
 
     return null;
   }
+
+  visitModuleDecorator(decorator) {
+    const statement = decorator.parent;
+    const properties = decorator.expression.arguments[0].properties;
+    const result = {
+      declarations: [],
+      services: []
+    };
+
+    properties.forEach(property => {
+      if (property.name.text === 'exports') {
+        // TODO: this only work when exports is a literal array
+        if (property.initializer.kind === ts.SyntaxKind.ArrayLiteralExpression) {
+          result.declarations = property.initializer.elements
+            .filter(elem => elem.kind === ts.SyntaxKind.Identifier)
+            .map(getFullyQualifiedName)
+        }
+        else {
+          console.warn(`exports property of angular module "${statement.name.text}" is not a literal array, \
+          and this is not yet supported in docs`);
+        }
+      }
+    });
+    return result;
+  }
 }
 
 function parseOutApiDocs(programFiles) {
@@ -250,18 +295,31 @@ function parseOutApiDocs(programFiles) {
 
   return programFiles.reduce(
     (soFar, file) => {
-      const directivesInFile = apiDocVisitor.visitSourceFile(file);
-
-      directivesInFile.forEach((directive) => {
-        soFar[directive.className] = directive;
-      });
-
-      return soFar;
-    },
-    {});
+      return soFar.concat(apiDocVisitor.visitSourceFile(file));
+    }, []);
 }
 
 function getDocumentation(declaration) {
   return marked(ts.displayPartsToString(declaration.symbol.getDocumentationComment()))
 }
+
+function getFullyQualifiedName(identifier) {
+  // TODO: Only the simple usage of named imports is currently supported.
+  const sourceFile = identifier.getSourceFile();
+  let namedImportsContains = name => anImport => {
+    let namedBindings = anImport.parent.importClause.namedBindings;
+    if (namedBindings.elements.some(namedBinding => namedBinding.name.text === name)) {
+      return true;
+    }
+  };
+  const foundImport = sourceFile.imports.find(namedImportsContains(identifier.text));
+  let fileName = sourceFile.fileName;
+  if (foundImport) {
+    fileName = path.normalize(`${path.dirname(fileName)}/${foundImport.text}`)
+      .replace(new RegExp('\\' + path.sep, 'g'), '/');
+  }
+  return `${fileName}#${identifier.text}`;
+
+}
+
 module.exports = parseOutApiDocs;

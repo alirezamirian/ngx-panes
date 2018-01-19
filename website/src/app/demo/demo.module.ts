@@ -15,7 +15,7 @@ import {Ng2FileTreeModule} from 'ng2-file-tree';
 import {NoopXSRFStrategy} from './noop-xsrf-strategy';
 import {XSRFStrategy} from '@angular/http';
 import {DemoService} from './demo.service';
-import {ResizeDisabledDemoComponent} from './demos/resize-disabled-demo/resize-disabled-demo.component';
+import {ResizeDisabledDemoComponent} from './demos/resizing-demo/resizing-demo.component';
 import {GithubBrowserDemoComponent} from './demos/github-browser-demo/github-browser-demo.component';
 
 import 'codemirror';

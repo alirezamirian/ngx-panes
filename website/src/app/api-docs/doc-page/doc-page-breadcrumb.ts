@@ -7,8 +7,8 @@ import {ActivatedRouteSnapshot} from '@angular/router';
 
 export function docPageBreadcrumb(route: ActivatedRouteSnapshot) {
   return <BreadcrumbItem>{
-    url: `api/${route.data.docItem.identifier}`,
+    url: `api/${route.params.symbol}`,
     params: [],
-    label: route.data.docItem.identifier
+    label: route.params.symbol
   };
 }

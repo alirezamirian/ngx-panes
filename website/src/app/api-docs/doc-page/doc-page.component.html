@@ -14,7 +14,8 @@
     <app-side-anchor></app-side-anchor>
     Usage
   </h2>
-  <app-code-block [source]="docItem.usage"></app-code-block>
+  <app-code-block [source]="docItem.usage"
+                  [language]="docItem.type === 'ngModule' ? 'typescript' : 'html'"></app-code-block>
 </ng-container>
 
 <ng-container *ngIf="docItem.inputs?.length">

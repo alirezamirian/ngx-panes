@@ -8,20 +8,20 @@
       </md-list-item>
       <h3 md-subheader>API Docs</h3>
       <md-nav-list dense *ngFor="let item of (apiDocs$ | async)?.modules">
-        <a [routerLink]="['/api', item.identifier]">
-          <md-list-item md-button
-                        [routerLink]="['/api', item.identifier]">{{item.identifier}}
-          </md-list-item>
+        <a [routerLink]="['/api', item.identifier]" routerLinkActive="active">
+          <md-list-item md-button>{{item.identifier}}</md-list-item>
         </a>
         <md-nav-list dense>
           <h4 md-subheader>Components</h4>
-          <a *ngFor="let component of item.components" [routerLink]="['/api', component.identifier]">
-            <md-list-item>{{component.identifier}}</md-list-item>
+          <a *ngFor="let component of item.components"
+             [routerLink]="['/api', component.identifier]" routerLinkActive="active">
+            <md-list-item routerLinkActive="active">{{component.identifier}}</md-list-item>
           </a>
         </md-nav-list>
         <md-nav-list dense>
           <h4 md-subheader>Directives</h4>
-          <a *ngFor="let directive of item.directives" [routerLink]="['/api', directive.identifier]">
+          <a *ngFor="let directive of item.directives"
+             [routerLink]="['/api', directive.identifier]" routerLinkActive="active">
             <md-list-item>{{directive.identifier}}</md-list-item>
           </a>
         </md-nav-list>

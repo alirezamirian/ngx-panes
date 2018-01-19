@@ -2,6 +2,10 @@
  * extracts an object based on documentation tags and
  */
 
+const AllHtmlEntities = require('html-entities').AllHtmlEntities;
+
+const htmlEntities = new AllHtmlEntities();
+
 const RE_COMMENT_LINE = /^\s*\*(?:\s(\s*)|$)/m;
 
 module.exports = function parseDocComment(classDeclaration, parsers) {
@@ -22,5 +26,5 @@ function stripStars(comment) {
 }
 
 function mapTag(tag) {
-  return {name: tag.tagName.text, content: stripStars(tag.comment)};
+  return {name: tag.tagName.text, content: htmlEntities.decode(stripStars(tag.comment))};
 }

@@ -30,3 +30,7 @@ md-nav-list md-nav-list md-nav-list md-list-item {
 md-nav-list md-nav-list .mat-subheader {
   padding-left: 32px;
 }
+
+.active > md-list-item {
+  background: rgba(0, 0, 0, .07);
+}

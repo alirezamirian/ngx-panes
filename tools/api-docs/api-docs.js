@@ -247,11 +247,6 @@ class APIDocVisitor {
     return node ? this.typeChecker.typeToString(this.typeChecker.getTypeAtLocation(node)) : 'void';
   }
 
-
-  isServiceDecorator(decorator) {
-    return decorator.expression.expression.text === 'Injectable';
-  }
-
   getDecoratorOfType(node, decoratorType) {
     const decorators = node.decorators || [];
 

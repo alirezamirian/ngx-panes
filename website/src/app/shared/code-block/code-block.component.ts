@@ -1,4 +1,4 @@
-import {AfterContentChecked, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {AfterContentInit, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 
 import * as hljs from 'highlight.js';
 import {MdTooltip} from '@angular/material';
@@ -12,7 +12,7 @@ hljs.configure({
   templateUrl: './code-block.component.html',
   styleUrls: ['./code-block.component.scss']
 })
-export class CodeBlockComponent implements OnInit, AfterContentChecked {
+export class CodeBlockComponent implements OnInit, AfterContentInit {
 
   // TODO: add line numbers (use Prism instead of hljs)
   loading = false;
@@ -42,7 +42,8 @@ export class CodeBlockComponent implements OnInit, AfterContentChecked {
   ngOnInit() {
   }
 
-  ngAfterContentChecked(): void {
+  ngAfterContentInit(): void {
+    console.log('content', this.content.nativeElement.innerHTML)
     hljs.highlightBlock(this.content.nativeElement);
   }
 

@@ -17,7 +17,18 @@ import {Align, RelativeAlign, toAlign, toRelativeAlign} from './rtl-utils';
 import {PaneViewComponent} from '../pane-view.component';
 
 /**
- * Renders a list of panes which are navigable via tabs
+ * Renders a list of panes, navigatable with side tabs.
+ *
+ * @usage
+ * <ngx-panes>
+ *     <ngx-pane title="First Pane">...</ngx-pane>
+ *     <ngx-pane title="Second Pane">...</ngx-pane>
+ * </ngx-panes>
+ *
+ * @example
+ * <ngx-panes>
+ *     <ngx-pane></ngx-pane>
+ * </ngx-panes>
  */
 @Component({
   selector: 'ngx-panes',
@@ -52,6 +63,7 @@ export class PanesComponent implements OnInit, AfterContentInit, OnChanges {
    */
   @Input() toggleable = true;
 
+  // noinspection JSAnnotator
   /**
    * Direction which the ngx-panes is aligned. It can be a {@link RelativeAlign} or Align.
    * @param value
@@ -98,7 +110,7 @@ export class PanesComponent implements OnInit, AfterContentInit, OnChanges {
 
   /**
    * selects a child pane.
-   * @param pane
+   * @param pane child `PaneComponent` instance to select
    */
   public select(pane: PaneComponent) {
     if (this._selectedPane !== pane) {

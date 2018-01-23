@@ -1,6 +1,6 @@
 <ngx-panes [align]="'start'" [defaultWidth]="280">
   <ngx-pane #firstPane id="test" title="Files" [width]="330">
-    <ng-template ngxPaneHeader>custom header {{firstPane.width}}</ng-template>
+    <ngx-pane-header>custom header {{firstPane.width}}</ngx-pane-header>
     <app-github-file-tree [slug]="slug" (fileSelected)="setSourceUrl($event)"></app-github-file-tree>
   </ngx-pane>
   <ngx-pane title="Issues" [width]="320">

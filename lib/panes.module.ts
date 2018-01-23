@@ -1,16 +1,30 @@
+/**
+ * Created by alireza on 5/22/17.
+ */
+
 import {NgModule} from '@angular/core';
 import {PanesComponent} from './panes/panes.component';
 import {PaneComponent} from './pane/pane.component';
 import {PaneResizerComponent} from './pane-resizer/pane-resizer.component';
 import {CommonModule} from '@angular/common';
 import {FlexLayoutModule} from '@angular/flex-layout';
-import {PaneHeaderDirective} from './pane-header.directive';
 import {PaneViewComponent} from './pane-view.component';
+import {PaneHeaderComponent} from './pane-header/pane-header.component';
+
 /**
- * Created by alireza on 5/22/17.
+ * The main module for ngx-panes. Add it to `imports` of your module.
+ *
+ * @usage
+ * &#64;NgModule({
+ *  imports: [
+ *    // ...
+ *    NgxPanesModule
+ *    //...
+ *  ]
+ * })
+ * export class AppModule{
+ * }
  */
-
-
 @NgModule({
   imports: [
     CommonModule,
@@ -20,13 +34,13 @@ import {PaneViewComponent} from './pane-view.component';
     PanesComponent,
     PaneComponent,
     PaneResizerComponent,
-    PaneHeaderDirective,
-    PaneViewComponent
+    PaneViewComponent,
+    PaneHeaderComponent
   ],
   exports: [
     PanesComponent,
     PaneComponent,
-    PaneHeaderDirective
+    PaneHeaderComponent
   ]
 })
 export class NgxPanesModule {

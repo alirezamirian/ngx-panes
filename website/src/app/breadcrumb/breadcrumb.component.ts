@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, ActivatedRouteSnapshot, NavigationEnd, Params, Router} from '@angular/router';
-import 'rxjs/add/operator/filter';
+import {filter} from 'rxjs/operators';
 
 export interface BreadcrumbItem {
   label: string;
@@ -45,7 +45,7 @@ export class BreadcrumbComponent implements OnInit {
    */
   ngOnInit() {
     // subscribe to the NavigationEnd event
-    this.router.events.filter(event => event instanceof NavigationEnd).subscribe(event => {
+    this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(event => {
       // set breadcrumbs
       // TODO: can we prevent hard-coded 'getBreadcrumbItems'?
       this.breadcrumbs = this.activatedRoute.children.reduce(routeToBreadcrumbs, []);

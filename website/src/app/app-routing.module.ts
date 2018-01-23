@@ -17,7 +17,7 @@ const routes: Routes = [
         path: 'guides', loadChildren: './guide/guide.module#GuideModule'
       },
       {
-        path: 'api', loadChildren: './api-docs/api-docs.module.ts#ApiDocsModule'
+        path: 'api', loadChildren: './api-docs/api-docs.module#ApiDocsModule'
       }
     ]
   },

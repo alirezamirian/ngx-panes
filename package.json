@@ -12,27 +12,27 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "4.1.2",
-    "@angular/common": "^4.1.2",
-    "@angular/compiler": "^4.1.2",
-    "@angular/core": "^4.1.2",
+    "@angular/animations": "^5.2.1",
+    "@angular/common": "^5.2.1",
+    "@angular/compiler": "^5.2.1",
+    "@angular/core": "^5.2.1",
     "@angular/flex-layout": "^2.0.0-beta.8",
-    "@angular/forms": "^4.1.2",
-    "@angular/http": "^4.1.2",
+    "@angular/forms": "^5.2.1",
+    "@angular/http": "^5.2.1",
     "@angular/material": "^2.0.0-beta.6",
-    "@angular/platform-browser": "^4.1.2",
-    "@angular/platform-browser-dynamic": "^4.1.2",
-    "@angular/router": "^4.1.2",
+    "@angular/platform-browser": "^5.2.1",
+    "@angular/platform-browser-dynamic": "^5.2.1",
+    "@angular/router": "^5.2.1",
     "bootstrap-sass": "^3.3.7",
     "codemirror": "^5.26.0",
     "core-js": "^2.4.1",
     "highlight.js": "^9.12.0",
-    "rxjs": "^5.1.0",
+    "rxjs": "^5.5.2",
     "zone.js": "^0.8.4"
   },
   "devDependencies": {
-    "@angular/cli": "1.0.3",
-    "@angular/compiler-cli": "^4.1.2",
+    "@angular/cli": "^1.6.5",
+    "@angular/compiler-cli": "^5.2.1",
     "@types/highlight.js": "^9.1.9",
     "@types/jasmine": "2.5.38",
     "@types/node": "~6.0.60",
@@ -58,6 +58,21 @@
     "sass-bidi": "^1.1.0",
     "ts-node": "~2.0.0",
     "tslint": "~4.5.0",
-    "typescript": "~2.2.0"
-  }
+    "typescript": "^2.6.2"
+  },
+  "description": "Panes for Angular!",
+  "main": "gulpfile.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/alireza-mirian/ngx-panes.git"
+  },
+  "keywords": [],
+  "author": "",
+  "bugs": {
+    "url": "https://gitlab.com/alireza-mirian/ngx-panes/issues"
+  },
+  "homepage": "https://gitlab.com/alireza-mirian/ngx-panes#README"
 }

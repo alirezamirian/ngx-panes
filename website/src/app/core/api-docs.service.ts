@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
 
-import 'rxjs/add/operator/share';
 import 'rxjs/add/operator/toPromise';
 import {Observable} from 'rxjs/Observable';
+import {map, share} from 'rxjs/operators';
 
 @Injectable()
 export class ApiDocsService {
@@ -14,9 +14,12 @@ export class ApiDocsService {
 
   getDocs(): Observable<any> {
     if (!this.docs$) {
-      this.docs$ = this.http.get('assets/api-docs.json').share().map(response => {
-        return response.json();
-      });
+      this.docs$ = this.http.get('assets/api-docs.json').pipe(
+        share(),
+        map(response => {
+          return response.json();
+        })
+      );
     }
     this.docs$.subscribe(docs => console.log('docs', docs));
     return this.docs$;

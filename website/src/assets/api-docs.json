@@ -2,7 +2,7 @@
   {
     "fileName": "lib/pane-header/pane-header.component.ts",
     "identifier": "PaneHeaderComponent",
-    "description": "",
+    "description": "<p><code>ngx-pane-header</code> is used for providing custom headers for panes.</p>\n<p>By default the header of the pane consist of a simple text label\n(which is determined by {@link PaneComponent#title} input).\nYou can override this behaviour, however and use custom content as\npane header by using a <code>&lt;ngx-pane-header&gt;...&lt;/ngx-pane-header&gt;</code> inside\n<code>&lt;ngx-pane&gt;...&lt;/ngx-pane&gt;</code> component.</p>\n",
     "methods": [],
     "properties": [
       {
@@ -15,7 +15,8 @@
     "isComponent": true,
     "selector": "ngx-pane-header",
     "inputs": [],
-    "outputs": []
+    "outputs": [],
+    "usage": "<ngx-panes>\n  <ngx-pane title=\"First Pane\">\n    <ngx-pane-header>this is a <b>special</b> header</ngx-pane-header>\n    <!-- pane content goes here -->\n    ...\n  </ngx-pane>\n  <ngx-pane title=\"will be used for header in absense of ngx-pane-header\">...</ngx-pane>\n</ngx-panes>"
   },
   {
     "fileName": "lib/pane-resizer/pane-resizer.component.ts",

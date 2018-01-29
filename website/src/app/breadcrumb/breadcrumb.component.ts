@@ -29,21 +29,11 @@ export class BreadcrumbComponent implements OnInit {
 
   public breadcrumbs: BreadcrumbItem[];
 
-  /**
-   * @class DetailComponent
-   * @constructor
-   */
   constructor(private activatedRoute: ActivatedRoute,
               private router: Router) {
     this.breadcrumbs = [];
   }
 
-  /**
-   * Let's go!
-   *
-   * @class DetailComponent
-   * @method ngOnInit
-   */
   ngOnInit() {
     // subscribe to the NavigationEnd event
     this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(event => {

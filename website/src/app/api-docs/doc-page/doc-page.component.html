@@ -33,7 +33,7 @@
     <app-side-anchor></app-side-anchor>
     Methods
   </h2>
-  <md-card class="method" *ngFor="let method of docItem.methods">
+  <mat-card class="method" *ngFor="let method of docItem.methods">
     <h3 id="method-{{method.name}}">
       <app-side-anchor></app-side-anchor>
       {{method.name}}
@@ -47,5 +47,5 @@
     <ng-container *ngIf="method.args.length > 0">
       <app-params [params]="method.args" [strings]="{name: 'Parameter Name'}"></app-params>
     </ng-container>
-  </md-card>
+  </mat-card>
 </ng-container>

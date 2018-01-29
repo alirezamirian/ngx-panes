@@ -1,14 +1,11 @@
-md-toolbar /deep/ md-toolbar-row:first-child {
-  display: none;
-}
 
-md-toolbar-row:nth-child(2) {
-  height: 30px;
+mat-toolbar-row:nth-child(1) {
+  height: 35px;
   font-size: .7em;
   align-items: flex-end;
 }
 
-md-toolbar-row:nth-child(3) {
+mat-toolbar-row:nth-child(2) {
   //height: 55px;
 }
 

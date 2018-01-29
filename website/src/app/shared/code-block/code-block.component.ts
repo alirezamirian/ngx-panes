@@ -1,7 +1,7 @@
 import {AfterContentInit, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 
 import * as hljs from 'highlight.js';
-import {MdTooltip} from '@angular/material';
+import {MatTooltip} from '@angular/material';
 
 hljs.configure({
   useBR: true
@@ -47,7 +47,7 @@ export class CodeBlockComponent implements OnInit, AfterContentInit {
     hljs.highlightBlock(this.content.nativeElement);
   }
 
-  copyToClipboard(tooltip: MdTooltip) {
+  copyToClipboard(tooltip: MatTooltip) {
     console.log(tooltip);
     const prevMessage = tooltip.message;
     const result = copyTextToClipboard(this._source);

@@ -1,24 +1,24 @@
 <div class="container">
   <div *ngIf="tags?.length">
     Filtered by:
-    <md-chip-list [selectable]="false">
-      <md-chip *ngFor="let tag of tags" [selected]="true" color="accent">
+    <mat-chip-list [selectable]="false">
+      <mat-chip *ngFor="let tag of tags" [selected]="true" color="accent">
         {{tag}}
-        <button md-icon-button (click)="removeTag(tag)">
-          <md-icon>close</md-icon>
+        <button mat-icon-button (click)="removeTag(tag)">
+          <mat-icon>close</mat-icon>
         </button>
-      </md-chip>
-    </md-chip-list>
+      </mat-chip>
+    </mat-chip-list>
   </div>
-  <md-card color="primary">
-    <md-card-title>Demos</md-card-title>
-    <md-card-content>
-      <md-list>
+  <mat-card color="primary">
+    <mat-card-title>Demos</mat-card-title>
+    <mat-card-content>
+      <mat-list>
         <app-demo-item *ngFor="let demo of filteredDemos"
                        (tagClicked)="addTag($event)"
                        [demo]="demo"></app-demo-item>
-      </md-list>
-    </md-card-content>
-  </md-card>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
 
 </div>

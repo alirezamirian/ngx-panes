@@ -3,9 +3,9 @@ import {Component, Input} from '@angular/core';
 @Component({
   selector: 'app-loading',
   template: `
-    <md-progress-spinner mode="indeterminate"
+    <mat-progress-spinner mode="indeterminate"
                          [strokeWidth]="4"
-                         *ngIf="loading"></md-progress-spinner>
+                         *ngIf="loading"></mat-progress-spinner>
     <ng-content *ngIf="!loading"></ng-content>
   `,
   styles: [
@@ -15,7 +15,7 @@ import {Component, Input} from '@angular/core';
         display: block;
       }
 
-      md-progress-spinner {
+      mat-progress-spinner {
         margin: auto;
         width: 50px;
         height: 100%;

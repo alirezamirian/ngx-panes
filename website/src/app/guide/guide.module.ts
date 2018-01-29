@@ -6,7 +6,7 @@ import {SharedModule} from '../shared/shared.module';
 import {GuideService} from './guide.service';
 import {RoutedGuideComponent} from './routed-guide/routed-guide.component';
 import {GuideListComponent} from './guide-list/guide-list.component';
-import {MdListModule} from '@angular/material';
+import {MatListModule} from '@angular/material';
 
 var entryComponents = [
   ThemingGuideComponent
@@ -15,7 +15,7 @@ var entryComponents = [
   imports: [
     SharedModule,
     GuideRoutingModule,
-    MdListModule
+    MatListModule
   ],
   providers: [
     GuideService

@@ -6,22 +6,22 @@
   $warn: map-get($theme, warn);
   $success: mat-palette($mat-green);
 
-  app-callout > md-card {
+  app-callout > mat-card {
     &.info {
       border-color: mat-color($primary);
-      > md-icon {
+      > mat-icon {
         color: mat-color($primary);
       }
     }
     &.success {
       border-color: mat-color($success);
-      > md-icon {
+      > mat-icon {
         color: mat-color($success);
       }
     }
     &.danger {
       border-color: mat-color($warn);
-      > md-icon {
+      > mat-icon {
         color: mat-color($warn);
       }
     }

@@ -1,6 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {MdListModule, MdToolbarModule} from '@angular/material';
+import {MatListModule, MatToolbarModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import {AppComponent} from './app.component';
@@ -23,8 +23,8 @@ import {CoreModule} from './core/core.module';
     CoreModule,
     BrowserModule,
     BrowserAnimationsModule,
-    MdToolbarModule,
-    MdListModule,
+    MatToolbarModule,
+    MatListModule,
 
     AppRoutingModule
   ],

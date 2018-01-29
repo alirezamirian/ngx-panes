@@ -3,17 +3,17 @@
   margin: 20px auto 0;
 }
 
-md-list {
+mat-list {
   margin: 0 -24px;
 }
 
-md-chip-list {
+mat-chip-list {
   margin-bottom: 15px;
   display: inline-block;
-  [md-icon-button] {
+  [mat-icon-button] {
 
   }
-  md-chip {
+  mat-chip {
     &:focus {
       outline: none;
     }

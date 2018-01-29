@@ -6,7 +6,7 @@ import {DemoItemComponent} from './demo-item/demo-item.component';
 import {DemoListComponent} from './demo-list/demo-list.component';
 import {RoutedDemoComponent} from './routed-demo/routed-demo.component';
 import {SharedModule} from '../shared/shared.module';
-import {MdCardModule, MdChipsModule, MdListModule} from '@angular/material';
+import {MatCardModule, MatChipsModule, MatListModule} from '@angular/material';
 import {GithubContributorsComponent} from './github-contributors/github-contributors.component';
 import {GithubIssueListComponent} from './github-issue-list/github-issue-list.component';
 import {GithubFileTreeComponent} from './github-file-tree/github-file-tree.component';
@@ -42,9 +42,9 @@ console.log('entryComponents', entryComponents);
     SharedModule,
     DemoRoutingModule,
 
-    MdListModule,
-    MdCardModule,
-    MdChipsModule,
+    MatListModule,
+    MatCardModule,
+    MatChipsModule,
 
     Ng2FileTreeModule, // used in GithubFileTreeComponent
 

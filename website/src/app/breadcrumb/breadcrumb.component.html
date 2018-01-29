@@ -2,6 +2,6 @@
   <span fxLayout="row" fxLayoutAlign="center center"
         *ngFor="let breadcrumb of breadcrumbs; let isLast = last">
     <a [routerLink]="[breadcrumb.url]">{{ breadcrumb.label }}</a>
-    <md-icon *ngIf="!isLast">keyboard_arrow_right</md-icon>
+    <mat-icon *ngIf="!isLast">keyboard_arrow_right</mat-icon>
   </span>
 </div>

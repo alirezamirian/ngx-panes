@@ -19,18 +19,18 @@
   overflow: auto;
 }
 
-md-nav-list md-nav-list md-list-item {
+mat-nav-list mat-nav-list mat-list-item {
   padding-left: 15px;
 }
 
-md-nav-list md-nav-list md-nav-list md-list-item {
+mat-nav-list mat-nav-list mat-nav-list mat-list-item {
   padding-left: 30px;
 }
 
-md-nav-list md-nav-list .mat-subheader {
+mat-nav-list mat-nav-list .mat-subheader {
   padding-left: 32px;
 }
 
-.active > md-list-item {
+.active > mat-list-item {
   background: rgba(0, 0, 0, .07);
 }

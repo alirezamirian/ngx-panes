@@ -16,7 +16,7 @@
     "selector": "ngx-pane-header",
     "inputs": [],
     "outputs": [],
-    "usage": "<ngx-panes>\n  <ngx-pane title=\"First Pane\">\n    <ngx-pane-header>this is a <b>special</b> header</ngx-pane-header>\n    <!-- pane content goes here -->\n    ...\n  </ngx-pane>\n  <ngx-pane title=\"will be used for header in absense of ngx-pane-header\">...</ngx-pane>\n</ngx-panes>"
+    "usage": "<ngx-panes>\n  <ngx-pane title=\"First Pane\">\n    <ngx-pane-header>this is a <b>special</b> header</ngx-pane-header>\n    <!-- pane content goes here -->\n  </ngx-pane>\n  <ngx-pane title=\"will be used for header in absense of ngx-pane-header\">...</ngx-pane>\n</ngx-panes>"
   },
   {
     "fileName": "lib/pane-resizer/pane-resizer.component.ts",

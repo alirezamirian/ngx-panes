@@ -13,7 +13,6 @@ import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
  *   <ngx-pane title="First Pane">
  *     <ngx-pane-header>this is a <b>special</b> header</ngx-pane-header>
  *     <!-- pane content goes here -->
- *     ...
  *   </ngx-pane>
  *   <ngx-pane title="will be used for header in absense of ngx-pane-header">...</ngx-pane>
  * </ngx-panes>

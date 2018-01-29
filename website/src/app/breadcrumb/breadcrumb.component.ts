@@ -21,6 +21,7 @@ const routeToBreadcrumbs = (breadcrumbs: BreadcrumbItem[], route: ActivatedRoute
 
 @Component({
   selector: 'app-breadcrumb',
+  exportAs: 'AppBreadcrumb',
   templateUrl: './breadcrumb.component.html',
   styleUrls: ['./breadcrumb.component.scss']
 })

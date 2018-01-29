@@ -1,11 +1,26 @@
 
+mat-toolbar.no-breadcrumb {
+  min-height: 40px;
+  mat-toolbar-row:nth-child(1) {
+    height: 56px;
+    margin-bottom: 0;
+  }
+  mat-toolbar-row:nth-child(2) {
+    height: 0;
+  }
+}
+
+mat-toolbar-row {
+  transition: height .2s, margin-bottom .2s;
+}
 mat-toolbar-row:nth-child(1) {
-  height: 35px;
+  height: 45px;
+  margin-bottom: -5px;
   font-size: .7em;
-  align-items: flex-end;
 }
 
 mat-toolbar-row:nth-child(2) {
+  overflow: hidden;
   //height: 55px;
 }
 
@@ -20,3 +35,4 @@ app-breadcrumb /deep/ a {
 a {
   margin-right: 20px;
 }
+

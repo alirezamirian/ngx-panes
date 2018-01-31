@@ -1,4 +1,5 @@
 @import '../../../../../../lib/theming';
+//@import '~ngx-panes/theming'; // for testing production bundle
 
 .theme-intellij {
   @include ngx-panes-theme((

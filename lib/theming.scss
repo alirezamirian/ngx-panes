@@ -1,11 +1,6 @@
 @import 'scss/functions/pick-visible-color';
+@import 'scss/functions/decimalize.scss';
 
-@function decimalize($value) {
-  @if (unit($value) == '%') {
-    @return $value/100%;
-  }
-  @return $value;
-}
 
 @mixin ngx-panes-theme($options: ()) {
   @if (map_has_key($options, primaryColor) == false) {

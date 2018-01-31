@@ -8,7 +8,10 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "build:lib": "npm run build:lib:ts && npm run build:lib:scss",
+    "build:lib:ts": "ng-packagr -p lib/package.json",
+    "build:lib:scss": "scss-bundle -c lib/scss-bundle.config.json"
   },
   "private": true,
   "dependencies": {
@@ -17,7 +20,7 @@
     "@angular/common": "^5.2.1",
     "@angular/compiler": "^5.2.1",
     "@angular/core": "^5.2.1",
-    "@angular/flex-layout": "^2.0.0-beta.8",
+    "@angular/flex-layout": "^2.0.0-beta.12",
     "@angular/forms": "^5.2.1",
     "@angular/http": "^5.2.1",
     "@angular/material": "^5.1.0",
@@ -53,10 +56,12 @@
     "karma-jasmine": "~1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
     "marked": "latest",
+    "ng-packagr": "^1.6.0",
     "ng2-file-tree": "^0.4.3",
     "prettier": "^1.10.2",
     "protractor": "~5.1.0",
     "sass-bidi": "^1.1.0",
+    "scss-bundle": "^2.1.2",
     "ts-node": "~2.0.0",
     "tslint": "~4.5.0",
     "typescript": "^2.6.2"

@@ -1,10 +1,16 @@
 {
+  "$schema": "../node_modules/ng-packagr/package.schema.json",
   "name": "ngx-panes",
   "version": "0.0.1",
-  "main": "./bundles/ngx-panes.umd.js",
-  "module": "./@angular/ngx-panes.es5.js",
-  "es2015": "./@angular/ngx-panes.js",
-  "typings": "./ngx-panes.d.ts",
+  "ngPackage": {
+    "lib": {
+      "entryFile": "./public_api.ts",
+      "externals": {
+        "@angular/flex-layout": "@angular/flex-layout"
+      }
+    },
+    "dest": "node_modules/ngx-panes"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/alirezamirian/ngx-panes.git"
@@ -20,8 +26,8 @@
   },
   "homepage": "https://alirezamirian.github.io/ngx-panes",
   "peerDependencies": {
-    "@angular/core": "^4.0.0",
-    "@angular/common": "^4.0.0",
-    "@angular/flex-layout": "^2.0.0-beta.8"
+    "@angular/core": "^5.0.0",
+    "@angular/common": "^5.0.0",
+    "@angular/flex-layout": "^2.0.0-beta.12"
   }
 }

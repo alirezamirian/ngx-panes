@@ -1,0 +1,6 @@
+@function decimalize($value) {
+  @if (unit($value) == '%') {
+    @return $value/100%;
+  }
+  @return $value;
+}

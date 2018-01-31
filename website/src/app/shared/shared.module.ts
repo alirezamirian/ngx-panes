@@ -18,6 +18,8 @@ import {CodeBlockSourceUrlDirective} from './code-block/source-url.directive';
 import {SideAnchorOwnerDirective} from './side-anchor/side-anchor-owner.directive';
 import {SideAnchorComponent} from './side-anchor/side-anchor.component';
 
+// import {NgxPanesModule} from 'ngx-panes'; // for testing production bundle
+
 @NgModule({
   imports: [
     CommonModule,

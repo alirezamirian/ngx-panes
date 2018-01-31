@@ -1,0 +1,4 @@
+{
+  "entry": "lib/theming.scss",
+  "dest": "node_modules/ngx-panes/_theming.scss"
+}

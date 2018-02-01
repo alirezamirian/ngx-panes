@@ -1,0 +1,38 @@
+@import '../scss/mixins';
+
+ngx-pane-resizer {
+  $resizer-length: 6px;
+  position: absolute;
+  @include if-inside-horizontal-pane {
+    top: 0;
+    bottom: 0;
+    width: $resizer-length;
+  }
+  @include if-inside-vertical-pane {
+    left: 0;
+    right: 0;
+    height: $resizer-length;
+  }
+
+  @include if-inside-left-aligned-pane {
+    cursor: e-resize;
+    left: 100%;
+    margin-left: -$resizer-length/2;
+  }
+  @include if-inside-right-aligned-pane {
+    cursor: w-resize;
+    right: 100%;
+    margin-right: -$resizer-length/2;
+  }
+
+  @include if-inside-bottom-aligned-pane {
+    cursor: n-resize;
+    top: 0;
+    margin-top: -$resizer-length/2;
+  }
+  @include if-inside-top-aligned-pane {
+    cursor: s-resize;
+    bottom: 0;
+    margin-bottom: -$resizer-length/2;
+  }
+}

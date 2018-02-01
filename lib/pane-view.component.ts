@@ -25,10 +25,4 @@ export class PaneViewComponent implements OnInit, OnChanges {
       }
     }
   }
-
-  getWidth(): number {
-    return this.viewContainerRef.element.nativeElement.parentElement.offsetWidth;
-  }
-
-
 }

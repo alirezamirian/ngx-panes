@@ -1,7 +1,8 @@
 @import '../scss/mixins';
 @import '../theming';
+@import 'resizer';
+@import 'alignment';
 
-$border: 1px solid; // border-color will be overridden by theme
 
 /deep/ {
   @include ngx-panes-theme((
@@ -17,18 +18,8 @@ $border: 1px solid; // border-color will be overridden by theme
   ));
 }
 .tabs {
-  width: 22px;
   line-height: 22px;
   overflow: hidden;
-  @include inside-end-aligned-pane{
-    order: 1;
-  }
-  @include inside-left-aligned-pane{
-    border-right: $border;
-  }
-  @include inside-right-aligned-pane{
-    border-left: $border;
-  }
 }
 
 .tab {
@@ -50,7 +41,7 @@ $border: 1px solid; // border-color will be overridden by theme
     float: left;
     margin-top: 100%;
   }
-  @include inside-left-aligned-pane {
+  @include if-inside-left-aligned-pane {
     transform: rotate(-90deg);
     /*
     ┌────────┐                  ┌────────┐
@@ -60,7 +51,7 @@ $border: 1px solid; // border-color will be overridden by theme
     └────────┘                  └────────┘
   */
   }
-  @include inside-right-aligned-pane {
+  @include if-inside-right-aligned-pane {
     transform: rotate(90deg);
     /*
     ┌────────┐                  ┌────────┐
@@ -90,29 +81,19 @@ $border: 1px solid; // border-color will be overridden by theme
   }
 }
 
-.wrapper {
-  height: 100%;
-  @include if-left-aligned {
-    border-right: $border;
-    @extend %border-right-shadow;
-  }
-  @include if-right-aligned {
-    border-left: $border;
-    @extend %border-left-shadow;
-  }
-}
-
 ngx-pane-view {
   overflow: auto;
 }
 
 .content-container {
   overflow: hidden;
+  position: relative;
 }
 
 .header {
+  flex-shrink: 0;
   padding: 3px 5px;
-  border-bottom: $border;
+  border-bottom: 1px solid;
   height: 24px;
   line-height: 18px;
   overflow: hidden;
@@ -120,25 +101,4 @@ ngx-pane-view {
   box-sizing: border-box;
   font-size: .9em;
   @extend %border-bottom-shadow;
-}
-
-ngx-pane-resizer {
-  $resizer-length: 6px;
-  position: absolute;
-  @include inside-horizontal-pane {
-    top: 0;
-    bottom: 0;
-    width: $resizer-length;
-  }
-  @include inside-left-aligned-pane {
-    cursor: e-resize;
-    left: 100%;
-    margin-left: -$resizer-length/2;
-  }
-  @include inside-right-aligned-pane {
-    cursor: w-resize;
-    right: 100%;
-    margin-right: -$resizer-length/2;
-  }
-  // TODO: handle vertical
 }

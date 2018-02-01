@@ -1,18 +1,22 @@
-<div fxLayout="row" fxLayoutAlign="start stretch" class="wrapper" [ngClass]="[_align, _relativeAlign]">
-  <div fxLayout="column" class="tabs">
+<div class="wrapper" [ngClass]="[_align, _relativeAlign]">
+  <div class="tabs">
     <div *ngFor="let pane of panes" class="tab" role="button" [class.active]="pane === selectedPane"
          (click)="paneTabClicked(pane)">
       <span class="rotated">{{pane.title}}</span>
     </div>
   </div>
-  <div [style.width.px]="isHorizontal() ? width : null" fxLayout="column"
+  <!-- TODO: use ngStyles-->
+  <div [style.width.px]="isHorizontal() ? width : null"
+       [style.maxWidth.px]="isHorizontal() ? maxSize : null"
+       [style.height.px]="!isHorizontal() ? width : null"
+       [style.maxHeight.px]="!isHorizontal() ? maxSize : null"
        #contentContainer
        class="content-container">
     <div class="header">
       <ng-container #header></ng-container>
       <ng-container *ngIf="!selectedPane?.header">{{selectedPane?.title}}</ng-container>
     </div>
-    <ngx-pane-view fxFlex *ngIf="selectedPane" [pane]="selectedPane">
+    <ngx-pane-view *ngIf="selectedPane" [pane]="selectedPane">
     </ngx-pane-view>
     <ngx-pane-resizer *ngIf="selectedPane?.resizable"></ngx-pane-resizer>
   </div>

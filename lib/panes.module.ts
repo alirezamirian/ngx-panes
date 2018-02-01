@@ -7,7 +7,6 @@ import {PanesComponent} from './panes/panes.component';
 import {PaneComponent} from './pane/pane.component';
 import {PaneResizerComponent} from './pane-resizer/pane-resizer.component';
 import {CommonModule} from '@angular/common';
-import {FlexLayoutModule} from '@angular/flex-layout';
 import {PaneViewComponent} from './pane-view.component';
 import {PaneHeaderComponent} from './pane-header/pane-header.component';
 
@@ -27,8 +26,7 @@ import {PaneHeaderComponent} from './pane-header/pane-header.component';
  */
 @NgModule({
   imports: [
-    CommonModule,
-    FlexLayoutModule
+    CommonModule
   ],
   declarations: [
     PanesComponent,

@@ -1,27 +1,48 @@
-@mixin inside-left-aligned-pane {
+// TODO: create a more abstract versions of mixins below which accepts alignment as parameter
+
+@mixin if-inside-left-aligned-pane {
   .wrapper.left &{
     @content;
   }
 }
-@mixin inside-right-aligned-pane {
+
+@mixin if-inside-right-aligned-pane {
   .wrapper.right &{
     @content;
   }
 }
 
-@mixin inside-horizontal-pane {
+@mixin if-inside-top-aligned-pane {
+  .wrapper.top & {
+    @content;
+  }
+}
+
+@mixin if-inside-bottom-aligned-pane {
+  .wrapper.bottom & {
+    @content;
+  }
+}
+
+@mixin if-inside-horizontal-pane {
   .wrapper.right &, .wrapper.left & {
     @content;
   }
 }
 
-@mixin inside-start-aligned-pane {
+@mixin if-inside-vertical-pane {
+  .wrapper.top &, .wrapper.bottom & {
+    @content;
+  }
+}
+
+@mixin if-inside-start-aligned-pane {
   .wrapper.start &{
     @content;
   }
 }
 
-@mixin inside-end-aligned-pane {
+@mixin if-inside-end-aligned-pane {
   .wrapper.end &{
     @content;
   }
@@ -42,6 +63,13 @@
     @content;
   }
 }
+
+@mixin if-vertical {
+  &.top, &.bottom {
+    @content;
+  }
+}
+
 %border-shadow{ // intermediate reusable placeholder
   position: relative;
   &::after {

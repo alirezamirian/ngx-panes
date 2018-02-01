@@ -1,0 +1,18 @@
+<div fxLayout="column" fxFlex>
+  <div fxFlex class="mat-padding">
+
+    <!--TODO: add code for demo-->
+  </div>
+  <ngx-panes #panes [align]="'bottom'">
+    <ngx-pane #pane1 id="test" title="Resizable" [width]="330">
+      <app-demo-content [lines]="40"></app-demo-content>
+    </ngx-pane>
+    <ngx-pane #pane2 title="Fixed size" [width]="320" [resizable]="false">
+      <app-demo-content [lines]="40"></app-demo-content>
+    </ngx-pane>
+    <!--  <ngx-pane title="Structure" [width]="300" [resizable]="false">
+        This pane is not a resizable pane. it's fixed at <code>330px</code> width
+      </ngx-pane>-->
+  </ngx-panes>
+
+</div>

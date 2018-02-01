@@ -63,6 +63,8 @@ export class PanesComponent implements OnInit, AfterContentInit, OnChanges {
    */
   @Input() toggleable = true;
 
+  maxSize: number;
+
   // noinspection JSAnnotator
   /**
    * Direction which the ngx-panes is aligned. It can be a {@link RelativeAlign} or Align.
@@ -91,7 +93,8 @@ export class PanesComponent implements OnInit, AfterContentInit, OnChanges {
     return this._align === 'left' || this._align === 'right';
   }
 
-  constructor(private $el: ElementRef, private renderer: Renderer2) { }
+  constructor(private $el: ElementRef, private renderer: Renderer2) {
+  }
 
   ngAfterContentInit(): void {
     this.panesChanged();
@@ -156,7 +159,24 @@ export class PanesComponent implements OnInit, AfterContentInit, OnChanges {
     }
   }
 
-  private getDir(): 'rtl'|'ltr' {
+  public directResize(size) {
+    if (this.isHorizontal()) {
+      this._contentContainer.nativeElement.style.width = size + 'px';
+    } else {
+      this._contentContainer.nativeElement.style.height = size + 'px';
+
+    }
+  }
+
+  public getSize() {
+    if (this.isHorizontal()) {
+      return this._contentContainer.nativeElement.offsetWidth;
+    } else {
+      return this._contentContainer.nativeElement.offsetHeight;
+    }
+  }
+
+  private getDir(): 'rtl' | 'ltr' {
     // TODO: revise
     let el = this.$el.nativeElement.parentElement;
     while (el && el.parentElement !== el) {
@@ -166,9 +186,5 @@ export class PanesComponent implements OnInit, AfterContentInit, OnChanges {
       el = el.parentElement;
     }
     return 'ltr';
-  }
-
-  public directResize(size) {
-    this._contentContainer.nativeElement.style.width = size + 'px';
   }
 }

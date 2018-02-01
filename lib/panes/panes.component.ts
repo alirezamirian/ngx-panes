@@ -122,7 +122,7 @@ export class PanesComponent implements OnInit, AfterContentInit, OnChanges {
    * selects a child pane.
    * @param pane child `PaneComponent` instance to select
    */
-  public select(pane: PaneComponent) {
+  public open(pane: PaneComponent) {
     if (this._selectedPane !== pane) {
       this.headerHost.clear();
       if (pane.header) {
@@ -150,7 +150,7 @@ export class PanesComponent implements OnInit, AfterContentInit, OnChanges {
     if (this._selectedPane === pane && this.toggleable) {
       this.close();
     } else {
-      this.select(pane);
+      this.open(pane);
     }
   }
 
@@ -161,7 +161,7 @@ export class PanesComponent implements OnInit, AfterContentInit, OnChanges {
     }
 
     if (!this._selectedPane && this.autoOpen) {
-      this.select(this.panes.last);
+      this.open(this.panes.last);
     }
   }
 

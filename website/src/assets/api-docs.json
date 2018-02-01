@@ -52,7 +52,20 @@
     "fileName": "lib/pane/pane.component.ts",
     "identifier": "PaneComponent",
     "description": "<p>Pane components, are used inside {@link PanesComponent}. Each pane should have a title which is shown\nin side tabs area. By default, the title is used for <strong>pane header</strong> also.</p>\n<p>Pane header is a thin bar on top of the selected pane which shows a label and also contains\nsome default ui controls for the pane.</p>\n",
-    "methods": [],
+    "methods": [
+      {
+        "name": "open",
+        "description": "<p>Opens this pane. Does nothing if already opened.</p>\n",
+        "args": [],
+        "returnType": "void"
+      },
+      {
+        "name": "close",
+        "description": "<p>Closes this pane. Does nothing if it&#39;s not opened.</p>\n",
+        "args": [],
+        "returnType": "void"
+      }
+    ],
     "properties": [
       {
         "name": "content",
@@ -63,6 +76,11 @@
         "name": "header",
         "type": "PaneHeaderComponent",
         "description": ""
+      },
+      {
+        "name": "opened",
+        "type": "boolean",
+        "description": "<p>Whether this pane should be opened or not. Usually used for initialization.\nWhenever it changes to <code>true</code>, this pane will be opened (if not already opened)\nand whenever it changes to <code>false</code> this pane will be closed if it&#39;s currently open.\nWhether this pane is currently opened or not.</p>\n"
       }
     ],
     "type": "directive",
@@ -73,6 +91,11 @@
         "name": "id",
         "type": "string",
         "description": "<p>unique identifier of the pane.</p>\n"
+      },
+      {
+        "name": "opened",
+        "type": "boolean",
+        "description": "<p>Whether this pane should be opened or not. Usually used for initialization.\nWhenever it changes to <code>true</code>, this pane will be opened (if not already opened)\nand whenever it changes to <code>false</code> this pane will be closed if it&#39;s currently open.\nWhether this pane is currently opened or not.</p>\n"
       },
       {
         "name": "resizable",
@@ -115,7 +138,7 @@
     "description": "<p>Renders a list of panes, navigatable with side tabs.</p>\n",
     "methods": [
       {
-        "name": "select",
+        "name": "open",
         "description": "<p>selects a child pane.</p>\n",
         "args": [
           {
@@ -155,6 +178,11 @@
         "description": ""
       },
       {
+        "name": "maxSize",
+        "type": "number",
+        "description": ""
+      },
+      {
         "name": "panes",
         "type": "QueryList<PaneComponent>",
         "description": ""
@@ -183,6 +211,12 @@
         "name": "align",
         "type": "\"left\" | \"right\" | \"top\" | \"bottom\" | \"start\" | \"end\"",
         "description": "<p>Direction which the ngx-panes is aligned. It can be a {@link RelativeAlign} or Align.</p>\n"
+      },
+      {
+        "name": "autoOpen",
+        "defaultValue": "true",
+        "type": "boolean",
+        "description": "<p>Whether or not the last pane should be opened if no pane is marked initially as opened.</p>\n"
       },
       {
         "name": "defaultWidth",

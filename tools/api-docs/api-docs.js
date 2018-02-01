@@ -251,7 +251,7 @@ class APIDocVisitor {
     const decorators = node.decorators || [];
 
     for (let i = 0; i < decorators.length; i++) {
-      if (decorators[i].expression.expression.text === decoratorType) {
+      if (decorators[i].expression.expression && decorators[i].expression.expression.text === decoratorType) {
         return decorators[i];
       }
     }

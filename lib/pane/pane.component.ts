@@ -1,5 +1,7 @@
-import {Component, ContentChild, Input, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {Component, ContentChild, forwardRef, Inject, Input, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {PaneHeaderComponent} from '../pane-header/pane-header.component';
+import {PanesComponent} from '../panes/panes.component';
+import {Boolean} from '../utils/decorators';
 
 
 /**
@@ -50,12 +52,55 @@ export class PaneComponent implements OnInit {
    */
   @Input() id: string;
 
+  constructor(@Inject(forwardRef(() => PanesComponent)) private panesComponent: PanesComponent) {
+  }
+
+  /**
+   * Whether this pane is currently opened or not.
+   * @returns {boolean}
+   */
+  get opened() {
+    return this.panesComponent.selectedPane === this;
+  }
+
+
   @ContentChild(PaneHeaderComponent) header: PaneHeaderComponent;
   @ViewChild('content', {read: TemplateRef}) content;
 
-  constructor() { }
+  /**
+   * Whether this pane should be opened or not. Usually used for initialization.
+   * Whenever it changes to `true`, this pane will be opened (if not already opened)
+   * and whenever it changes to `false` this pane will be closed if it's currently open.
+   */
+  @Input()
+  @Boolean
+  set opened(value: boolean) {
+    if (value) {
+      this.panesComponent.open(this);
+    } else {
+      if (this.opened) {
+        this.close();
+      }
+    }
+  };
 
   ngOnInit() {
+  }
+
+  /**
+   * Opens this pane. Does nothing if already opened.
+   */
+  open() {
+    this.panesComponent.open(this);
+  }
+
+  /**
+   * Closes this pane. Does nothing if it's not opened.
+   */
+  close() {
+    if (this.opened) {
+      this.panesComponent.close();
+    }
   }
 
 }

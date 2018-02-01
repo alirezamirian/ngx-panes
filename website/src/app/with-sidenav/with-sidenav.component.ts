@@ -1,10 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {GuideModel, guides} from '../guide/guides';
-import {Observable} from 'rxjs/Observable';
 // workaround for importing all guides
 import '../guide/guides/index';
 import {ApiDocsService} from '../core/api-docs.service';
-import {map} from 'rxjs/operators';
+import {map, share} from 'rxjs/operators';
 
 @Component({
   selector: 'app-with-sidenav',
@@ -12,8 +11,8 @@ import {map} from 'rxjs/operators';
   styleUrls: ['./with-sidenav.component.scss']
 })
 export class WithSidenavComponent implements OnInit {
-  apiDocs$: Observable<any>;
   guides: GuideModel[];
+  private docs: { modules: any[]; types: any[] } = {modules: [], types: []};
 
   constructor(private apiDocsService: ApiDocsService) {
   }
@@ -21,7 +20,8 @@ export class WithSidenavComponent implements OnInit {
   ngOnInit() {
     this.guides = guides;
     // TODO: extract a service for apiDocs
-    this.apiDocs$ = this.apiDocsService.getDocs().pipe(
+    this.apiDocsService.getDocs().pipe(
+      share(),
       map(docs => {
         const modules = docs.filter(doc => doc.type === 'ngModule').map(module => {
           const allDirectives = docs.filter(doc => {
@@ -37,7 +37,9 @@ export class WithSidenavComponent implements OnInit {
         const types = docs.filter(doc => ['ngModule', 'directive', 'service'].indexOf(doc.type) < 0);
         return {modules, types};
       })
-    );
+    ).subscribe(docs => {
+      this.docs = docs;
+    });
   }
 }
 

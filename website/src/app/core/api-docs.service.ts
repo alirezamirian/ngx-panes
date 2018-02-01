@@ -18,10 +18,10 @@ export class ApiDocsService {
         share(),
         map(response => {
           return response.json();
-        })
+        }),
+        map(convertLinksRecursive)
       );
     }
-    this.docs$.subscribe(docs => console.log('docs', docs));
     return this.docs$;
   }
 
@@ -46,4 +46,28 @@ export class ApiDocsService {
     return this.getDocs().toPromise().then(docs => docs.filter(doc => doc.identifier === symbol));
   }
 
+}
+
+function convertLinksRecursive(docItem) {
+  if (Array.isArray(docItem)) {
+    return docItem.map(convertLinksRecursive);
+  } else if (typeof docItem === 'object') {
+    const result = {};
+    Object.keys(docItem).forEach(key => {
+      if (typeof docItem[key] === 'string' && ['description'].indexOf(key) > -1) {
+        result[key] = convertLinks(docItem[key]);
+      } else {
+        result[key] = convertLinksRecursive(docItem[key]);
+      }
+    });
+    return result;
+  } else {
+    return docItem;
+  }
+}
+
+function convertLinks(html) {
+  return html.replace(/{@link (.*?)(\#(.*?))?( (.*))?}/g, (whole, identifier, ignored, property, ignored2, linkText) => {
+    return `<a href="/api/${identifier}${property ? ('#' + property) : ''}">${linkText || property || identifier}</a>`;
+  });
 }

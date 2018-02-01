@@ -49,3 +49,11 @@
     </ng-container>
   </mat-card>
 </ng-container>
+
+<ng-container *ngIf="docItem.properties?.length && docItem.type === 'type'">
+  <h2 id="properties">
+    <app-side-anchor></app-side-anchor>
+    Properties
+  </h2>
+  <app-params [params]="docItem.properties"></app-params>
+</ng-container>

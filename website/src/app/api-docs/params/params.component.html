@@ -2,23 +2,24 @@
   <table class="table table-condensed">
     <thead>
     <tr>
-      <th>{{strings.name || 'Name'}}</th>
-      <th>{{strings.type || 'Type'}}</th>
-      <th>{{strings.description || 'Description'}}</th>
-      <th>{{strings.defaultValue || 'Default Value'}}</th>
+      <th *ngIf="keys.name">{{strings.name || 'Name'}}</th>
+      <th *ngIf="keys.type">{{strings.type || 'Type'}}</th>
+      <th *ngIf="keys.description">{{strings.description || 'Description'}}</th>
+      <th *ngIf="keys.defaultValue">{{strings.defaultValue || 'Default Value'}}</th>
     </tr>
     </thead>
     <tbody>
     <tr *ngFor="let input of params">
-      <td>
+      <td *ngIf="keys.name" [id]="input.name">
+        <app-side-anchor></app-side-anchor>
         <b>{{input.name}}</b>
       </td>
-      <td>
+      <td *ngIf="keys.type">
         <i class="type">{{input.type}}</i>
       </td>
-      <td [innerHtml]="input.description">
+      <td *ngIf="keys.description" [innerHtml]="input.description">
       </td>
-      <td>
+      <td *ngIf="keys.defaultValue">
         <code *ngIf="input.defaultValue">{{input.defaultValue}}</code>
         <span *ngIf="!input.defaultValue">-</span>
       </td>

@@ -1,17 +1,29 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+
+interface Param {
+  name: string;
+  type: string;
+  description: string;
+  defaultValue: string;
+}
 
 @Component({
   selector: 'app-params',
   templateUrl: './params.component.html',
   styleUrls: ['./params.component.scss']
 })
-export class ParamsComponent implements OnInit {
+export class ParamsComponent implements OnInit, OnChanges {
 
   @Input()
-  params: { name: string, type: string, description: string, defaultValue: string }[];
+  exclude: string[] = [];
 
   @Input()
-  strings: { name?: string, type?: string, description?: string, defaultValue?: string } = {};
+  params: Param[];
+
+  @Input()
+  strings: Partial<Param> = {};
+  private keys: any & {};
+
 
   constructor() {
   }
@@ -19,4 +31,12 @@ export class ParamsComponent implements OnInit {
   ngOnInit() {
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.params && this.params) {
+      this.keys = ['name', 'type', 'description', 'defaultValue'].filter(
+        key => this.params.some(param => param[key] != null)
+      ).reduce((soFar, key) => Object.assign(soFar, {[key]: true}), {});
+      console.log('this.keys', this.keys);
+    }
+  }
 }

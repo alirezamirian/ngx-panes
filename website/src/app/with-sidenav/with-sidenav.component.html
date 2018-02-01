@@ -7,7 +7,7 @@
         <a [routerLink]="['/guides', item.metadata.id]" routerLinkActive="active">{{item.metadata.title}}</a>
       </mat-list-item>
       <h3 matSubheader>API Docs</h3>
-      <mat-nav-list dense *ngFor="let item of (apiDocs$ | async)?.modules">
+      <mat-nav-list dense *ngFor="let item of docs.modules">
         <a [routerLink]="['/api', item.identifier]" routerLinkActive="active">
           <mat-list-item mat-button>{{item.identifier}}</mat-list-item>
         </a>
@@ -18,13 +18,20 @@
             <mat-list-item routerLinkActive="active">{{component.identifier}}</mat-list-item>
           </a>
         </mat-nav-list>
-        <mat-nav-list dense>
+        <mat-nav-list dense *ngIf="item.directives?.length > 0">
           <h4 matSubheader>Directives</h4>
           <a *ngFor="let directive of item.directives"
              [routerLink]="['/api', directive.identifier]" routerLinkActive="active">
             <mat-list-item>{{directive.identifier}}</mat-list-item>
           </a>
         </mat-nav-list>
+      </mat-nav-list>
+      <mat-nav-list dense *ngIf="docs.types?.length > 0">
+        <h4 matSubheader>Types</h4>
+        <a *ngFor="let type of docs.types"
+           [routerLink]="['/api', type.identifier]" routerLinkActive="active">
+          <mat-list-item>{{type.identifier}}</mat-list-item>
+        </a>
       </mat-nav-list>
     </mat-nav-list>
   </mat-card>

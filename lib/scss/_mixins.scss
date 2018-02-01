@@ -1,13 +1,13 @@
 // TODO: create a more abstract versions of mixins below which accepts alignment as parameter
 
 @mixin if-inside-left-aligned-pane {
-  .wrapper.left &{
+  .wrapper.left & {
     @content;
   }
 }
 
 @mixin if-inside-right-aligned-pane {
-  .wrapper.right &{
+  .wrapper.right & {
     @content;
   }
 }
@@ -37,23 +37,37 @@
 }
 
 @mixin if-inside-start-aligned-pane {
-  .wrapper.start &{
+  .wrapper.start & {
     @content;
   }
 }
 
 @mixin if-inside-end-aligned-pane {
-  .wrapper.end &{
+  .wrapper.end & {
     @content;
   }
 }
+
 @mixin if-left-aligned {
-  &.left{
+  &.left {
     @content;
   }
 }
+
 @mixin if-right-aligned {
-  &.right{
+  &.right {
+    @content;
+  }
+}
+
+@mixin if-top-aligned {
+  &.top {
+    @content;
+  }
+}
+
+@mixin if-bottom-aligned {
+  &.bottom {
     @content;
   }
 }
@@ -70,7 +84,25 @@
   }
 }
 
-%border-shadow{ // intermediate reusable placeholder
+@mixin if-open {
+  &.open {
+    @content;
+  }
+}
+
+@mixin if-inside-open-panes {
+  .wrapper.open & {
+    @content
+  }
+}
+
+@mixin if-inside-close-panes {
+  .wrapper:not(.open) & {
+    @content
+  }
+}
+
+%border-shadow { // intermediate reusable placeholder
   position: relative;
   &::after {
     pointer-events: none;
@@ -80,46 +112,52 @@
     box-shadow: 0 0 6px -2px rgba(0, 0, 0, 0.2) inset;
   }
 }
-%border-vertical-shadow{ // intermediate reusable placeholder
+
+%border-vertical-shadow { // intermediate reusable placeholder
   @extend %border-shadow;
-  &::after{
+  &::after {
     height: 2px;
     left: 0;
     right: 0;
   }
 }
-%border-horizontal-shadow{ // intermediate reusable placeholder
+
+%border-horizontal-shadow { // intermediate reusable placeholder
   @extend %border-shadow;
-  &::after{
+  &::after {
     width: 2px;
     bottom: 0;
     top: 0;
   }
 }
+
 /**
  *
  */
-%border-bottom-shadow{
+%border-bottom-shadow {
   @extend %border-vertical-shadow;
-  &::after{
+  &::after {
     top: 100%;
   }
 }
-%border-top-shadow{
+
+%border-top-shadow {
   @extend %border-vertical-shadow;
-  &::after{
+  &::after {
     bottom: 100%;
   }
 }
-%border-left-shadow{
+
+%border-left-shadow {
   @extend %border-horizontal-shadow;
-  &::after{
+  &::after {
     right: 100%;
   }
 }
-%border-right-shadow{
+
+%border-right-shadow {
   @extend %border-horizontal-shadow;
-  &::after{
+  &::after {
     left: 100%;
   }
 }

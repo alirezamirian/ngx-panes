@@ -86,7 +86,6 @@ ngx-pane-view {
 }
 
 .content-container {
-  overflow: hidden;
   position: relative;
 }
 
@@ -101,4 +100,8 @@ ngx-pane-view {
   box-sizing: border-box;
   font-size: .9em;
   @extend %border-bottom-shadow;
+
+  @include if-inside-close-panes {
+    display: none;
+  }
 }

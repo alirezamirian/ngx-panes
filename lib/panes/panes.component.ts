@@ -63,6 +63,13 @@ export class PanesComponent implements OnInit, AfterContentInit, OnChanges {
    */
   @Input() toggleable = true;
 
+  /**
+   * Whether or not the last pane should be opened if no pane is marked initially as opened.
+   * @type {boolean}
+   * @default true
+   */
+  @Input() autoOpen = true;
+
   maxSize: number;
 
   // noinspection JSAnnotator
@@ -153,8 +160,7 @@ export class PanesComponent implements OnInit, AfterContentInit, OnChanges {
       this._selectedPane = null;
     }
 
-    // TODO: let user choose whether automatic selection should be done or not and how
-    if (!this._selectedPane) {
+    if (!this._selectedPane && this.autoOpen) {
       this.select(this.panes.last);
     }
   }

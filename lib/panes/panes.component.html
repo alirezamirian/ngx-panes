@@ -1,4 +1,4 @@
-<div class="wrapper" [ngClass]="[_align, _relativeAlign]">
+<div class="wrapper" [ngClass]="[_align, _relativeAlign]" [class.open]="!!selectedPane">
   <div class="tabs">
     <div *ngFor="let pane of panes" class="tab" role="button" [class.active]="pane === selectedPane"
          (click)="paneTabClicked(pane)">

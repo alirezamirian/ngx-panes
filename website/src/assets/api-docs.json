@@ -1,8 +1,7 @@
 [
   {
-    "fileName": "lib/pane-header/pane-header.component.ts",
     "identifier": "PaneHeaderComponent",
-    "description": "<p><code>ngx-pane-header</code> is used for providing custom headers for panes.</p>\n<p>By default the header of the pane consist of a simple text label\n(which is determined by {@link PaneComponent#title} input).\nYou can override this behaviour, however and use custom content as\npane header by using a <code>&lt;ngx-pane-header&gt;...&lt;/ngx-pane-header&gt;</code> inside\n<code>&lt;ngx-pane&gt;...&lt;/ngx-pane&gt;</code> component.</p>\n",
+    "description": "<p><code>ngx-pane-header</code> is used for providing custom headers for panes.</p>\n<p>By default the header of the pane consist of a simple text label\n(which is determined by {@link PaneComponent#title PaneComponent title input}).\nYou can override this behaviour, however and use custom content as\npane header by using a <code>&lt;ngx-pane-header&gt;...&lt;/ngx-pane-header&gt;</code> inside\n<code>&lt;ngx-pane&gt;...&lt;/ngx-pane&gt;</code> component.</p>\n",
     "methods": [],
     "properties": [
       {
@@ -16,10 +15,10 @@
     "selector": "ngx-pane-header",
     "inputs": [],
     "outputs": [],
+    "fileName": "lib/pane-header/pane-header.component.ts",
     "usage": "<ngx-panes>\n  <ngx-pane title=\"First Pane\">\n    <ngx-pane-header>this is a <b>special</b> header</ngx-pane-header>\n    <!-- pane content goes here -->\n  </ngx-pane>\n  <ngx-pane title=\"will be used for header in absense of ngx-pane-header\">...</ngx-pane>\n</ngx-panes>"
   },
   {
-    "fileName": "lib/pane-resizer/pane-resizer.component.ts",
     "identifier": "PaneResizerComponent",
     "description": "",
     "methods": [],
@@ -28,10 +27,10 @@
     "isComponent": true,
     "selector": "ngx-pane-resizer",
     "inputs": [],
-    "outputs": []
+    "outputs": [],
+    "fileName": "lib/pane-resizer/pane-resizer.component.ts"
   },
   {
-    "fileName": "lib/pane-view.component.ts",
     "identifier": "PaneViewComponent",
     "description": "",
     "methods": [],
@@ -46,10 +45,10 @@
         "description": ""
       }
     ],
-    "outputs": []
+    "outputs": [],
+    "fileName": "lib/pane-view.component.ts"
   },
   {
-    "fileName": "lib/pane/pane.component.ts",
     "identifier": "PaneComponent",
     "description": "<p>Pane components, are used inside {@link PanesComponent}. Each pane should have a title which is shown\nin side tabs area. By default, the title is used for <strong>pane header</strong> also.</p>\n<p>Pane header is a thin bar on top of the selected pane which shows a label and also contains\nsome default ui controls for the pane.</p>\n",
     "methods": [
@@ -80,7 +79,7 @@
       {
         "name": "opened",
         "type": "boolean",
-        "description": "<p>Whether this pane should be opened or not. Usually used for initialization.\nWhenever it changes to <code>true</code>, this pane will be opened (if not already opened)\nand whenever it changes to <code>false</code> this pane will be closed if it&#39;s currently open.\nWhether this pane is currently opened or not.</p>\n"
+        "description": "<p>Whether this pane is currently opened or not.\nWhether this pane should be opened or not. Usually used for initialization.\nWhenever it changes to <code>true</code>, this pane will be opened (if not already opened)\nand whenever it changes to <code>false</code> this pane will be closed if it&#39;s currently open.</p>\n"
       }
     ],
     "type": "directive",
@@ -95,7 +94,7 @@
       {
         "name": "opened",
         "type": "boolean",
-        "description": "<p>Whether this pane should be opened or not. Usually used for initialization.\nWhenever it changes to <code>true</code>, this pane will be opened (if not already opened)\nand whenever it changes to <code>false</code> this pane will be closed if it&#39;s currently open.\nWhether this pane is currently opened or not.</p>\n"
+        "description": "<p>Whether this pane is currently opened or not.\nWhether this pane should be opened or not. Usually used for initialization.\nWhenever it changes to <code>true</code>, this pane will be opened (if not already opened)\nand whenever it changes to <code>false</code> this pane will be closed if it&#39;s currently open.</p>\n"
       },
       {
         "name": "resizable",
@@ -115,10 +114,47 @@
       }
     ],
     "outputs": [],
+    "fileName": "lib/pane/pane.component.ts",
     "usage": "<ngx-panes>\n  <!-- Simple pane with a title -->\n  <ngx-pane title=\"project\">...</ngx-pane>\n\n  <!-- Different title and header. Header is used in top of the selected pane, title is used inside pane's tab -->\n  <ngx-pane title=\"structure\">\n    <div ngx-pane-header>custom header</div>\n    ...\n  </ngx-pane>\n</ngx-panes>"
   },
   {
-    "fileName": "lib/panes.module.ts",
+    "type": "variable",
+    "identifier": "PANES_DEFAULTS",
+    "description": "<p>Injection token for providing defaults for some input parameters of {@link PanesComponent pane components}.\nThe value of this injection token must be of type {@link PanesDefaults}.</p>\n",
+    "fileName": "lib/panes-config.ts",
+    "usage": "const panesDefaults: PanesDefaults = { resizable: false };\n\n// Configuring global defaults for all panes in the app.\n@NgModule({\n  //...\n  providers: [\n    // ...\n    { provide: PANES_DEFAULTS, useValue: panesDefaults }\n  ]\n})\nexport class AppModule {}\n\n// Configuring defaults for all child panes of some component.\n@Component({\n  // ...\n  providers: [{ provide: PANES_DEFAULTS, useValue: panesDefaults }]\n})\nclass SomeComponent {}\n",
+    "usageLang": "typescript"
+  },
+  {
+    "type": "type",
+    "identifier": "PanesDefaults",
+    "description": "<p>Configuration to be provided as default parameters for all <code>ngx-panes</code> child components.\nObject of this type provided as {@link PANES_DEFAULTS} injection token will be picked up\n{@link PanesComponent} to use them for default values of some configuration inputs.</p>\n",
+    "methods": [],
+    "properties": [
+      {
+        "name": "autoOpen",
+        "type": "boolean",
+        "description": "<p>Default value for {@link PanesComponent#autoOpen} input.</p>\n"
+      },
+      {
+        "name": "defaultWidth",
+        "type": "number",
+        "description": "<p>Default value for {@link PanesComponent#defaultWidth} input.</p>\n"
+      },
+      {
+        "name": "resizable",
+        "type": "boolean",
+        "description": "<p>Default value for {@link PanesComponent#resizable} input.</p>\n"
+      },
+      {
+        "name": "toggleable",
+        "type": "boolean",
+        "description": "<p>Default value for {@link PanesComponent#toggleable} input.</p>\n"
+      }
+    ],
+    "fileName": "lib/panes-config.ts"
+  },
+  {
     "identifier": "NgxPanesModule",
     "description": "<p>The main module for ngx-panes. Add it to <code>imports</code> of your module.</p>\n",
     "methods": [],
@@ -130,10 +166,11 @@
       "lib/pane-header/pane-header.component#PaneHeaderComponent"
     ],
     "services": [],
-    "usage": "@NgModule({\n  imports: [\n    // ...\n    NgxPanesModule\n    //...\n  ]\n})\nexport class AppModule {}\n"
+    "fileName": "lib/panes.module.ts",
+    "usage": "@NgModule({\n  imports: [\n    // ...\n    NgxPanesModule\n    //...\n  ]\n})\nexport class AppModule {}\n",
+    "usageLang": "typescript"
   },
   {
-    "fileName": "lib/panes/panes.component.ts",
     "identifier": "PanesComponent",
     "description": "<p>Renders a list of panes, navigatable with side tabs.</p>\n",
     "methods": [
@@ -231,6 +268,7 @@
       }
     ],
     "outputs": [],
+    "fileName": "lib/panes/panes.component.ts",
     "examples": [
       {
         "content": "<ngx-panes>\n<ngx-pane></ngx-pane>\n</ngx-panes>"

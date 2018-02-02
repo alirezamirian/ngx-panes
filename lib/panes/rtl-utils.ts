@@ -44,10 +44,16 @@ const _toAlignMap = {
 };
 
 
+/**
+ * @private
+ */
 export const toRelativeAlign = function(align: Align|RelativeAlign, dir: Dir): RelativeAlign{
   return <RelativeAlign> _toRelativeAlignMap[dir][align];
 };
 
+/**
+ * @private
+ */
 export const toAlign = function(relativeAlign: RelativeAlign|Align, dir: Dir): Align{
   return <Align> _toAlignMap[dir][relativeAlign];
 };

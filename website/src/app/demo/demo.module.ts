@@ -29,12 +29,14 @@ import 'codemirror/addon/edit/matchbrackets.js';
 import {CodeEditorComponent} from './code-editor/code-editor.component';
 import {ThemingDemoComponent} from './demos/theming-demo/theming-demo.component';
 import {AlignDemoComponent} from './demos/align-demo/align-demo.component';
+import {ConfigDemoComponent} from './demos/config-demo/config-demo.component';
 
 export const entryComponents = [
   GithubBrowserDemoComponent,
   ResizeDisabledDemoComponent,
   ThemingDemoComponent,
-  AlignDemoComponent
+  AlignDemoComponent,
+  ConfigDemoComponent
 ];
 
 @NgModule({

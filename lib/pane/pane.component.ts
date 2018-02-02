@@ -1,7 +1,18 @@
-import {Component, ContentChild, forwardRef, Inject, Input, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {
+  Component,
+  ContentChild,
+  forwardRef,
+  Inject,
+  Input,
+  OnInit,
+  Optional,
+  TemplateRef,
+  ViewChild
+} from '@angular/core';
 import {PaneHeaderComponent} from '../pane-header/pane-header.component';
 import {PanesComponent} from '../panes/panes.component';
 import {Boolean} from '../utils/decorators';
+import {PANES_DEFAULTS, PanesDefaults} from '../panes-config';
 
 
 /**
@@ -52,7 +63,13 @@ export class PaneComponent implements OnInit {
    */
   @Input() id: string;
 
-  constructor(@Inject(forwardRef(() => PanesComponent)) private panesComponent: PanesComponent) {
+  constructor(@Inject(forwardRef(() => PanesComponent)) private panesComponent: PanesComponent,
+              @Optional() @Inject(PANES_DEFAULTS) defaults: PanesDefaults) {
+    if (defaults) {
+      if (defaults.resizable != null) {
+        this.resizable = defaults.resizable;
+      }
+    }
   }
 
   /**

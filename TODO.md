@@ -1,8 +1,8 @@
 ## ngx-panes
 - [ ] Add support for animating panes on close
 - [ ] Add support for pane reordering
-- [ ] Add support for custom pane label
-- [ ] Implement 'top' and 'bottom' alignment modes
+- [x] Add support for custom pane label
+- [x] Implement 'top' and 'bottom' alignment modes
 - [ ] shortcut support (Alt+1, Alt+2, etc.)
 
 ## Website

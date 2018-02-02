@@ -3,11 +3,12 @@ import {
   Component,
   ContentChildren,
   ElementRef,
+  Inject,
   Input,
   OnChanges,
   OnInit,
+  Optional,
   QueryList,
-  Renderer2,
   SimpleChanges,
   ViewChild,
   ViewContainerRef
@@ -15,6 +16,7 @@ import {
 import {PaneComponent} from '../pane/pane.component';
 import {Align, RelativeAlign, toAlign, toRelativeAlign} from './rtl-utils';
 import {PaneViewComponent} from '../pane-view.component';
+import {PANES_DEFAULTS, PanesDefaults} from '../panes-config';
 
 /**
  * Renders a list of panes, navigatable with side tabs.
@@ -100,7 +102,18 @@ export class PanesComponent implements OnInit, AfterContentInit, OnChanges {
     return this._align === 'left' || this._align === 'right';
   }
 
-  constructor(private $el: ElementRef, private renderer: Renderer2) {
+  constructor(private $el: ElementRef, @Optional() @Inject(PANES_DEFAULTS) defaults: PanesDefaults) {
+    if (defaults) {
+      if (defaults.autoOpen != null) {
+        this.autoOpen = defaults.autoOpen;
+      }
+      if (defaults.defaultWidth != null) {
+        this.defaultWidth = defaults.defaultWidth;
+      }
+      if (defaults.toggleable != null) {
+        this.toggleable = defaults.toggleable;
+      }
+    }
   }
 
   ngAfterContentInit(): void {

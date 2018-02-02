@@ -3,16 +3,35 @@
   position: absolute;
   left: -30px;
   top: 2px;
-  opacity: 0;
 }
 
-/deep/ [id]:hover [id] app-side-anchor {
+// NOTE: :target selector doesn't work for some reason until user explicitly click on link
+
+:host.target:not(:hover) {
+  opacity: .7;
+  .icon {
+    display: none;
+  }
+}
+
+:host:not(.target),
+:host.target:hover {
+  .target-icon {
+    display: none;
+  }
+}
+
+/deep/ [id] app-side-anchor {
   opacity: 0;
 }
 
 /deep/ [id]:hover app-side-anchor {
   transition: opacity .4s;
   opacity: 1;
+}
+
+/deep/ [id]:hover [id]:not(:hover) app-side-anchor:not(.target) {
+  opacity: 0;
 }
 
 a {

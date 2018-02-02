@@ -11,6 +11,7 @@ const marked = require('marked');
 
 const commentParsers = require('./parsers');
 const parseDocComment = require('./parse-doc-comment');
+const isExported = require("./utils").isExported;
 const isComponentDecorator = require("./utils").isComponentDecorator;
 
 function getNamesCompareFn(name) {
@@ -37,7 +38,7 @@ function isInternalMember(member) {
     for (let i = 0; i < member.jsDoc.length; i++) {
       if (member.jsDoc[i].tags && member.jsDoc[i].tags.length > 0) {
         for (let j = 0; j < member.jsDoc[i].tags.length; j++) {
-          if (member.jsDoc[i].tags[j].tagName.text === 'internal') {
+          if (member.jsDoc[i].tags[j].tagName.text === 'private') {
             return true;
           }
         }
@@ -74,13 +75,20 @@ class APIDocVisitor {
     }
 
     return sourceFile.statements.reduce((elementsSoFar, statement) => {
-      if (statement.kind === ts.SyntaxKind.ClassDeclaration) {
-        return elementsSoFar.concat(this.visitClassDeclaration(fileName, statement));
-      } else if (statement.kind === ts.SyntaxKind.InterfaceDeclaration) {
-        return elementsSoFar.concat(this.visitInterfaceDeclaration(fileName, statement));
+      let newItems = [], tagParsingResult = {};
+      if (isExported(statement) && !isInternalMember(statement)) {
+        if (statement.kind === ts.SyntaxKind.ClassDeclaration) {
+          newItems = this.visitClassDeclaration(fileName, statement);
+        } else if (statement.kind === ts.SyntaxKind.InterfaceDeclaration) {
+          newItems = this.visitInterfaceDeclaration(fileName, statement);
+        } else if (statement.kind === ts.SyntaxKind.VariableStatement) {
+          newItems = this.visitVariableStatement(fileName, statement);
+        }
       }
-
-      return elementsSoFar;
+      if (newItems.length) {
+        tagParsingResult = parseDocComment(statement, commentParsers);
+      }
+      return elementsSoFar.concat([].concat(newItems).map(item => Object.assign(item, {fileName}, tagParsingResult)));
     }, []);
   }
 
@@ -91,7 +99,6 @@ class APIDocVisitor {
     const members = this.visitMembers(interfaceDeclaration.members);
 
     return [{
-      fileName,
       type: 'type',
       identifier,
       description,
@@ -106,7 +113,7 @@ class APIDocVisitor {
     const identifier = classDeclaration.name.text;
     const members = this.visitMembers(classDeclaration.members);
 
-    let doc = {fileName, identifier, description, methods: members.methods, properties: members.properties};
+    let doc = {identifier, description, methods: members.methods, properties: members.properties};
     let typeSpecificDoc = {};
     if (classDeclaration.decorators) {
       for (let i = 0; i < classDeclaration.decorators.length; i++) {
@@ -132,7 +139,7 @@ class APIDocVisitor {
         }
       }
     }
-    return [Object.assign(doc, typeSpecificDoc, parseDocComment(classDeclaration, commentParsers))];
+    return [Object.assign(doc, typeSpecificDoc)];
   }
 
   visitDirectiveDecorator(decorator) {
@@ -283,6 +290,19 @@ class APIDocVisitor {
     });
     return result;
   }
+
+  visitVariableStatement(fileName, statement) {
+    return statement.declarationList.declarations
+      .map(declaration => this.visitVariableDeclaration(fileName, declaration));
+  }
+
+  visitVariableDeclaration(fileName, statement) {
+    return {
+      type: 'variable',
+      identifier: statement.name.text,
+      description: getDocumentation(statement)
+    }
+  }
 }
 
 function parseOutApiDocs(programFiles) {
@@ -294,8 +314,8 @@ function parseOutApiDocs(programFiles) {
     }, []);
 }
 
-function getDocumentation(declaration) {
-  return marked(ts.displayPartsToString(declaration.symbol.getDocumentationComment()))
+function getDocumentation(statement) {
+  return marked(ts.displayPartsToString(statement.symbol.getDocumentationComment()))
 }
 
 function getFullyQualifiedName(identifier) {

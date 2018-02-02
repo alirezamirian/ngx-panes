@@ -1,8 +1,6 @@
 const beautifier = require('js-beautify');
 const prettier = require("prettier");
-const isServiceClass = require("../utils").isServiceClass;
 
-const isNgModuleClass = require("../utils").isNgModuleClass;
 const isDirectiveClass = require("../utils").isDirectiveClass;
 
 module.exports = [
@@ -11,16 +9,16 @@ module.exports = [
 ];
 
 
-function reformatCode(content, classDeclaration) {
-  if (isDirectiveClass(classDeclaration)) {
-    return beautifier.html(content, {indent_size: 2});
+function reformatCode(content, statement) {
+  if (isDirectiveClass(statement)) {
+    return {text: beautifier.html(content, {indent_size: 2}), usageLang: 'html'};
   }
-  if (isNgModuleClass(classDeclaration) || isServiceClass(classDeclaration)) {
+  else { // assumption: usage of all other things is in TS. (is it a safe assumption?)
     try {
-      return prettier.format(content);
+      return {text: prettier.format(content), otherProps: {usageLang: 'typescript'}};
     }
     catch (e) {
-      console.warn(`An error happened in formatting usage of ${classDeclaration.name.text}:`, e);
+      console.warn(`An error happened in formatting usage of ${statement.toString()}:`, e);
       return content;
     }
   }

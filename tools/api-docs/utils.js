@@ -1,10 +1,13 @@
+const ts = require('typescript');
+
 module.exports = {
   isDirectiveDecorator,
   isComponentDecorator,
   isModuleDecorator,
   isDirectiveClass,
   isNgModuleClass,
-  isServiceClass
+  isServiceClass,
+  isExported
 };
 
 
@@ -57,4 +60,10 @@ function isServiceClass(classDeclaration) {
     }
   }
   return false;
+}
+
+
+function isExported(statement) {
+  return Array.isArray(statement.modifiers) &&
+    statement.modifiers.some(modifier => modifier.kind === ts.SyntaxKind.ExportKeyword)
 }

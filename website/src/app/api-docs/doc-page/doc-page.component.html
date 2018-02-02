@@ -15,7 +15,7 @@
     Usage
   </h2>
   <app-code-block [source]="docItem.usage"
-                  [language]="docItem.type === 'ngModule' ? 'typescript' : 'html'"></app-code-block>
+                  [language]="docItem.usageLang"></app-code-block>
 </ng-container>
 
 <ng-container *ngIf="docItem.inputs?.length">

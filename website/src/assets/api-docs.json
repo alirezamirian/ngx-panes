@@ -31,6 +31,49 @@
     "fileName": "lib/pane-resizer/pane-resizer.component.ts"
   },
   {
+    "identifier": "PaneTabsComponent",
+    "description": "",
+    "methods": [],
+    "properties": [],
+    "type": "directive",
+    "isComponent": true,
+    "selector": "ngx-pane-tabs",
+    "inputs": [
+      {
+        "name": "align",
+        "type": "Align",
+        "description": ""
+      },
+      {
+        "name": "direction",
+        "type": "\"h\" | \"v\"",
+        "description": ""
+      },
+      {
+        "name": "panes",
+        "type": "PaneComponent[]",
+        "description": ""
+      },
+      {
+        "name": "relativeAlign",
+        "type": "RelativeAlign",
+        "description": ""
+      },
+      {
+        "name": "selected",
+        "type": "PaneComponent",
+        "description": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "select",
+        "description": ""
+      }
+    ],
+    "fileName": "lib/pane-tabs/pane-tabs.component.ts"
+  },
+  {
     "identifier": "PaneViewComponent",
     "description": "",
     "methods": [],

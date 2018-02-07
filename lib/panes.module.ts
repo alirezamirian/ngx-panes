@@ -9,6 +9,8 @@ import {PaneResizerComponent} from './pane-resizer/pane-resizer.component';
 import {CommonModule} from '@angular/common';
 import {PaneViewComponent} from './pane-view.component';
 import {PaneHeaderComponent} from './pane-header/pane-header.component';
+import {NgxPaneTabsComponent} from './ngx-pane-tabs/ngx-pane-tabs.component';
+import {PaneTabsComponent} from './pane-tabs/pane-tabs.component';
 
 /**
  * The main module for ngx-panes. Add it to `imports` of your module.
@@ -33,7 +35,8 @@ import {PaneHeaderComponent} from './pane-header/pane-header.component';
     PaneComponent,
     PaneResizerComponent,
     PaneViewComponent,
-    PaneHeaderComponent
+    PaneHeaderComponent,
+    PaneTabsComponent
   ],
   exports: [
     PanesComponent,

@@ -1,10 +1,9 @@
 <div class="wrapper" [ngClass]="[_align, _relativeAlign]" [class.open]="!!selectedPane">
-  <div class="tabs">
-    <div *ngFor="let pane of panes" class="tab" role="button" [class.active]="pane === selectedPane"
-         (click)="paneTabClicked(pane)">
-      <span class="rotated">{{pane.title}}</span>
-    </div>
-  </div>
+  <ngx-pane-tabs [panes]="panes" [selected]="selectedPane"
+                 [direction]="isHorizontal() ? 'h' : 'v'"
+                 [align]="_align"
+                 [relativeAlign]="_relativeAlign"
+                 (select)="paneTabClicked($event)"></ngx-pane-tabs>
   <!-- TODO: use ngStyles-->
   <div [style.width.px]="isHorizontal() ? width : null"
        [style.maxWidth.px]="isHorizontal() ? maxSize : null"

@@ -1,32 +1,32 @@
 <div fxLayout="column" fxFlex>
   <div fxFlex fxLayout="row">
-    <ngx-panes>
-      <ngx-pane id="start" title="Start" [width]="330">
+    <ngx-panes [defaultWidth]="330">
+      <ngx-pane id="start1" title="Start 1">
         <app-demo-content [lines]="40"></app-demo-content>
       </ngx-pane>
-      <!--  <ngx-pane title="Structure" [width]="300" [resizable]="false">
-          This pane is not a resizable pane. it's fixed at <code>330px</code> width
-        </ngx-pane>-->
+      <ngx-pane id="start2" title="Start 2">
+        <app-demo-content [lines]="40"></app-demo-content>
+      </ngx-pane>
     </ngx-panes>
     <div fxFlex class="mat-padding">
       Main content
     </div>
-    <ngx-panes [align]="'end'">
-      <ngx-pane id="end" title="End" [width]="330">
+    <ngx-panes [align]="'end'" [defaultWidth]="330">
+      <ngx-pane id="end1" title="End 1">
         <app-demo-content [lines]="40"></app-demo-content>
       </ngx-pane>
-      <!--  <ngx-pane title="Structure" [width]="300" [resizable]="false">
-          This pane is not a resizable pane. it's fixed at <code>330px</code> width
-        </ngx-pane>-->
+      <ngx-pane id="end2" title="End 2">
+        <app-demo-content [lines]="40"></app-demo-content>
+      </ngx-pane>
     </ngx-panes>
   </div>
-  <ngx-panes [align]="'bottom'">
-    <ngx-pane id="bottom" title="Bottom" [width]="200">
+  <ngx-panes [align]="'bottom'" [defaultWidth]="200">
+    <ngx-pane id="bottom1" title="Bottom 1">
       <app-demo-content [lines]="40"></app-demo-content>
     </ngx-pane>
-    <!--  <ngx-pane title="Structure" [width]="300" [resizable]="false">
-        This pane is not a resizable pane. it's fixed at <code>330px</code> width
-      </ngx-pane>-->
+    <ngx-pane id="bottom2" title="Bottom 2">
+      <app-demo-content [lines]="40"></app-demo-content>
+    </ngx-pane>
   </ngx-panes>
 
 </div>

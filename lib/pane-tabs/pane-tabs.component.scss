@@ -1,0 +1,100 @@
+@import '../scss/variables';
+
+.tabs {
+  line-height: 22px;
+  overflow: hidden;
+}
+
+.tab {
+  padding: 10px 0;
+  cursor: pointer;
+  user-select: none;
+  direction: ltr;
+  font-size: .9em;
+  &:not(.active):hover {
+    background: rgba(0, 0, 0, .1);
+  }
+}
+
+.tabs {
+  box-sizing: border-box;
+  display: flex;
+
+  &.h {
+    width: 22px;
+    height: 100%;
+    flex-direction: column;
+    .tab {
+      padding: 10px 0;
+    }
+  }
+  &.v {
+    height: 22px;
+    width: 100%;
+    flex-direction: row;
+    .tab {
+      padding: 2px 10px;
+    }
+  }
+  &.bottom {
+    border-top: $border;
+  }
+  &.top {
+    border-bottom: $border;
+  }
+  &.left {
+    border-right: $border;
+  }
+  &.right {
+    border-left: $border;
+  }
+}
+
+.rotated {
+  display: inline-block;
+  white-space: nowrap;
+  transform-origin: center;
+  &::before {
+    content: " ";
+    float: left;
+    margin-top: 100%;
+  }
+  .left & {
+    transform: rotate(-90deg);
+    /*
+    ┌────────┐                  ┌────────┐
+    │^^^^^^^^│                  │<       │
+    │        │  rotate(-90deg)  │<       │     ✅
+    │        │        =>        │<       │
+    └────────┘                  └────────┘
+  */
+  }
+  .right & {
+    transform: rotate(90deg);
+    /*
+    ┌────────┐                  ┌────────┐
+    │^^^^^^^^│                  │       >│
+    │        │  rotate(90deg)   │       >│      X
+    │        │        =>        │       >│
+    └────────┘                  └────────┘
+    */
+
+    /*
+    The following commented solution is nice but it's not cross-browser (at least it doesn't work in Firefox).
+    ┌────────┐                          ┌────────┐                  ┌────────┐
+    │^^^^^^^^│  display: inline-flex;   │        │                  │>       │
+    │        │  align-items: flex-end;  │        │ rotate(-90deg)   │>       │     ✅
+    │        │        =>                │^^^^^^^^│       =>         │>       │
+    └────────┘                          └────────┘                  └────────┘
+    */
+    /*
+    display: inline-flex;
+    align-items: flex-end;
+    */
+
+    // The following solution works in all browsers, but relays on line-height
+    transform: rotate(90deg) translateY(100%);
+    position: relative;
+    left: 23px;
+  }
+}

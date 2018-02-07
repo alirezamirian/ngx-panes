@@ -4,6 +4,7 @@
              [align]="_align"
              [relativeAlign]="_relativeAlign"
              (select)="paneTabClicked($event)"></pane-tabs>
+  <!-- TODO: maybe extract a sized-pane component -->
   <!-- TODO: use ngStyles-->
   <div [style.width.px]="isHorizontal() ? width : null"
        [style.maxWidth.px]="isHorizontal() ? maxSize : null"

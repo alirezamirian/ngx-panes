@@ -1,6 +1,6 @@
 @import '../scss/mixins';
 
-ngx-pane-resizer {
+pane-resizer {
   $resizer-length: 6px;
   position: absolute;
   @include if-inside-horizontal-pane {

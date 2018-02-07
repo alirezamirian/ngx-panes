@@ -1,7 +1,7 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild, ViewContainerRef} from '@angular/core';
 
 @Component({
-  selector: 'ngx-pane-view',
+  selector: 'pane-view',
   templateUrl: './pane-view.component.html',
   styleUrls: ['./pane-view.component.scss']
 })

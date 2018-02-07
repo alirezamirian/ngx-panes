@@ -2,7 +2,7 @@ import {Component, HostListener, NgZone, OnInit} from '@angular/core';
 import {PanesComponent} from '../panes/panes.component';
 
 @Component({
-  selector: 'ngx-pane-resizer',
+  selector: 'pane-resizer',
   template: '',
   styleUrls: ['./pane-resizer.component.scss']
 })

@@ -39,7 +39,7 @@
   }
 }
 
-ngx-pane-tabs {
+pane-tabs {
   box-sizing: border-box;
   @include if-inside-end-aligned-pane {
     order: 1;
@@ -55,6 +55,6 @@ ngx-pane-tabs {
   flex-direction: column;
 }
 
-ngx-pane-view {
+pane-view {
   flex: 1;
 }

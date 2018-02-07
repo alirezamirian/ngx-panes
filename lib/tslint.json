@@ -111,7 +111,10 @@
     "component-selector": [
       true,
       "element",
-      "ngx",
+      [
+        "ngx",
+        "pane"
+      ],
       "kebab-case"
     ],
     "use-input-property-decorator": true,

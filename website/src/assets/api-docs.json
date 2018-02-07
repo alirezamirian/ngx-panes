@@ -25,7 +25,7 @@
     "properties": [],
     "type": "directive",
     "isComponent": true,
-    "selector": "ngx-pane-resizer",
+    "selector": "pane-resizer",
     "inputs": [],
     "outputs": [],
     "fileName": "lib/pane-resizer/pane-resizer.component.ts"
@@ -37,7 +37,7 @@
     "properties": [],
     "type": "directive",
     "isComponent": true,
-    "selector": "ngx-pane-tabs",
+    "selector": "pane-tabs",
     "inputs": [
       {
         "name": "align",
@@ -80,7 +80,7 @@
     "properties": [],
     "type": "directive",
     "isComponent": true,
-    "selector": "ngx-pane-view",
+    "selector": "pane-view",
     "inputs": [
       {
         "name": "pane",

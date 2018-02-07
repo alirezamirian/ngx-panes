@@ -1,9 +1,9 @@
 <div class="wrapper" [ngClass]="[_align, _relativeAlign]" [class.open]="!!selectedPane">
-  <ngx-pane-tabs [panes]="panes" [selected]="selectedPane"
-                 [direction]="isHorizontal() ? 'h' : 'v'"
-                 [align]="_align"
-                 [relativeAlign]="_relativeAlign"
-                 (select)="paneTabClicked($event)"></ngx-pane-tabs>
+  <pane-tabs [panes]="panes" [selected]="selectedPane"
+             [direction]="isHorizontal() ? 'h' : 'v'"
+             [align]="_align"
+             [relativeAlign]="_relativeAlign"
+             (select)="paneTabClicked($event)"></pane-tabs>
   <!-- TODO: use ngStyles-->
   <div [style.width.px]="isHorizontal() ? width : null"
        [style.maxWidth.px]="isHorizontal() ? maxSize : null"
@@ -11,7 +11,7 @@
        [style.maxHeight.px]="!isHorizontal() ? maxSize : null"
        #contentContainer
        class="content-container">
-    <ngx-pane-view *ngIf="selectedPane" [pane]="selectedPane"></ngx-pane-view>
-    <ngx-pane-resizer *ngIf="selectedPane?.resizable"></ngx-pane-resizer>
+    <pane-view *ngIf="selectedPane" [pane]="selectedPane"></pane-view>
+    <pane-resizer *ngIf="selectedPane?.resizable"></pane-resizer>
   </div>
 </div>

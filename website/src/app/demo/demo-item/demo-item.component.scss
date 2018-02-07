@@ -17,7 +17,7 @@ mat-list-item {
 
 mat-chip-list {
   margin: 8px 0 0 0;
-  display: block;
+  display: none; // temporary until deciding about existence of tags for demos
   &:focus {
     outline: none;
   }

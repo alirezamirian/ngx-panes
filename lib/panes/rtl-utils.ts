@@ -1,9 +1,14 @@
 /**
- * Created by alireza on 5/16/17.
+ * Direction independent alignment. See also {@link Align}.
  */
-
 export type RelativeAlign = 'start'|'end'|'top'|'bottom';
+/**
+ * See also {@link RelativeAlign}
+ */
 export type Align = 'left'|'right'|'top'|'bottom';
+/**
+ * @private
+ */
 export type Dir = 'rtl'|'ltr';
 
 const _toRelativeAlignMap = {

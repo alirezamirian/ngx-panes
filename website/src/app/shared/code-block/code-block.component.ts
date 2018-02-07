@@ -1,4 +1,4 @@
-import {AfterContentInit, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {AfterContentInit, Component, ElementRef, HostBinding, Input, OnInit, ViewChild} from '@angular/core';
 
 import * as hljs from 'highlight.js';
 import {MatTooltip} from '@angular/material';
@@ -23,6 +23,13 @@ export class CodeBlockComponent implements OnInit, AfterContentInit {
 
   @Input()
   autoFormat = true;
+
+  @Input()
+  copy = true;
+
+  @HostBinding('class.flat')
+  @Input()
+  flat = false;
 
   @Input() set source(value: string) {
     value = value || '';

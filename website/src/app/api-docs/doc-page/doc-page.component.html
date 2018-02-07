@@ -5,9 +5,14 @@
   </ng-container>
 </h1>
 
+
+<app-code-block *ngIf="docItem.source" [copy]="false" [flat]="true"
+                language="typescript" [source]="docItem.source"></app-code-block>
+
 <div [innerHtml]="docItem.description"></div>
 <!-- TODO: handle examples -->
 <!-- TODO(api-docs): convert @link elements to correct markdown link -->
+
 
 <ng-container *ngIf="docItem.usage">
   <h2 id="usage">
@@ -57,3 +62,4 @@
   </h2>
   <app-params [params]="docItem.properties"></app-params>
 </ng-container>
+

@@ -3,9 +3,15 @@ mat-card {
   margin-bottom: 10px;
 }
 
+:host.flat mat-card {
+  box-shadow: none;
+  background: #eee;
+}
+
 pre {
   background: none;
   border: none;
+  margin-bottom: 3px;
 }
 
 .copy {

@@ -75,11 +75,6 @@
         "name": "header",
         "type": "PaneHeaderComponent",
         "description": ""
-      },
-      {
-        "name": "opened",
-        "type": "boolean",
-        "description": "<p>Whether this pane is currently opened or not.\nWhether this pane should be opened or not. Usually used for initialization.\nWhenever it changes to <code>true</code>, this pane will be opened (if not already opened)\nand whenever it changes to <code>false</code> this pane will be closed if it&#39;s currently open.</p>\n"
       }
     ],
     "type": "directive",
@@ -94,7 +89,7 @@
       {
         "name": "opened",
         "type": "boolean",
-        "description": "<p>Whether this pane is currently opened or not.\nWhether this pane should be opened or not. Usually used for initialization.\nWhenever it changes to <code>true</code>, this pane will be opened (if not already opened)\nand whenever it changes to <code>false</code> this pane will be closed if it&#39;s currently open.</p>\n"
+        "description": "<p>Whether this pane should be opened or not. Usually used for initialization.\nWhenever it changes to <code>true</code>, this pane will be opened (if not already opened)\nand whenever it changes to <code>false</code> this pane will be closed if it&#39;s currently open.</p>\n"
       },
       {
         "name": "resizable",
@@ -275,5 +270,19 @@
       }
     ],
     "usage": "<ngx-panes>\n  <ngx-pane title=\"First Pane\">...</ngx-pane>\n  <ngx-pane title=\"Second Pane\">...</ngx-pane>\n</ngx-panes>"
+  },
+  {
+    "type": "typeAlias",
+    "identifier": "RelativeAlign",
+    "description": "<p>Direction independent alignment. See also {@link Align}.</p>\n",
+    "source": "export type RelativeAlign = 'start'|'end'|'top'|'bottom';",
+    "fileName": "lib/panes/rtl-utils.ts"
+  },
+  {
+    "type": "typeAlias",
+    "identifier": "Align",
+    "description": "<p>See also {@link RelativeAlign}</p>\n",
+    "source": "export type Align = 'left'|'right'|'top'|'bottom';",
+    "fileName": "lib/panes/rtl-utils.ts"
   }
 ]

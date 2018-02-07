@@ -6,7 +6,6 @@ const {isDirectiveDecorator, isModuleDecorator} = require("./utils");
 
 const ts = require('typescript');
 const path = require('path');
-const fs = require('fs');
 const marked = require('marked');
 
 const commentParsers = require('./parsers');
@@ -83,6 +82,8 @@ class APIDocVisitor {
           newItems = this.visitInterfaceDeclaration(fileName, statement);
         } else if (statement.kind === ts.SyntaxKind.VariableStatement) {
           newItems = this.visitVariableStatement(fileName, statement);
+        } else if (statement.kind === ts.SyntaxKind.TypeAliasDeclaration) {
+          newItems = this.visitTypeAliasDeclaration(fileName, statement);
         }
       }
       if (newItems.length) {
@@ -93,8 +94,7 @@ class APIDocVisitor {
   }
 
   visitInterfaceDeclaration(fileName, interfaceDeclaration) {
-    const symbol = this.program.getTypeChecker().getSymbolAtLocation(interfaceDeclaration.name);
-    const description = marked(ts.displayPartsToString(symbol.getDocumentationComment()));
+    const description = getDocumentation(interfaceDeclaration);
     const identifier = interfaceDeclaration.name.text;
     const members = this.visitMembers(interfaceDeclaration.members);
 
@@ -108,8 +108,7 @@ class APIDocVisitor {
   }
 
   visitClassDeclaration(fileName, classDeclaration) {
-    const symbol = this.program.getTypeChecker().getSymbolAtLocation(classDeclaration.name);
-    const description = marked(ts.displayPartsToString(symbol.getDocumentationComment()));
+    const description = getDocumentation(classDeclaration);
     const identifier = classDeclaration.name.text;
     const members = this.visitMembers(classDeclaration.members);
 
@@ -301,6 +300,17 @@ class APIDocVisitor {
       type: 'variable',
       identifier: statement.name.text,
       description: getDocumentation(statement)
+    }
+  }
+
+  visitTypeAliasDeclaration(fileName, statement) {
+    const description = getDocumentation(statement);
+    const identifier = statement.name.text;
+    return {
+      type: 'typeAlias',
+      identifier,
+      description,
+      source: statement.getText()
     }
   }
 }

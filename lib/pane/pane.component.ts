@@ -62,6 +62,8 @@ export class PaneComponent implements OnInit {
    * unique identifier of the pane.
    */
   @Input() id: string;
+  @ContentChild(PaneHeaderComponent) header: PaneHeaderComponent;
+  @ViewChild('content', {read: TemplateRef}) content;
 
   constructor(@Inject(forwardRef(() => PanesComponent)) private panesComponent: PanesComponent,
               @Optional() @Inject(PANES_DEFAULTS) defaults: PanesDefaults) {
@@ -73,16 +75,13 @@ export class PaneComponent implements OnInit {
   }
 
   /**
+   * @private
    * Whether this pane is currently opened or not.
    * @returns {boolean}
    */
   get opened() {
     return this.panesComponent.selectedPane === this;
   }
-
-
-  @ContentChild(PaneHeaderComponent) header: PaneHeaderComponent;
-  @ViewChild('content', {read: TemplateRef}) content;
 
   /**
    * Whether this pane should be opened or not. Usually used for initialization.

@@ -5,7 +5,7 @@
       <ng-content></ng-content>
     </div>
   </app-loading>
-  <button mat-mini-fab class="copy"
+  <button mat-mini-fab class="copy" *ngIf="copy"
           (click)="copyToClipboard(tooltip)"
           matTooltip="Copy to clipboard"
           #tooltip="matTooltip"

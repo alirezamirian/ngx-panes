@@ -11,12 +11,7 @@
        [style.maxHeight.px]="!isHorizontal() ? maxSize : null"
        #contentContainer
        class="content-container">
-    <div class="header">
-      <ng-container #header></ng-container>
-      <ng-container *ngIf="!selectedPane?.header">{{selectedPane?.title}}</ng-container>
-    </div>
-    <ngx-pane-view *ngIf="selectedPane" [pane]="selectedPane">
-    </ngx-pane-view>
+    <ngx-pane-view *ngIf="selectedPane" [pane]="selectedPane"></ngx-pane-view>
     <ngx-pane-resizer *ngIf="selectedPane?.resizable"></ngx-pane-resizer>
   </div>
 </div>

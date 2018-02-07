@@ -7,7 +7,7 @@ import {PanesComponent} from './panes/panes.component';
 import {PaneComponent} from './pane/pane.component';
 import {PaneResizerComponent} from './pane-resizer/pane-resizer.component';
 import {CommonModule} from '@angular/common';
-import {PaneViewComponent} from './pane-view.component';
+import {PaneViewComponent} from './pane-view/pane-view.component';
 import {PaneHeaderComponent} from './pane-header/pane-header.component';
 import {NgxPaneTabsComponent} from './ngx-pane-tabs/ngx-pane-tabs.component';
 import {PaneTabsComponent} from './pane-tabs/pane-tabs.component';

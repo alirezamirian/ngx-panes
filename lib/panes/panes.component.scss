@@ -25,20 +25,3 @@ ngx-pane-view {
 .content-container {
   position: relative;
 }
-
-.header {
-  flex-shrink: 0;
-  padding: 3px 5px;
-  border-bottom: 1px solid;
-  height: 24px;
-  line-height: 18px;
-  overflow: hidden;
-  white-space: nowrap;
-  box-sizing: border-box;
-  font-size: .9em;
-  @extend %border-bottom-shadow;
-
-  @include if-inside-close-panes {
-    display: none;
-  }
-}

@@ -10,12 +10,11 @@ import {
   Optional,
   QueryList,
   SimpleChanges,
-  ViewChild,
-  ViewContainerRef
+  ViewChild
 } from '@angular/core';
 import {PaneComponent} from '../pane/pane.component';
 import {Align, RelativeAlign, toAlign, toRelativeAlign} from './rtl-utils';
-import {PaneViewComponent} from '../pane-view.component';
+import {PaneViewComponent} from '../pane-view/pane-view.component';
 import {PANES_DEFAULTS, PanesDefaults} from '../panes-config';
 
 /**
@@ -47,8 +46,6 @@ export class PanesComponent implements OnInit, AfterContentInit, OnChanges {
   @ContentChildren(PaneComponent) panes: QueryList<PaneComponent>;
 
   @ViewChild(PaneViewComponent) paneView: PaneViewComponent;
-
-  @ViewChild('header', {read: ViewContainerRef}) headerHost: ViewContainerRef;
 
   /**
    * Default width (in pixels) to be used for any child pane with an undefined width.
@@ -137,10 +134,6 @@ export class PanesComponent implements OnInit, AfterContentInit, OnChanges {
    */
   public open(pane: PaneComponent) {
     if (this._selectedPane !== pane) {
-      this.headerHost.clear();
-      if (pane.header) {
-        this.headerHost.createEmbeddedView(pane.header.templateRef);
-      }
       this._selectedPane = pane;
     }
   }

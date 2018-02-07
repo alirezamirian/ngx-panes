@@ -89,7 +89,7 @@
       }
     ],
     "outputs": [],
-    "fileName": "lib/pane-view.component.ts"
+    "fileName": "lib/pane-view/pane-view.component.ts"
   },
   {
     "identifier": "PaneComponent",
@@ -246,11 +246,6 @@
         "name": "align",
         "type": "\"left\" | \"right\" | \"top\" | \"bottom\" | \"start\" | \"end\"",
         "description": "<p>Direction which the ngx-panes is aligned. It can be a {@link RelativeAlign} or Align.</p>\n"
-      },
-      {
-        "name": "headerHost",
-        "type": "ViewContainerRef",
-        "description": ""
       },
       {
         "name": "maxSize",

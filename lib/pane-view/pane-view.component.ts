@@ -2,14 +2,18 @@ import {Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild, ViewConta
 
 @Component({
   selector: 'ngx-pane-view',
-  template: '<ng-container #container></ng-container>'
+  templateUrl: './pane-view.component.html',
+  styleUrls: ['./pane-view.component.scss']
 })
 export class PaneViewComponent implements OnInit, OnChanges {
 
   @Input() pane;
 
-  @ViewChild('container', {read: ViewContainerRef})
+  @ViewChild('content', {read: ViewContainerRef})
   private viewContainerRef: ViewContainerRef;
+
+  @ViewChild('header', {read: ViewContainerRef})
+  private headerContainerRef: ViewContainerRef;
 
   constructor() {
   }
@@ -22,6 +26,10 @@ export class PaneViewComponent implements OnInit, OnChanges {
       this.viewContainerRef.clear();
       if (this.pane) {
         this.viewContainerRef.createEmbeddedView(this.pane.content);
+        this.headerContainerRef.clear();
+        if (this.pane.header) {
+          this.headerContainerRef.createEmbeddedView(this.pane.header.templateRef);
+        }
       }
     }
   }

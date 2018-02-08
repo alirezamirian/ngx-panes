@@ -1,14 +1,12 @@
 import {
   AfterContentInit,
   Component,
-  ContentChildren,
   ElementRef,
   Inject,
   Input,
   OnChanges,
   OnInit,
   Optional,
-  QueryList,
   SimpleChanges,
   ViewChild
 } from '@angular/core';
@@ -16,6 +14,7 @@ import {PaneComponent} from '../pane/pane.component';
 import {Align, RelativeAlign, toAlign, toRelativeAlign} from './rtl-utils';
 import {PaneViewComponent} from '../pane-view/pane-view.component';
 import {PANES_DEFAULTS, PanesDefaults} from '../panes-config';
+import {PaneGroupService} from '../pane-group/pane-group.service';
 
 /**
  * Renders a list of panes, navigatable with side tabs.
@@ -34,19 +33,14 @@ import {PANES_DEFAULTS, PanesDefaults} from '../panes-config';
 @Component({
   selector: 'ngx-panes',
   templateUrl: './panes.component.html',
-  styleUrls: ['./panes.component.scss']
+  styleUrls: ['./panes.component.scss'],
+  providers: [
+    PaneGroupService
+  ]
 })
 export class PanesComponent implements OnInit, AfterContentInit, OnChanges {
-  private _selectedPane: PaneComponent = null;
-  public _align: Align;
   public _relativeAlign: RelativeAlign;
-
-  @ViewChild('contentContainer') private _contentContainer: ElementRef;
-
-  @ContentChildren(PaneComponent) panes: QueryList<PaneComponent>;
-
   @ViewChild(PaneViewComponent) paneView: PaneViewComponent;
-
   /**
    * Default width (in pixels) to be used for any child pane with an undefined width.
    * If you don't specify a default width, child panes will **wrap they content**.
@@ -61,15 +55,18 @@ export class PanesComponent implements OnInit, AfterContentInit, OnChanges {
    * @default true
    */
   @Input() toggleable = true;
-
   /**
    * Whether or not the last pane should be opened if no pane is marked initially as opened.
    * @type {boolean}
    * @default true
    */
   @Input() autoOpen = true;
-
   maxSize: number;
+  @ViewChild('contentContainer') private _contentContainer: ElementRef;
+  private panes: PaneComponent[];
+  private _selectedPane: PaneComponent = null;
+
+  public _align: Align;
 
   // noinspection JSAnnotator
   /**
@@ -95,11 +92,16 @@ export class PanesComponent implements OnInit, AfterContentInit, OnChanges {
     return this._selectedPane;
   }
 
-  public isHorizontal(): boolean {
-    return this._align === 'left' || this._align === 'right';
+  get width() {
+    if (this._selectedPane === null) {
+      return 0;
+    }
+    return this._selectedPane.width || this.defaultWidth;
   }
 
-  constructor(private $el: ElementRef, @Optional() @Inject(PANES_DEFAULTS) defaults: PanesDefaults) {
+  constructor(private $el: ElementRef,
+              private paneGroup: PaneGroupService,
+              @Optional() @Inject(PANES_DEFAULTS) defaults: PanesDefaults) {
     if (defaults) {
       if (defaults.autoOpen != null) {
         this.autoOpen = defaults.autoOpen;
@@ -113,9 +115,20 @@ export class PanesComponent implements OnInit, AfterContentInit, OnChanges {
     }
   }
 
+  public isHorizontal(): boolean {
+    return this._align === 'left' || this._align === 'right';
+  }
+
   ngAfterContentInit(): void {
-    this.panesChanged();
-    this.panes.changes.subscribe(panes => this.panesChanged());
+    this.paneGroup.panes$.subscribe((panes: PaneComponent[]) => {
+      this.panes = panes;
+      if (!this._selectedPane && this.autoOpen && panes.length > 0) {
+        panes[panes.length - 1].open();
+      }
+    });
+    this.paneGroup.selectedPane$.subscribe((selectedPane: PaneComponent) => {
+      this._selectedPane = selectedPane;
+    });
   }
 
   ngOnInit() {
@@ -129,46 +142,10 @@ export class PanesComponent implements OnInit, AfterContentInit, OnChanges {
   }
 
   /**
-   * selects a child pane.
-   * @param pane child `PaneComponent` instance to select
-   */
-  public open(pane: PaneComponent) {
-    if (this._selectedPane !== pane) {
-      this._selectedPane = pane;
-    }
-  }
-
-  /**
    * Closes currently selected pane. Does nothing if already closed.
    */
   public close() {
-    this._selectedPane = null;
-  }
-
-  get width() {
-    if (this._selectedPane === null) {
-      return 0;
-    }
-    return this._selectedPane.width || this.defaultWidth;
-  }
-
-  private paneTabClicked(pane) {
-    if (this._selectedPane === pane && this.toggleable) {
-      this.close();
-    } else {
-      this.open(pane);
-    }
-  }
-
-  private panesChanged() {
-    const selectedPaneExists = this.panes.some(pane => pane === this.selectedPane);
-    if (!selectedPaneExists) {
-      this._selectedPane = null;
-    }
-
-    if (!this._selectedPane && this.autoOpen) {
-      this.open(this.panes.last);
-    }
+    this.paneGroup.close();
   }
 
   public directResize(size) {
@@ -185,6 +162,14 @@ export class PanesComponent implements OnInit, AfterContentInit, OnChanges {
       return this._contentContainer.nativeElement.offsetWidth;
     } else {
       return this._contentContainer.nativeElement.offsetHeight;
+    }
+  }
+
+  private paneTabClicked(pane: PaneComponent) {
+    if (this._selectedPane === pane && this.toggleable) {
+      this.close();
+    } else {
+      pane.open();
     }
   }
 

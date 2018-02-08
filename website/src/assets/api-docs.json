@@ -19,6 +19,13 @@
     "usage": "<ngx-panes>\n  <ngx-pane title=\"First Pane\">\n    <ngx-pane-header>this is a <b>special</b> header</ngx-pane-header>\n    <!-- pane content goes here -->\n  </ngx-pane>\n  <ngx-pane title=\"will be used for header in absense of ngx-pane-header\">...</ngx-pane>\n</ngx-panes>"
   },
   {
+    "identifier": "PaneManagerService",
+    "description": "",
+    "methods": [],
+    "properties": [],
+    "fileName": "lib/pane-manager/pane-manager.service.ts"
+  },
+  {
     "identifier": "PaneResizerComponent",
     "description": "",
     "methods": [],

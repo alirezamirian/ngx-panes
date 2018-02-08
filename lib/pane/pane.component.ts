@@ -1,18 +1,10 @@
-import {
-  Component,
-  ContentChild,
-  forwardRef,
-  Inject,
-  Input,
-  OnInit,
-  Optional,
-  TemplateRef,
-  ViewChild
-} from '@angular/core';
+import {Component, ContentChild, Inject, Input, OnDestroy, Optional, TemplateRef, ViewChild} from '@angular/core';
 import {PaneHeaderComponent} from '../pane-header/pane-header.component';
 import {PanesComponent} from '../panes/panes.component';
 import {Boolean} from '../utils/decorators';
 import {PANES_DEFAULTS, PanesDefaults} from '../panes-config';
+import {PaneGroupService} from '../pane-group/pane-group.service';
+import {Subscription} from 'rxjs/Subscription';
 
 
 /**
@@ -39,7 +31,7 @@ import {PANES_DEFAULTS, PanesDefaults} from '../panes-config';
   templateUrl: './pane.component.html',
   styleUrls: ['./pane.component.scss']
 })
-export class PaneComponent implements OnInit {
+export class PaneComponent implements OnDestroy {
 
   /**
    * Title of the pane to be shown in pane's tab.
@@ -65,14 +57,8 @@ export class PaneComponent implements OnInit {
   @ContentChild(PaneHeaderComponent) header: PaneHeaderComponent;
   @ViewChild('content', {read: TemplateRef}) content;
 
-  constructor(@Inject(forwardRef(() => PanesComponent)) private panesComponent: PanesComponent,
-              @Optional() @Inject(PANES_DEFAULTS) defaults: PanesDefaults) {
-    if (defaults) {
-      if (defaults.resizable != null) {
-        this.resizable = defaults.resizable;
-      }
-    }
-  }
+  private _openned: boolean;
+  private subscription: Subscription;
 
   /**
    * @private
@@ -80,7 +66,7 @@ export class PaneComponent implements OnInit {
    * @returns {boolean}
    */
   get opened() {
-    return this.panesComponent.selectedPane === this;
+    return this._openned;
   }
 
   /**
@@ -92,7 +78,7 @@ export class PaneComponent implements OnInit {
   @Boolean
   set opened(value: boolean) {
     if (value) {
-      this.panesComponent.open(this);
+      this.open();
     } else {
       if (this.opened) {
         this.close();
@@ -100,14 +86,26 @@ export class PaneComponent implements OnInit {
     }
   };
 
-  ngOnInit() {
+  constructor(private paneGroup: PaneGroupService,
+              @Optional() @Inject(PANES_DEFAULTS) defaults: PanesDefaults) {
+    if (defaults) {
+      if (defaults.resizable != null) {
+        this.resizable = defaults.resizable;
+      }
+    }
+    this.paneGroup.add(this);
+    this.subscription = paneGroup.selectedPane$.subscribe(pane => this._openned = pane === this);
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   /**
    * Opens this pane. Does nothing if already opened.
    */
   open() {
-    this.panesComponent.open(this);
+    this.paneGroup.select(this);
   }
 
   /**
@@ -115,8 +113,7 @@ export class PaneComponent implements OnInit {
    */
   close() {
     if (this.opened) {
-      this.panesComponent.close();
+      this.paneGroup.close();
     }
   }
-
 }

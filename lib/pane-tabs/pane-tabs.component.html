@@ -1,6 +1,9 @@
 <div class="tabs" [ngClass]="[direction, relativeAlign, align]">
-  <div *ngFor="let pane of panes" class="tab" role="button" [class.active]="selected === pane"
-       (click)="select.emit(pane)">
-    <span class="rotated">{{pane.title}}</span>
-  </div>
+  <pane-tab *ngFor="let pane of panes"
+            [active]="selected === pane"
+            [direction]="direction"
+            [align]="align"
+            (click)="select.emit(pane)">
+    {{pane.title}}
+  </pane-tab>
 </div>

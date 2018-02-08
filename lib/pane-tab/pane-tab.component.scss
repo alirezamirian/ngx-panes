@@ -1,0 +1,68 @@
+
+.tab {
+  cursor: default;
+  user-select: none;
+  direction: ltr;
+  font-size: .9em;
+
+  &.h {
+    padding: 10px 0;
+  }
+
+  &.v {
+    padding: 0 10px;
+  }
+
+  &:not(.active):hover {
+    background: rgba(0, 0, 0, .1);
+  }
+}
+
+.rotated {
+  display: inline-block;
+  white-space: nowrap;
+  transform-origin: center;
+  &::before {
+    content: " ";
+    float: left;
+    margin-top: 100%;
+  }
+  .left & {
+    transform: rotate(-90deg);
+    /*
+    ┌────────┐                  ┌────────┐
+    │^^^^^^^^│                  │<       │
+    │        │  rotate(-90deg)  │<       │     ✅
+    │        │        =>        │<       │
+    └────────┘                  └────────┘
+  */
+  }
+  .right & {
+    transform: rotate(90deg);
+    /*
+    ┌────────┐                  ┌────────┐
+    │^^^^^^^^│                  │       >│
+    │        │  rotate(90deg)   │       >│      X
+    │        │        =>        │       >│
+    └────────┘                  └────────┘
+    */
+
+    /*
+    The following commented solution is nice but it's not cross-browser (at least it doesn't work in Firefox).
+    ┌────────┐                          ┌────────┐                  ┌────────┐
+    │^^^^^^^^│  display: inline-flex;   │        │                  │>       │
+    │        │  align-items: flex-end;  │        │ rotate(-90deg)   │>       │     ✅
+    │        │        =>                │^^^^^^^^│       =>         │>       │
+    └────────┘                          └────────┘                  └────────┘
+    */
+    /*
+    display: inline-flex;
+    align-items: flex-end;
+    */
+
+    // The following solution works in all browsers, but relays on line-height
+    transform: rotate(90deg) translateY(100%);
+    position: relative;
+    left: 23px;
+  }
+}

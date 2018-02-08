@@ -1,5 +1,23 @@
 [
   {
+    "identifier": "PaneGroupService",
+    "description": "",
+    "methods": [],
+    "properties": [
+      {
+        "name": "panes$",
+        "type": "Observable<PaneComponent[]>",
+        "description": ""
+      },
+      {
+        "name": "selectedPane$",
+        "type": "Observable<PaneComponent>",
+        "description": ""
+      }
+    ],
+    "fileName": "lib/pane-group/pane-group.service.ts"
+  },
+  {
     "identifier": "PaneHeaderComponent",
     "description": "<p><code>ngx-pane-header</code> is used for providing custom headers for panes.</p>\n<p>By default the header of the pane consist of a simple text label\n(which is determined by {@link PaneComponent#title PaneComponent title input}).\nYou can override this behaviour, however and use custom content as\npane header by using a <code>&lt;ngx-pane-header&gt;...&lt;/ngx-pane-header&gt;</code> inside\n<code>&lt;ngx-pane&gt;...&lt;/ngx-pane&gt;</code> component.</p>\n",
     "methods": [],
@@ -19,13 +37,6 @@
     "usage": "<ngx-panes>\n  <ngx-pane title=\"First Pane\">\n    <ngx-pane-header>this is a <b>special</b> header</ngx-pane-header>\n    <!-- pane content goes here -->\n  </ngx-pane>\n  <ngx-pane title=\"will be used for header in absense of ngx-pane-header\">...</ngx-pane>\n</ngx-panes>"
   },
   {
-    "identifier": "PaneManagerService",
-    "description": "",
-    "methods": [],
-    "properties": [],
-    "fileName": "lib/pane-manager/pane-manager.service.ts"
-  },
-  {
     "identifier": "PaneResizerComponent",
     "description": "",
     "methods": [],
@@ -36,6 +47,18 @@
     "inputs": [],
     "outputs": [],
     "fileName": "lib/pane-resizer/pane-resizer.component.ts"
+  },
+  {
+    "identifier": "PaneTabComponent",
+    "description": "",
+    "methods": [],
+    "properties": [],
+    "type": "directive",
+    "isComponent": true,
+    "selector": "ngx-pane-tab",
+    "inputs": [],
+    "outputs": [],
+    "fileName": "lib/pane-tab/pane-tab.component.ts"
   },
   {
     "identifier": "PaneTabsComponent",
@@ -220,18 +243,6 @@
     "description": "<p>Renders a list of panes, navigatable with side tabs.</p>\n",
     "methods": [
       {
-        "name": "open",
-        "description": "<p>selects a child pane.</p>\n",
-        "args": [
-          {
-            "name": "pane",
-            "type": "PaneComponent",
-            "description": "<p>child <code>PaneComponent</code> instance to select</p>\n"
-          }
-        ],
-        "returnType": "void"
-      },
-      {
         "name": "close",
         "description": "<p>Closes currently selected pane. Does nothing if already closed.</p>\n",
         "args": [],
@@ -257,11 +268,6 @@
       {
         "name": "maxSize",
         "type": "number",
-        "description": ""
-      },
-      {
-        "name": "panes",
-        "type": "QueryList<PaneComponent>",
         "description": ""
       },
       {

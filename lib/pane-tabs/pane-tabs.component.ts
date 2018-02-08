@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
 import {PaneComponent} from '../pane/pane.component';
-import {Align, RelativeAlign} from '../panes/rtl-utils';
+import {Align, RelativeAlign} from '../utils/rtl-utils';
 
 @Component({
   selector: 'pane-tabs',

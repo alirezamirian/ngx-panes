@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
-import {Align} from '../panes/rtl-utils';
+import {Align} from '../utils/rtl-utils';
 
 @Component({
   selector: 'pane-tab',

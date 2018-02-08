@@ -11,7 +11,7 @@ import {
   ViewChild
 } from '@angular/core';
 import {PaneComponent} from '../pane/pane.component';
-import {Align, RelativeAlign, toAlign, toRelativeAlign} from './rtl-utils';
+import {Align, RelativeAlign, toAlign, toRelativeAlign} from '../utils/rtl-utils';
 import {PaneViewComponent} from '../pane-view/pane-view.component';
 import {PANES_DEFAULTS, PanesDefaults} from '../panes-config';
 import {PaneGroupService} from '../pane-group/pane-group.service';

@@ -120,15 +120,18 @@ export class PanesComponent implements OnInit, AfterContentInit, OnChanges {
   }
 
   ngAfterContentInit(): void {
-    this.paneGroup.panes$.subscribe((panes: PaneComponent[]) => {
-      this.panes = panes;
-      if (!this._selectedPane && this.autoOpen && panes.length > 0) {
-        panes[panes.length - 1].open();
-      }
-    });
     this.paneGroup.selectedPane$.subscribe((selectedPane: PaneComponent) => {
       this._selectedPane = selectedPane;
     });
+
+    this.paneGroup.panes$.subscribe((panes: PaneComponent[]) => {
+      this.panes = panes;
+      if (!this._selectedPane && this.autoOpen && panes.length > 0) {
+        console.log('autoopen')
+        panes[panes.length - 1].open();
+      }
+    });
+
   }
 
   ngOnInit() {

@@ -57,7 +57,7 @@ export class PaneComponent implements OnDestroy {
   @ContentChild(PaneHeaderComponent) header: PaneHeaderComponent;
   @ViewChild('content', {read: TemplateRef}) content;
 
-  private _openned: boolean;
+  private _opened: boolean;
   private subscription: Subscription;
 
   /**
@@ -66,7 +66,7 @@ export class PaneComponent implements OnDestroy {
    * @returns {boolean}
    */
   get opened() {
-    return this._openned;
+    return this._opened;
   }
 
   /**
@@ -94,7 +94,7 @@ export class PaneComponent implements OnDestroy {
       }
     }
     this.paneGroup.add(this);
-    this.subscription = paneGroup.selectedPane$.subscribe(pane => this._openned = pane === this);
+    this.subscription = paneGroup.selectedPane$.subscribe(pane => this._opened = pane === this);
   }
 
   ngOnDestroy(): void {

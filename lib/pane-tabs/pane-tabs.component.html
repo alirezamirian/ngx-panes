@@ -1,9 +1,13 @@
-<div class="tabs" [ngClass]="[direction, relativeAlign, align]">
-  <pane-tab *ngFor="let pane of panes"
+<div class="tabs" [ngClass]="[direction, relativeAlign, align]"
+     [class.can-drop]="dragState && dragState.placeholderIndex > -1">
+  <pane-tab *ngFor="let pane of panes; let index = index"
             [active]="selected === pane"
             [direction]="direction"
             [align]="align"
-            (click)="select.emit(pane)">
-    {{pane.title}}
-  </pane-tab>
+            [pane]="pane"
+            [class.dragging]="dragState?.draggingPaneIndex === index"
+            [class.can-animate]="dragState?.canAnimate"
+            [style.marginLeft.px]="direction === 'v' && index === dragState?.placeholderIndex ? dragState.placeholderSize : 0"
+            [style.marginTop.px]="direction === 'h' && index === dragState?.placeholderIndex ? dragState.placeholderSize : 0"
+            (click)="select.emit(pane)" (dragStarted)="dragStarted($event)"></pane-tab>
 </div>

@@ -2,6 +2,9 @@ import {Injectable} from '@angular/core';
 import {PaneComponent} from '../pane/pane.component';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
+/**
+ * @private
+ */
 @Injectable()
 export class PaneGroupService {
 

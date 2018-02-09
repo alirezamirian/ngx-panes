@@ -1,6 +1,15 @@
 @import '../scss/mixins';
 @import '../scss/shared';
 
+:host {
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  overflow: auto;
+}
+
 .header {
   flex-shrink: 0;
   padding: 3px 5px;

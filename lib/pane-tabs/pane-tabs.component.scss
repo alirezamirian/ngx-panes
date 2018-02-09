@@ -10,14 +10,20 @@
   display: flex;
 
   &.h {
-    width: 22px;
+    max-width: 22px;
     height: 100%;
     flex-direction: column;
+    &.can-drop {
+      min-width: 22px;
+    }
   }
   &.v {
-    height: 22px;
+    max-height: 22px;
     width: 100%;
     flex-direction: row;
+    &.can-drop {
+      min-height: 22px;
+    }
   }
   &.bottom {
     border-top: $border;
@@ -31,4 +37,13 @@
   &.right {
     border-left: $border;
   }
+
+}
+
+pane-tab.dragging {
+  display: none;
+}
+
+pane-tab.can-animate {
+  transition: margin .1s;
 }

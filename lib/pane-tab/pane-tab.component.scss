@@ -66,3 +66,9 @@
     left: 23px;
   }
 }
+
+:host.ghost {
+  display: inline-block !important;
+  position: fixed;
+  overflow: hidden;
+}

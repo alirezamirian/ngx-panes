@@ -35,6 +35,9 @@
     .tabs {
       background: darken($backgroundColor, map-get($options, tabsContrast));
       color: $fgColor;
+      &.can-drop {
+        box-shadow: 0 0 40px -10px transparentize($fgColor, .6) inset;
+      }
     }
     .header {
       $bg: darken($backgroundColor, map-get($options, headerContrast));

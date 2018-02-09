@@ -1,23 +1,5 @@
 [
   {
-    "identifier": "PaneGroupService",
-    "description": "",
-    "methods": [],
-    "properties": [
-      {
-        "name": "panes$",
-        "type": "Observable<PaneComponent[]>",
-        "description": ""
-      },
-      {
-        "name": "selectedPane$",
-        "type": "Observable<PaneComponent>",
-        "description": ""
-      }
-    ],
-    "fileName": "lib/pane-group/pane-group.service.ts"
-  },
-  {
     "identifier": "PaneHeaderComponent",
     "description": "<p><code>ngx-pane-header</code> is used for providing custom headers for panes.</p>\n<p>By default the header of the pane consist of a simple text label\n(which is determined by {@link PaneComponent#title PaneComponent title input}).\nYou can override this behaviour, however and use custom content as\npane header by using a <code>&lt;ngx-pane-header&gt;...&lt;/ngx-pane-header&gt;</code> inside\n<code>&lt;ngx-pane&gt;...&lt;/ngx-pane&gt;</code> component.</p>\n",
     "methods": [],
@@ -55,9 +37,35 @@
     "properties": [],
     "type": "directive",
     "isComponent": true,
-    "selector": "ngx-pane-tab",
-    "inputs": [],
-    "outputs": [],
+    "selector": "pane-tab",
+    "inputs": [
+      {
+        "name": "active",
+        "type": "boolean",
+        "description": ""
+      },
+      {
+        "name": "align",
+        "type": "Align",
+        "description": ""
+      },
+      {
+        "name": "direction",
+        "type": "\"h\" | \"v\"",
+        "description": ""
+      },
+      {
+        "name": "pane",
+        "type": "PaneComponent",
+        "description": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "dragStarted",
+        "description": ""
+      }
+    ],
     "fileName": "lib/pane-tab/pane-tab.component.ts"
   },
   {
@@ -327,13 +335,13 @@
     "identifier": "RelativeAlign",
     "description": "<p>Direction independent alignment. See also {@link Align}.</p>\n",
     "source": "export type RelativeAlign = 'start'|'end'|'top'|'bottom';",
-    "fileName": "lib/panes/rtl-utils.ts"
+    "fileName": "lib/utils/rtl-utils.ts"
   },
   {
     "type": "typeAlias",
     "identifier": "Align",
     "description": "<p>See also {@link RelativeAlign}</p>\n",
     "source": "export type Align = 'left'|'right'|'top'|'bottom';",
-    "fileName": "lib/panes/rtl-utils.ts"
+    "fileName": "lib/utils/rtl-utils.ts"
   }
 ]

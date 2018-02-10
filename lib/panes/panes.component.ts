@@ -33,10 +33,7 @@ import {PaneGroupService} from '../pane-group/pane-group.service';
 @Component({
   selector: 'ngx-panes',
   templateUrl: './panes.component.html',
-  styleUrls: ['./panes.component.scss'],
-  providers: [
-    PaneGroupService
-  ]
+  styleUrls: ['./panes.component.scss']
 })
 export class PanesComponent implements OnInit, AfterContentInit, OnChanges {
   public _relativeAlign: RelativeAlign;
@@ -62,7 +59,6 @@ export class PanesComponent implements OnInit, AfterContentInit, OnChanges {
    */
   @Input() autoOpen = true;
   maxSize: number;
-  @ViewChild('contentContainer') private _contentContainer: ElementRef;
   private panes: PaneComponent[];
   private _selectedPane: PaneComponent = null;
 
@@ -127,7 +123,6 @@ export class PanesComponent implements OnInit, AfterContentInit, OnChanges {
     this.paneGroup.panes$.subscribe((panes: PaneComponent[]) => {
       this.panes = panes;
       if (!this._selectedPane && this.autoOpen && panes.length > 0) {
-        console.log('autoopen')
         panes[panes.length - 1].open();
       }
     });
@@ -149,23 +144,6 @@ export class PanesComponent implements OnInit, AfterContentInit, OnChanges {
    */
   public close() {
     this.paneGroup.close();
-  }
-
-  public directResize(size) {
-    if (this.isHorizontal()) {
-      this._contentContainer.nativeElement.style.width = size + 'px';
-    } else {
-      this._contentContainer.nativeElement.style.height = size + 'px';
-
-    }
-  }
-
-  public getSize() {
-    if (this.isHorizontal()) {
-      return this._contentContainer.nativeElement.offsetWidth;
-    } else {
-      return this._contentContainer.nativeElement.offsetHeight;
-    }
   }
 
   private paneTabClicked(pane: PaneComponent) {

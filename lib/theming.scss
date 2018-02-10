@@ -27,7 +27,7 @@
   $tab-fg-color: lighten($light-text-color, 10%);
   $fgColor: pick-visible-color($backgroundColor, $dark-text-color, $tab-fg-color);
 
-  /deep/ ngx-panes {
+  /deep/ ngx-pane-area {
     .tab.active {
       background: $primaryColor;
       color: pick-visible-color($primaryColor, $dark-text-color, $tab-fg-color);

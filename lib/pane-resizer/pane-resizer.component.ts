@@ -1,5 +1,5 @@
 import {Component, HostListener, NgZone, OnInit} from '@angular/core';
-import {PanesComponent} from '../panes/panes.component';
+import {PaneViewComponent} from '../pane-view/pane-view.component';
 
 @Component({
   selector: 'pane-resizer',
@@ -12,7 +12,7 @@ export class PaneResizerComponent implements OnInit {
   private initialWidth: number;
   private _lastSize: number;
 
-  constructor(private panes: PanesComponent, private zone: NgZone) {
+  constructor(private paneView: PaneViewComponent, private zone: NgZone) {
   }
 
   ngOnInit() {
@@ -22,14 +22,14 @@ export class PaneResizerComponent implements OnInit {
 
   @HostListener('mousedown', ['$event'])
   private onMouseDown($event: MouseEvent) {
-    if (!this.panes.selectedPane) {
+    if (!this.paneView.pane) {
       return;
     }
     this.startPos = {
       x: $event.pageX,
       y: $event.pageY
     };
-    this.initialWidth = this.panes.getSize();
+    this.initialWidth = this.paneView.getSize();
     $event.preventDefault();
     this.zone.runOutsideAngular(() => {
       document.addEventListener('mousemove', this.onMouseMove);
@@ -39,9 +39,9 @@ export class PaneResizerComponent implements OnInit {
   }
 
   private onMouseMove(event: MouseEvent) {
-    if (this.panes.selectedPane) {
+    if (this.paneView.pane) {
       let movement = 0;
-      switch (this.panes.align) {
+      switch (this.paneView.align) {
         case 'left':
           movement = event.pageX - this.startPos.x;
           break;
@@ -56,12 +56,12 @@ export class PaneResizerComponent implements OnInit {
           break;
       }
       this._lastSize = this.initialWidth + movement;
-      this.panes.directResize(this._lastSize);
+      this.paneView.directResize(this._lastSize);
     }
   }
 
   private onMouseUp(event: MouseEvent) {
-    this.panes.selectedPane.width = this._lastSize;
+    this.paneView.pane.width = this._lastSize;
     document.removeEventListener('mousemove', this.onMouseMove);
     document.removeEventListener('mouseup', this.onMouseUp);
   }

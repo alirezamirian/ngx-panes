@@ -1,5 +1,17 @@
 [
   {
+    "identifier": "PaneAreaComponent",
+    "description": "",
+    "methods": [],
+    "properties": [],
+    "type": "directive",
+    "isComponent": true,
+    "selector": "ngx-pane-area",
+    "inputs": [],
+    "outputs": [],
+    "fileName": "lib/pane-area/pane-area.component.ts"
+  },
+  {
     "identifier": "PaneHeaderComponent",
     "description": "<p><code>ngx-pane-header</code> is used for providing custom headers for panes.</p>\n<p>By default the header of the pane consist of a simple text label\n(which is determined by {@link PaneComponent#title PaneComponent title input}).\nYou can override this behaviour, however and use custom content as\npane header by using a <code>&lt;ngx-pane-header&gt;...&lt;/ngx-pane-header&gt;</code> inside\n<code>&lt;ngx-pane&gt;...&lt;/ngx-pane&gt;</code> component.</p>\n",
     "methods": [],

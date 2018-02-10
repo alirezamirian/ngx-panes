@@ -18,25 +18,6 @@
     width: 100%;
     flex-direction: column;
   }
-
-  @include if-open {
-    @include if-left-aligned {
-      border-right: $border;
-      @extend %border-right-shadow;
-    }
-    @include if-right-aligned {
-      border-left: $border;
-      @extend %border-left-shadow;
-    }
-    @include if-top-aligned {
-      border-bottom: $border;
-      @extend %border-bottom-shadow;
-    }
-    @include if-bottom-aligned {
-      border-top: $border;
-      @extend %border-top-shadow;
-    }
-  }
 }
 
 pane-tabs {

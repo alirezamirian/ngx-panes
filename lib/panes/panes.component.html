@@ -1,5 +1,5 @@
 <div class="wrapper" [ngClass]="[_align, _relativeAlign]" [class.open]="!!selectedPane">
-  <pane-tabs [panes]="panes" [selected]="selectedPane"
+  <pane-tabs [paneGroup]="paneGroup"
              [direction]="isHorizontal() ? 'h' : 'v'"
              [align]="_align"
              [relativeAlign]="_relativeAlign"

@@ -1,29 +1,36 @@
-<div fxLayout="column" fxFlex>
-  <div fxFlex fxLayout="row">
-    <ngx-panes [defaultWidth]="330">
-      <ngx-pane id="start1" title="Start 1">
-        <app-demo-content [lines]="40"></app-demo-content>
-      </ngx-pane>
-      <ngx-pane id="start2" title="Start 2">
-        <app-demo-content [lines]="40"></app-demo-content>
-      </ngx-pane>
-    </ngx-panes>
-    <div fxFlex class="mat-padding">
-      Main content
-    </div>
-    <ngx-panes [align]="'end'" [defaultWidth]="330">
-      <ngx-pane id="end1" title="End 1">
-        <app-demo-content [lines]="40"></app-demo-content>
-      </ngx-pane>
-      <ngx-pane id="end2" title="End 2">
-        <app-demo-content [lines]="40"></app-demo-content>
-      </ngx-pane>
-    </ngx-panes>
-  </div>
-  <ngx-panes [align]="'bottom'" [defaultWidth]="200">
-    <ngx-pane id="bottom1" title="Bottom 1">
-      <app-demo-content [lines]="40"></app-demo-content>
+<ngx-pane-area>
+  <ngx-pane-group [defaultWidth]="300">
+    <ngx-pane title="test 1" [opened]="true" [resizable]="false">
+      First Pane
+      <app-demo-content [lines]="20"></app-demo-content>
     </ngx-pane>
-  </ngx-panes>
+  </ngx-pane-group>
+  <ngx-pane-group [defaultWidth]="300">
+    <ngx-pane title="test 2">
+      Second Pane
+      <app-demo-content [lines]="22"></app-demo-content>
+    </ngx-pane>
+    <ngx-pane title="test 2">
+      Third Pane
+      <app-demo-content [lines]="22"></app-demo-content>
+    </ngx-pane>
 
-</div>
+  </ngx-pane-group>
+  <ngx-pane-group>
+    <ngx-pane title="test 3" #pane3 [width]="150">
+      Forth Pane. pane width: {{pane3.width}}
+      <app-demo-content [lines]="20"></app-demo-content>
+    </ngx-pane>
+  </ngx-pane-group>
+  <ngx-pane-group [autoOpen]="false">
+    <ngx-pane title="test 4" #pane4 [width]="100">
+      Forth Pane. pane width: {{pane4.width}}
+      <app-demo-content [lines]="20"></app-demo-content>
+    </ngx-pane>
+  </ngx-pane-group>
+
+
+  <div ngx-pane-area-content>
+    Main content
+  </div>
+</ngx-pane-area>

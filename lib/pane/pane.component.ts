@@ -1,10 +1,9 @@
-import {Component, ContentChild, Inject, Input, OnDestroy, Optional, TemplateRef, ViewChild} from '@angular/core';
+import {Component, ContentChild, Inject, Input, OnInit, Optional, TemplateRef, ViewChild} from '@angular/core';
 import {PaneHeaderComponent} from '../pane-header/pane-header.component';
 import {PanesComponent} from '../panes/panes.component';
 import {Boolean} from '../utils/decorators';
 import {PANES_DEFAULTS, PanesDefaults} from '../panes-config';
 import {PaneGroupService} from '../pane-group/pane-group.service';
-import {Subscription} from 'rxjs/Subscription';
 
 
 /**
@@ -31,13 +30,18 @@ import {Subscription} from 'rxjs/Subscription';
   templateUrl: './pane.component.html',
   styleUrls: ['./pane.component.scss']
 })
-export class PaneComponent implements OnDestroy {
+export class PaneComponent implements OnInit {
 
   /**
    * Title of the pane to be shown in pane's tab.
    * It will also appear in pane's header in the absence of `ngx-pane-header`.
    */
   @Input() title: string;
+  private _width: number;
+
+  get width(): number | null {
+    return this._width || this.paneGroup.getOption('defaultWidth');
+  }
 
   /**
    * Width of the pane. More precisely, **width** for **horizontally** aligned and **height** for **vertically**
@@ -45,7 +49,10 @@ export class PaneComponent implements OnDestroy {
    * If unset, `defaultWidth` of the host `ngx-panes` will be used. If both are undefined, the content of the
    * pane will determine its width. Resizing pane (if enabled) changes the pane's width.
    */
-  @Input() width: number;
+  @Input() set width(w: number | null) {
+    this._width = w;
+  };
+
   /**
    * Whether user can resize pane or not.
    */
@@ -57,16 +64,13 @@ export class PaneComponent implements OnDestroy {
   @ContentChild(PaneHeaderComponent) header: PaneHeaderComponent;
   @ViewChild('content', {read: TemplateRef}) content;
 
-  private _opened: boolean;
-  private subscription: Subscription;
-
   /**
    * @private
    * Whether this pane is currently opened or not.
    * @returns {boolean}
    */
   get opened() {
-    return this._opened;
+    return this.paneGroup.snapshot.selectedPane === this;
   }
 
   /**
@@ -93,13 +97,13 @@ export class PaneComponent implements OnDestroy {
         this.resizable = defaults.resizable;
       }
     }
-    this.paneGroup.add(this);
-    this.subscription = paneGroup.selectedPane$.subscribe(pane => this._opened = pane === this);
+
   }
 
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+  ngOnInit() {
+    this.paneGroup.add(this);
   }
+
 
   /**
    * Opens this pane. Does nothing if already opened.

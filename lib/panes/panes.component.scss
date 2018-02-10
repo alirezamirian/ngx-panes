@@ -1,6 +1,5 @@
 @import '../scss/mixins';
 @import '../theming';
-@import 'resizer';
 @import 'alignment';
 
 
@@ -16,10 +15,6 @@
     primaryColor: #2d2f30,
     backgroundColor: #3c3f41
   ));
-}
-
-pane-view {
-  overflow: auto;
 }
 
 .content-container {

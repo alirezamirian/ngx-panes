@@ -1,13 +1,37 @@
 @import '../scss/mixins';
 @import '../scss/shared';
+@import '../scss/variables';
+@import './resizer';
 
 :host {
-  display: flex;
-  flex-direction: column;
+  position: relative;
 }
 
 .content {
   overflow: auto;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  @include if-left-aligned {
+    border-right: $border;
+    @extend %border-right-shadow;
+  }
+  @include if-right-aligned {
+    border-left: $border;
+    @extend %border-left-shadow;
+  }
+  @include if-top-aligned {
+    border-bottom: $border;
+    @extend %border-bottom-shadow;
+  }
+  @include if-bottom-aligned {
+    border-top: $border;
+    @extend %border-top-shadow;
+  }
 }
 
 .header {
@@ -22,3 +46,4 @@
   font-size: .9em;
   @extend %border-bottom-shadow;
 }
+

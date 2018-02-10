@@ -1,0 +1,57 @@
+@import '../theming';
+
+:host {
+  display: block;
+  height: 100%;
+}
+
+/deep/ {
+  @include ngx-panes-theme((
+    primaryColor: #4756bf,
+    backgroundColor: #eee
+  ));
+}
+
+.outer-wrapper {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  place-content: stretch flex-start;
+  align-items: stretch;
+  flex: 1;
+  width: 100%;
+  height: 100%;
+}
+
+.inner-wrapper {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.content-outer-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.content-inner-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex {
+  flex: 1;
+}
+
+.v-pane-tabs /deep/ .tabs {
+  padding: 0 20px;
+}
+
+.content-outer-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+pane-tabs {
+  position: relative;
+}

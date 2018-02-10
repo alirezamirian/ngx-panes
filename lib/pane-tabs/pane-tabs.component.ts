@@ -3,10 +3,9 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
-  EventEmitter,
   Input,
   NgZone,
-  Output,
+  Optional,
   QueryList,
   ViewChildren
 } from '@angular/core';
@@ -25,17 +24,13 @@ import {PaneGroupService} from '../pane-group/pane-group.service';
 export class PaneTabsComponent {
 
   @Input()
-  panes: PaneComponent[];
-  @Input()
-  selected: PaneComponent;
+  paneGroup: PaneGroupService;
   @Input()
   direction: 'h' | 'v';
   @Input()
   align: Align;
   @Input()
   relativeAlign: RelativeAlign;
-  @Output()
-  select = new EventEmitter();
 
   @ViewChildren(PaneTabComponent, {read: ElementRef})
   private tabElementRefs: QueryList<ElementRef>;
@@ -53,7 +48,7 @@ export class PaneTabsComponent {
   constructor(private changeDetector: ChangeDetectorRef,
               private ngZone: NgZone,
               private elementRef: ElementRef,
-              private paneGroup: PaneGroupService) {
+              @Optional() private paneGroup: PaneGroupService) {
   }
 
   dragStarted(dragStart: DragStartEvent) {
@@ -112,7 +107,7 @@ export class PaneTabsComponent {
   }
 
   private handleDragStart(dragStart: DragStartEvent) {
-    const draggingPaneIndex = this.panes.indexOf(dragStart.pane);
+    const draggingPaneIndex = this.paneGroup.snapshot.panes.indexOf(dragStart.pane);
 
     const direction = this.oppositeDirection();
     const effectiveSize = this.getSize(dragStart.draggingRect, direction);

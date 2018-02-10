@@ -1,4 +1,14 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild, ViewContainerRef} from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+  ViewChild,
+  ViewContainerRef
+} from '@angular/core';
+import {Align} from '../utils/rtl-utils';
 
 @Component({
   selector: 'pane-view',
@@ -14,6 +24,11 @@ export class PaneViewComponent implements OnInit, OnChanges {
 
   @ViewChild('header', {read: ViewContainerRef})
   private headerContainerRef: ViewContainerRef;
+
+  @Input()
+  public align: Align;
+  @ViewChild('contentContainer') private _contentContainer: ElementRef;
+
 
   constructor() {
   }
@@ -33,4 +48,26 @@ export class PaneViewComponent implements OnInit, OnChanges {
       }
     }
   }
+
+  public directResize(size) {
+    if (this.isHorizontal()) {
+      this._contentContainer.nativeElement.style.width = size + 'px';
+    } else {
+      this._contentContainer.nativeElement.style.height = size + 'px';
+
+    }
+  }
+
+  public getSize() {
+    if (this.isHorizontal()) {
+      return this._contentContainer.nativeElement.offsetWidth;
+    } else {
+      return this._contentContainer.nativeElement.offsetHeight;
+    }
+  }
+
+  public isHorizontal(): boolean {
+    return this.align === 'left' || this.align === 'right';
+  }
+
 }

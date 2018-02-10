@@ -1,7 +1,16 @@
-<div class="header">
-  <ng-container #header></ng-container>
-  <ng-container *ngIf="!pane?.header">{{pane?.title}}</ng-container>
+<div class="wrapper" [ngClass]="[align]" [class.open]="!!pane"
+     #contentContainer
+     [style.width.px]="isHorizontal() ? pane.width : null"
+     [style.maxWidth.px]="isHorizontal() ? pane.maxSize : null"
+     [style.height.px]="!isHorizontal() ? pane.width : null"
+     [style.maxHeight.px]="!isHorizontal() ? pane.maxSize : null">
+  <div class="header">
+    <ng-container #header></ng-container>
+    <ng-container *ngIf="!pane?.header">{{pane?.title}}</ng-container>
+  </div>
+  <div class="content">
+    <ng-container #content></ng-container>
+  </div>
+  <pane-resizer *ngIf="pane?.resizable"></pane-resizer>
 </div>
-<div class="content">
-  <ng-container #content></ng-container>
-</div>
+

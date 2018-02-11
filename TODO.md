@@ -14,12 +14,13 @@
 # Active TODO list:
 ## high priority
 - [x] Fix and test align options
-- [ ] Remove ngx-panes
+- [x] Remove ngx-panes
 - [ ] Update docs
 - [ ] Decide for ngx-pane group being a component or directive
 - [ ] Update demos to use new pane-area, or ngx-pane-group if it end up being an stand alone component
-- [ ] Resolve theming issues
+- [ ] Resolve theming issues (also add theming for pane-area. its content)
 - [ ] Clean up styles
+- [ ] decide for height of ngx-pane-area
 
 ## Low priority
 - [ ] Add option for pane reordering

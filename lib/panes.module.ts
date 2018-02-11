@@ -3,7 +3,6 @@
  */
 
 import {NgModule} from '@angular/core';
-import {PanesComponent} from './panes/panes.component';
 import {PaneComponent} from './pane/pane.component';
 import {PaneResizerComponent} from './pane-resizer/pane-resizer.component';
 import {CommonModule} from '@angular/common';
@@ -12,7 +11,7 @@ import {PaneHeaderComponent} from './pane-header/pane-header.component';
 import {PaneTabsComponent} from './pane-tabs/pane-tabs.component';
 import {PaneTabComponent} from './pane-tab/pane-tab.component';
 import {PaneAreaComponent} from './pane-area/pane-area.component';
-import {PaneGroupDirective} from './pane-group/pane-group.component';
+import {PaneGroupComponent} from './pane-group/pane-group.component';
 
 /**
  * The main module for ngx-panes. Add it to `imports` of your module.
@@ -33,7 +32,6 @@ import {PaneGroupDirective} from './pane-group/pane-group.component';
     CommonModule
   ],
   declarations: [
-    PanesComponent,
     PaneComponent,
     PaneResizerComponent,
     PaneViewComponent,
@@ -41,14 +39,13 @@ import {PaneGroupDirective} from './pane-group/pane-group.component';
     PaneTabsComponent,
     PaneTabComponent,
     PaneAreaComponent,
-    PaneGroupDirective
+    PaneGroupComponent
   ],
   exports: [
-    PanesComponent,
     PaneComponent,
     PaneHeaderComponent,
     PaneAreaComponent,
-    PaneGroupDirective
+    PaneGroupComponent
   ]
 })
 export class NgxPanesModule {

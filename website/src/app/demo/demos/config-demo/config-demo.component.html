@@ -1,30 +1,35 @@
-<ngx-panes [toggleable]="true" [defaultWidth]="300">
-  <ngx-pane title="First Pane">
-    <app-demo-content [lines]="40"></app-demo-content>
-  </ngx-pane>
-  <ngx-pane title="Second Pane">
-    <app-demo-content [lines]="40"></app-demo-content>
-  </ngx-pane>
-</ngx-panes>
-<div fxFlex class="mat-padding">
-  <p>
-    <code>resizable</code> and <code>toggleable</code> are set to <code>false</code>
-    for all child panes.
-  </p>
-  <p>
-    The left <code>ngx-panes</code> is explicitly set to be toggleable,
-    and the <b>forth pane</b> is explicitly set to be resizable.
-  </p>
-
-</div>
-<ngx-panes [align]="'end'" [defaultWidth]="350">
-  <ngx-pane title="Third pane">
-    <app-demo-content [lines]="40"></app-demo-content>
-  </ngx-pane>
-  <ngx-pane title="Forth pane" [resizable]="true">
-    <div class="mat-padding">
-      This pane is explicitly set to be resizable
+<ngx-pane-area>
+  <ngx-pane-group [toggleable]="true" [defaultWidth]="300">
+    <ngx-pane title="First Pane">
+      <app-demo-content [lines]="40"></app-demo-content>
+    </ngx-pane>
+    <ngx-pane title="Second Pane">
+      <app-demo-content [lines]="40"></app-demo-content>
+    </ngx-pane>
+  </ngx-pane-group>
+  <ngx-pane-group [align]="'end'" [defaultWidth]="350">
+    <ngx-pane title="Third pane">
+      <app-demo-content [lines]="40"></app-demo-content>
+    </ngx-pane>
+    <ngx-pane title="Forth pane" [resizable]="true">
+      <div class="mat-padding">
+        This pane is explicitly set to be resizable
+      </div>
+      <app-demo-content [lines]="40"></app-demo-content>
+    </ngx-pane>
+  </ngx-pane-group>
+  <div ngx-pane-area-content>
+    <div fxFlex class="mat-padding">
+      <p>
+        <code>resizable</code> and <code>toggleable</code> are set to <code>false</code>
+        for all child panes.
+      </p>
+      <p>
+        The left <code>ngx-panes</code> is explicitly set to be toggleable,
+        and the <b>forth pane</b> is explicitly set to be resizable.
+      </p>
     </div>
-    <app-demo-content [lines]="40"></app-demo-content>
-  </ngx-pane>
-</ngx-panes>
+  </div>
+</ngx-pane-area>
+
+

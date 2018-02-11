@@ -1,17 +1,19 @@
-import {Directive, ElementRef, Input, OnInit} from '@angular/core';
+import {Component, ElementRef, Inject, Input, OnInit, Optional} from '@angular/core';
 import {PaneGroupService} from './pane-group.service';
 import {PaneAreaComponent} from '../pane-area/pane-area.component';
 import {Align, RelativeAlign, toAlign, toRelativeAlign} from '../utils/rtl-utils';
+import {PANES_DEFAULTS, PanesDefaults} from '../panes-config';
+import {PaneComponent} from '../pane/pane.component';
 
 // noinspection TsLint
-@Directive({
+@Component({
   selector: 'ngx-pane-group',
-  exportAs: 'ngxPaneGroup',
+  template: '',
   providers: [
     PaneGroupService
   ]
 })
-export class PaneGroupDirective implements OnInit {
+export class PaneGroupComponent implements OnInit {
 
   private _relativeAlign: RelativeAlign;
   private initialized: boolean;
@@ -66,14 +68,41 @@ export class PaneGroupDirective implements OnInit {
     }
   }
 
-  constructor(private $el: ElementRef,
-              private paneArea: PaneAreaComponent,
-              public paneGroup: PaneGroupService) {
+  /**
+   * returns currently selected pane
+   * @returns {PaneComponent}
+   */
+  public get selectedPane(): PaneComponent | null {
+    return this.paneGroup.snapshot.selectedPane;
   }
 
   ngOnInit() {
     this.paneArea.addGroup(this.paneGroup, this._align);
     this.initialized = true;
+  }
+
+  constructor(private $el: ElementRef,
+              private paneArea: PaneAreaComponent,
+              public paneGroup: PaneGroupService,
+              @Optional() @Inject(PANES_DEFAULTS) defaults: PanesDefaults) {
+    if (defaults) {
+      if (defaults.autoOpen != null) {
+        this.autoOpen = defaults.autoOpen;
+      }
+      if (defaults.defaultWidth != null) {
+        this.defaultWidth = defaults.defaultWidth;
+      }
+      if (defaults.toggleable != null) {
+        this.toggleable = defaults.toggleable;
+      }
+    }
+  }
+
+  /**
+   * Closes currently selected pane. Does nothing if already closed.
+   */
+  public close() {
+    this.paneGroup.close();
   }
 
   private getDir(): 'rtl' | 'ltr' {

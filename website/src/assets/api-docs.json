@@ -3,13 +3,7 @@
     "identifier": "PaneAreaComponent",
     "description": "",
     "methods": [],
-    "properties": [
-      {
-        "name": "panesComponents",
-        "type": "QueryList<PanesComponent>",
-        "description": ""
-      }
-    ],
+    "properties": [],
     "type": "directive",
     "isComponent": true,
     "selector": "ngx-pane-area",
@@ -18,9 +12,16 @@
     "fileName": "lib/pane-area/pane-area.component.ts"
   },
   {
-    "identifier": "PaneGroupDirective",
+    "identifier": "PaneGroupComponent",
     "description": "",
-    "methods": [],
+    "methods": [
+      {
+        "name": "close",
+        "description": "<p>Closes currently selected pane. Does nothing if already closed.</p>\n",
+        "args": [],
+        "returnType": "void"
+      }
+    ],
     "properties": [
       {
         "name": "_align",
@@ -31,12 +32,16 @@
         "name": "align",
         "type": "\"left\" | \"right\" | \"top\" | \"bottom\" | \"start\" | \"end\"",
         "description": "<p>Direction which the ngx-panes is aligned. It can be a {@link RelativeAlign} or Align.</p>\n"
+      },
+      {
+        "name": "selectedPane",
+        "type": "PaneComponent",
+        "description": "<p>returns currently selected pane</p>\n"
       }
     ],
     "type": "directive",
-    "isComponent": false,
+    "isComponent": true,
     "selector": "ngx-pane-group",
-    "exportAs": "ngxPaneGroup",
     "inputs": [
       {
         "name": "align",
@@ -180,7 +185,7 @@
       },
       {
         "name": "pane",
-        "type": "any",
+        "type": "PaneComponent",
         "description": ""
       }
     ],
@@ -254,7 +259,7 @@
     ],
     "outputs": [],
     "fileName": "lib/pane/pane.component.ts",
-    "usage": "<ngx-panes>\n  <!-- Simple pane with a title -->\n  <ngx-pane title=\"project\">...</ngx-pane>\n\n  <!-- Different title and header. Header is used in top of the selected pane, title is used inside pane's tab -->\n  <ngx-pane title=\"structure\">\n    <div ngx-pane-header>custom header</div>\n    ...\n  </ngx-pane>\n</ngx-panes>"
+    "usage": "<ngx-panes>\r  <!-- Simple pane with a title -->\r  <ngx-pane title=\"project\">...</ngx-pane>\r\r  <!-- Different title and header. Header is used in top of the selected pane, title is used inside pane's tab -->\r  <ngx-pane title=\"structure\">\r    <div ngx-pane-header>custom header</div>\r    ...\r  </ngx-pane>\r</ngx-panes>"
   },
   {
     "type": "variable",
@@ -300,100 +305,15 @@
     "properties": [],
     "type": "ngModule",
     "declarations": [
-      "lib/panes/panes.component#PanesComponent",
       "lib/pane/pane.component#PaneComponent",
       "lib/pane-header/pane-header.component#PaneHeaderComponent",
       "lib/pane-area/pane-area.component#PaneAreaComponent",
-      "lib/pane-group/pane-group.component#PaneGroupDirective"
+      "lib/pane-group/pane-group.component#PaneGroupComponent"
     ],
     "services": [],
     "fileName": "lib/panes.module.ts",
     "usage": "@NgModule({\n  imports: [\n    // ...\n    NgxPanesModule\n    //...\n  ]\n})\nexport class AppModule {}\n",
     "usageLang": "typescript"
-  },
-  {
-    "identifier": "PanesComponent",
-    "description": "<p>Renders a list of panes, navigatable with side tabs.</p>\n",
-    "methods": [
-      {
-        "name": "close",
-        "description": "<p>Closes currently selected pane. Does nothing if already closed.</p>\n",
-        "args": [],
-        "returnType": "void"
-      }
-    ],
-    "properties": [
-      {
-        "name": "_align",
-        "type": "Align",
-        "description": ""
-      },
-      {
-        "name": "_relativeAlign",
-        "type": "RelativeAlign",
-        "description": ""
-      },
-      {
-        "name": "align",
-        "type": "\"left\" | \"right\" | \"top\" | \"bottom\" | \"start\" | \"end\"",
-        "description": "<p>Direction which the ngx-panes is aligned. It can be a {@link RelativeAlign} or Align.</p>\n"
-      },
-      {
-        "name": "maxSize",
-        "type": "number",
-        "description": ""
-      },
-      {
-        "name": "paneView",
-        "type": "PaneViewComponent",
-        "description": ""
-      },
-      {
-        "name": "selectedPane",
-        "type": "PaneComponent",
-        "description": "<p>returns currently selected pane</p>\n"
-      },
-      {
-        "name": "width",
-        "type": "number",
-        "description": ""
-      }
-    ],
-    "type": "directive",
-    "isComponent": true,
-    "selector": "ngx-panes",
-    "inputs": [
-      {
-        "name": "align",
-        "type": "\"left\" | \"right\" | \"top\" | \"bottom\" | \"start\" | \"end\"",
-        "description": "<p>Direction which the ngx-panes is aligned. It can be a {@link RelativeAlign} or Align.</p>\n"
-      },
-      {
-        "name": "autoOpen",
-        "defaultValue": "true",
-        "type": "boolean",
-        "description": "<p>Whether or not the last pane should be opened if no pane is marked initially as opened.</p>\n"
-      },
-      {
-        "name": "defaultWidth",
-        "type": "number",
-        "description": "<p>Default width (in pixels) to be used for any child pane with an undefined width.\nIf you don&#39;t specify a default width, child panes will <strong>wrap they content</strong>.</p>\n"
-      },
-      {
-        "name": "toggleable",
-        "defaultValue": "true",
-        "type": "boolean",
-        "description": "<p>Whether clicking on tabs toggles the selected panes or not. If toggleable is false, clicking on currently open\npane&#39;s tab will do nothing.</p>\n"
-      }
-    ],
-    "outputs": [],
-    "fileName": "lib/panes/panes.component.ts",
-    "examples": [
-      {
-        "content": "<ngx-panes>\n<ngx-pane></ngx-pane>\n</ngx-panes>"
-      }
-    ],
-    "usage": "<ngx-panes>\n  <ngx-pane title=\"First Pane\">...</ngx-pane>\n  <ngx-pane title=\"Second Pane\">...</ngx-pane>\n</ngx-panes>"
   },
   {
     "type": "typeAlias",

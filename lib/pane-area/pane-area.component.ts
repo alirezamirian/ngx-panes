@@ -1,7 +1,6 @@
-import {Component, ContentChildren, OnInit, QueryList} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {PaneGroupService} from '../pane-group/pane-group.service';
 import {PaneComponent} from '../pane/pane.component';
-import {PanesComponent} from '../panes/panes.component';
 import {Align} from '../utils/rtl-utils';
 import {Subscription} from 'rxjs/Subscription';
 
@@ -19,9 +18,6 @@ interface Side {
   styleUrls: ['./pane-area.component.scss']
 })
 export class PaneAreaComponent implements OnInit {
-
-  @ContentChildren(PanesComponent)
-  panesComponents: QueryList<PanesComponent>;
 
   private aligns: Align[] = ['left', 'right', 'bottom', 'top'];
 

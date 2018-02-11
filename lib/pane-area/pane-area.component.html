@@ -5,18 +5,18 @@
     can be simplified to pane groups only -->
     <pane-tabs align="left" relativeAlign="start" direction="h" [paneGroup]="left.paneGroup"></pane-tabs>
     <div class="content-outer-wrapper flex">
-      <pane-view *ngIf="top.paneGroup.selectedPane$ | async as paneGroup" [pane]="paneGroup"
+      <pane-view *ngIf="top.paneGroup?.selectedPane$ | async as paneGroup" [pane]="paneGroup"
                  [align]="'top'"></pane-view>
       <div class="content-inner-wrapper flex">
-        <pane-view *ngIf="left.paneGroup.selectedPane$ | async as paneGroup" [pane]="paneGroup"
+        <pane-view *ngIf="left.paneGroup?.selectedPane$ | async as paneGroup" [pane]="paneGroup"
                    [align]="'left'"></pane-view>
         <div class="flex content">
           <ng-content select="[ngx-pane-area-content]"></ng-content>
         </div>
-        <pane-view *ngIf="right.paneGroup.selectedPane$ | async as paneGroup" [pane]="paneGroup"
+        <pane-view *ngIf="right.paneGroup?.selectedPane$ | async as paneGroup" [pane]="paneGroup"
                    [align]="'right'"></pane-view>
       </div>
-      <pane-view *ngIf="bottom.paneGroup.selectedPane$ | async as paneGroup" [pane]="paneGroup"
+      <pane-view *ngIf="bottom.paneGroup?.selectedPane$ | async as paneGroup" [pane]="paneGroup"
                  [align]="'bottom'"></pane-view>
     </div>
     <pane-tabs align="right" relativeAlign="end" direction="h" [paneGroup]="right.paneGroup"></pane-tabs>

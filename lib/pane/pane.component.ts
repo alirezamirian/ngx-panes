@@ -1,6 +1,5 @@
 import {Component, ContentChild, Inject, Input, OnInit, Optional, TemplateRef, ViewChild} from '@angular/core';
 import {PaneHeaderComponent} from '../pane-header/pane-header.component';
-import {PanesComponent} from '../panes/panes.component';
 import {Boolean} from '../utils/decorators';
 import {PANES_DEFAULTS, PanesDefaults} from '../panes-config';
 import {PaneGroupService} from '../pane-group/pane-group.service';

@@ -1,6 +1,6 @@
 import {Component, HostListener, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {Demo} from '../demos';
-import {PaneGroupDirective} from '../../../../../../lib/pane-group/pane-group.component';
+import {PaneGroupComponent} from '../../../../../../lib/pane-group/pane-group.component';
 
 @Demo({
   id: 'align',
@@ -15,8 +15,8 @@ import {PaneGroupDirective} from '../../../../../../lib/pane-group/pane-group.co
 })
 export class AlignDemoComponent implements OnInit {
 
-  @ViewChildren(PaneGroupDirective)
-  paneGroups: QueryList<PaneGroupDirective>;
+  @ViewChildren(PaneGroupComponent)
+  paneGroups: QueryList<PaneGroupComponent>;
   aligns = ['top', undefined, 'right', undefined];
 
   constructor() {

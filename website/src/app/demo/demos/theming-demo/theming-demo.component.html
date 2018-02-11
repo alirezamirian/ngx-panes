@@ -1,33 +1,36 @@
-<div [ngClass]="'theme-' + theme">
-  <ngx-panes #panes [defaultWidth]="330">
-    <ngx-pane #pane1 id="test" title="Foo">
-      <app-demo-content [lines]="40"></app-demo-content>
-    </ngx-pane>
-    <ngx-pane #pane2 title="Bar">
-      <app-demo-content [lines]="40"></app-demo-content>
-    </ngx-pane>
-    <ngx-pane #pane3 title="Foobar">
-      <app-demo-content style="min-width: 200px" [lines]="40"></app-demo-content>
-    </ngx-pane>
-  </ngx-panes>
-</div>
+<div [ngClass]="'theme-' + theme" style="height: 100%;">
+  <ngx-pane-area>
+    <ngx-pane-group #panes [defaultWidth]="330">
+      <ngx-pane #pane1 id="test" title="Foo">
+        <app-demo-content [lines]="40"></app-demo-content>
+      </ngx-pane>
+      <ngx-pane #pane2 title="Bar">
+        <app-demo-content [lines]="40"></app-demo-content>
+      </ngx-pane>
+      <ngx-pane #pane3 title="Foobar">
+        <app-demo-content style="min-width: 200px" [lines]="40"></app-demo-content>
+      </ngx-pane>
+    </ngx-pane-group>
+    <div ngx-pane-area-content>
+      <div fxFlex class="mat-padding main-content">
+
+        <!--<app-code-block [sourceUrl]="'https://raw.githubusercontent.com/angular/angular/master/gulpfile.js'"
+                        [source]="'var x = 10;'">
+        </app-code-block>-->
+
+        <div>
+          <br/>
+          <button mat-button (click)="theme = 'default'">Default</button>
+          <button mat-button (click)="theme = 'intellij'">Intellij</button>
+          <button mat-button (click)="theme = 'light-orange'">Light Orange</button>
+          <button mat-button (click)="theme = 'bluegrey'">Blue Gray</button>
+          <button mat-button (click)="theme = 'darcula'">Darcula</button>
+        </div>
 
 
-<div fxFlex class="mat-padding main-content">
+        <!--TODO: add code for demo-->
+      </div>
+    </div>
+  </ngx-pane-area>
 
-  <!--<app-code-block [sourceUrl]="'https://raw.githubusercontent.com/angular/angular/master/gulpfile.js'"
-                  [source]="'var x = 10;'">
-  </app-code-block>-->
-
-  <div>
-    <br/>
-    <button mat-button (click)="theme = 'default'">Default</button>
-    <button mat-button (click)="theme = 'intellij'">Intellij</button>
-    <button mat-button (click)="theme = 'light-orange'">Light Orange</button>
-    <button mat-button (click)="theme = 'bluegrey'">Blue Gray</button>
-    <button mat-button (click)="theme = 'darcula'">Darcula</button>
-  </div>
-
-
-  <!--TODO: add code for demo-->
 </div>

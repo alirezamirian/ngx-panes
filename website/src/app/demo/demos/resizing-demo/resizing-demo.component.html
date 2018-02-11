@@ -1,39 +1,43 @@
-<ngx-panes #panes>
-  <ngx-pane #pane1 id="test" title="Resizable" [width]="330">
-    <app-demo-content [lines]="40"></app-demo-content>
-  </ngx-pane>
-  <ngx-pane #pane2 title="Fixed size" [width]="320" [resizable]="false" opened>
-    <app-demo-content [lines]="40"></app-demo-content>
-  </ngx-pane>
-  <ngx-pane #pane3 title="Fixed size (by content)" [resizable]="false">
-    <app-demo-content style="min-width: 200px" [lines]="40"></app-demo-content>
-  </ngx-pane>
-  <!--  <ngx-pane title="Structure" [width]="300" [resizable]="false">
-      This pane is not a resizable pane. it's fixed at <code>330px</code> width
-    </ngx-pane>-->
-</ngx-panes>
+<ngx-pane-area>
+  <ngx-pane-group #panes>
+    <ngx-pane #pane1 id="test" title="Resizable" [width]="330">
+      <app-demo-content [lines]="40"></app-demo-content>
+    </ngx-pane>
+    <ngx-pane #pane2 title="Fixed size" [width]="320" [resizable]="false" opened>
+      <app-demo-content [lines]="40"></app-demo-content>
+    </ngx-pane>
+    <ngx-pane #pane3 title="Fixed size (by content)" [resizable]="false">
+      <app-demo-content style="min-width: 200px" [lines]="40"></app-demo-content>
+    </ngx-pane>
+    <!--  <ngx-pane title="Structure" [width]="300" [resizable]="false">
+        This pane is not a resizable pane. it's fixed at <code>330px</code> width
+      </ngx-pane>-->
+  </ngx-pane-group>
 
-
-<div fxFlex class="mat-padding">
-  <div [ngSwitch]="panes.selectedPane">
-    <div *ngSwitchCase="pane1">
-      This pane is resizable with an initial width of <code>330px</code>.
-      <br/>
-      Current width of the pane is <code>{{pane1.width}}px</code>.
-      <br/>
-      As you can see, resizing is done outsize angular zone and width only updates at the end of resizing for the
-      sake of performance.
-    </div>
-    <div *ngSwitchCase="pane2">
-      This pane is not resizable with a fixed size of <code>320px</code>
-    </div>
-    <div *ngSwitchCase="pane3">
-      This pane is not resizable
-      <br/>
-      and the width of the pane is determined by it's content.
+  <div ngx-pane-area-content>
+    <div fxFlex class="mat-padding">
+      <div [ngSwitch]="panes.paneGroup?.snapshot.selectedPane">
+        <div *ngSwitchCase="pane1">
+          This pane is resizable with an initial width of <code>330px</code>.
+          <br/>
+          Current width of the pane is <code>{{pane1.width}}px</code>.
+          <br/>
+          As you can see, resizing is done outsize angular zone and width only updates at the end of resizing for the
+          sake of performance.
+        </div>
+        <div *ngSwitchCase="pane2">
+          This pane is not resizable with a fixed size of <code>320px</code>
+        </div>
+        <div *ngSwitchCase="pane3">
+          This pane is not resizable
+          <br/>
+          and the width of the pane is determined by it's content.
+        </div>
+      </div>
+      <!--TODO: add code for demo-->
     </div>
   </div>
-  <!--TODO: add code for demo-->
-</div>
+</ngx-pane-area>
+
 
 

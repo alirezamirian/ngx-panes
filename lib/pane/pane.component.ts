@@ -63,7 +63,7 @@ export class PaneComponent implements OnInit {
    */
   @Input() id: string;
   @ContentChild(PaneHeaderComponent) header: PaneHeaderComponent;
-  @ViewChild('content', {read: TemplateRef}) content;
+  @ViewChild('content', {read: TemplateRef}) content: TemplateRef;
 
   /**
    * @private
@@ -98,6 +98,9 @@ export class PaneComponent implements OnInit {
       if (defaults.resizable != null) {
         this.resizable = defaults.resizable;
       }
+    }
+    if (this._openned) {
+      this.paneGroup.select(this);
     }
 
   }

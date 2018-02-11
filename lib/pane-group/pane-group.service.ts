@@ -15,11 +15,11 @@ class PaneGroupOptions {
 export class PaneGroupService {
 
   snapshot: { panes: PaneComponent[], selectedPane: PaneComponent | null } = {panes: [], selectedPane: null};
-  public panes$ = this.panesSubject.asObservable();
   private panesSubject = new BehaviorSubject<PaneComponent[]>([]);
-  private selectedPaneSubject = new BehaviorSubject<PaneComponent>(null);
-  public selectedPane$ = this.selectedPaneSubject.asObservable();
+  panes$ = this.panesSubject.asObservable();
   private options: PaneGroupOptions = new PaneGroupOptions();
+  private selectedPaneSubject = new BehaviorSubject<PaneComponent>(null);
+  selectedPane$ = this.selectedPaneSubject.asObservable();
 
   constructor() {
     this.panes$.subscribe(panes => this.snapshot.panes = panes);

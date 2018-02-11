@@ -1,4 +1,5 @@
 import {
+  ChangeDetectorRef,
   Component,
   ElementRef,
   Input,
@@ -9,6 +10,7 @@ import {
   ViewContainerRef
 } from '@angular/core';
 import {Align} from '../utils/rtl-utils';
+import {PaneComponent} from '../pane/pane.component';
 
 @Component({
   selector: 'pane-view',
@@ -17,7 +19,7 @@ import {Align} from '../utils/rtl-utils';
 })
 export class PaneViewComponent implements OnInit, OnChanges {
 
-  @Input() pane;
+  @Input() pane: PaneComponent;
 
   @ViewChild('content', {read: ViewContainerRef})
   private viewContainerRef: ViewContainerRef;
@@ -30,7 +32,7 @@ export class PaneViewComponent implements OnInit, OnChanges {
   @ViewChild('contentContainer') private _contentContainer: ElementRef;
 
 
-  constructor() {
+  constructor(private changeDetector: ChangeDetectorRef) {
   }
 
   ngOnInit() {
@@ -38,13 +40,17 @@ export class PaneViewComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.pane) {
+      console.log('panes changed for pane view', this.align);
       this.viewContainerRef.clear();
       if (this.pane) {
-        this.viewContainerRef.createEmbeddedView(this.pane.content);
-        this.headerContainerRef.clear();
-        if (this.pane.header) {
-          this.headerContainerRef.createEmbeddedView(this.pane.header.templateRef);
-        }
+        setTimeout(() => {
+          // This setTimeout seems to be necessary sometimes (e.g. in swapping pane groups). I don't know why exactly
+          this.viewContainerRef.createEmbeddedView(this.pane.content);
+          this.headerContainerRef.clear();
+          if (this.pane.header) {
+            this.headerContainerRef.createEmbeddedView(this.pane.header.templateRef);
+          }
+        });
       }
     }
   }

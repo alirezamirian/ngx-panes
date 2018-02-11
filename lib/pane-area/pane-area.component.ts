@@ -16,12 +16,14 @@ interface Side {
 @Component({
   selector: 'ngx-pane-area',
   templateUrl: './pane-area.component.html',
-  styleUrls: ['./pane-area.component.scss'],
+  styleUrls: ['./pane-area.component.scss']
 })
 export class PaneAreaComponent implements OnInit {
 
   @ContentChildren(PanesComponent)
   panesComponents: QueryList<PanesComponent>;
+
+  private aligns: Align[] = ['left', 'right', 'bottom', 'top'];
 
   private left: Side = {selectedPane: null, panes: [], paneGroup: null, subscriptions: []};
   private right: Side = {selectedPane: null, panes: [], paneGroup: null, subscriptions: []};
@@ -34,11 +36,25 @@ export class PaneAreaComponent implements OnInit {
   ngOnInit() {
   }
 
+  getAlign(paneGroup) {
+    return this.aligns.find(align => this[align].paneGroup === paneGroup) || null;
+  }
+
   addGroup(paneGroup: PaneGroupService, side?: Align) {
-    const aligns: Align[] = ['left', 'right', 'bottom', 'top'];
-    side = side || aligns.find(align => !this[align] || !this[align].paneGroup);
+    const firstAvailableSide = this.aligns.find(align => !this[align].paneGroup);
+    const currentSide = this.aligns.find(align => this[align].paneGroup === paneGroup);
+
     if (side) {
+      // If there is already a pane group in that side, and there are available sides
+      if (this[side].paneGroup && (currentSide || firstAvailableSide)) {
+        // Move current pane group at this side to first available side
+        this.setupSide(this[side].paneGroup, currentSide || firstAvailableSide);
+      }
+      // Setup this new pane group at the ordered side
       this.setupSide(paneGroup, side);
+    } else if (firstAvailableSide) {
+      // if side is not specified, setup pane group in first available side.
+      this.setupSide(paneGroup, firstAvailableSide);
     }
   }
 

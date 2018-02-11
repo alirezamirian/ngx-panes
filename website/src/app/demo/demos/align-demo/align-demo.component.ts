@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {Demo} from '../demos';
+import {PaneGroupDirective} from '../../../../../../lib/pane-group/pane-group.component';
 
 @Demo({
   id: 'align',
-  title: 'Pane alignment',
-  description: 'Demonstrates options regarding pane alignment',
+  title: 'Alignment',
+  description: 'Demonstrates options regarding pane group alignment inside pane-area',
   tags: ['Alignment']
 })
 @Component({
@@ -14,7 +15,16 @@ import {Demo} from '../demos';
 })
 export class AlignDemoComponent implements OnInit {
 
+  @ViewChildren(PaneGroupDirective)
+  paneGroups: QueryList<PaneGroupDirective>;
+  aligns = ['top', undefined, 'right', undefined];
+
   constructor() {
+  }
+
+  @HostListener('click')
+  log() {
+    console.log(this.paneGroups.map(paneGroup => paneGroup.align));
   }
 
   ngOnInit() {

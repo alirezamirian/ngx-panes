@@ -5,7 +5,6 @@ import {
   ElementRef,
   Input,
   NgZone,
-  Optional,
   QueryList,
   ViewChildren
 } from '@angular/core';
@@ -47,8 +46,7 @@ export class PaneTabsComponent {
 
   constructor(private changeDetector: ChangeDetectorRef,
               private ngZone: NgZone,
-              private elementRef: ElementRef,
-              @Optional() private paneGroup: PaneGroupService) {
+              private elementRef: ElementRef) {
   }
 
   dragStarted(dragStart: DragStartEvent) {

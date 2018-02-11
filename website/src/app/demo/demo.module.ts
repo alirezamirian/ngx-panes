@@ -6,7 +6,7 @@ import {DemoItemComponent} from './demo-item/demo-item.component';
 import {DemoListComponent} from './demo-list/demo-list.component';
 import {RoutedDemoComponent} from './routed-demo/routed-demo.component';
 import {SharedModule} from '../shared/shared.module';
-import {MatCardModule, MatChipsModule, MatListModule} from '@angular/material';
+import {MatCardModule, MatChipsModule, MatInputModule, MatListModule, MatSelectModule} from '@angular/material';
 import {GithubContributorsComponent} from './github-contributors/github-contributors.component';
 import {GithubIssueListComponent} from './github-issue-list/github-issue-list.component';
 import {GithubFileTreeComponent} from './github-file-tree/github-file-tree.component';
@@ -30,6 +30,7 @@ import {CodeEditorComponent} from './code-editor/code-editor.component';
 import {ThemingDemoComponent} from './demos/theming-demo/theming-demo.component';
 import {AlignDemoComponent} from './demos/align-demo/align-demo.component';
 import {ConfigDemoComponent} from './demos/config-demo/config-demo.component';
+import {FormsModule} from '@angular/forms';
 
 export const entryComponents = [
   GithubBrowserDemoComponent,
@@ -48,6 +49,9 @@ export const entryComponents = [
     MatListModule,
     MatCardModule,
     MatChipsModule,
+    MatSelectModule,
+    MatInputModule,
+    FormsModule,
 
     Ng2FileTreeModule, // used in GithubFileTreeComponent
 

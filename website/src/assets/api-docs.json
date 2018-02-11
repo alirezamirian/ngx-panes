@@ -3,13 +3,64 @@
     "identifier": "PaneAreaComponent",
     "description": "",
     "methods": [],
-    "properties": [],
+    "properties": [
+      {
+        "name": "panesComponents",
+        "type": "QueryList<PanesComponent>",
+        "description": ""
+      }
+    ],
     "type": "directive",
     "isComponent": true,
     "selector": "ngx-pane-area",
     "inputs": [],
     "outputs": [],
     "fileName": "lib/pane-area/pane-area.component.ts"
+  },
+  {
+    "identifier": "PaneGroupDirective",
+    "description": "",
+    "methods": [],
+    "properties": [
+      {
+        "name": "_align",
+        "type": "Align",
+        "description": ""
+      },
+      {
+        "name": "align",
+        "type": "\"left\" | \"right\" | \"top\" | \"bottom\" | \"start\" | \"end\"",
+        "description": "<p>Direction which the ngx-panes is aligned. It can be a {@link RelativeAlign} or Align.</p>\n"
+      }
+    ],
+    "type": "directive",
+    "isComponent": false,
+    "selector": "ngx-pane-group",
+    "exportAs": "ngxPaneGroup",
+    "inputs": [
+      {
+        "name": "align",
+        "type": "\"left\" | \"right\" | \"top\" | \"bottom\" | \"start\" | \"end\"",
+        "description": "<p>Direction which the ngx-panes is aligned. It can be a {@link RelativeAlign} or Align.</p>\n"
+      },
+      {
+        "name": "autoOpen",
+        "type": "boolean",
+        "description": "<p>Whether or not the last pane should be opened if no pane is marked initially as opened.</p>\n"
+      },
+      {
+        "name": "defaultWidth",
+        "type": "number",
+        "description": "<p>Default width (in pixels) to be used for any child pane with an undefined width.\nIf you don&#39;t specify a default width, child panes will <strong>wrap they content</strong>.</p>\n"
+      },
+      {
+        "name": "toggleable",
+        "type": "boolean",
+        "description": "<p>Whether clicking on tabs toggles the selected panes or not. If toggleable is false, clicking on currently open\npane&#39;s tab will do nothing.</p>\n"
+      }
+    ],
+    "outputs": [],
+    "fileName": "lib/pane-group/pane-group.component.ts"
   },
   {
     "identifier": "PaneHeaderComponent",
@@ -100,27 +151,17 @@
         "description": ""
       },
       {
-        "name": "panes",
-        "type": "PaneComponent[]",
+        "name": "paneGroup",
+        "type": "PaneGroupService",
         "description": ""
       },
       {
         "name": "relativeAlign",
         "type": "RelativeAlign",
         "description": ""
-      },
-      {
-        "name": "selected",
-        "type": "PaneComponent",
-        "description": ""
       }
     ],
-    "outputs": [
-      {
-        "name": "select",
-        "description": ""
-      }
-    ],
+    "outputs": [],
     "fileName": "lib/pane-tabs/pane-tabs.component.ts"
   },
   {
@@ -132,6 +173,11 @@
     "isComponent": true,
     "selector": "pane-view",
     "inputs": [
+      {
+        "name": "align",
+        "type": "Align",
+        "description": ""
+      },
       {
         "name": "pane",
         "type": "any",
@@ -168,6 +214,11 @@
         "name": "header",
         "type": "PaneHeaderComponent",
         "description": ""
+      },
+      {
+        "name": "width",
+        "type": "number",
+        "description": "<p>Width of the pane. More precisely, <strong>width</strong> for <strong>horizontally</strong> aligned and <strong>height</strong> for <strong>vertically</strong>\naligned panes.\nIf unset, <code>defaultWidth</code> of the host <code>ngx-panes</code> will be used. If both are undefined, the content of the\npane will determine its width. Resizing pane (if enabled) changes the pane&#39;s width.</p>\n"
       }
     ],
     "type": "directive",
@@ -251,7 +302,9 @@
     "declarations": [
       "lib/panes/panes.component#PanesComponent",
       "lib/pane/pane.component#PaneComponent",
-      "lib/pane-header/pane-header.component#PaneHeaderComponent"
+      "lib/pane-header/pane-header.component#PaneHeaderComponent",
+      "lib/pane-area/pane-area.component#PaneAreaComponent",
+      "lib/pane-group/pane-group.component#PaneGroupDirective"
     ],
     "services": [],
     "fileName": "lib/panes.module.ts",

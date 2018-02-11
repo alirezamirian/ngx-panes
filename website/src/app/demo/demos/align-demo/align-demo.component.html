@@ -1,41 +1,102 @@
-<ngx-pane-area>
-  <ngx-pane-group [defaultWidth]="300">
-    <ngx-pane title="test 1">
-      First Pane
+<ngx-pane-area #paneArea>
+  <ngx-pane-group #paneGroup1="ngxPaneGroup" [defaultWidth]="200" [align]="aligns[0]" [autoOpen]="false">
+    <ngx-pane title="First group - 1">
+      <div class="padding">
+        Initial alignment of this pane group is set to <code>top</code>.
+        It would be set to <code>start</code> (<code>left</code> in current direction)
+        if it wasn't specified.
+        <app-demo-content [lines]="20"></app-demo-content>
+      </div>
+    </ngx-pane>
+    <ngx-pane title="First group - 2">
       <app-demo-content [lines]="20"></app-demo-content>
     </ngx-pane>
-    <ngx-pane title="test 1" opened>
-      <app-demo-content [lines]="20"></app-demo-content>
-    </ngx-pane>
-    <ngx-pane title="test 1">
-      asdasd
+    <ngx-pane title="First group - 3">
       <app-demo-content [lines]="20"></app-demo-content>
     </ngx-pane>
   </ngx-pane-group>
-  <ngx-pane-group [defaultWidth]="300">
-    <ngx-pane title="test 2">
+  <ngx-pane-group [defaultWidth]="300" #paneGroup2="ngxPaneGroup" [align]="aligns[1]">
+    <ngx-pane title="Second group - 1">
+      <div class="padding">
+        Initial alignment of this pane group is not set.
+        It's set to <code>Start</code> (<code>left</code> in current direction) which is the alignment with the most
+        priority.
+        <app-demo-content [lines]="22"></app-demo-content>
+      </div>
+    </ngx-pane>
+    <ngx-pane title="Second group - 2">
       <app-demo-content [lines]="22"></app-demo-content>
     </ngx-pane>
-    <ngx-pane title="test 2">
-      <app-demo-content [lines]="22"></app-demo-content>
-    </ngx-pane>
-
   </ngx-pane-group>
-  <ngx-pane-group>
-    <ngx-pane title="test 3" #pane3 [width]="150">
-      Forth Pane. pane width: {{pane3.width}}
-      <app-demo-content [lines]="20"></app-demo-content>
-    </ngx-pane>
-  </ngx-pane-group>
-  <ngx-pane-group [autoOpen]="false">
-    <ngx-pane title="test 4" #pane4 [width]="100">
-      Forth Pane. pane width: {{pane4.width}}
-      <app-demo-content [lines]="20"></app-demo-content>
+  <ngx-pane-group [align]="aligns[2]" #paneGroup3="ngxPaneGroup" [defaultWidth]="250">
+    <ngx-pane title="Third group - 1">
+      <div class="padding">
+        Initial alignment of this pane group is set to right.
+        It would be set to <code>end</code> (<code>right</code> in current direction)
+        if it wasn't set explicitly.
+        <app-demo-content [lines]="20"></app-demo-content>
+      </div>
     </ngx-pane>
   </ngx-pane-group>
+  <ngx-pane-group [align]="aligns[3]" #paneGroup4="ngxPaneGroup" [defaultWidth]="150">
+    <ngx-pane title="Forth group - 1">
+      <div class="padding">
+        Initial alignment of this pane group is not set.
+        It's set to <code>bottom</code> which is the only remaining side.
+        <app-demo-content [lines]="20"></app-demo-content>
+      </div>
+    </ngx-pane>
+  </ngx-pane-group>
 
 
-  <div ngx-pane-area-content>
-    Main content
+  <div ngx-pane-area-content class="mat-padding">
+    <p>
+      You can include up to four <code>ngx-pane-group</code>s in an <code>ngx-pane-area</code>.
+      By default, panes will be aligned in <code>start</code> (<b>left</b> in ltr <b>right</b> in rtl),
+      <code>end</code> (<b>right</b> in ltr <b>left</b> in rtl), <code>bottom</code>
+      and <code>top</code> respectively.
+      You can also explicitly set pane alignment via
+      <a routerLink="/api/PaneGroupDirective" fragment="align">align input</a>.
+    </p>
+    <div fxLayout="row">
+      <mat-form-field>
+        <mat-select placeholder="First group alignment"
+                    [value]="paneArea.getAlign(paneGroup1.paneGroup)" (valueChange)="aligns[0] = $event">
+          <mat-option value="left">left</mat-option>
+          <mat-option value="right">right</mat-option>
+          <mat-option value="top">top</mat-option>
+          <mat-option value="bottom">bottom</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Second group alignment"
+                    [value]="paneArea.getAlign(paneGroup2.paneGroup)" (valueChange)="aligns[1] = $event">
+          <mat-option value="left">left</mat-option>
+          <mat-option value="right">right</mat-option>
+          <mat-option value="top">top</mat-option>
+          <mat-option value="bottom">bottom</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div fxLayout="row">
+      <mat-form-field>
+        <mat-select placeholder="Third group alignment"
+                    [value]="paneArea.getAlign(paneGroup3.paneGroup)" (valueChange)="aligns[2] = $event">
+          <mat-option value="left">left</mat-option>
+          <mat-option value="right">right</mat-option>
+          <mat-option value="top">top</mat-option>
+          <mat-option value="bottom">bottom</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Forth group alignment"
+                    [value]="paneArea.getAlign(paneGroup4.paneGroup)" (valueChange)="aligns[3] = $event">
+          <mat-option value="left">left</mat-option>
+          <mat-option value="right">right</mat-option>
+          <mat-option value="top">top</mat-option>
+          <mat-option value="bottom">bottom</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
   </div>
 </ngx-pane-area>

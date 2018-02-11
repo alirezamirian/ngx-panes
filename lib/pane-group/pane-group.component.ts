@@ -6,7 +6,7 @@ import {Align, RelativeAlign, toAlign, toRelativeAlign} from '../utils/rtl-utils
 // noinspection TsLint
 @Directive({
   selector: 'ngx-pane-group',
-  styleUrls: ['./pane-group.component.scss'],
+  exportAs: 'ngxPaneGroup',
   providers: [
     PaneGroupService
   ]
@@ -14,6 +14,7 @@ import {Align, RelativeAlign, toAlign, toRelativeAlign} from '../utils/rtl-utils
 export class PaneGroupDirective implements OnInit {
 
   private _relativeAlign: RelativeAlign;
+  private initialized: boolean;
 
   /**
    * Default width (in pixels) to be used for any child pane with an undefined width.
@@ -60,18 +61,19 @@ export class PaneGroupDirective implements OnInit {
   set align(value: RelativeAlign | Align) {
     this._align = toAlign(value, this.getDir());
     this._relativeAlign = toRelativeAlign(value, this.getDir());
-    if (this.paneArea) {
+    if (this.paneArea && this._align && this.initialized) {
       this.paneArea.addGroup(this.paneGroup, this._align);
     }
   }
 
   constructor(private $el: ElementRef,
               private paneArea: PaneAreaComponent,
-              private paneGroup: PaneGroupService) {
+              public paneGroup: PaneGroupService) {
   }
 
   ngOnInit() {
     this.paneArea.addGroup(this.paneGroup, this._align);
+    this.initialized = true;
   }
 
   private getDir(): 'rtl' | 'ltr' {

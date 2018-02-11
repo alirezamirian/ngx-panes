@@ -1,7 +1,7 @@
 import {InjectionToken} from '@angular/core';
 
 /**
- * Injection token for providing defaults for some input parameters of {@link PanesComponent pane components}.
+ * Injection token for providing defaults for some input parameters of {@link PaneGroupComponent pane components}.
  * The value of this injection token must be of type {@link PanesDefaults}.
  * @usage
  *
@@ -40,23 +40,23 @@ export const PANES_DEFAULTS = new InjectionToken<PanesDefaults>('ngx-panes confi
 /**
  * Configuration to be provided as default parameters for all `ngx-panes` child components.
  * Object of this type provided as {@link PANES_DEFAULTS} injection token will be picked up
- * {@link PanesComponent} to use them for default values of some configuration inputs.
+ * {@link PaneGroupComponent} to use them for default values of some configuration inputs.
  */
 export interface PanesDefaults {
   /**
-   * Default value for {@link PanesComponent#resizable} input.
+   * Default value for {@link PaneGroupComponent#resizable} input.
    */
   resizable?: boolean;
   /**
-   * Default value for {@link PanesComponent#autoOpen} input.
+   * Default value for {@link PaneGroupComponent#autoOpen} input.
    */
   autoOpen?: boolean;
   /**
-   * Default value for {@link PanesComponent#toggleable} input.
+   * Default value for {@link PaneGroupComponent#toggleable} input.
    */
   toggleable?: boolean;
   /**
-   * Default value for {@link PanesComponent#defaultWidth} input.
+   * Default value for {@link PaneGroupComponent#defaultWidth} input.
    */
   defaultWidth?: number;
 }

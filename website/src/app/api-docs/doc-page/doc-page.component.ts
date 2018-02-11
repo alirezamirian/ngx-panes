@@ -42,7 +42,7 @@ export class DocPageComponent implements OnInit, AfterViewInit {
   }
 
   private syncFragmentScroll(fragment: string) {
-    if (isPlatformBrowser(this.platformId)) {
+    if (isPlatformBrowser(this.platformId) && fragment) {
       const elem = document.querySelector('#' + fragment);
       if (elem) {
         this.router.events.pipe(first()).subscribe(event => {

@@ -17,6 +17,7 @@ import {CodeBlockComponent} from './code-block/code-block.component';
 import {CodeBlockSourceUrlDirective} from './code-block/source-url.directive';
 import {SideAnchorOwnerDirective} from './side-anchor/side-anchor-owner.directive';
 import {SideAnchorComponent} from './side-anchor/side-anchor.component';
+import {RouterModule} from '@angular/router';
 
 // import {NgxPanesModule} from 'ngx-panes'; // for testing production bundle
 
@@ -29,6 +30,7 @@ import {SideAnchorComponent} from './side-anchor/side-anchor.component';
     MatTooltipModule,
     FlexLayoutModule,
     MatProgressSpinnerModule, // used in loading.component.ts
+    RouterModule
   ],
   declarations: [
     AppLoadingComponent,

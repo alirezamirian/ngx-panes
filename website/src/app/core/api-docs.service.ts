@@ -37,8 +37,8 @@ export class ApiDocsService {
    *
    * @usage:
    *
-   * apiDocsService.getDocItem('PanesComponent');
-   * apiDocsService.getDocItem('PanesComponent', 'lib/pane/pane.component.ts');
+   * apiDocsService.getDocItem('PaneComponent');
+   * apiDocsService.getDocItem('PaneComponent', 'lib/pane/pane.component.ts');
    *
    * @returns {Promise<any>}
    */
@@ -54,7 +54,8 @@ function convertLinksRecursive(docItem) {
   } else if (typeof docItem === 'object') {
     const result = {};
     Object.keys(docItem).forEach(key => {
-      if (typeof docItem[key] === 'string' && ['description'].indexOf(key) > -1) {
+      const includedProperties = ['description'];
+      if (typeof docItem[key] === 'string' && includedProperties.indexOf(key) > -1) {
         result[key] = convertLinks(docItem[key]);
       } else {
         result[key] = convertLinksRecursive(docItem[key]);

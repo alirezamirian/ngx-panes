@@ -1,19 +1,33 @@
 [
   {
     "identifier": "PaneAreaComponent",
-    "description": "",
-    "methods": [],
+    "description": "<p>Defines an area consisted of a centered main content surrounded by\nup to 4 side pane groups (aka tool windows).</p>\n<p>Valid children of a ngx-pane-area are:</p>\n<ul>\n<li>{@link PaneGroupComponent ngx-pane-group}: defines side pane groups</li>\n<li>{@link PaneAreaContent ngx-pane-area-content}: defines main content</li>\n</ul>\n",
+    "methods": [
+      {
+        "name": "getAlign",
+        "description": "<p>Returns align value of the input paneGroup, or null if pane group doesn&#39;t exist in this pane area.</p>\n",
+        "args": [
+          {
+            "name": "paneGroup",
+            "type": "PaneGroupComponent",
+            "description": ""
+          }
+        ],
+        "returnType": "Align"
+      }
+    ],
     "properties": [],
     "type": "directive",
     "isComponent": true,
     "selector": "ngx-pane-area",
     "inputs": [],
     "outputs": [],
-    "fileName": "lib/pane-area/pane-area.component.ts"
+    "fileName": "lib/pane-area/pane-area.component.ts",
+    "usage": "<ngx-pane-area>\r  <ngx-pane-group> ... </ngx-pane-group>\r  <ngx-pane-group> ... </ngx-pane-group>\r  <ngx-pane-area-content> ... </ngx-pane-area-content>\r</ngx-pane-area>"
   },
   {
     "identifier": "PaneGroupComponent",
-    "description": "",
+    "description": "<p>Pane groups are used inside {@link PaneAreaComponent ngx-pane-area}.\nEach group of panes is align in of the the four\npossible sides of the pane-area, which is determined by\n{@link PaneGroupComponent#align align} input. if align is not specified,\nfirst unused align with the following order will be used:</p>\n<ul>\n<li><code>start</code> (<code>left</code> in ltr, <code>right</code> in rtl)</li>\n<li><code>end</code> (<code>right</code> in ltr, <code>left</code> in rtl)</li>\n<li><code>bottom</code></li>\n<li><code>top</code></li>\n</ul>\n<p>See also <a href=\"/demos/align\">Alignment demo</a>.</p>\n",
     "methods": [
       {
         "name": "close",
@@ -31,7 +45,7 @@
       {
         "name": "align",
         "type": "\"left\" | \"right\" | \"top\" | \"bottom\" | \"start\" | \"end\"",
-        "description": "<p>Direction which the ngx-panes is aligned. It can be a {@link RelativeAlign} or Align.</p>\n"
+        "description": "<p>Position of the pane group inside {@link PaneAreaComponent pane area}.\nIt can be a {@link RelativeAlign} or an {@link Align}.</p>\n"
       },
       {
         "name": "selectedPane",
@@ -46,7 +60,7 @@
       {
         "name": "align",
         "type": "\"left\" | \"right\" | \"top\" | \"bottom\" | \"start\" | \"end\"",
-        "description": "<p>Direction which the ngx-panes is aligned. It can be a {@link RelativeAlign} or Align.</p>\n"
+        "description": "<p>Position of the pane group inside {@link PaneAreaComponent pane area}.\nIt can be a {@link RelativeAlign} or an {@link Align}.</p>\n"
       },
       {
         "name": "autoOpen",
@@ -65,11 +79,12 @@
       }
     ],
     "outputs": [],
-    "fileName": "lib/pane-group/pane-group.component.ts"
+    "fileName": "lib/pane-group/pane-group.component.ts",
+    "usage": "<ngx-pane-area>\r  <ngx-pane-group>\r    <!-- ngx-pane components -->\r  </ngx-pane-group>\r</ngx-pane-area>"
   },
   {
     "identifier": "PaneHeaderComponent",
-    "description": "<p><code>ngx-pane-header</code> is used for providing custom headers for panes.</p>\n<p>By default the header of the pane consist of a simple text label\n(which is determined by {@link PaneComponent#title PaneComponent title input}).\nYou can override this behaviour, however and use custom content as\npane header by using a <code>&lt;ngx-pane-header&gt;...&lt;/ngx-pane-header&gt;</code> inside\n<code>&lt;ngx-pane&gt;...&lt;/ngx-pane&gt;</code> component.</p>\n",
+    "description": "<p><code>ngx-pane-header</code> is used for providing custom headers for panes.</p>\n<p>By default the header of the pane consist of a simple text label\n(which is determined by {@link PaneComponent#title PaneComponent title input}).\nYou can override this behaviour, and use custom content as\npane header by using a <code>&lt;ngx-pane-header&gt;...&lt;/ngx-pane-header&gt;</code> inside\n<code>&lt;ngx-pane&gt;...&lt;/ngx-pane&gt;</code> component.</p>\n",
     "methods": [],
     "properties": [
       {
@@ -84,7 +99,7 @@
     "inputs": [],
     "outputs": [],
     "fileName": "lib/pane-header/pane-header.component.ts",
-    "usage": "<ngx-panes>\n  <ngx-pane title=\"First Pane\">\n    <ngx-pane-header>this is a <b>special</b> header</ngx-pane-header>\n    <!-- pane content goes here -->\n  </ngx-pane>\n  <ngx-pane title=\"will be used for header in absense of ngx-pane-header\">...</ngx-pane>\n</ngx-panes>"
+    "usage": "<ngx-pane title=\"First Pane\">\n  <ngx-pane-header>this is a <b>special</b> header</ngx-pane-header>\n  <!-- pane content goes here -->\n</ngx-pane>\n<ngx-pane title=\"will be used for header in absense of ngx-pane-header\">...</ngx-pane>"
   },
   {
     "identifier": "PaneResizerComponent",
@@ -194,7 +209,7 @@
   },
   {
     "identifier": "PaneComponent",
-    "description": "<p>Pane components, are used inside {@link PanesComponent}. Each pane should have a title which is shown\nin side tabs area. By default, the title is used for <strong>pane header</strong> also.</p>\n<p>Pane header is a thin bar on top of the selected pane which shows a label and also contains\nsome default ui controls for the pane.</p>\n",
+    "description": "<p>Pane components, are used inside {@link PaneGroupComponent}. Each pane should have a title which is shown\nin side tabs area. By default, the title is used for <strong>pane header</strong> also.</p>\n<p>Pane header is a thin bar on top of the selected pane which shows a label and also contains\nsome default ui controls for the pane (in future!).</p>\n",
     "methods": [
       {
         "name": "open",
@@ -212,7 +227,7 @@
     "properties": [
       {
         "name": "content",
-        "type": "any",
+        "type": "TemplateRef<any>",
         "description": ""
       },
       {
@@ -249,7 +264,7 @@
       {
         "name": "title",
         "type": "string",
-        "description": "<p>Title of the pane to be shown in pane&#39;s tab.\nIt will also appear in pane&#39;s header in the absence of <code>ngx-pane-header</code>.</p>\n"
+        "description": "<p>Title of the pane to be shown in pane&#39;s tab.\nIt will also appear in pane&#39;s header in the absence of <code>{@link PaneHeaderComponent ngx-pane-header}</code>.</p>\n"
       },
       {
         "name": "width",
@@ -259,12 +274,12 @@
     ],
     "outputs": [],
     "fileName": "lib/pane/pane.component.ts",
-    "usage": "<ngx-panes>\r  <!-- Simple pane with a title -->\r  <ngx-pane title=\"project\">...</ngx-pane>\r\r  <!-- Different title and header. Header is used in top of the selected pane, title is used inside pane's tab -->\r  <ngx-pane title=\"structure\">\r    <div ngx-pane-header>custom header</div>\r    ...\r  </ngx-pane>\r</ngx-panes>"
+    "usage": "<ngx-pane-area>\r  <ngx-pane-group>\r    <!-- Simple pane with a title -->\r    <ngx-pane title=\"project\">...</ngx-pane>\r\r    <!-- Different title and header. Header is used in top of the selected pane, title is used inside pane's tab -->\r    <ngx-pane title=\"structure\">\r      <div ngx-pane-header>custom header</div>\r      ...\r    </ngx-pane>\r  </ngx-pane-group>\r</ngx-pane-area>"
   },
   {
     "type": "variable",
     "identifier": "PANES_DEFAULTS",
-    "description": "<p>Injection token for providing defaults for some input parameters of {@link PanesComponent pane components}.\nThe value of this injection token must be of type {@link PanesDefaults}.</p>\n",
+    "description": "<p>Injection token for providing defaults for some input parameters of {@link PaneGroupComponent pane components}.\nThe value of this injection token must be of type {@link PanesDefaults}.</p>\n",
     "fileName": "lib/panes-config.ts",
     "usage": "const panesDefaults: PanesDefaults = { resizable: false };\n\n// Configuring global defaults for all panes in the app.\n@NgModule({\n  //...\n  providers: [\n    // ...\n    { provide: PANES_DEFAULTS, useValue: panesDefaults }\n  ]\n})\nexport class AppModule {}\n\n// Configuring defaults for all child panes of some component.\n@Component({\n  // ...\n  providers: [{ provide: PANES_DEFAULTS, useValue: panesDefaults }]\n})\nclass SomeComponent {}\n",
     "usageLang": "typescript"
@@ -272,28 +287,28 @@
   {
     "type": "type",
     "identifier": "PanesDefaults",
-    "description": "<p>Configuration to be provided as default parameters for all <code>ngx-panes</code> child components.\nObject of this type provided as {@link PANES_DEFAULTS} injection token will be picked up\n{@link PanesComponent} to use them for default values of some configuration inputs.</p>\n",
+    "description": "<p>Configuration to be provided as default parameters for all <code>ngx-panes</code> child components.\nObject of this type provided as {@link PANES_DEFAULTS} injection token will be picked up\n{@link PaneGroupComponent} to use them for default values of some configuration inputs.</p>\n",
     "methods": [],
     "properties": [
       {
         "name": "autoOpen",
         "type": "boolean",
-        "description": "<p>Default value for {@link PanesComponent#autoOpen} input.</p>\n"
+        "description": "<p>Default value for {@link PaneGroupComponent#autoOpen} input.</p>\n"
       },
       {
         "name": "defaultWidth",
         "type": "number",
-        "description": "<p>Default value for {@link PanesComponent#defaultWidth} input.</p>\n"
+        "description": "<p>Default value for {@link PaneGroupComponent#defaultWidth} input.</p>\n"
       },
       {
         "name": "resizable",
         "type": "boolean",
-        "description": "<p>Default value for {@link PanesComponent#resizable} input.</p>\n"
+        "description": "<p>Default value for {@link PaneGroupComponent#resizable} input.</p>\n"
       },
       {
         "name": "toggleable",
         "type": "boolean",
-        "description": "<p>Default value for {@link PanesComponent#toggleable} input.</p>\n"
+        "description": "<p>Default value for {@link PaneGroupComponent#toggleable} input.</p>\n"
       }
     ],
     "fileName": "lib/panes-config.ts"

@@ -21,17 +21,21 @@
   }
 }
 
-/deep/ [id] app-side-anchor {
-  opacity: 0;
-}
-
-/deep/ [id]:hover app-side-anchor {
-  transition: opacity .4s;
-  opacity: 1;
-}
-
-/deep/ [id]:hover [id]:not(:hover) app-side-anchor:not(.target) {
-  opacity: 0;
+/deep/ [id], /deep/ [sideAnchorOwner] {
+  app-side-anchor {
+    opacity: 0;
+  }
+  &:hover {
+    app-side-anchor {
+      transition: opacity .4s;
+      opacity: 1;
+    }
+    [id]:not(:hover), [sideAnchorOwner]:not(:hover) {
+      app-side-anchor:not(.target) {
+        opacity: 0;
+      }
+    }
+  }
 }
 
 a {

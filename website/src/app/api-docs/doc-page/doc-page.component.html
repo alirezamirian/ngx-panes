@@ -1,4 +1,5 @@
-<h1>
+<h1 sideAnchorOwner>
+  <app-side-anchor></app-side-anchor>
   <ng-container [ngSwitch]="docItem.type">
     <ng-container *ngSwitchCase="'directive'">{{docItem.selector}}</ng-container>
     <ng-container *ngSwitchDefault="">{{docItem.identifier}}</ng-container>
@@ -44,8 +45,13 @@
       {{method.name}}
       <small>
         (<span *ngFor="let arg of method.args; let index"><b>{{arg.name}}</b>:
-          <code>{{arg.type}}</code><span *ngIf="index < method.args.length">, </span></span>):
-        <code>{{method.returnType}}</code>
+          <code>
+            <app-doc-item [identifier]="arg.type"></app-doc-item>
+          </code>
+        <span *ngIf="index < method.args.length">, </span></span>):
+        <code>
+          <app-doc-item [identifier]="method.returnType"></app-doc-item>
+        </code>
       </small>
     </h3>
     <div [innerHtml]="method.description"></div>

@@ -17,10 +17,10 @@ export class SideAnchorComponent implements AfterViewInit {
               private route: ActivatedRoute,
               private location: Location) {
     if (!sideAnchorOwner) {
-      throw new Error('SideAnchorComponent is used without any descendant element having an id');
+      throw new Error('SideAnchorComponent is used without any descendant element having an id or sideAnchorOwner');
+    } else {
+      sideAnchorOwner.activate();
     }
-
-    sideAnchorOwner.activate();
   }
 
   getPath() {
@@ -28,9 +28,11 @@ export class SideAnchorComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.target = this.route.snapshot.fragment === this.sideAnchorOwner.id;
-    this.route.fragment.subscribe(fragment => {
-      this.target = fragment === this.sideAnchorOwner.id;
-    });
+    if (this.sideAnchorOwner) {
+      this.target = this.route.snapshot.fragment === this.sideAnchorOwner.id;
+      this.route.fragment.subscribe(fragment => {
+        this.target = fragment === this.sideAnchorOwner.id;
+      });
+    }
   }
 }

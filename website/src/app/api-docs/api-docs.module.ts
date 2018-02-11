@@ -6,15 +6,16 @@ import {DocItemResolverGuard} from './doc-item-resolver.guard';
 import {MatCardModule} from '@angular/material';
 import {ParamsComponent} from './params/params.component';
 import {SharedModule} from '../shared/shared.module';
+import {DocItemComponent} from './doc-item.component';
 
 @NgModule({
   imports: [
     SharedModule,
     MatCardModule,
-    ApiDocsRoutingModule
+    ApiDocsRoutingModule,
   ],
   providers: [DocItemResolverGuard],
-  declarations: [DocPageComponent, ParamsComponent]
+  declarations: [DocPageComponent, ParamsComponent, DocItemComponent]
 })
 export class ApiDocsModule {
 }

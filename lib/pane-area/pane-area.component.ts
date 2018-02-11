@@ -3,6 +3,7 @@ import {PaneGroupService} from '../pane-group/pane-group.service';
 import {PaneComponent} from '../pane/pane.component';
 import {Align} from '../utils/rtl-utils';
 import {Subscription} from 'rxjs/Subscription';
+import {PaneGroupComponent} from '../pane-group/pane-group.component';
 
 
 interface Side {
@@ -12,6 +13,21 @@ interface Side {
   subscriptions: Subscription[];
 }
 
+/**
+ * Defines an area consisted of a centered main content surrounded by
+ * up to 4 side pane groups (aka tool windows).
+ *
+ * Valid children of a ngx-pane-area are:
+ * - {@link PaneGroupComponent ngx-pane-group}: defines side pane groups
+ * - {@link PaneAreaContent ngx-pane-area-content}: defines main content
+ *
+ * @usage
+ * <ngx-pane-area>
+ *   <ngx-pane-group> ... </ngx-pane-group>
+ *   <ngx-pane-group> ... </ngx-pane-group>
+ *   <ngx-pane-area-content> ... </ngx-pane-area-content>
+ * </ngx-pane-area>
+ */
 @Component({
   selector: 'ngx-pane-area',
   templateUrl: './pane-area.component.html',
@@ -32,8 +48,13 @@ export class PaneAreaComponent implements OnInit {
   ngOnInit() {
   }
 
-  getAlign(paneGroup) {
-    return this.aligns.find(align => this[align].paneGroup === paneGroup) || null;
+  /**
+   * Returns align value of the input paneGroup, or null if pane group doesn't exist in this pane area.
+   * @param paneGroup
+   * @returns {(Align | undefined) & null}
+   */
+  getAlign(paneGroup: PaneGroupComponent): Align | null {
+    return this.aligns.find(align => this[align].paneGroup === paneGroup.paneGroup) || null;
   }
 
   addGroup(paneGroup: PaneGroupService, side?: Align) {

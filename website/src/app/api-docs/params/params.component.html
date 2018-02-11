@@ -15,7 +15,12 @@
         <b>{{input.name}}</b>
       </td>
       <td *ngIf="keys.type">
-        <i class="type">{{input.type}}</i>
+        <ng-container *ngFor="let type of input.type.split('|'); let index = index">
+          <i class="type">
+            <app-doc-item [identifier]="type"></app-doc-item>
+          </i>
+          <span *ngIf="index > 0">|</span>
+        </ng-container>
       </td>
       <td *ngIf="keys.description" [innerHtml]="input.description">
       </td>

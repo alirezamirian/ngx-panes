@@ -2,7 +2,7 @@ import {Directive, ElementRef, HostBinding} from '@angular/core';
 
 // noinspection TsLint
 @Directive({
-  selector: '[id]'
+  selector: '[id],[sideAnchorOwner]'
 })
 export class SideAnchorOwnerDirective {
 

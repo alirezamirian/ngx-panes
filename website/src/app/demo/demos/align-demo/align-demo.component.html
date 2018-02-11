@@ -5,7 +5,6 @@
         Initial alignment of this pane group is set to <code>top</code>.
         It would be set to <code>start</code> (<code>left</code> in current direction)
         if it wasn't specified.
-        <app-demo-content [lines]="20"></app-demo-content>
       </div>
     </ngx-pane>
     <ngx-pane title="First group - 2">
@@ -21,7 +20,6 @@
         Initial alignment of this pane group is not set.
         It's set to <code>Start</code> (<code>left</code> in current direction) which is the alignment with the most
         priority.
-        <app-demo-content [lines]="22"></app-demo-content>
       </div>
     </ngx-pane>
     <ngx-pane title="Second group - 2">
@@ -32,9 +30,8 @@
     <ngx-pane title="Third group - 1">
       <div class="padding">
         Initial alignment of this pane group is set to right.
-        It would be set to <code>end</code> (<code>right</code> in current direction)
+        It would be set to <code>end</code>
         if it wasn't set explicitly.
-        <app-demo-content [lines]="20"></app-demo-content>
       </div>
     </ngx-pane>
   </ngx-pane-group>
@@ -43,7 +40,6 @@
       <div class="padding">
         Initial alignment of this pane group is not set.
         It's set to <code>bottom</code> which is the only remaining side.
-        <app-demo-content [lines]="20"></app-demo-content>
       </div>
     </ngx-pane>
   </ngx-pane-group>
@@ -51,17 +47,16 @@
 
   <div ngx-pane-area-content class="mat-padding">
     <p>
-      You can include up to four <code>ngx-pane-group</code>s in an <code>ngx-pane-area</code>.
-      By default, panes will be aligned in <code>start</code> (<b>left</b> in ltr <b>right</b> in rtl),
-      <code>end</code> (<b>right</b> in ltr <b>left</b> in rtl), <code>bottom</code>
+      By default, pane groups will be aligned in <code>start</code> (<b>left</b> in ltr <b>right</b> in rtl),
+      <code>end</code>, <code>bottom</code>
       and <code>top</code> respectively.
       You can also explicitly set pane alignment via
-      <a routerLink="/api/PaneGroupDirective" fragment="align">align input</a>.
+      <a routerLink="/api/PaneGroupComponent" fragment="align">align input</a>.
     </p>
-    <div fxLayout="row">
+    <div fxLayout="row" fxLayoutAlign="center">
       <mat-form-field>
         <mat-select placeholder="First group alignment"
-                    [value]="paneArea.getAlign(paneGroup1.paneGroup)" (valueChange)="aligns[0] = $event">
+                    [value]="paneArea.getAlign(paneGroup1)" (valueChange)="aligns[0] = $event">
           <mat-option value="left">left</mat-option>
           <mat-option value="right">right</mat-option>
           <mat-option value="top">top</mat-option>
@@ -70,7 +65,7 @@
       </mat-form-field>
       <mat-form-field>
         <mat-select placeholder="Second group alignment"
-                    [value]="paneArea.getAlign(paneGroup2.paneGroup)" (valueChange)="aligns[1] = $event">
+                    [value]="paneArea.getAlign(paneGroup2)" (valueChange)="aligns[1] = $event">
           <mat-option value="left">left</mat-option>
           <mat-option value="right">right</mat-option>
           <mat-option value="top">top</mat-option>
@@ -78,10 +73,10 @@
         </mat-select>
       </mat-form-field>
     </div>
-    <div fxLayout="row">
+    <div fxLayout="row" fxLayoutAlign="center">
       <mat-form-field>
         <mat-select placeholder="Third group alignment"
-                    [value]="paneArea.getAlign(paneGroup3.paneGroup)" (valueChange)="aligns[2] = $event">
+                    [value]="paneArea.getAlign(paneGroup3)" (valueChange)="aligns[2] = $event">
           <mat-option value="left">left</mat-option>
           <mat-option value="right">right</mat-option>
           <mat-option value="top">top</mat-option>
@@ -90,7 +85,7 @@
       </mat-form-field>
       <mat-form-field>
         <mat-select placeholder="Forth group alignment"
-                    [value]="paneArea.getAlign(paneGroup4.paneGroup)" (valueChange)="aligns[3] = $event">
+                    [value]="paneArea.getAlign(paneGroup4)" (valueChange)="aligns[3] = $event">
           <mat-option value="left">left</mat-option>
           <mat-option value="right">right</mat-option>
           <mat-option value="top">top</mat-option>

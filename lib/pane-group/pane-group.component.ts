@@ -5,7 +5,26 @@ import {Align, RelativeAlign, toAlign, toRelativeAlign} from '../utils/rtl-utils
 import {PANES_DEFAULTS, PanesDefaults} from '../panes-config';
 import {PaneComponent} from '../pane/pane.component';
 
-// noinspection TsLint
+
+/**
+ * Pane groups are used inside {@link PaneAreaComponent ngx-pane-area}.
+ * Each group of panes is align in of the the four
+ * possible sides of the pane-area, which is determined by
+ * {@link PaneGroupComponent#align align} input. if align is not specified,
+ * first unused align with the following order will be used:
+ * - `start` (`left` in ltr, `right` in rtl)
+ * - `end` (`right` in ltr, `left` in rtl)
+ * - `bottom`
+ * - `top`
+ *
+ * See also [Alignment demo](/demos/align).
+ * @usage
+ * <ngx-pane-area>
+ *   <ngx-pane-group>
+ *      <!-- ngx-pane components -->
+ *   </ngx-pane-group>
+ * </ngx-pane-area>
+ */
 @Component({
   selector: 'ngx-pane-group',
   template: '',
@@ -55,7 +74,8 @@ export class PaneGroupComponent implements OnInit {
 
   // noinspection JSAnnotator
   /**
-   * Direction which the ngx-panes is aligned. It can be a {@link RelativeAlign} or Align.
+   * Position of the pane group inside {@link PaneAreaComponent pane area}.
+   * It can be a {@link RelativeAlign} or an {@link Align}.
    * @param value
    * @default 'start'
    */
@@ -101,7 +121,7 @@ export class PaneGroupComponent implements OnInit {
   /**
    * Closes currently selected pane. Does nothing if already closed.
    */
-  public close() {
+  public close(): void {
     this.paneGroup.close();
   }
 

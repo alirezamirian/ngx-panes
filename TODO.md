@@ -15,9 +15,10 @@
 ## high priority
 - [x] Fix and test align options
 - [x] Remove ngx-panes
-- [ ] Update docs
-- [ ] Decide for ngx-pane group being a component or directive
-- [ ] Update demos to use new pane-area, or ngx-pane-group if it end up being an stand alone component
+- [x] Update docs
+- [x] Decide for ngx-pane group being a component or directive
+- [x] Update demos to use new pane-area, or ngx-pane-group if it end up being an stand alone component
+- [ ] fix ngx-pane-area-content s
 - [ ] Resolve theming issues (also add theming for pane-area. its content)
 - [ ] Clean up styles
 - [ ] decide for height of ngx-pane-area

@@ -38,6 +38,7 @@ export class PaneComponent implements OnInit {
    */
   @Input() title: string;
   private _width: number;
+  private _openned: boolean;
 
   get width(): number | null {
     return this._width || this.paneGroup.getOption('defaultWidth');
@@ -88,6 +89,7 @@ export class PaneComponent implements OnInit {
         this.close();
       }
     }
+    this._openned = value;
   };
 
   constructor(private paneGroup: PaneGroupService,
@@ -102,6 +104,9 @@ export class PaneComponent implements OnInit {
 
   ngOnInit() {
     this.paneGroup.add(this);
+    if (this._openned) {
+      this.paneGroup.select(this);
+    }
   }
 
 

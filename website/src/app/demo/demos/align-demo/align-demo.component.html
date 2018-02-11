@@ -1,17 +1,22 @@
 <ngx-pane-area>
   <ngx-pane-group [defaultWidth]="300">
-    <ngx-pane title="test 1" [opened]="true" [resizable]="false">
+    <ngx-pane title="test 1">
       First Pane
+      <app-demo-content [lines]="20"></app-demo-content>
+    </ngx-pane>
+    <ngx-pane title="test 1" opened>
+      <app-demo-content [lines]="20"></app-demo-content>
+    </ngx-pane>
+    <ngx-pane title="test 1">
+      asdasd
       <app-demo-content [lines]="20"></app-demo-content>
     </ngx-pane>
   </ngx-pane-group>
   <ngx-pane-group [defaultWidth]="300">
     <ngx-pane title="test 2">
-      Second Pane
       <app-demo-content [lines]="22"></app-demo-content>
     </ngx-pane>
     <ngx-pane title="test 2">
-      Third Pane
       <app-demo-content [lines]="22"></app-demo-content>
     </ngx-pane>
 

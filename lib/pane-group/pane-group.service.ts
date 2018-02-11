@@ -17,8 +17,8 @@ export class PaneGroupService {
   snapshot: { panes: PaneComponent[], selectedPane: PaneComponent | null } = {panes: [], selectedPane: null};
   public panes$ = this.panesSubject.asObservable();
   private panesSubject = new BehaviorSubject<PaneComponent[]>([]);
-  public selectedPane$ = this.selectedPaneSubject.asObservable();
   private selectedPaneSubject = new BehaviorSubject<PaneComponent>(null);
+  public selectedPane$ = this.selectedPaneSubject.asObservable();
   private options: PaneGroupOptions = new PaneGroupOptions();
 
   constructor() {

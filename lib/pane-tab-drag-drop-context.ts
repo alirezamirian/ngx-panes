@@ -8,6 +8,9 @@ interface DropCandidate {
   index: number;
 }
 
+/**
+ * @private
+ */
 @Injectable()
 export class PaneTabDragDropContext {
 

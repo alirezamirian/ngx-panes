@@ -9,7 +9,7 @@
   box-sizing: border-box;
   display: flex;
 
-  &.h {
+  &.v {
     max-width: 22px;
     height: 100%;
     flex-direction: column;
@@ -21,7 +21,7 @@
       min-width: 22px;
     }
   }
-  &.v {
+  &.h {
     max-height: 22px;
     width: 100%;
     flex-direction: row;

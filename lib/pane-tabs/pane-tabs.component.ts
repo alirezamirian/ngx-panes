@@ -86,21 +86,21 @@ export class PaneTabsComponent implements OnDestroy {
   }
 
   getSize(rect: ClientRect, direction = this.direction) {
-    if (direction === 'h') {
+    if (direction === 'v') {
       return rect.width;
     }
     return rect.height;
   }
 
   getStart(rect: ClientRect, direction = this.direction) {
-    if (direction === 'h') {
+    if (direction === 'v') {
       return rect.left;
     }
     return rect.top;
   }
 
   getEnd(rect: ClientRect, direction = this.direction) {
-    if (direction === 'h') {
+    if (direction === 'v') {
       return rect.right;
     }
     return rect.bottom;

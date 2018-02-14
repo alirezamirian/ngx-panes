@@ -1,9 +1,9 @@
 <div class="outer-wrapper">
-  <pane-tabs class="v-pane-tabs" align="top" relativeAlign="top" direction="v" [paneGroup]="top.paneGroup"></pane-tabs>
+  <pane-tabs class="v-pane-tabs" align="top" relativeAlign="top" direction="h" [paneGroup]="top.paneGroup"></pane-tabs>
   <div class="inner-wrapper flex">
     <!-- TODO: consider passing around the pane group to pane-tabs and pane-view. This way this.left, this.right, ...
     can be simplified to pane groups only -->
-    <pane-tabs align="left" relativeAlign="start" direction="h" [paneGroup]="left.paneGroup"></pane-tabs>
+    <pane-tabs align="left" relativeAlign="start" direction="v" [paneGroup]="left.paneGroup"></pane-tabs>
     <div class="content-outer-wrapper flex">
       <pane-view *ngIf="top.paneGroup?.selectedPane$ | async as paneGroup" [pane]="paneGroup"
                  [align]="'top'"></pane-view>
@@ -19,8 +19,8 @@
       <pane-view *ngIf="bottom.paneGroup?.selectedPane$ | async as paneGroup" [pane]="paneGroup"
                  [align]="'bottom'"></pane-view>
     </div>
-    <pane-tabs align="right" relativeAlign="end" direction="h" [paneGroup]="right.paneGroup"></pane-tabs>
+    <pane-tabs align="right" relativeAlign="end" direction="v" [paneGroup]="right.paneGroup"></pane-tabs>
   </div>
-  <pane-tabs class="v-pane-tabs" align="bottom" relativeAlign="bottom" direction="v"
+  <pane-tabs class="v-pane-tabs" align="bottom" relativeAlign="bottom" direction="h"
              [paneGroup]="bottom.paneGroup"></pane-tabs>
 </div>

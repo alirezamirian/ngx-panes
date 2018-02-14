@@ -162,7 +162,13 @@
     "identifier": "PaneTabsComponent",
     "description": "",
     "methods": [],
-    "properties": [],
+    "properties": [
+      {
+        "name": "canAnimate",
+        "type": "boolean",
+        "description": ""
+      }
+    ],
     "type": "directive",
     "isComponent": true,
     "selector": "pane-tabs",

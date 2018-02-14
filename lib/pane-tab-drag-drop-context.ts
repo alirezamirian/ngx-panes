@@ -40,24 +40,16 @@ export class PaneTabDragDropContext {
       let dropCandidate: DropCandidate = null;
       this.ngZone.run(() => {
         tabGroups.forEach(tabGroup => {
-          tabGroup.handleDragStart(dragStart);
+          tabGroup.handleDragStart(dragStart, initiatorTabGroup.direction !== tabGroup.direction);
         });
       });
       dragStart.drag$.subscribe((dragEvent: DragEvent) => {
-        const rect = dragEvent.draggingRect;
-        const draggingRect: ClientRect = {
-          left: rect.left + dragEvent.movement.x,
-          right: rect.right + dragEvent.movement.x,
-          width: rect.width,
-          height: rect.height,
-          top: rect.top + dragEvent.movement.y,
-          bottom: rect.bottom + dragEvent.movement.y
-        };
+        const rect = dragEvent.from;
 
         dropCandidate = tabGroups.reduce<DropCandidate>((candidate: DropCandidate, tabGroup) => {
           let dropIndex = -1;
           if (!candidate) {
-            dropIndex = tabGroup.getDropIndex(draggingRect);
+            dropIndex = tabGroup.getDropIndex(dragEvent.to);
             if (dropIndex > -1) {
               candidate = {
                 index: dropIndex,

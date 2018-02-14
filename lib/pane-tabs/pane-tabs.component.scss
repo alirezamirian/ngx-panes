@@ -13,6 +13,10 @@
     max-width: 22px;
     height: 100%;
     flex-direction: column;
+    min-width: 0;
+    :host.dragging & {
+      transition: min-width 50ms ease-in;
+    }
     &.can-drop {
       min-width: 22px;
     }
@@ -21,6 +25,10 @@
     max-height: 22px;
     width: 100%;
     flex-direction: row;
+    min-height: 0;
+    :host.dragging & {
+      transition: min-height 50ms ease-in;
+    }
     &.can-drop {
       min-height: 22px;
     }
@@ -44,6 +52,6 @@ pane-tab.dragging {
   display: none;
 }
 
-pane-tab.can-animate {
+:host.dragging pane-tab {
   transition: margin .1s;
 }

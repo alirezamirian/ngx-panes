@@ -3,6 +3,7 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
+  HostBinding,
   Input,
   NgZone,
   OnDestroy,
@@ -24,6 +25,7 @@ interface DragState {
   draggingPane: PaneComponent;
   draggingPaneIndex: number;
   panesRect: any | ClientRect;
+  willRotate: boolean;
   placeholderSize: number;
   placeholderIndex: any;
   /**
@@ -31,10 +33,11 @@ interface DragState {
    * panesComponent) for corresponding child tab, which specifies drop zone for that index.
    */
   dropIndexRanges: Range[];
+
   /**
    * Used for disabling initial unwanted animation
    */
-  canAnimate: boolean;
+  started: boolean
 }
 
 @Component({
@@ -56,6 +59,11 @@ export class PaneTabsComponent implements OnDestroy {
   align: Align;
   @Input()
   relativeAlign: RelativeAlign;
+
+  @HostBinding('class.dragging')
+  get canAnimate(): boolean {
+    return this.dragState && this.dragState.started;
+  };
 
   @ViewChildren(PaneTabComponent, {read: ElementRef})
   private tabElementRefs: QueryList<ElementRef>;
@@ -106,11 +114,11 @@ export class PaneTabsComponent implements OnDestroy {
     return this.getStart(rect, direction) + this.getSize(rect, direction) / 2;
   }
 
-  handleDragStart(dragStart: DragStartEvent) {
+  handleDragStart(dragStart: DragStartEvent, willRotate: boolean) {
     const draggingPaneIndex = this.paneGroup.snapshot.panes.indexOf(dragStart.pane);
 
     const direction = this.oppositeDirection();
-    const effectiveSize = this.getSize(dragStart.draggingRect, direction);
+    const effectiveSize = this.getSize(dragStart.from, willRotate ? this.direction : direction);
     const dropIndexRanges = this.tabElementRefs
       .filter((tabElementRef, index) => index !== draggingPaneIndex)
       .map(elRef => elRef.nativeElement)
@@ -131,8 +139,9 @@ export class PaneTabsComponent implements OnDestroy {
       to: Infinity
     });
     this.dragState = {
-      canAnimate: false,
+      started: false,
       draggingPane: dragStart.pane,
+      willRotate,
       draggingPaneIndex: draggingPaneIndex,
       placeholderIndex: -1,
       panesRect: this.elementRef.nativeElement.getBoundingClientRect(),
@@ -140,7 +149,7 @@ export class PaneTabsComponent implements OnDestroy {
       dropIndexRanges: dropIndexRanges
     };
     setTimeout(() => {
-      this.dragState.canAnimate = true;
+      this.dragState.started = true;
       this.changeDetector.detectChanges();
     });
     this.changeDetector.detectChanges();
@@ -173,10 +182,10 @@ export class PaneTabsComponent implements OnDestroy {
   }
 
   private canDrop(rect: ClientRect) {
-    const panesRect = this.dragState.panesRect;
-    // these conditions are exact behaviour of JetBrains IDEs. There are improvement possibilities however.
-    const from = this.getStart(panesRect) - this.getSize(rect);
-    const to = this.getEnd(panesRect);
+    // these conditions are exact behaviour of JetBrains IDEs. There are rooms for improvement however.
+    const size = this.getSize(rect, this.dragState.willRotate ? this.oppositeDirection() : this.direction);
+    const from = this.getStart(this.dragState.panesRect) - size;
+    const to = this.getEnd(this.dragState.panesRect);
     return (this.getEnd(rect) >= from) && this.getStart(rect) <= to;
   }
 }

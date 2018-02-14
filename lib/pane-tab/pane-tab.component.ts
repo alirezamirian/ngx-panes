@@ -33,7 +33,8 @@ interface Point {
  * @private
  */
 export interface DragEvent {
-  draggingRect: ClientRect;
+  from: ClientRect;
+  to: ClientRect;
   movement: Point;
 }
 
@@ -42,7 +43,7 @@ export interface DragEvent {
  */
 export interface DragStartEvent {
   pane: PaneComponent;
-  draggingRect: ClientRect;
+  from: ClientRect;
   drag$: Observable<DragEvent>;
 }
 
@@ -83,17 +84,28 @@ export class PaneTabComponent implements OnInit, OnDestroy {
       .pipe(
         // switch each mousedown event to an stream of mouse movements
         switchMap((mouseDown: MouseEvent) => {
-            const draggingRect = this.elRef.nativeElement.getBoundingClientRect();
+          const from = this.elRef.nativeElement.getBoundingClientRect();
             const isDraggedEnough = (mouseMove: MouseEvent) =>
               Math.abs(mouseMove.pageX - mouseDown.pageX) > DRAG_TRHESHOLD ||
               Math.abs(mouseMove.pageY - mouseDown.pageY) > DRAG_TRHESHOLD;
-            const toDrag = (mouseMove: MouseEvent) => ({
-              draggingRect: draggingRect,
-              movement: {x: mouseMove.pageX - mouseDown.pageX, y: mouseMove.pageY - mouseDown.pageY}
-            });
+          const toDrag = (mouseMove: MouseEvent): DragEvent => {
+            const movement = {x: mouseMove.pageX - mouseDown.pageX, y: mouseMove.pageY - mouseDown.pageY};
+            return {
+              from: from,
+              to: {
+                left: from.left + movement.x,
+                right: from.right + movement.x,
+                width: from.width,
+                height: from.height,
+                top: from.top + movement.y,
+                bottom: from.bottom + movement.y
+              },
+              movement
+            };
+          };
             const toDragStart = (mouseMove: MouseEvent) => ({
               pane: this.pane,
-              draggingRect: draggingRect,
+              from,
               drag$: fromEvent(this.document, 'mousemove')
                 .pipe(
                   startWith(mouseMove),
@@ -104,7 +116,7 @@ export class PaneTabComponent implements OnInit, OnDestroy {
             return fromEvent(this.document, 'mousemove').pipe(
               filter(isDraggedEnough),
               takeUntil(fromEvent(this.document, 'mouseup')),
-              map(toDragStart),
+              map<MouseEvent, DragStartEvent>(toDragStart),
               first(),
               catchError(() => empty()),
             );
@@ -126,7 +138,7 @@ export class PaneTabComponent implements OnInit, OnDestroy {
         this.ghost = this.elRef.nativeElement.cloneNode(true);
         // FIXME: remove when theming issues are resolved
         synchronizeCssStyles(this.elRef.nativeElement, this.ghost, ['background', 'color']);
-        const rect = dragStartEvent.draggingRect;
+        const rect = dragStartEvent.from;
         this.renderer.appendChild(this.document.body, this.ghost);
         this.renderer.addClass(this.ghost, 'ghost');
         this.renderer.setStyle(this.ghost, 'width', rect.width + 'px');

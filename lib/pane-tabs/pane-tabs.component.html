@@ -6,7 +6,6 @@
             [align]="align"
             [pane]="pane"
             [class.dragging]="dragState?.draggingPaneIndex === index"
-            [class.can-animate]="dragState?.canAnimate"
             [style.marginLeft.px]="direction === 'v' && index === dragState?.placeholderIndex ? dragState.placeholderSize : 0"
             [style.marginTop.px]="direction === 'h' && index === dragState?.placeholderIndex ? dragState.placeholderSize : 0"
             (click)="paneGroup.toggle(pane)" (dragStarted)="dragStarted($event)"></pane-tab>

@@ -3,6 +3,8 @@ import {InjectionToken} from '@angular/core';
 /**
  * Injection token for providing defaults for some input parameters of {@link PaneGroupComponent pane components}.
  * The value of this injection token must be of type {@link PanesDefaults}.
+ *
+ * See also [configuration demo](/demos/config).
  * @usage
  *
  * const panesDefaults: PanesDefaults = {

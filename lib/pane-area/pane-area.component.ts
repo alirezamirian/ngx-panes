@@ -18,15 +18,16 @@ interface Side {
  * Defines an area consisted of a centered main content surrounded by
  * up to 4 side pane groups (aka tool windows).
  *
- * Valid children of a ngx-pane-area are:
- * - {@link PaneGroupComponent ngx-pane-group}: defines side pane groups
- * - {@link PaneAreaContent ngx-pane-area-content}: defines main content
+ * Children of ngx-pane-area except for {@link PaneGroupComponent ngx-pane-group}s are
+ * projected as main content.
  *
  * @usage
  * <ngx-pane-area>
  *   <ngx-pane-group> ... </ngx-pane-group>
  *   <ngx-pane-group> ... </ngx-pane-group>
- *   <ngx-pane-area-content> ... </ngx-pane-area-content>
+ *   <div>
+ *     <!-- will be projected as main content -->
+ *   </div>
  * </ngx-pane-area>
  */
 @Component({

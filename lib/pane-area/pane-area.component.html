@@ -11,7 +11,7 @@
         <pane-view *ngIf="left.paneGroup?.selectedPane$ | async as paneGroup" [pane]="paneGroup"
                    [align]="'left'"></pane-view>
         <div class="flex content">
-          <ng-content select="[ngx-pane-area-content]"></ng-content>
+          <ng-content></ng-content>
         </div>
         <pane-view *ngIf="right.paneGroup?.selectedPane$ | async as paneGroup" [pane]="paneGroup"
                    [align]="'right'"></pane-view>

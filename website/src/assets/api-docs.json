@@ -114,6 +114,13 @@
     "fileName": "lib/pane-resizer/pane-resizer.component.ts"
   },
   {
+    "identifier": "PaneTabDragDropContext",
+    "description": "",
+    "methods": [],
+    "properties": [],
+    "fileName": "lib/pane-tab-drag-drop-context.ts"
+  },
+  {
     "identifier": "PaneTabComponent",
     "description": "",
     "methods": [],

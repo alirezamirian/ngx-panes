@@ -17,7 +17,7 @@ export class PaneGroupService {
   snapshot: { panes: PaneComponent[], selectedPane: PaneComponent | null } = {panes: [], selectedPane: null};
   private panesSubject = new BehaviorSubject<PaneComponent[]>([]);
   panes$ = this.panesSubject.asObservable();
-  private options: PaneGroupOptions = new PaneGroupOptions();
+  public options: PaneGroupOptions = new PaneGroupOptions();
   private selectedPaneSubject = new BehaviorSubject<PaneComponent>(null);
   selectedPane$ = this.selectedPaneSubject.asObservable();
 
@@ -27,12 +27,14 @@ export class PaneGroupService {
     // TODO: should we unsubscribe?!
   }
 
-  add(pane: PaneComponent) {
-    if (this.snapshot.panes.indexOf(pane) < 0) {
-      this.updatePanes(this.snapshot.panes.concat(pane));
+  add(pane: PaneComponent, index?: number) {
+    const panes = this.snapshot.panes;
+    if (index === undefined) {
+      index = panes.length;
     }
-    if (!this.snapshot.selectedPane && this.options.autoOpen) {
-      this.select(pane);
+    if (panes.indexOf(pane) < 0) {
+      this.updatePanes(panes.slice(0, index).concat(pane).concat(panes.slice(index)));
+      pane.paneGroup = this; // necessary for moving across pane groups
     }
   }
 

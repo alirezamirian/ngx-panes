@@ -93,7 +93,7 @@ export class PaneComponent implements OnInit {
     this._openned = value;
   };
 
-  constructor(private paneGroup: PaneGroupService,
+  constructor(public paneGroup: PaneGroupService,
               @Optional() @Inject(PANES_DEFAULTS) defaults: PanesDefaults) {
     if (defaults) {
       if (defaults.resizable != null) {
@@ -107,9 +107,14 @@ export class PaneComponent implements OnInit {
   }
 
   ngOnInit() {
+    // TODO: maybe this should be moved to PaneGroupComponent. it can query for all paneComponent content childs,
+    // and add/remove them to paneGroup when necessary.
     this.paneGroup.add(this);
     if (this._openned) {
       this.paneGroup.select(this);
+    }
+    if (!this.paneGroup.snapshot.selectedPane && this.paneGroup.options.autoOpen) {
+      this.open();
     }
   }
 

@@ -4,6 +4,7 @@ import {PaneComponent} from '../pane/pane.component';
 import {Align} from '../utils/rtl-utils';
 import {Subscription} from 'rxjs/Subscription';
 import {PaneGroupComponent} from '../pane-group/pane-group.component';
+import {PaneTabDragDropContext} from '../pane-tab-drag-drop-context';
 
 
 interface Side {
@@ -31,7 +32,10 @@ interface Side {
 @Component({
   selector: 'ngx-pane-area',
   templateUrl: './pane-area.component.html',
-  styleUrls: ['./pane-area.component.scss']
+  styleUrls: ['./pane-area.component.scss'],
+  providers: [
+    PaneTabDragDropContext
+  ]
 })
 export class PaneAreaComponent implements OnInit {
 

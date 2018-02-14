@@ -5,22 +5,48 @@ import {
   ElementRef,
   Input,
   NgZone,
+  OnDestroy,
   QueryList,
   ViewChildren
 } from '@angular/core';
 import {PaneComponent} from '../pane/pane.component';
 import {Align, RelativeAlign} from '../utils/rtl-utils';
-import {DragEvent, DragStartEvent, PaneTabComponent} from '../pane-tab/pane-tab.component';
+import {DragStartEvent, PaneTabComponent} from '../pane-tab/pane-tab.component';
 import {PaneGroupService} from '../pane-group/pane-group.service';
+import {PaneTabDragDropContext} from '../pane-tab-drag-drop-context';
+
+interface Range {
+  from;
+  to: any;
+}
+
+interface DragState {
+  draggingPane: PaneComponent;
+  draggingPaneIndex: number;
+  panesRect: any | ClientRect;
+  placeholderSize: number;
+  placeholderIndex: any;
+  /**
+   * Each element in this list represents an interval (in x or y direction depending on direction
+   * panesComponent) for corresponding child tab, which specifies drop zone for that index.
+   */
+  dropIndexRanges: Range[];
+  /**
+   * Used for disabling initial unwanted animation
+   */
+  canAnimate: boolean;
+}
 
 @Component({
   selector: 'pane-tabs',
   templateUrl: './pane-tabs.component.html',
   styleUrls: ['./pane-tabs.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-
+  providers: [
+    PaneTabDragDropContext
+  ]
 })
-export class PaneTabsComponent {
+export class PaneTabsComponent implements OnDestroy {
 
   @Input()
   paneGroup: PaneGroupService;
@@ -34,45 +60,21 @@ export class PaneTabsComponent {
   @ViewChildren(PaneTabComponent, {read: ElementRef})
   private tabElementRefs: QueryList<ElementRef>;
 
-  private dragState: {
-    draggingPane: PaneComponent;
-    draggingPaneIndex: number;
-    panesRect: any | ClientRect;
-    placeholderSize: number;
-    placeholderIndex: any;
-    dropIndexRanges: { from; to: any }[];
-    canAnimate: boolean;
-  };
+  private dragState: DragState | null;
 
   constructor(private changeDetector: ChangeDetectorRef,
               private ngZone: NgZone,
+              private dragDropContext: PaneTabDragDropContext,
               private elementRef: ElementRef) {
+    this.dragDropContext.addTabs(this);
+  }
+
+  ngOnDestroy(): void {
+    this.dragDropContext.removeTabs(this);
   }
 
   dragStarted(dragStart: DragStartEvent) {
-    this.ngZone.runOutsideAngular(() => {
-      let toIndex = -1;
-      this.ngZone.run(() => this.handleDragStart(dragStart));
-      dragStart.drag$.subscribe((dragEvent: DragEvent) => {
-        const rect = dragEvent.draggingRect;
-        const draggingRect: ClientRect = {
-          left: rect.left + dragEvent.movement.x,
-          right: rect.right + dragEvent.movement.x,
-          width: rect.width,
-          height: rect.height,
-          top: rect.top + dragEvent.movement.y,
-          bottom: rect.bottom + dragEvent.movement.y
-        };
-        toIndex = this.getDropIndex(draggingRect);
-        this.showDropAtIndex(toIndex);
-      }, null, () => {
-        if (toIndex > -1) {
-          this.paneGroup.move(dragStart.pane, toIndex);
-          dragStart.pane.open();
-        }
-        this.ngZone.run(() => this.handleDragFinish());
-      });
-    });
+    this.dragDropContext.dragStarted(this, dragStart);
   }
 
   getSize(rect: ClientRect, direction = this.direction) {
@@ -104,7 +106,7 @@ export class PaneTabsComponent {
     return this.getStart(rect, direction) + this.getSize(rect, direction) / 2;
   }
 
-  private handleDragStart(dragStart: DragStartEvent) {
+  handleDragStart(dragStart: DragStartEvent) {
     const draggingPaneIndex = this.paneGroup.snapshot.panes.indexOf(dragStart.pane);
 
     const direction = this.oppositeDirection();
@@ -144,7 +146,7 @@ export class PaneTabsComponent {
     this.changeDetector.detectChanges();
   }
 
-  private getDropIndex(rect: ClientRect) {
+  getDropIndex(rect: ClientRect) {
     if (this.canDrop(rect)) {
       const start = this.getStart(rect, this.oppositeDirection());
       return this.dragState.dropIndexRanges.findIndex(range => start >= range.from && start < range.to);
@@ -152,7 +154,7 @@ export class PaneTabsComponent {
     return -1;
   }
 
-  private showDropAtIndex(index) {
+  showDropAtIndex(index) {
     let placeholderIndex = index;
     if (index > -1 && this.dragState.draggingPaneIndex > -1 && index >= this.dragState.draggingPaneIndex) {
       placeholderIndex++;
@@ -165,7 +167,7 @@ export class PaneTabsComponent {
     }
   }
 
-  private handleDragFinish() {
+  handleDragFinish() {
     this.dragState = null;
     this.changeDetector.detectChanges();
   }

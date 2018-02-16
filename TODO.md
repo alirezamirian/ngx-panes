@@ -27,6 +27,9 @@
 - [ ] Add option for pane reordering
 - [x] Add support for cross pane-group pane reordering inside a pane-area
 - [ ] Add option for cross pane-group pane reordering being enabled or not
+- [ ] Warn user for missing ids
+- [ ] Add support for custom state management services
+- [ ] Add support for NoHistory directive (which provides a noop paneAreaStateManager)
 
 ## Least priority
 - [ ] Explore onPush change detection possibility

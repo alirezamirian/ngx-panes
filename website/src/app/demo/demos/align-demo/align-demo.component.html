@@ -1,6 +1,7 @@
-<ngx-pane-area #paneArea>
-  <ngx-pane-group #paneGroup1 [defaultWidth]="200" [align]="aligns[0]" [autoOpen]="false" *ngIf="groups[0]">
-    <ngx-pane title="First group - 1">
+<ngx-pane-area #paneArea id="alignDemo">
+  <ngx-pane-group id="paneGroup1" #paneGroup1 [defaultWidth]="200" [align]="aligns[0]" [autoOpen]="false"
+                  *ngIf="groups[0]">
+    <ngx-pane title="First group - 1" id="pane1">
       <div class="padding">
         Initial alignment of this pane group is set to <code>top</code>.
         It would be set to <code>start</code> (<code>left</code> in current direction)
@@ -10,24 +11,24 @@
     <ngx-pane title="First group - 2" id="pane2" *ngIf="!removed">
       <app-demo-content [lines]="20"></app-demo-content>
     </ngx-pane>
-    <ngx-pane title="First group - 3">
+    <ngx-pane title="First group - 3" id="pane3">
       <app-demo-content [lines]="20"></app-demo-content>
     </ngx-pane>
   </ngx-pane-group>
-  <ngx-pane-group [defaultWidth]="300" #paneGroup2 [align]="aligns[1]" *ngIf="groups[1]">
-    <ngx-pane title="Second group - 1">
+  <ngx-pane-group id="paneGroup2" [defaultWidth]="300" #paneGroup2 [align]="aligns[1]" *ngIf="groups[1]">
+    <ngx-pane title="Second group - 1" id="pane4">
       <div class="padding">
         Initial alignment of this pane group is not set.
         It's set to <code>Start</code> (<code>left</code> in current direction) which is the alignment with the most
         priority.
       </div>
     </ngx-pane>
-    <ngx-pane title="Second group - 2">
+    <ngx-pane title="Second group - 2" id="pane5">
       <app-demo-content [lines]="22"></app-demo-content>
     </ngx-pane>
   </ngx-pane-group>
-  <ngx-pane-group [align]="aligns[2]" #paneGroup3 [defaultWidth]="250" *ngIf="groups[2]">
-    <ngx-pane title="Third group - 1">
+  <ngx-pane-group id="paneGroup3" [align]="aligns[2]" #paneGroup3 [defaultWidth]="250" *ngIf="groups[2]">
+    <ngx-pane title="Third group - 1" id="pane6">
       <div class="padding">
         Initial alignment of this pane group is set to right.
         It would be set to <code>end</code>
@@ -35,8 +36,8 @@
       </div>
     </ngx-pane>
   </ngx-pane-group>
-  <ngx-pane-group [align]="aligns[3]" #paneGroup4 [defaultWidth]="150" *ngIf="groups[3]">
-    <ngx-pane title="Forth group - 1">
+  <ngx-pane-group id="paneGroup4" [align]="aligns[3]" #paneGroup4 [defaultWidth]="150" *ngIf="groups[3]">
+    <ngx-pane title="Forth group - 1" id="pane7">
       <div class="padding">
         Initial alignment of this pane group is not set.
         It's set to <code>bottom</code> which is the only remaining side.
@@ -100,9 +101,16 @@
       </mat-checkbox>
       <mat-divider></mat-divider>
     </div>
-    <mat-checkbox [(ngModel)]="groups[0]">First Pane Group</mat-checkbox>
-    <mat-checkbox [(ngModel)]="groups[1]">Second Pane Group</mat-checkbox>
-    <mat-checkbox [(ngModel)]="groups[2]">Third Pane Group</mat-checkbox>
-    <mat-checkbox [(ngModel)]="groups[3]">Forth Pane Group</mat-checkbox>
+    <div>
+      <mat-checkbox [(ngModel)]="groups[0]">First Pane Group</mat-checkbox>
+      <mat-checkbox [(ngModel)]="groups[1]">Second Pane Group</mat-checkbox>
+      <mat-checkbox [(ngModel)]="groups[2]">Third Pane Group</mat-checkbox>
+      <mat-checkbox [(ngModel)]="groups[3]">Forth Pane Group</mat-checkbox>
+    </div>
+    <br/>
+    <div *ngIf="hasHistory">
+      The order of the panes are loaded via saved history.
+      <button mat-button color="warn" (click)="clearHistory()">Clear History</button>
+    </div>
   </div>
 </ngx-pane-area>

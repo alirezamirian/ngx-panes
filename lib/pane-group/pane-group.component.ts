@@ -44,6 +44,10 @@ export class PaneGroupComponent implements OnInit, AfterContentInit {
   private _relativeAlign: RelativeAlign;
   private initialized: boolean;
 
+
+  @Input()
+  id: string;
+
   /**
    * Default width (in pixels) to be used for any child pane with an undefined width.
    * If you don't specify a default width, child panes will **wrap they content**.

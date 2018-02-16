@@ -1,15 +1,41 @@
-import {AfterContentInit, Component, ContentChildren, forwardRef, OnInit, QueryList} from '@angular/core';
+import {
+  AfterContentInit,
+  Component,
+  ContentChildren,
+  forwardRef,
+  Input,
+  OnDestroy,
+  OnInit,
+  QueryList
+} from '@angular/core';
 import {Align} from '../utils/rtl-utils';
 import {PaneGroupComponent} from '../pane-group/pane-group.component';
 import {Move, PaneTabDragDropContext} from '../pane-tab-drag-drop-context';
 import {PaneComponent} from '../pane/pane.component';
 import {Subscription} from 'rxjs/Subscription';
-import {StateHistoryManager} from '../state-history-manager';
+import {PaneAreaStateManager} from '../state-history-manager';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {skip} from 'rxjs/operators';
 
 
 interface Side {
   paneGroup: PaneGroupComponent;
   subscription?: Subscription;
+}
+
+interface PaneGroupHistory {
+  align?: Align;
+  paneIds: string[];
+}
+
+export interface PaneState {
+  size: number;
+  groupId: string;
+  index: number;
+}
+
+export interface PaneHistory {
+  [key: string]: PaneState;
 }
 
 /**
@@ -36,9 +62,13 @@ interface Side {
     PaneTabDragDropContext
   ]
 })
-export class PaneAreaComponent implements OnInit, AfterContentInit {
+export class PaneAreaComponent implements OnInit, AfterContentInit, OnDestroy {
 
   private aligns: Align[] = ['left', 'right', 'bottom', 'top'];
+
+  @Input()
+  id: string;
+  private historySubject: BehaviorSubject<PaneHistory>;
 
   left: Side = {paneGroup: null};
   right: Side = {paneGroup: null};
@@ -49,10 +79,13 @@ export class PaneAreaComponent implements OnInit, AfterContentInit {
   paneGroups: QueryList<PaneGroupComponent>;
 
   constructor(private dragDropContext: PaneTabDragDropContext,
-              private history: StateHistoryManager) {
+              private historyManager: PaneAreaStateManager) {
   }
 
   ngOnInit() {
+    this.historySubject = new BehaviorSubject<PaneHistory>(this.historyManager.getHistory(this) || {});
+    this.historyManager.trackChanges(this, this.historySubject.asObservable().pipe(skip(1)));
+
     this.dragDropContext.moves$.subscribe((move: Move) => {
       if (move.from === move.to) {
         this.movePane(move.from, move.pane, move.toIndex);
@@ -60,7 +93,12 @@ export class PaneAreaComponent implements OnInit, AfterContentInit {
         this.addPane(move.to, move.pane, move.toIndex);
         this.removePane(move.from, move.pane);
       }
+      move.pane.open();
     });
+  }
+
+  ngOnDestroy() {
+    this.historySubject.complete();
   }
 
   movePane(paneGroup: PaneGroupComponent, pane: PaneComponent, toIndex: number) {
@@ -68,7 +106,7 @@ export class PaneAreaComponent implements OnInit, AfterContentInit {
     if (fromIndex > -1 && fromIndex !== toIndex) {
       const panes = [].concat(paneGroup.panes); // copy
       panes.splice(toIndex, 0, panes.splice(fromIndex, 1)[0]);
-      paneGroup.setPanes(panes);
+      this.setPanes(paneGroup, panes);
     }
   }
 
@@ -78,21 +116,40 @@ export class PaneAreaComponent implements OnInit, AfterContentInit {
       toIndex = panes.length;
     }
     if (panes.indexOf(pane) < 0) {
-      paneGroup.setPanes(panes.slice(0, toIndex).concat(pane).concat(panes.slice(toIndex)));
+      this.setPanes(paneGroup, panes.slice(0, toIndex).concat(pane).concat(panes.slice(toIndex)));
     }
   }
 
   removePane(paneGroup: PaneGroupComponent, pane: PaneComponent) {
     const index = paneGroup.panes.indexOf(pane);
     if (index > -1) {
-      paneGroup.setPanes(paneGroup.panes.slice(0, index).concat(paneGroup.panes.slice(index + 1)));
+      this.setPanes(paneGroup, paneGroup.panes.slice(0, index).concat(paneGroup.panes.slice(index + 1)));
     }
+  }
+
+
+  setPanes(paneGroup: PaneGroupComponent, panes: PaneComponent[]) {
+    paneGroup.setPanes(panes);
+    panes.forEach((pane, index) => {
+      if (pane.id && paneGroup.id) {
+        this.updateHistory(pane.id, {
+          groupId: paneGroup.id,
+          index
+        });
+      }
+    });
   }
 
   ngAfterContentInit(): void {
     this.paneGroups.forEach(paneGroup => console.log('after content init in pane area', paneGroup.childPanes.length));
     this.paneGroups.changes.subscribe(() => this.syncGroups());
     this.syncGroups();
+  }
+
+  updateHistory(paneId: string, updates: Partial<PaneState>) {
+    this.historySubject.next(Object.assign({}, this.historySubject.getValue(), {
+      [paneId]: Object.assign({}, this.historySubject.getValue()[paneId] || {}, updates)
+    }));
   }
 
   syncGroups(): void {
@@ -108,9 +165,6 @@ export class PaneAreaComponent implements OnInit, AfterContentInit {
   }
 
   syncPanes() {
-    const areEqual = (pane1: PaneComponent, pane2: PaneComponent) =>
-      pane1 === pane2 || pane1.id != null && pane1.id === pane2.id;
-
     const allPanes = this.paneGroups.reduce<PaneComponent[]>((panesSoFar, paneGroup) => {
       return [...panesSoFar, ...paneGroup.panes];
     }, []);
@@ -118,16 +172,35 @@ export class PaneAreaComponent implements OnInit, AfterContentInit {
       return [...panesSoFar, ...paneGroup.childPanes.toArray()];
     }, []);
 
+    const paneGroupPanes = new Map<PaneGroupComponent, PaneComponent[]>();
     this.paneGroups.forEach(paneGroup => {
-      // remove removed panes
-      let panes = paneGroup.panes.filter(pane => allChildPanes.some(aPane => areEqual(pane, aPane)));
+      paneGroupPanes.set(paneGroup, paneGroup.panes.filter(pane => allChildPanes.indexOf(pane) > -1));
+    });
+    this.paneGroups.forEach(paneGroup => {
+      // remove stale panes.
       paneGroup.childPanes.forEach((childPane, index) => {
-        if (!allPanes.some(aPane => areEqual(childPane, aPane))) {
-          // add newly added panes
-          panes = panes.slice(0, index).concat(childPane).concat(panes.slice(index));
+        if (allPanes.indexOf(childPane) < 0) {
+          // add the ones that are not yet added.
+          const paneHistory = this.historySubject.getValue()[childPane.id];
+          let targetGroup = paneGroup, targetIndex = index;
+          if (paneHistory) {
+            const previousGroup = this.paneGroups.find(group => group.id === paneHistory.groupId);
+            if (previousGroup) {
+              targetGroup = previousGroup;
+              targetIndex = paneHistory.index;
+            }
+          }
+          const panes = paneGroupPanes.get(targetGroup);
+          if (targetIndex < panes.length) {
+            panes.splice(targetIndex, 0, childPane);
+          } else {
+            panes[targetIndex] = childPane;
+          }
         }
       });
-      paneGroup.setPanes(panes);
+    });
+    this.paneGroups.forEach(paneGroup => {
+      paneGroup.setPanes(paneGroupPanes.get(paneGroup).filter(i => i));
     });
   }
 

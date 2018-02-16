@@ -12,6 +12,7 @@ import {PaneTabsComponent} from './pane-tabs/pane-tabs.component';
 import {PaneTabComponent} from './pane-tab/pane-tab.component';
 import {PaneAreaComponent} from './pane-area/pane-area.component';
 import {PaneGroupComponent} from './pane-group/pane-group.component';
+import {LocalStoragePaneAreaStateManager, PaneAreaStateManager} from './state-history-manager';
 
 /**
  * The main module for ngx-panes. Add it to `imports` of your module.
@@ -41,6 +42,10 @@ import {PaneGroupComponent} from './pane-group/pane-group.component';
     PaneAreaComponent,
     PaneGroupComponent
   ],
+  providers: [{
+    provide: PaneAreaStateManager,
+    useClass: LocalStoragePaneAreaStateManager
+  }],
   exports: [
     PaneComponent,
     PaneHeaderComponent,

@@ -6,7 +6,14 @@ import {DemoItemComponent} from './demo-item/demo-item.component';
 import {DemoListComponent} from './demo-list/demo-list.component';
 import {RoutedDemoComponent} from './routed-demo/routed-demo.component';
 import {SharedModule} from '../shared/shared.module';
-import {MatCardModule, MatChipsModule, MatInputModule, MatListModule, MatSelectModule} from '@angular/material';
+import {
+  MatCardModule,
+  MatCheckboxModule,
+  MatChipsModule,
+  MatInputModule,
+  MatListModule,
+  MatSelectModule
+} from '@angular/material';
 import {GithubContributorsComponent} from './github-contributors/github-contributors.component';
 import {GithubIssueListComponent} from './github-issue-list/github-issue-list.component';
 import {GithubFileTreeComponent} from './github-file-tree/github-file-tree.component';
@@ -50,6 +57,7 @@ export const entryComponents = [
     MatCardModule,
     MatChipsModule,
     MatSelectModule,
+    MatCheckboxModule,
     MatInputModule,
     FormsModule,
 

@@ -16,7 +16,13 @@
         "returnType": "Align"
       }
     ],
-    "properties": [],
+    "properties": [
+      {
+        "name": "paneGroups",
+        "type": "QueryList<PaneGroupComponent>",
+        "description": ""
+      }
+    ],
     "type": "directive",
     "isComponent": true,
     "selector": "ngx-pane-area",
@@ -46,6 +52,11 @@
         "name": "align",
         "type": "\"left\" | \"right\" | \"top\" | \"bottom\" | \"start\" | \"end\"",
         "description": "<p>Position of the pane group inside {@link PaneAreaComponent pane area}.\nIt can be a {@link RelativeAlign} or an {@link Align}.</p>\n"
+      },
+      {
+        "name": "panes",
+        "type": "QueryList<PaneComponent>",
+        "description": ""
       },
       {
         "name": "selectedPane",
@@ -232,6 +243,11 @@
     ],
     "properties": [
       {
+        "name": "_openned",
+        "type": "boolean",
+        "description": ""
+      },
+      {
         "name": "content",
         "type": "TemplateRef<any>",
         "description": ""
@@ -335,6 +351,13 @@
     "fileName": "lib/panes.module.ts",
     "usage": "@NgModule({\n  imports: [\n    // ...\n    NgxPanesModule\n    //...\n  ]\n})\nexport class AppModule {}\n",
     "usageLang": "typescript"
+  },
+  {
+    "identifier": "StateHistoryManager",
+    "description": "",
+    "methods": [],
+    "properties": [],
+    "fileName": "lib/state-history-manager.ts"
   },
   {
     "type": "typeAlias",

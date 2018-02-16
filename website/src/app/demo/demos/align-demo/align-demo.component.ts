@@ -1,6 +1,7 @@
 import {Component, HostListener, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {Demo} from '../demos';
 import {PaneGroupComponent} from '../../../../../../lib/pane-group/pane-group.component';
+import {MatCheckboxChange} from '@angular/material';
 
 @Demo({
   id: 'align',
@@ -17,9 +18,14 @@ export class AlignDemoComponent implements OnInit {
 
   @ViewChildren(PaneGroupComponent)
   paneGroups: QueryList<PaneGroupComponent>;
-  aligns = ['top', undefined, 'right', undefined];
+  aligns = ['top', undefined, 'right', 'bottom'];
+  removed = false;
+  groups = [true, true, true, true];
 
   constructor() {
+    // setInterval(() => {
+    //   this.removed = !this.removed;
+    // }, 3000);
   }
 
   @HostListener('click')
@@ -28,6 +34,14 @@ export class AlignDemoComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  identity(a) {
+    return a;
+  }
+
+  selectAll(event: MatCheckboxChange) {
+    this.groups = this.groups.map(() => event.checked);
   }
 
 }

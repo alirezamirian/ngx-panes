@@ -1,5 +1,15 @@
-import {Component, ElementRef, Inject, Input, OnInit, Optional} from '@angular/core';
-import {PaneGroupService} from './pane-group.service';
+import {
+  AfterContentInit,
+  Component,
+  ContentChildren,
+  ElementRef,
+  forwardRef,
+  Inject,
+  Input,
+  OnInit,
+  Optional,
+  QueryList
+} from '@angular/core';
 import {PaneAreaComponent} from '../pane-area/pane-area.component';
 import {Align, RelativeAlign, toAlign, toRelativeAlign} from '../utils/rtl-utils';
 import {PANES_DEFAULTS, PanesDefaults} from '../panes-config';
@@ -28,11 +38,8 @@ import {PaneComponent} from '../pane/pane.component';
 @Component({
   selector: 'ngx-pane-group',
   template: '',
-  providers: [
-    PaneGroupService
-  ]
 })
-export class PaneGroupComponent implements OnInit {
+export class PaneGroupComponent implements OnInit, AfterContentInit {
 
   private _relativeAlign: RelativeAlign;
   private initialized: boolean;
@@ -43,9 +50,7 @@ export class PaneGroupComponent implements OnInit {
    * @default null
    * @type {number|null}
    */
-  @Input() set defaultWidth(defaultWidth: number | null) {
-    this.paneGroup.setOption('defaultWidth', defaultWidth);
-  };
+  @Input() defaultWidth: number | null;
 
   /**
    * Whether clicking on tabs toggles the selected panes or not. If toggleable is false, clicking on currently open
@@ -53,24 +58,24 @@ export class PaneGroupComponent implements OnInit {
    * @type {boolean}
    * @default true
    */
-  @Input() set toggleable(toggleable: boolean) {
-    this.paneGroup.setOption('toggleable', toggleable);
-  };
+  @Input() toggleable = true;
 
   /**
    * Whether or not the last pane should be opened if no pane is marked initially as opened.
    * @type {boolean}
    * @default true
    */
-  @Input() set autoOpen(autoOpen: boolean) {
-    this.paneGroup.setOption('autoOpen', autoOpen);
-  };
+  @Input() autoOpen = true;
 
   public _align: Align;
 
   get align() {
     return this._align;
   }
+
+  @ContentChildren(forwardRef(() => PaneComponent))
+  childPanes: QueryList<PaneComponent>;
+  public panes: PaneComponent[] = [];
 
   // noinspection JSAnnotator
   /**
@@ -84,26 +89,26 @@ export class PaneGroupComponent implements OnInit {
     this._align = toAlign(value, this.getDir());
     this._relativeAlign = toRelativeAlign(value, this.getDir());
     if (this.paneArea && this._align && this.initialized) {
-      this.paneArea.addGroup(this.paneGroup, this._align);
+      this.paneArea.syncGroups();
     }
   }
+
+  private _selectedPane: PaneComponent | null;
 
   /**
    * returns currently selected pane
    * @returns {PaneComponent}
    */
   public get selectedPane(): PaneComponent | null {
-    return this.paneGroup.snapshot.selectedPane;
+    return this._selectedPane;
   }
 
-  ngOnInit() {
-    this.paneArea.addGroup(this.paneGroup, this._align);
-    this.initialized = true;
+  public set selectedPane(pane: PaneComponent | null) {
+    this._selectedPane = pane;
   }
 
   constructor(private $el: ElementRef,
-              private paneArea: PaneAreaComponent,
-              public paneGroup: PaneGroupService,
+              @Inject(forwardRef(() => PaneAreaComponent)) private paneArea: PaneAreaComponent,
               @Optional() @Inject(PANES_DEFAULTS) defaults: PanesDefaults) {
     if (defaults) {
       if (defaults.autoOpen != null) {
@@ -118,11 +123,49 @@ export class PaneGroupComponent implements OnInit {
     }
   }
 
+
+  ngOnInit() {
+  }
+
+  ngAfterContentInit() {
+    // console.log('after content init in pane group');
+  }
+
+  /**
+   * @private
+   */
+  public setPanes(panes: PaneComponent[]) {
+    this.panes = panes;
+    if (panes.indexOf(this.selectedPane) < 0) {
+      this.selectedPane = null;
+    }
+    if (!this.initialized) {
+      this.selectedPane = this.panes.find(pane => pane._openned) || null;
+      if (!this.selectedPane && this.autoOpen && this.panes.length > 0) {
+        this.selectedPane = this.panes[0];
+      }
+    }
+    panes.forEach(pane => pane.paneGroup = this);
+    this.initialized = true;
+  }
+
   /**
    * Closes currently selected pane. Does nothing if already closed.
    */
   public close(): void {
-    this.paneGroup.close();
+    this.selectedPane = null;
+  }
+
+  public open(pane: PaneComponent) {
+    this.selectedPane = pane;
+  }
+
+  public toggle(pane: PaneComponent) {
+    if (this.selectedPane === pane && this.toggleable) {
+      this.close();
+    } else if (pane) {
+      this.open(pane);
+    }
   }
 
   private getDir(): 'rtl' | 'ltr' {

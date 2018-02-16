@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   ElementRef,
@@ -13,8 +12,8 @@ import {
 import {PaneComponent} from '../pane/pane.component';
 import {Align, RelativeAlign} from '../utils/rtl-utils';
 import {DragStartEvent, PaneTabComponent} from '../pane-tab/pane-tab.component';
-import {PaneGroupService} from '../pane-group/pane-group.service';
 import {PaneTabDragDropContext} from '../pane-tab-drag-drop-context';
+import {PaneGroupComponent} from '../pane-group/pane-group.component';
 
 interface Range {
   from;
@@ -37,14 +36,14 @@ interface DragState {
   /**
    * Used for disabling initial unwanted animation
    */
-  started: boolean
+  started: boolean;
 }
 
 @Component({
   selector: 'pane-tabs',
   templateUrl: './pane-tabs.component.html',
   styleUrls: ['./pane-tabs.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  // changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     PaneTabDragDropContext
   ]
@@ -52,7 +51,7 @@ interface DragState {
 export class PaneTabsComponent implements OnDestroy {
 
   @Input()
-  paneGroup: PaneGroupService;
+  paneGroup: PaneGroupComponent;
   @Input()
   direction: 'h' | 'v';
   @Input()
@@ -115,7 +114,7 @@ export class PaneTabsComponent implements OnDestroy {
   }
 
   handleDragStart(dragStart: DragStartEvent, willRotate: boolean) {
-    const draggingPaneIndex = this.paneGroup.snapshot.panes.indexOf(dragStart.pane);
+    const draggingPaneIndex = this.paneGroup.panes.indexOf(dragStart.pane);
 
     const direction = this.oppositeDirection();
     const effectiveSize = this.getSize(dragStart.from, willRotate ? this.direction : direction);

@@ -1,7 +1,7 @@
 <div class="tabs" [ngClass]="[direction, relativeAlign, align]"
      [class.can-drop]="dragState && dragState.placeholderIndex > -1">
-  <pane-tab *ngFor="let pane of (paneGroup?.panes$ | async); let index = index"
-            [active]="paneGroup.snapshot.selectedPane === pane"
+  <pane-tab *ngFor="let pane of paneGroup?.panes; let index = index"
+            [active]="paneGroup.selectedPane === pane"
             [direction]="direction"
             [align]="align"
             [pane]="pane"

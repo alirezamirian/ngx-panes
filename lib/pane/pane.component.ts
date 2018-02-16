@@ -2,7 +2,7 @@ import {Component, ContentChild, Inject, Input, OnInit, Optional, TemplateRef, V
 import {PaneHeaderComponent} from '../pane-header/pane-header.component';
 import {Boolean} from '../utils/decorators';
 import {PANES_DEFAULTS, PanesDefaults} from '../panes-config';
-import {PaneGroupService} from '../pane-group/pane-group.service';
+import {PaneGroupComponent} from '../pane-group/pane-group.component';
 
 
 /**
@@ -39,10 +39,10 @@ export class PaneComponent implements OnInit {
    */
   @Input() title: string;
   private _width: number;
-  private _openned: boolean;
+  _openned: boolean;
 
   get width(): number | null {
-    return this._width || this.paneGroup.getOption('defaultWidth');
+    return this._width || this.paneGroup.defaultWidth;
   }
 
   /**
@@ -72,7 +72,7 @@ export class PaneComponent implements OnInit {
    * @returns {boolean}
    */
   get opened() {
-    return this.paneGroup.snapshot.selectedPane === this;
+    return this.paneGroup.selectedPane === this;
   }
 
   /**
@@ -90,10 +90,9 @@ export class PaneComponent implements OnInit {
         this.close();
       }
     }
-    this._openned = value;
   };
 
-  constructor(public paneGroup: PaneGroupService,
+  constructor(public paneGroup: PaneGroupComponent,
               @Optional() @Inject(PANES_DEFAULTS) defaults: PanesDefaults) {
     if (defaults) {
       if (defaults.resizable != null) {
@@ -101,21 +100,13 @@ export class PaneComponent implements OnInit {
       }
     }
     if (this._openned) {
-      this.paneGroup.select(this);
+      this.paneGroup.open(this);
     }
 
   }
 
   ngOnInit() {
-    // TODO: maybe this should be moved to PaneGroupComponent. it can query for all paneComponent content childs,
-    // and add/remove them to paneGroup when necessary.
-    this.paneGroup.add(this);
-    if (this._openned) {
-      this.paneGroup.select(this);
-    }
-    if (!this.paneGroup.snapshot.selectedPane && this.paneGroup.options.autoOpen) {
-      this.open();
-    }
+
   }
 
 
@@ -123,7 +114,7 @@ export class PaneComponent implements OnInit {
    * Opens this pane. Does nothing if already opened.
    */
   open() {
-    this.paneGroup.select(this);
+    this.paneGroup.open(this);
   }
 
   /**

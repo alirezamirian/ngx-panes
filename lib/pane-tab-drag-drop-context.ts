@@ -1,11 +1,22 @@
 import {Injectable, NgZone, Optional, SkipSelf} from '@angular/core';
 import {PaneTabsComponent} from './pane-tabs/pane-tabs.component';
 import {DragEvent, DragStartEvent} from './pane-tab/pane-tab.component';
+import {PaneGroupComponent} from './pane-group/pane-group.component';
+import {Subject} from 'rxjs/Subject';
+import {PaneComponent} from './pane/pane.component';
+import {Observable} from 'rxjs/Observable';
 
 
 interface DropCandidate {
   tabGroup: PaneTabsComponent;
   index: number;
+}
+
+export interface Move {
+  pane: PaneComponent;
+  from: PaneGroupComponent;
+  to: PaneGroupComponent;
+  toIndex: number;
 }
 
 /**
@@ -15,6 +26,10 @@ interface DropCandidate {
 export class PaneTabDragDropContext {
 
   private tabGroups: PaneTabsComponent[] = [];
+
+  private movesSubject = new Subject<Move>();
+
+  public moves$: Observable<Move> = this.movesSubject.asObservable();
 
   constructor(@Optional() @SkipSelf() delegate: PaneTabDragDropContext, private ngZone: NgZone) {
     return delegate;
@@ -66,13 +81,12 @@ export class PaneTabDragDropContext {
       }, null, () => {
         this.ngZone.run(() => {
           if (dropCandidate) {
-            if (dropCandidate.tabGroup.paneGroup === initiatorTabGroup.paneGroup) {
-              initiatorTabGroup.paneGroup.move(dragStart.pane, dropCandidate.index);
-            } else {
-              dropCandidate.tabGroup.paneGroup.add(dragStart.pane, dropCandidate.index);
-              initiatorTabGroup.paneGroup.remove(dragStart.pane);
-            }
-            dragStart.pane.open();
+            this.movesSubject.next({
+              pane: dragStart.pane,
+              from: initiatorTabGroup.paneGroup,
+              to: dropCandidate.tabGroup.paneGroup,
+              toIndex: dropCandidate.index
+            });
           }
           tabGroups.forEach(tabGroup => {
             tabGroup.handleDragFinish();

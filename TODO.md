@@ -25,7 +25,7 @@
 
 ## Low priority
 - [ ] Add option for pane reordering
-- [ ] Add support for cross pane-group pane reordering inside a pane-area
+- [x] Add support for cross pane-group pane reordering inside a pane-area
 - [ ] Add option for cross pane-group pane reordering being enabled or not
 
 ## Least priority

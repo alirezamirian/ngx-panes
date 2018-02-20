@@ -1,5 +1,5 @@
 <ngx-pane-area #paneArea id="alignDemo">
-  <ngx-pane-group id="paneGroup1" #paneGroup1 [defaultWidth]="200" [align]="aligns[0]" [autoOpen]="false"
+  <ngx-pane-group id="paneGroup1" [defaultWidth]="200" [align]="aligns[0]" [autoOpen]="false"
                   *ngIf="groups[0]">
     <ngx-pane title="First group - 1" id="pane1">
       <div class="padding">
@@ -8,14 +8,14 @@
         if it wasn't specified.
       </div>
     </ngx-pane>
-    <ngx-pane title="First group - 2" id="pane2" *ngIf="!removed">
+    <ngx-pane title="First group - 2" id="pane2">
       <app-demo-content [lines]="20"></app-demo-content>
     </ngx-pane>
     <ngx-pane title="First group - 3" id="pane3">
       <app-demo-content [lines]="20"></app-demo-content>
     </ngx-pane>
   </ngx-pane-group>
-  <ngx-pane-group id="paneGroup2" [defaultWidth]="300" #paneGroup2 [align]="aligns[1]" *ngIf="groups[1]">
+  <ngx-pane-group id="paneGroup2" [defaultWidth]="300" [align]="aligns[1]" *ngIf="groups[1]">
     <ngx-pane title="Second group - 1" id="pane4">
       <div class="padding">
         Initial alignment of this pane group is not set.
@@ -27,7 +27,7 @@
       <app-demo-content [lines]="22"></app-demo-content>
     </ngx-pane>
   </ngx-pane-group>
-  <ngx-pane-group id="paneGroup3" [align]="aligns[2]" #paneGroup3 [defaultWidth]="250" *ngIf="groups[2]">
+  <ngx-pane-group id="paneGroup3" [align]="aligns[2]" [defaultWidth]="250" *ngIf="groups[2]">
     <ngx-pane title="Third group - 1" id="pane6">
       <div class="padding">
         Initial alignment of this pane group is set to right.
@@ -36,7 +36,7 @@
       </div>
     </ngx-pane>
   </ngx-pane-group>
-  <ngx-pane-group id="paneGroup4" [align]="aligns[3]" #paneGroup4 [defaultWidth]="150" *ngIf="groups[3]">
+  <ngx-pane-group id="paneGroup4" [align]="aligns[3]" [defaultWidth]="150" *ngIf="groups[3]">
     <ngx-pane title="Forth group - 1" id="pane7">
       <div class="padding">
         Initial alignment of this pane group is not set.
@@ -57,8 +57,8 @@
     </p>
     <div fxLayout="row" fxLayoutAlign="center">
       <mat-form-field>
-        <mat-select placeholder="First group alignment"
-                    [value]="paneArea.getAlign(paneGroup1)" (valueChange)="aligns[0] = $event">
+        <mat-select placeholder="First group alignment" [disabled]="!paneGroupsArray[0]"
+                    [value]="paneArea.getAlign(paneGroupsArray[0])" (valueChange)="aligns[0] = $event">
           <mat-option value="left">left</mat-option>
           <mat-option value="right">right</mat-option>
           <mat-option value="top">top</mat-option>
@@ -66,8 +66,8 @@
         </mat-select>
       </mat-form-field>
       <mat-form-field>
-        <mat-select placeholder="Second group alignment"
-                    [value]="paneArea.getAlign(paneGroup2)" (valueChange)="aligns[1] = $event">
+        <mat-select placeholder="Second group alignment" [disabled]="!paneGroupsArray[1]"
+                    [value]="paneArea.getAlign(paneGroupsArray[1])" (valueChange)="aligns[1] = $event">
           <mat-option value="left">left</mat-option>
           <mat-option value="right">right</mat-option>
           <mat-option value="top">top</mat-option>
@@ -77,8 +77,8 @@
     </div>
     <div fxLayout="row" fxLayoutAlign="center">
       <mat-form-field>
-        <mat-select placeholder="Third group alignment"
-                    [value]="paneArea.getAlign(paneGroup3)" (valueChange)="aligns[2] = $event">
+        <mat-select placeholder="Third group alignment" [disabled]="!paneGroupsArray[2]"
+                    [value]="paneArea.getAlign(paneGroupsArray[2])" (valueChange)="aligns[2] = $event">
           <mat-option value="left">left</mat-option>
           <mat-option value="right">right</mat-option>
           <mat-option value="top">top</mat-option>
@@ -86,8 +86,8 @@
         </mat-select>
       </mat-form-field>
       <mat-form-field>
-        <mat-select placeholder="Forth group alignment"
-                    [value]="paneArea.getAlign(paneGroup4)" (valueChange)="aligns[3] = $event">
+        <mat-select placeholder="Forth group alignment" [disabled]="!paneGroupsArray[3]"
+                    [value]="paneArea.getAlign(paneGroupsArray[3])" (valueChange)="aligns[3] = $event">
           <mat-option value="left">left</mat-option>
           <mat-option value="right">right</mat-option>
           <mat-option value="top">top</mat-option>
@@ -108,9 +108,11 @@
       <mat-checkbox [(ngModel)]="groups[3]">Forth Pane Group</mat-checkbox>
     </div>
     <br/>
-    <div *ngIf="hasHistory">
-      The order of the panes are loaded via saved history.
-      <button mat-button color="warn" (click)="clearHistory()">Clear History</button>
-    </div>
+    <app-callout type="info" *ngIf="hasHistory">
+      <div fxLayout="row" fxLayoutAlign="start start">
+        <div fxFlex>The order of the panes are loaded via saved history.</div>
+        <button mat-button color="warn" (click)="clearHistory()">Clear History</button>
+      </div>
+    </app-callout>
   </div>
 </ngx-pane-area>

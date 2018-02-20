@@ -25,22 +25,26 @@ export class AlignDemoComponent implements AfterViewInit {
   paneArea: PaneAreaComponent;
 
   aligns = ['top', undefined, 'right', 'bottom'];
-  removed = false;
   groups = [true, true, true, true];
+  paneGroupsArray: PaneGroupComponent[] = [];
   private hasHistory: boolean;
 
   constructor(public historyManager: PaneAreaStateManager) {
-    setInterval(() => {
-      this.removed = !this.removed;
-    }, 3000);
   }
 
   @HostListener('click')
   log() {
-    console.log(this.paneGroups.map(paneGroup => paneGroup.align));
+    console.log(this.paneGroups);
   }
 
   ngAfterViewInit() {
+    this.paneGroupsArray = this.paneGroups.toArray();
+    this.paneGroups.changes.subscribe(() => this.paneGroupsArray = [
+      this.paneGroups.find(paneGroup => paneGroup.id === 'paneGroup1'),
+      this.paneGroups.find(paneGroup => paneGroup.id === 'paneGroup2'),
+      this.paneGroups.find(paneGroup => paneGroup.id === 'paneGroup3'),
+      this.paneGroups.find(paneGroup => paneGroup.id === 'paneGroup4'),
+    ]);
     setTimeout(() => {
       this.hasHistory = !!this.historyManager.getHistory(this.paneArea);
     });

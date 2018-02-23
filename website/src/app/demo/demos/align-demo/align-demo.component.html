@@ -108,10 +108,10 @@
       <mat-checkbox [(ngModel)]="groups[3]">Forth Pane Group</mat-checkbox>
     </div>
     <br/>
-    <app-callout type="info" *ngIf="hasHistory">
+    <app-callout type="danger" *ngIf="hasHistory">
       <div fxLayout="row" fxLayoutAlign="start start">
         <div fxFlex>The order of the panes are loaded via saved history.</div>
-        <button mat-button color="warn" (click)="clearHistory()">Clear History</button>
+        <button mat-button color="warn" class="btn-clear-history" (click)="clearHistory()">Clear History</button>
       </div>
     </app-callout>
   </div>

@@ -26,7 +26,8 @@
 ## Low priority
 - [x] Add option for pane reordering
 - [x] Add support for cross pane-group pane reordering inside a pane-area
-- [ ] Warn user for missing ids
+- [x] Add support for passing state as an input
+- [ ] Warn user of missing ids
 - [ ] Add support for custom state management services
 - [ ] Add support for NoHistory directive (which provides a noop paneAreaStateManager)
 

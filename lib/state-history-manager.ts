@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {PaneAreaComponent, PaneHistory} from './pane-area/pane-area.component';
+import {PaneAreaComponent, PaneAreaState} from './pane-area/pane-area.component';
 import {PaneGroupComponent} from './pane-group/pane-group.component';
 import {Observable} from 'rxjs/Observable';
 
@@ -12,17 +12,17 @@ export interface Position {
 export abstract class PaneAreaStateManager {
 
 
-  abstract getHistory(paneArea: PaneAreaComponent): PaneHistory;
+  abstract getSavedState(paneArea: PaneAreaComponent): PaneAreaState | Promise<PaneAreaState>;
 
-  abstract trackChanges(paneArea: PaneAreaComponent, history$: Observable<PaneHistory>);
+  abstract trackChanges(paneArea: PaneAreaComponent, state$: Observable<PaneAreaState>): void;
 
-  abstract clearHistory(paneArea: PaneAreaComponent);
+  abstract clearHistory(paneArea: PaneAreaComponent): void;
 }
 
 @Injectable()
 export class LocalStoragePaneAreaStateManager extends PaneAreaStateManager {
 
-  getHistory(paneArea: PaneAreaComponent): PaneHistory {
+  getSavedState(paneArea: PaneAreaComponent): PaneAreaState {
     return JSON.parse(localStorage.getItem(this.getKey(paneArea)));
   }
 
@@ -30,8 +30,8 @@ export class LocalStoragePaneAreaStateManager extends PaneAreaStateManager {
     localStorage.removeItem(this.getKey(paneArea));
   }
 
-  trackChanges(paneArea: PaneAreaComponent, history$: Observable<PaneHistory>) {
-    history$.subscribe(history => {
+  trackChanges(paneArea: PaneAreaComponent, state$: Observable<PaneAreaState>) {
+    state$.subscribe(history => {
       localStorage.setItem(this.getKey(paneArea), JSON.stringify(history));
     });
   }

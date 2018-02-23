@@ -25,7 +25,7 @@
   },
   {
     "type": "type",
-    "identifier": "PaneHistory",
+    "identifier": "PaneAreaState",
     "description": "",
     "methods": [],
     "properties": [],
@@ -70,6 +70,11 @@
         "description": ""
       },
       {
+        "name": "state",
+        "type": "PaneAreaState",
+        "description": ""
+      },
+      {
         "name": "top",
         "type": "Side",
         "description": ""
@@ -91,7 +96,12 @@
         "description": "<p>Whether user should be able to reorder panes in a pane group (or move panes between\npane groups) by dragging their tabs.\nFor now there is no separate options for reordering and moving to another pane group, as\nsuch option doesn&#39;t seem to be necessary.</p>\n"
       }
     ],
-    "outputs": [],
+    "outputs": [
+      {
+        "name": "stateChange",
+        "description": ""
+      }
+    ],
     "fileName": "lib/pane-area/pane-area.component.ts",
     "usage": "<ngx-pane-area>\r  <ngx-pane-group> ... </ngx-pane-group>\r  <ngx-pane-group> ... </ngx-pane-group>\r  <div>\r    <!-- will be projected as main content -->\r  </div>\r</ngx-pane-area>"
   },

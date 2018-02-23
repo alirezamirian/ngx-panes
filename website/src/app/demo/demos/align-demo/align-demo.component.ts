@@ -46,7 +46,7 @@ export class AlignDemoComponent implements AfterViewInit {
       this.paneGroups.find(paneGroup => paneGroup.id === 'paneGroup4'),
     ]);
     setTimeout(() => {
-      this.hasHistory = !!this.historyManager.getHistory(this.paneArea);
+      this.hasHistory = !!this.historyManager.getSavedState(this.paneArea);
     });
   }
 

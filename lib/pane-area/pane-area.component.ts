@@ -1,31 +1,15 @@
-import {
-  AfterContentInit,
-  Component,
-  ContentChildren,
-  forwardRef,
-  Input,
-  OnDestroy,
-  OnInit,
-  QueryList
-} from '@angular/core';
+import {AfterContentInit, Component, ContentChildren, EventEmitter, Input, Output, QueryList} from '@angular/core';
 import {Align} from '../utils/rtl-utils';
 import {PaneGroupComponent} from '../pane-group/pane-group.component';
 import {Move, PaneTabDragDropContext} from '../pane-tab-drag-drop-context';
 import {PaneComponent} from '../pane/pane.component';
 import {Subscription} from 'rxjs/Subscription';
 import {PaneAreaStateManager} from '../state-history-manager';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import {skip} from 'rxjs/operators';
 
 
 interface Side {
   paneGroup: PaneGroupComponent;
   subscriptions?: Subscription[];
-}
-
-interface PaneGroupHistory {
-  align?: Align;
-  paneIds: string[];
 }
 
 export interface PaneState {
@@ -34,8 +18,8 @@ export interface PaneState {
   index: number;
 }
 
-export interface PaneHistory {
-  [key: string]: PaneState;
+export interface PaneAreaState {
+  [id: string]: PaneState;
 }
 
 /**
@@ -62,7 +46,7 @@ export interface PaneHistory {
     PaneTabDragDropContext
   ]
 })
-export class PaneAreaComponent implements OnInit, AfterContentInit, OnDestroy {
+export class PaneAreaComponent implements AfterContentInit {
 
   @Input()
   id: string;
@@ -80,45 +64,45 @@ export class PaneAreaComponent implements OnInit, AfterContentInit, OnDestroy {
   right: Side = {paneGroup: null};
   bottom: Side = {paneGroup: null};
   top: Side = {paneGroup: null};
-  @ContentChildren(forwardRef(() => PaneGroupComponent))
+  @ContentChildren(PaneGroupComponent)
   paneGroups: QueryList<PaneGroupComponent>;
   private aligns: Align[] = ['left', 'right', 'bottom', 'top'];
-  private historySubject: BehaviorSubject<PaneHistory>;
+
+  @Output()
+  stateChange: EventEmitter<PaneAreaState> = new EventEmitter<PaneAreaState>();
+
+  // TODO make it @Input()
+  state: PaneAreaState;
 
   constructor(private dragDropContext: PaneTabDragDropContext,
-              private historyManager: PaneAreaStateManager) {
-  }
-
-  ngOnInit() {
-    this.historySubject = new BehaviorSubject<PaneHistory>(this.historyManager.getHistory(this) || {});
-    this.historyManager.trackChanges(this, this.historySubject.asObservable().pipe(skip(1)));
-
-    this.dragDropContext.moves$.subscribe((move: Move) => {
-      if (move.from === move.to) {
-        this.movePane(move.from, move.pane, move.toIndex);
-      } else {
-        this.addPane(move.to, move.pane, move.toIndex);
-        this.removePane(move.from, move.pane);
-      }
-      move.pane.open();
-    });
+              private stateManager: PaneAreaStateManager) {
   }
 
   ngAfterContentInit(): void {
-    this.paneGroups.forEach(paneGroup => console.log('after content init in pane area', paneGroup.childPanes.length));
-    this.paneGroups.changes.subscribe(() => this.syncGroups());
-    this.syncGroups();
-  }
+    this.stateManager.trackChanges(this, this.stateChange);
+    Promise.resolve(this.stateManager.getSavedState(this)).then(state => {
+      this.state = state || {};
 
-  ngOnDestroy() {
-    this.historySubject.complete();
+      // TODO: add support for async state initialization and postpone initialization bellow until state got initialized
+      this.paneGroups.changes.subscribe(() => this.syncGroups());
+      this.syncGroups();
+      this.dragDropContext.moves$.subscribe((move: Move) => {
+        if (move.from === move.to) {
+          this.movePane(move.from, move.pane, move.toIndex);
+        } else {
+          this.addPane(move.to, move.pane, move.toIndex);
+          this.removePane(move.from, move.pane);
+        }
+        move.pane.open();
+      });
+    });
   }
 
   setPanes(paneGroup: PaneGroupComponent, panes: PaneComponent[]) {
     paneGroup.setPanes(panes);
     panes.forEach((pane, index) => {
       if (pane.id && paneGroup.id) {
-        this.updateHistory(pane.id, {
+        this.updateState(pane.id, {
           groupId: paneGroup.id,
           index
         });
@@ -161,10 +145,11 @@ export class PaneAreaComponent implements OnInit, AfterContentInit, OnDestroy {
     }
   }
 
-  private updateHistory(paneId: string, updates: Partial<PaneState>) {
-    this.historySubject.next(Object.assign({}, this.historySubject.getValue(), {
-      [paneId]: Object.assign({}, this.historySubject.getValue()[paneId] || {}, updates)
-    }));
+  private updateState(paneId: string, updates: Partial<PaneState>) {
+    this.state = Object.assign({}, this.state, {
+      [paneId]: Object.assign({}, this.state[paneId] || {}, updates)
+    });
+    this.stateChange.emit(this.state);
   }
 
   private syncGroups(): void {
@@ -196,7 +181,7 @@ export class PaneAreaComponent implements OnInit, AfterContentInit, OnDestroy {
       paneGroup.childPanes.forEach((childPane, index) => {
         if (allPanes.indexOf(childPane) < 0) {
           // add the ones that are not yet added.
-          const paneHistory = this.historySubject.getValue()[childPane.id];
+          const paneHistory = this.state[childPane.id];
           let targetGroup = paneGroup, targetIndex = index;
           if (paneHistory) {
             const previousGroup = this.paneGroups.find(group => group.id === paneHistory.groupId);

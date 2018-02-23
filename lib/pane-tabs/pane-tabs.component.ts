@@ -58,6 +58,8 @@ export class PaneTabsComponent implements OnDestroy {
   align: Align;
   @Input()
   relativeAlign: RelativeAlign;
+  @Input()
+  draggable = true;
 
   @HostBinding('class.dragging')
   get canAnimate(): boolean {

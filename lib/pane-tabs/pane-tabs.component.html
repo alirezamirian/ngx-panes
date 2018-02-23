@@ -8,5 +8,6 @@
             [class.dragging]="dragState?.draggingPaneIndex === index"
             [style.marginLeft.px]="direction === 'h' && index === dragState?.placeholderIndex ? dragState.placeholderSize : 0"
             [style.marginTop.px]="direction === 'v' && index === dragState?.placeholderIndex ? dragState.placeholderSize : 0"
+            [draggable]="draggable"
             (click)="paneGroup.toggle(pane)" (dragStarted)="dragStarted($event)"></pane-tab>
 </div>

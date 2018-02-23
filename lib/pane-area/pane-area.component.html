@@ -1,9 +1,11 @@
 <div class="outer-wrapper">
-  <pane-tabs class="v-pane-tabs" align="top" relativeAlign="top" direction="h" [paneGroup]="top.paneGroup"></pane-tabs>
+  <pane-tabs class="v-pane-tabs" align="top" relativeAlign="top" direction="h" [draggable]="tabsDraggable"
+             [paneGroup]="top.paneGroup"></pane-tabs>
   <div class="inner-wrapper flex">
     <!-- TODO: consider passing around the pane group to pane-tabs and pane-view. This way this.left, this.right, ...
     can be simplified to pane groups only -->
-    <pane-tabs align="left" relativeAlign="start" direction="v" [paneGroup]="left.paneGroup"></pane-tabs>
+    <pane-tabs align="left" relativeAlign="start" direction="v" [draggable]="tabsDraggable"
+               [paneGroup]="left.paneGroup"></pane-tabs>
     <div class="content-outer-wrapper flex">
       <pane-view *ngIf="top.paneGroup?.selectedPane as pane" [pane]="pane" [align]="'top'"></pane-view>
       <div class="content-inner-wrapper flex">
@@ -15,8 +17,9 @@
       </div>
       <pane-view *ngIf="bottom.paneGroup?.selectedPane as pane" [pane]="pane" [align]="'bottom'"></pane-view>
     </div>
-    <pane-tabs align="right" relativeAlign="end" direction="v" [paneGroup]="right.paneGroup"></pane-tabs>
+    <pane-tabs align="right" relativeAlign="end" direction="v" [draggable]="tabsDraggable"
+               [paneGroup]="right.paneGroup"></pane-tabs>
   </div>
-  <pane-tabs class="v-pane-tabs" align="bottom" relativeAlign="bottom" direction="h"
+  <pane-tabs class="v-pane-tabs" align="bottom" relativeAlign="bottom" direction="h" [draggable]="tabsDraggable"
              [paneGroup]="bottom.paneGroup"></pane-tabs>
 </div>

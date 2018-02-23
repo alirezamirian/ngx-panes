@@ -1,5 +1,37 @@
 [
   {
+    "type": "type",
+    "identifier": "PaneState",
+    "description": "",
+    "methods": [],
+    "properties": [
+      {
+        "name": "groupId",
+        "type": "string",
+        "description": ""
+      },
+      {
+        "name": "index",
+        "type": "number",
+        "description": ""
+      },
+      {
+        "name": "size",
+        "type": "number",
+        "description": ""
+      }
+    ],
+    "fileName": "lib/pane-area/pane-area.component.ts"
+  },
+  {
+    "type": "type",
+    "identifier": "PaneHistory",
+    "description": "",
+    "methods": [],
+    "properties": [],
+    "fileName": "lib/pane-area/pane-area.component.ts"
+  },
+  {
     "identifier": "PaneAreaComponent",
     "description": "<p>Defines an area consisted of a centered main content surrounded by\nup to 4 side pane groups (aka tool windows).</p>\n<p>Children of ngx-pane-area except for {@link PaneGroupComponent ngx-pane-group}s are\nprojected as main content.</p>\n",
     "methods": [
@@ -18,15 +50,47 @@
     ],
     "properties": [
       {
+        "name": "bottom",
+        "type": "Side",
+        "description": ""
+      },
+      {
+        "name": "left",
+        "type": "Side",
+        "description": ""
+      },
+      {
         "name": "paneGroups",
         "type": "QueryList<PaneGroupComponent>",
+        "description": ""
+      },
+      {
+        "name": "right",
+        "type": "Side",
+        "description": ""
+      },
+      {
+        "name": "top",
+        "type": "Side",
         "description": ""
       }
     ],
     "type": "directive",
     "isComponent": true,
     "selector": "ngx-pane-area",
-    "inputs": [],
+    "inputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "description": ""
+      },
+      {
+        "name": "tabsDraggable",
+        "defaultValue": "true",
+        "type": "boolean",
+        "description": "<p>Whether user should be able to reorder panes in a pane group (or move panes between\npane groups) by dragging their tabs.\nFor now there is no separate options for reordering and moving to another pane group, as\nsuch option doesn&#39;t seem to be necessary.</p>\n"
+      }
+    ],
     "outputs": [],
     "fileName": "lib/pane-area/pane-area.component.ts",
     "usage": "<ngx-pane-area>\r  <ngx-pane-group> ... </ngx-pane-group>\r  <ngx-pane-group> ... </ngx-pane-group>\r  <div>\r    <!-- will be projected as main content -->\r  </div>\r</ngx-pane-area>"
@@ -54,8 +118,18 @@
         "description": "<p>Position of the pane group inside {@link PaneAreaComponent pane area}.\nIt can be a {@link RelativeAlign} or an {@link Align}.</p>\n"
       },
       {
-        "name": "panes",
+        "name": "align$",
+        "type": "Observable<Align>",
+        "description": ""
+      },
+      {
+        "name": "childPanes",
         "type": "QueryList<PaneComponent>",
+        "description": ""
+      },
+      {
+        "name": "panes",
+        "type": "PaneComponent[]",
         "description": ""
       },
       {
@@ -75,6 +149,7 @@
       },
       {
         "name": "autoOpen",
+        "defaultValue": "true",
         "type": "boolean",
         "description": "<p>Whether or not the last pane should be opened if no pane is marked initially as opened.</p>\n"
       },
@@ -84,7 +159,13 @@
         "description": "<p>Default width (in pixels) to be used for any child pane with an undefined width.\nIf you don&#39;t specify a default width, child panes will <strong>wrap they content</strong>.</p>\n"
       },
       {
+        "name": "id",
+        "type": "string",
+        "description": ""
+      },
+      {
         "name": "toggleable",
+        "defaultValue": "true",
         "type": "boolean",
         "description": "<p>Whether clicking on tabs toggles the selected panes or not. If toggleable is false, clicking on currently open\npane&#39;s tab will do nothing.</p>\n"
       }
@@ -125,6 +206,35 @@
     "fileName": "lib/pane-resizer/pane-resizer.component.ts"
   },
   {
+    "type": "type",
+    "identifier": "Move",
+    "description": "",
+    "methods": [],
+    "properties": [
+      {
+        "name": "from",
+        "type": "PaneGroupComponent",
+        "description": ""
+      },
+      {
+        "name": "pane",
+        "type": "PaneComponent",
+        "description": ""
+      },
+      {
+        "name": "to",
+        "type": "PaneGroupComponent",
+        "description": ""
+      },
+      {
+        "name": "toIndex",
+        "type": "number",
+        "description": ""
+      }
+    ],
+    "fileName": "lib/pane-tab-drag-drop-context.ts"
+  },
+  {
     "identifier": "PaneTabComponent",
     "description": "",
     "methods": [],
@@ -146,6 +256,12 @@
       {
         "name": "direction",
         "type": "\"h\" | \"v\"",
+        "description": ""
+      },
+      {
+        "name": "draggable",
+        "defaultValue": "true",
+        "type": "boolean",
         "description": ""
       },
       {
@@ -188,8 +304,14 @@
         "description": ""
       },
       {
+        "name": "draggable",
+        "defaultValue": "true",
+        "type": "boolean",
+        "description": ""
+      },
+      {
         "name": "paneGroup",
-        "type": "PaneGroupService",
+        "type": "PaneGroupComponent",
         "description": ""
       },
       {
@@ -353,7 +475,33 @@
     "usageLang": "typescript"
   },
   {
-    "identifier": "StateHistoryManager",
+    "type": "type",
+    "identifier": "Position",
+    "description": "",
+    "methods": [],
+    "properties": [
+      {
+        "name": "index",
+        "type": "number",
+        "description": ""
+      },
+      {
+        "name": "paneGroup",
+        "type": "PaneGroupComponent",
+        "description": ""
+      }
+    ],
+    "fileName": "lib/state-history-manager.ts"
+  },
+  {
+    "identifier": "PaneAreaStateManager",
+    "description": "",
+    "methods": [],
+    "properties": [],
+    "fileName": "lib/state-history-manager.ts"
+  },
+  {
+    "identifier": "LocalStoragePaneAreaStateManager",
     "description": "",
     "methods": [],
     "properties": [],

@@ -1,5 +1,4 @@
 import {
-  AfterContentInit,
   Component,
   ContentChildren,
   ElementRef,
@@ -10,10 +9,10 @@ import {
   Optional,
   QueryList
 } from '@angular/core';
-import {PaneAreaComponent} from '../pane-area/pane-area.component';
 import {Align, RelativeAlign, toAlign, toRelativeAlign} from '../utils/rtl-utils';
 import {PANES_DEFAULTS, PanesDefaults} from '../panes-config';
 import {PaneComponent} from '../pane/pane.component';
+import {Subject} from 'rxjs/Subject';
 
 
 /**
@@ -39,11 +38,13 @@ import {PaneComponent} from '../pane/pane.component';
   selector: 'ngx-pane-group',
   template: '',
 })
-export class PaneGroupComponent implements OnInit, AfterContentInit {
+export class PaneGroupComponent implements OnInit {
 
   private _relativeAlign: RelativeAlign;
   private initialized: boolean;
 
+  private alignChangesSubject = new Subject<Align>();
+  align$ = this.alignChangesSubject.asObservable();
 
   @Input()
   id: string;
@@ -92,9 +93,7 @@ export class PaneGroupComponent implements OnInit, AfterContentInit {
   set align(value: RelativeAlign | Align) {
     this._align = toAlign(value, this.getDir());
     this._relativeAlign = toRelativeAlign(value, this.getDir());
-    if (this.paneArea && this._align && this.initialized) {
-      this.paneArea.syncGroups();
-    }
+    this.alignChangesSubject.next(this._align);
   }
 
   private _selectedPane: PaneComponent | null;
@@ -112,7 +111,6 @@ export class PaneGroupComponent implements OnInit, AfterContentInit {
   }
 
   constructor(private $el: ElementRef,
-              @Inject(forwardRef(() => PaneAreaComponent)) private paneArea: PaneAreaComponent,
               @Optional() @Inject(PANES_DEFAULTS) defaults: PanesDefaults) {
     if (defaults) {
       if (defaults.autoOpen != null) {
@@ -131,9 +129,6 @@ export class PaneGroupComponent implements OnInit, AfterContentInit {
   ngOnInit() {
   }
 
-  ngAfterContentInit() {
-    // console.log('after content init in pane group');
-  }
 
   /**
    * @private

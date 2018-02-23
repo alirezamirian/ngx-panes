@@ -20,7 +20,7 @@ import {skip} from 'rxjs/operators';
 
 interface Side {
   paneGroup: PaneGroupComponent;
-  subscription?: Subscription;
+  subscriptions?: Subscription[];
 }
 
 interface PaneGroupHistory {
@@ -64,19 +64,26 @@ export interface PaneHistory {
 })
 export class PaneAreaComponent implements OnInit, AfterContentInit, OnDestroy {
 
-  private aligns: Align[] = ['left', 'right', 'bottom', 'top'];
-
   @Input()
   id: string;
-  private historySubject: BehaviorSubject<PaneHistory>;
+  /**
+   * Whether user should be able to reorder panes in a pane group (or move panes between
+   * pane groups) by dragging their tabs.
+   * For now there is no separate options for reordering and moving to another pane group, as
+   * such option doesn't seem to be necessary.
+   * @type {boolean}
+   */
+  @Input()
+  tabsDraggable = true;
 
   left: Side = {paneGroup: null};
   right: Side = {paneGroup: null};
   bottom: Side = {paneGroup: null};
   top: Side = {paneGroup: null};
-
   @ContentChildren(forwardRef(() => PaneGroupComponent))
   paneGroups: QueryList<PaneGroupComponent>;
+  private aligns: Align[] = ['left', 'right', 'bottom', 'top'];
+  private historySubject: BehaviorSubject<PaneHistory>;
 
   constructor(private dragDropContext: PaneTabDragDropContext,
               private historyManager: PaneAreaStateManager) {
@@ -97,36 +104,15 @@ export class PaneAreaComponent implements OnInit, AfterContentInit, OnDestroy {
     });
   }
 
+  ngAfterContentInit(): void {
+    this.paneGroups.forEach(paneGroup => console.log('after content init in pane area', paneGroup.childPanes.length));
+    this.paneGroups.changes.subscribe(() => this.syncGroups());
+    this.syncGroups();
+  }
+
   ngOnDestroy() {
     this.historySubject.complete();
   }
-
-  movePane(paneGroup: PaneGroupComponent, pane: PaneComponent, toIndex: number) {
-    const fromIndex = paneGroup.panes.indexOf(pane);
-    if (fromIndex > -1 && fromIndex !== toIndex) {
-      const panes = [].concat(paneGroup.panes); // copy
-      panes.splice(toIndex, 0, panes.splice(fromIndex, 1)[0]);
-      this.setPanes(paneGroup, panes);
-    }
-  }
-
-  addPane(paneGroup: PaneGroupComponent, pane: PaneComponent, toIndex: number) {
-    const panes = paneGroup.panes;
-    if (toIndex === undefined) {
-      toIndex = panes.length;
-    }
-    if (panes.indexOf(pane) < 0) {
-      this.setPanes(paneGroup, panes.slice(0, toIndex).concat(pane).concat(panes.slice(toIndex)));
-    }
-  }
-
-  removePane(paneGroup: PaneGroupComponent, pane: PaneComponent) {
-    const index = paneGroup.panes.indexOf(pane);
-    if (index > -1) {
-      this.setPanes(paneGroup, paneGroup.panes.slice(0, index).concat(paneGroup.panes.slice(index + 1)));
-    }
-  }
-
 
   setPanes(paneGroup: PaneGroupComponent, panes: PaneComponent[]) {
     paneGroup.setPanes(panes);
@@ -140,19 +126,48 @@ export class PaneAreaComponent implements OnInit, AfterContentInit, OnDestroy {
     });
   }
 
-  ngAfterContentInit(): void {
-    this.paneGroups.forEach(paneGroup => console.log('after content init in pane area', paneGroup.childPanes.length));
-    this.paneGroups.changes.subscribe(() => this.syncGroups());
-    this.syncGroups();
+  /**
+   * Returns align value of the input paneGroup, or null if pane group doesn't exist in this pane area.
+   * @param paneGroup
+   * @returns {(Align | undefined) & null}
+   */
+  getAlign(paneGroup: PaneGroupComponent): Align | null {
+    return this.aligns.find(align => this[align].paneGroup === paneGroup) || null;
   }
 
-  updateHistory(paneId: string, updates: Partial<PaneState>) {
+  private movePane(paneGroup: PaneGroupComponent, pane: PaneComponent, toIndex: number) {
+    const fromIndex = paneGroup.panes.indexOf(pane);
+    if (fromIndex > -1 && fromIndex !== toIndex) {
+      const panes = [].concat(paneGroup.panes); // copy
+      panes.splice(toIndex, 0, panes.splice(fromIndex, 1)[0]);
+      this.setPanes(paneGroup, panes);
+    }
+  }
+
+  private addPane(paneGroup: PaneGroupComponent, pane: PaneComponent, toIndex: number) {
+    const panes = paneGroup.panes;
+    if (toIndex === undefined) {
+      toIndex = panes.length;
+    }
+    if (panes.indexOf(pane) < 0) {
+      this.setPanes(paneGroup, panes.slice(0, toIndex).concat(pane).concat(panes.slice(toIndex)));
+    }
+  }
+
+  private removePane(paneGroup: PaneGroupComponent, pane: PaneComponent) {
+    const index = paneGroup.panes.indexOf(pane);
+    if (index > -1) {
+      this.setPanes(paneGroup, paneGroup.panes.slice(0, index).concat(paneGroup.panes.slice(index + 1)));
+    }
+  }
+
+  private updateHistory(paneId: string, updates: Partial<PaneState>) {
     this.historySubject.next(Object.assign({}, this.historySubject.getValue(), {
       [paneId]: Object.assign({}, this.historySubject.getValue()[paneId] || {}, updates)
     }));
   }
 
-  syncGroups(): void {
+  private syncGroups(): void {
     this.aligns.forEach(align => {
       if (!this.paneGroups.some(paneGroup => this[align].paneGroup === paneGroup)) {
         this.removeSide(align);
@@ -164,7 +179,7 @@ export class PaneAreaComponent implements OnInit, AfterContentInit, OnDestroy {
     this.syncPanes();
   }
 
-  syncPanes() {
+  private syncPanes() {
     const allPanes = this.paneGroups.reduce<PaneComponent[]>((panesSoFar, paneGroup) => {
       return [...panesSoFar, ...paneGroup.panes];
     }, []);
@@ -204,16 +219,7 @@ export class PaneAreaComponent implements OnInit, AfterContentInit, OnDestroy {
     });
   }
 
-  /**
-   * Returns align value of the input paneGroup, or null if pane group doesn't exist in this pane area.
-   * @param paneGroup
-   * @returns {(Align | undefined) & null}
-   */
-  getAlign(paneGroup: PaneGroupComponent): Align | null {
-    return this.aligns.find(align => this[align].paneGroup === paneGroup) || null;
-  }
-
-  addGroup(paneGroup: PaneGroupComponent) {
+  private addGroup(paneGroup: PaneGroupComponent) {
     const side = paneGroup._align;
     const firstAvailableSide = this.aligns.find(align => !this[align].paneGroup);
     const currentSide = this.aligns.find(align => this[align].paneGroup === paneGroup);
@@ -238,8 +244,8 @@ export class PaneAreaComponent implements OnInit, AfterContentInit, OnDestroy {
 
 
   private removeSide(side: Align) {
-    if (this[side].subscription) {
-      this[side].subscription.unsubscribe();
+    if (this[side].subscriptions) {
+      this[side].subscriptions.forEach(subscription => subscription.unsubscribe());
     }
     this[side].paneGroup = null;
   }
@@ -248,7 +254,10 @@ export class PaneAreaComponent implements OnInit, AfterContentInit, OnDestroy {
     this.removeSide(side);
     this[side] = {
       paneGroup: paneGroup,
-      subscription: paneGroup.childPanes.changes.subscribe(() => this.syncPanes())
+      subscriptions: [
+        paneGroup.align$.subscribe(() => this.syncGroups()),
+        paneGroup.childPanes.changes.subscribe(() => this.syncPanes())
+      ]
     };
     paneGroup._align = side;
   }

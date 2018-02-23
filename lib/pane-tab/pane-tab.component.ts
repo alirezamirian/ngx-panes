@@ -64,6 +64,9 @@ export class PaneTabComponent implements OnInit, OnDestroy {
   direction: 'h' | 'v';
 
   @Input()
+  draggable = true;
+
+  @Input()
   align: Align;
 
   @Input()
@@ -82,6 +85,7 @@ export class PaneTabComponent implements OnInit, OnDestroy {
               @Inject(DOCUMENT) private document: Document) {
     this.dragStart$ = fromEvent(this.elRef.nativeElement, 'mousedown')
       .pipe(
+        filter(() => this.draggable),
         // switch each mousedown event to an stream of mouse movements
         switchMap((mouseDown: MouseEvent) => {
           const from = this.elRef.nativeElement.getBoundingClientRect();
@@ -121,7 +125,7 @@ export class PaneTabComponent implements OnInit, OnDestroy {
               catchError(() => empty()),
             );
           }
-        ),
+        )
       );
   }
 

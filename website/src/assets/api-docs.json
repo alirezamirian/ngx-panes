@@ -87,7 +87,7 @@
       {
         "name": "id",
         "type": "string",
-        "description": ""
+        "description": "<p>Unique identifier for this pane area. Used by default {@link LocalStoragePaneAreaStateManager}\nto store state of panes inside pane area.</p>\n"
       },
       {
         "name": "tabsDraggable",
@@ -214,35 +214,6 @@
     "inputs": [],
     "outputs": [],
     "fileName": "lib/pane-resizer/pane-resizer.component.ts"
-  },
-  {
-    "type": "type",
-    "identifier": "Move",
-    "description": "",
-    "methods": [],
-    "properties": [
-      {
-        "name": "from",
-        "type": "PaneGroupComponent",
-        "description": ""
-      },
-      {
-        "name": "pane",
-        "type": "PaneComponent",
-        "description": ""
-      },
-      {
-        "name": "to",
-        "type": "PaneGroupComponent",
-        "description": ""
-      },
-      {
-        "name": "toIndex",
-        "type": "number",
-        "description": ""
-      }
-    ],
-    "fileName": "lib/pane-tab-drag-drop-context.ts"
   },
   {
     "identifier": "PaneTabComponent",
@@ -485,34 +456,57 @@
     "usageLang": "typescript"
   },
   {
-    "type": "type",
-    "identifier": "Position",
-    "description": "",
-    "methods": [],
-    "properties": [
+    "identifier": "PaneAreaStateManager",
+    "description": "<p>An abstract class, used as DI token for pane area state manager service.\n{@link LocalStoragePaneAreaStateManager} is the default implementation, which\nis provided by {@link NgxPanesModule} out of the box.\nYou can provide other implementations to be used instead of local storage.\nA common use case is a service which loads and saves state via a backend API.</p>\n",
+    "methods": [
       {
-        "name": "index",
-        "type": "number",
-        "description": ""
+        "name": "getSavedState",
+        "description": "<p>Sync or Async method used for retrieving previously saved state of the given pane area.</p>\n",
+        "args": [
+          {
+            "name": "paneArea",
+            "type": "PaneAreaComponent",
+            "description": ""
+          }
+        ],
+        "returnType": "PaneAreaState | Promise<PaneAreaState>"
       },
       {
-        "name": "paneGroup",
-        "type": "PaneGroupComponent",
-        "description": ""
+        "name": "trackChanges",
+        "description": "<p>Given a <code>paneArea</code> and an observable of its state changes, this method is responsible for\nstoring its state. Whether it stores every emitted changed state or a subset of them using\nRxjs operators like\n<a href=\"http://reactivex.io/rxjs/class/es6/Observable.js~Observable.html#instance-method-last\">last</a> or,\n<a href=\"http://reactivex.io/rxjs/class/es6/Observable.js~Observable.html#instance-method-debounceTime\">debounceTime</a>,\nis an implementation decision, left to\nactual implementor, to be taken based on costs or other considerations. Default\n{@link LocalStoragePaneAreaStateManager} stores every changed state.</p>\n",
+        "args": [
+          {
+            "name": "paneArea",
+            "type": "PaneAreaComponent",
+            "description": "<p>The pane area component to track its changes.</p>\n"
+          },
+          {
+            "name": "state$",
+            "type": "Observable<PaneAreaState>",
+            "description": "<p>Observable of changes.</p>\n"
+          }
+        ],
+        "returnType": "void"
+      },
+      {
+        "name": "clearHistory",
+        "description": "<p>clears previously stored pane area state.</p>\n",
+        "args": [
+          {
+            "name": "paneArea",
+            "type": "PaneAreaComponent",
+            "description": ""
+          }
+        ],
+        "returnType": "void"
       }
     ],
-    "fileName": "lib/state-history-manager.ts"
-  },
-  {
-    "identifier": "PaneAreaStateManager",
-    "description": "",
-    "methods": [],
     "properties": [],
     "fileName": "lib/state-history-manager.ts"
   },
   {
     "identifier": "LocalStoragePaneAreaStateManager",
-    "description": "",
+    "description": "<p>Default {@link PaneAreaStateManager} service provided by {@link NgxPanesModule},\nwhich saves/loads pane area state in\n<a href=\"https://developer.mozilla.org/en-US/docs/Web/API/Storage/LocalStorage\">browser&#39;s local storage</a>.\nIt requires pane areas to have a unique {@link PaneAreaComponent#id id}.</p>\n",
     "methods": [],
     "properties": [],
     "fileName": "lib/state-history-manager.ts"

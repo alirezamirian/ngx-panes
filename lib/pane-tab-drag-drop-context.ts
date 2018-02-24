@@ -7,11 +7,17 @@ import {PaneComponent} from './pane/pane.component';
 import {Observable} from 'rxjs/Observable';
 
 
+/**
+ * @private
+ */
 interface DropCandidate {
   tabGroup: PaneTabsComponent;
   index: number;
 }
 
+/**
+ * @private
+ */
 export interface Move {
   pane: PaneComponent;
   from: PaneGroupComponent;

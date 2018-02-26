@@ -68,7 +68,7 @@ function convertLinksRecursive(docItem) {
 }
 
 function convertLinks(html) {
-  return html.replace(/{@link (.*?)(\#(.*?))?( (.*))?}/g, (whole, identifier, ignored, property, ignored2, linkText) => {
+  return html.replace(/{@link (.*?)(\#(.*?))?( (.*?))?}/g, (whole, identifier, ignored, property, ignored2, linkText) => {
     return `<a href="/api/${identifier}${property ? ('#' + property) : ''}">${linkText || property || identifier}</a>`;
   });
 }

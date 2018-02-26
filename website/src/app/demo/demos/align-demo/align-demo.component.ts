@@ -2,7 +2,7 @@ import {AfterViewInit, Component, HostListener, QueryList, ViewChild, ViewChildr
 import {Demo} from '../demos';
 import {PaneGroupComponent} from '../../../../../../lib/pane-group/pane-group.component';
 import {MatCheckboxChange} from '@angular/material';
-import {PaneAreaStateManager} from '../../../../../../lib/state-history-manager';
+import {PaneAreaStateManager} from '../../../../../../lib/pane-area-state-manager';
 import {PaneAreaComponent} from '../../../../../../lib/pane-area/pane-area.component';
 
 @Demo({

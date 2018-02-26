@@ -4,7 +4,7 @@ import {PaneGroupComponent} from '../pane-group/pane-group.component';
 import {Move, PaneTabDragDropContext} from '../pane-tab-drag-drop-context';
 import {PaneComponent} from '../pane/pane.component';
 import {Subscription} from 'rxjs/Subscription';
-import {PaneAreaStateManager} from '../state-history-manager';
+import {PaneAreaStateManager} from '../pane-area-state-manager';
 
 
 interface Side {
@@ -13,7 +13,6 @@ interface Side {
 }
 
 export interface PaneState {
-  size: number;
   groupId: string;
   index: number;
 }

@@ -38,7 +38,7 @@ export abstract class PaneAreaStateManager {
    * @param {PaneAreaComponent} paneArea
    * @returns {PaneAreaState | Promise<PaneAreaState>}
    */
-  abstract getSavedState(paneArea: PaneAreaComponent): PaneAreaState | Promise<PaneAreaState>;
+  abstract getSavedState(paneArea: PaneAreaComponent): PaneAreaState | Promise<PaneAreaState> | null;
 
   /**
    * Given a `paneArea` and an observable of its state changes, this method is responsible for
@@ -74,7 +74,7 @@ export abstract class PaneAreaStateManager {
 @Injectable()
 export class LocalStoragePaneAreaStateManager extends PaneAreaStateManager {
 
-  getSavedState(paneArea: PaneAreaComponent): PaneAreaState {
+  getSavedState(paneArea: PaneAreaComponent): PaneAreaState | null {
     return JSON.parse(localStorage.getItem(this.getKey(paneArea)));
   }
 
@@ -92,4 +92,23 @@ export class LocalStoragePaneAreaStateManager extends PaneAreaStateManager {
     return `__NGX_PANES_HISTORY_${paneArea.id}`;
   }
 
+}
+
+
+/**
+ * An state manager which does nothing!
+ * Using {@link NoHistoryDirective noHistory directive} on {@link PaneAreaComponent pane-area},
+ * will provides an instance of `NoopPaneAreaStateManager` to it.
+ */
+export class NoopPaneAreaStateManager extends PaneAreaStateManager {
+
+  getSavedState(paneArea: PaneAreaComponent): null {
+    return null;
+  }
+
+  trackChanges(paneArea: PaneAreaComponent, state$: Observable<PaneAreaState>): void {
+  }
+
+  clearHistory(paneArea: PaneAreaComponent): void {
+  }
 }

@@ -56,6 +56,27 @@
     "fileName": "lib/pane-area-state-manager.ts"
   },
   {
+    "identifier": "NoopPaneAreaStateManager",
+    "description": "<p>An state manager which does nothing!\nUsing {@link NoHistoryDirective noHistory directive} on {@link PaneAreaComponent pane-area},\nwill provides an instance of <code>NoopPaneAreaStateManager</code> to it.</p>\n",
+    "methods": [],
+    "properties": [],
+    "fileName": "lib/pane-area-state-manager.ts"
+  },
+  {
+    "identifier": "NoHistoryDirective",
+    "description": "<p>Overrides default {@link LocalStoragePaneAreaStateManager} (or any other provided\n{@link PaneAreaStateManager}) and provides a {@link NoopPaneAreaStateManager}\nfor pane-area. Use it on {@link PaneAreaComponent pane-area} to disable state\nhistory tracking.</p>\n",
+    "methods": [],
+    "properties": [],
+    "type": "directive",
+    "isComponent": false,
+    "selector": "ngx-pane-area[noHistory]",
+    "inputs": [],
+    "outputs": [],
+    "fileName": "lib/pane-area/no-history.directive.ts",
+    "usage": "<ngx-pane-area noHistory>\r  ...\r</ngx-pane-area>",
+    "usageLang": "html"
+  },
+  {
     "type": "type",
     "identifier": "PaneState",
     "description": "",
@@ -154,7 +175,8 @@
       }
     ],
     "fileName": "lib/pane-area/pane-area.component.ts",
-    "usage": "<ngx-pane-area>\r  <ngx-pane-group> ... </ngx-pane-group>\r  <ngx-pane-group> ... </ngx-pane-group>\r  <div>\r    <!-- will be projected as main content -->\r  </div>\r</ngx-pane-area>"
+    "usage": "<ngx-pane-area>\r  <ngx-pane-group> ... </ngx-pane-group>\r  <ngx-pane-group> ... </ngx-pane-group>\r  <div>\r    <!-- will be projected as main content -->\r  </div>\r</ngx-pane-area>",
+    "usageLang": "html"
   },
   {
     "identifier": "PaneGroupComponent",
@@ -233,7 +255,8 @@
     ],
     "outputs": [],
     "fileName": "lib/pane-group/pane-group.component.ts",
-    "usage": "<ngx-pane-area>\r  <ngx-pane-group>\r    <!-- ngx-pane components -->\r  </ngx-pane-group>\r</ngx-pane-area>"
+    "usage": "<ngx-pane-area>\r  <ngx-pane-group>\r    <!-- ngx-pane components -->\r  </ngx-pane-group>\r</ngx-pane-area>",
+    "usageLang": "html"
   },
   {
     "identifier": "PaneHeaderComponent",
@@ -252,7 +275,8 @@
     "inputs": [],
     "outputs": [],
     "fileName": "lib/pane-header/pane-header.component.ts",
-    "usage": "<ngx-pane title=\"First Pane\">\r  <ngx-pane-header>this is a <b>special</b> header</ngx-pane-header>\r  <!-- pane content goes here -->\r</ngx-pane>\r<ngx-pane title=\"will be used for header in absense of ngx-pane-header\">...</ngx-pane>"
+    "usage": "<ngx-pane title=\"First Pane\">\r  <ngx-pane-header>this is a <b>special</b> header</ngx-pane-header>\r  <!-- pane content goes here -->\r</ngx-pane>\r<ngx-pane title=\"will be used for header in absense of ngx-pane-header\">...</ngx-pane>",
+    "usageLang": "html"
   },
   {
     "identifier": "PaneResizerComponent",
@@ -450,7 +474,8 @@
     ],
     "outputs": [],
     "fileName": "lib/pane/pane.component.ts",
-    "usage": "<ngx-pane-area>\r  <ngx-pane-group>\r    <!-- Simple pane with a title -->\r    <ngx-pane title=\"project\">...</ngx-pane>\r\r    <!-- Different title and header. Header is used in top of the selected pane, title is used inside pane's tab -->\r    <ngx-pane title=\"structure\">\r      <div ngx-pane-header>custom header</div>\r      ...\r    </ngx-pane>\r  </ngx-pane-group>\r</ngx-pane-area>"
+    "usage": "<ngx-pane-area>\r  <ngx-pane-group>\r    <!-- Simple pane with a title -->\r    <ngx-pane title=\"project\">...</ngx-pane>\r\r    <!-- Different title and header. Header is used in top of the selected pane, title is used inside pane's tab -->\r    <ngx-pane title=\"structure\">\r      <div ngx-pane-header>custom header</div>\r      ...\r    </ngx-pane>\r  </ngx-pane-group>\r</ngx-pane-area>",
+    "usageLang": "html"
   },
   {
     "type": "variable",
@@ -499,7 +524,8 @@
       "lib/pane/pane.component#PaneComponent",
       "lib/pane-header/pane-header.component#PaneHeaderComponent",
       "lib/pane-area/pane-area.component#PaneAreaComponent",
-      "lib/pane-group/pane-group.component#PaneGroupComponent"
+      "lib/pane-group/pane-group.component#PaneGroupComponent",
+      "lib/pane-area/no-history.directive#NoHistoryDirective"
     ],
     "services": [],
     "fileName": "lib/panes.module.ts",

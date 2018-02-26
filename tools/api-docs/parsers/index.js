@@ -11,7 +11,7 @@ module.exports = [
 
 function reformatCode(content, statement) {
   if (isDirectiveClass(statement)) {
-    return {text: beautifier.html(content, {indent_size: 2}), usageLang: 'html'};
+    return {text: beautifier.html(content, {indent_size: 2}), otherProps: {usageLang: 'html'}};
   }
   else { // assumption: usage of all other things is in TS. (is it a safe assumption?)
     try {

@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {GuideModel, guides} from '../guide/guides';
+import {GuideModel} from '../guide/guides';
 // workaround for importing all guides
 import '../guide/guides/index';
 import {ApiDocsService} from '../core/api-docs.service';
 import {map, share} from 'rxjs/operators';
+import {GuideService} from '../core/guide.service';
 
 @Component({
   selector: 'app-with-sidenav',
@@ -14,11 +15,11 @@ export class WithSidenavComponent implements OnInit {
   guides: GuideModel[];
   private docs: { modules: any[]; types: any[] } = {modules: [], types: []};
 
-  constructor(private apiDocsService: ApiDocsService) {
+  constructor(private apiDocsService: ApiDocsService, private guideService: GuideService) {
   }
 
   ngOnInit() {
-    this.guides = guides;
+    this.guides = this.guideService.getAll();
     // TODO: extract a service for apiDocs
     this.apiDocsService.getDocs().pipe(
       share(),

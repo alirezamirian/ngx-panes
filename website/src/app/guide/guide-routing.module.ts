@@ -6,7 +6,7 @@ import {GuideListComponent} from './guide-list/guide-list.component';
 import {guideListBreadcrumb} from './guide-list/guide-list-breadcrumb';
 import {routedGuideBreadcrumb} from './routed-guide/routed-guide-breadcrumb';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: '',
     component: GuideListComponent,

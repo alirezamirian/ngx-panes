@@ -2,9 +2,10 @@
  * Created by alireza on 5/26/17.
  */
 import {Type} from '@angular/core';
+import {Ordered} from '../core/core-types';
 
 
-interface Guide {
+interface Guide extends Ordered {
   /**
    * Defines an identifier to be used by router to the guide at /guides/{id}
    */

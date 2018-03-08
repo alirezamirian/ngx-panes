@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {GuideService} from '../guide.service';
+import {GuideService} from '../../core/guide.service';
 import {GuideModel} from '../guides';
 
 @Component({

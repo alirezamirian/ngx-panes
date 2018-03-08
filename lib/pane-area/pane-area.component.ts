@@ -12,11 +12,25 @@ interface Side {
   subscriptions?: Subscription[];
 }
 
+/**
+ * Represents state of {@link PaneComponent pane} position inside a {@link PaneAreaComponent paneArea}.
+ * Used in {@link PaneAreaState}, which itself is used in {@link PaneAreaStateManager#getSavedState}
+ */
 export interface PaneState {
+  /**
+   * Id of the {@link PaneGroupComponent paneGroup} this pane should be placed into.
+   */
   groupId: string;
+  /**
+   * Position (index) of the pane inside the parent {@link PaneGroupComponent paneGroup}
+   */
   index: number;
 }
 
+/**
+ * A dictionary from {@link PaneComponent pane} component ids to {@link PaneState} objects.
+ * Used to preserve state of panes inside {@link PaneAreaComponent pane area}.
+ */
 export interface PaneAreaState {
   [id: string]: PaneState;
 }

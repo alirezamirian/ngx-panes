@@ -79,18 +79,18 @@
   {
     "type": "type",
     "identifier": "PaneState",
-    "description": "",
+    "description": "<p>Represents state of {@link PaneComponent pane} position inside a {@link PaneAreaComponent paneArea}.\nUsed in {@link PaneAreaState}, which itself is used in {@link PaneAreaStateManager#getSavedState}</p>\n",
     "methods": [],
     "properties": [
       {
         "name": "groupId",
         "type": "string",
-        "description": ""
+        "description": "<p>Id of the {@link PaneGroupComponent paneGroup} this pane should be placed into.</p>\n"
       },
       {
         "name": "index",
         "type": "number",
-        "description": ""
+        "description": "<p>Position (index) of the pane inside the parent {@link PaneGroupComponent paneGroup}</p>\n"
       }
     ],
     "fileName": "lib/pane-area/pane-area.component.ts"
@@ -98,7 +98,7 @@
   {
     "type": "type",
     "identifier": "PaneAreaState",
-    "description": "",
+    "description": "<p>A dictionary from {@link PaneComponent pane} component ids to {@link PaneState} objects.\nUsed to preserve state of panes inside {@link PaneAreaComponent pane area}.</p>\n",
     "methods": [],
     "properties": [],
     "fileName": "lib/pane-area/pane-area.component.ts"

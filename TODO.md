@@ -21,7 +21,8 @@
 - [x] fix ngx-pane-area-content s
 - [ ] Resolve theming issues (also add theming for pane-area. its content)
 - [ ] Clean up styles
-- [ ] decide for height of ngx-pane-area
+- [ ] Decide for height of ngx-pane-area
+- [ ] Provide necessary outputs (like widthChange for pane and so on), and add outputs to api doc pages
 
 ## Low priority
 - [x] Add option for pane reordering

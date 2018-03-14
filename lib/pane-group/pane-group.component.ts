@@ -44,6 +44,9 @@ export class PaneGroupComponent implements OnInit {
   private initialized: boolean;
 
   private alignChangesSubject = new Subject<Align>();
+  /**
+   * @private
+   */
   align$ = this.alignChangesSubject.asObservable();
 
   @Input()
@@ -72,14 +75,21 @@ export class PaneGroupComponent implements OnInit {
    */
   @Input() autoOpen = true;
 
+  /**
+   * @private
+   */
   public _align: Align;
 
   get align() {
     return this._align;
   }
 
+  /**
+   * @private
+   */
   @ContentChildren(forwardRef(() => PaneComponent))
   childPanes: QueryList<PaneComponent>;
+
   public panes: PaneComponent[] = [];
 
   // noinspection JSAnnotator

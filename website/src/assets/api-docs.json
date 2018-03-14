@@ -132,11 +132,6 @@
         "description": ""
       },
       {
-        "name": "paneGroups",
-        "type": "QueryList<PaneGroupComponent>",
-        "description": ""
-      },
-      {
         "name": "right",
         "type": "Side",
         "description": ""
@@ -191,24 +186,9 @@
     ],
     "properties": [
       {
-        "name": "_align",
-        "type": "Align",
-        "description": ""
-      },
-      {
         "name": "align",
         "type": "\"left\" | \"right\" | \"top\" | \"bottom\" | \"start\" | \"end\"",
         "description": "<p>Position of the pane group inside {@link PaneAreaComponent pane area}.\nIt can be a {@link RelativeAlign} or an {@link Align}.</p>\n"
-      },
-      {
-        "name": "align$",
-        "type": "Observable<Align>",
-        "description": ""
-      },
-      {
-        "name": "childPanes",
-        "type": "QueryList<PaneComponent>",
-        "description": ""
       },
       {
         "name": "panes",
@@ -472,7 +452,12 @@
         "description": "<p>Width of the pane. More precisely, <strong>width</strong> for <strong>horizontally</strong> aligned and <strong>height</strong> for <strong>vertically</strong>\naligned panes.\nIf unset, <code>defaultWidth</code> of the host <code>ngx-panes</code> will be used. If both are undefined, the content of the\npane will determine its width. Resizing pane (if enabled) changes the pane&#39;s width.</p>\n"
       }
     ],
-    "outputs": [],
+    "outputs": [
+      {
+        "name": "widthChange",
+        "description": ""
+      }
+    ],
     "fileName": "lib/pane/pane.component.ts",
     "usage": "<ngx-pane-area>\r  <ngx-pane-group>\r    <!-- Simple pane with a title -->\r    <ngx-pane title=\"project\">...</ngx-pane>\r\r    <!-- Different title and header. Header is used in top of the selected pane, title is used inside pane's tab -->\r    <ngx-pane title=\"structure\">\r      <div ngx-pane-header>custom header</div>\r      ...\r    </ngx-pane>\r  </ngx-pane-group>\r</ngx-pane-area>",
     "usageLang": "html"

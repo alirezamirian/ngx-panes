@@ -1,4 +1,15 @@
-import {Component, ContentChild, Inject, Input, OnInit, Optional, TemplateRef, ViewChild} from '@angular/core';
+import {
+  Component,
+  ContentChild,
+  EventEmitter,
+  Inject,
+  Input,
+  OnInit,
+  Optional,
+  Output,
+  TemplateRef,
+  ViewChild
+} from '@angular/core';
 import {PaneHeaderComponent} from '../pane-header/pane-header.component';
 import {Boolean} from '../utils/decorators';
 import {PANES_DEFAULTS, PanesDefaults} from '../panes-config';
@@ -45,6 +56,9 @@ export class PaneComponent implements OnInit {
     return this._width || this.paneGroup.defaultWidth;
   }
 
+  @Output()
+  widthChange = new EventEmitter();
+
   /**
    * Width of the pane. More precisely, **width** for **horizontally** aligned and **height** for **vertically**
    * aligned panes.
@@ -53,6 +67,9 @@ export class PaneComponent implements OnInit {
    */
   @Input() set width(w: number | null) {
     this._width = w;
+    if (w !== undefined) {
+      this.widthChange.emit(w);
+    }
   };
 
   /**

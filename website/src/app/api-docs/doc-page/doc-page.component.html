@@ -32,6 +32,14 @@
   <app-params [params]="docItem.inputs"></app-params>
 </ng-container>
 
+<ng-container *ngIf="docItem.properties?.length">
+  <h2 id="properties">
+    <app-side-anchor></app-side-anchor>
+    Properties
+  </h2>
+  <app-params [params]="docItem.properties"></app-params>
+</ng-container>
+
 <!-- TODO: handle outputs -->
 
 <ng-container *ngIf="docItem.methods?.length">
@@ -61,11 +69,4 @@
   </mat-card>
 </ng-container>
 
-<ng-container *ngIf="docItem.properties?.length && docItem.type === 'type'">
-  <h2 id="properties">
-    <app-side-anchor></app-side-anchor>
-    Properties
-  </h2>
-  <app-params [params]="docItem.properties"></app-params>
-</ng-container>
 

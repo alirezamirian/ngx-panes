@@ -81,6 +81,9 @@ export class PaneAreaComponent implements AfterContentInit {
   right: Side = {paneGroup: null};
   bottom: Side = {paneGroup: null};
   top: Side = {paneGroup: null};
+  /**
+   * @private
+   */
   @ContentChildren(PaneGroupComponent)
   paneGroups: QueryList<PaneGroupComponent>;
   private aligns: Align[] = ['left', 'right', 'bottom', 'top'];

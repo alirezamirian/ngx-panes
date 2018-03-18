@@ -67,9 +67,6 @@ export class PaneComponent implements OnInit {
    */
   @Input() set width(w: number | null) {
     this._width = w;
-    if (w !== undefined) {
-      this.widthChange.emit(w);
-    }
   };
 
   /**

@@ -1,25 +1,24 @@
 <h1>State management</h1>
 
 <p>
-  A typical usage of the library is a <a routerLink="/api/PaneAreaComponent">pane area</a>
+  Below is a typical usage of the library which consists of a <a routerLink="/api/PaneAreaComponent">pane area</a>
   which contains a couple of <a routerLink="/api/PaneGroupComponent">pane groups</a>, each of them containing
   a number of <a routerLink="/api/PaneComponent">panes</a>:
 </p>
-<app-code-block [language]="'html'" [source]="usageExample">
-</app-code-block>
 
-<p>
-  Which results in something like this:
-</p>
-
-<ngx-pane-area style="height: 250px;">
+<ngx-pane-area style="height: 260px;">
   <ngx-pane-group align="start" [defaultWidth]="200">
-    <ngx-pane title="Pane #1" [width]="widths[0]" (widthChange)="setWidth(0,$event)">First Pane</ngx-pane>
-    <ngx-pane title="Pane #2" [width]="widths[1]" (widthChange)="setWidth(1,$event)">Second Pane</ngx-pane>
+    <ngx-pane title="Pane #1" [width]="widths[0]" (widthChange)="setWidth(0,$event, true)">First Pane</ngx-pane>
+    <ngx-pane title="Pane #2" [width]="widths[1]" (widthChange)="setWidth(1,$event, true)">Second Pane</ngx-pane>
   </ngx-pane-group>
   <ngx-pane-group align="end" [defaultWidth]="200">
-    <ngx-pane title="Pane #3" [width]="widths[2]" (widthChange)="setWidth(2,$event)">Third Pane</ngx-pane>
+    <ngx-pane title="Pane #3" [width]="widths[2]" (widthChange)="setWidth(2,$event, true)">Third Pane</ngx-pane>
   </ngx-pane-group>
+  <div class="mat-padding">
+    Code for this pane area is something like this:
+    <app-code-block [flat]="true" [language]="'html'" [copy]="false" [source]="usageExample">
+    </app-code-block>
+  </div>
 </ngx-pane-area>
 
 <br/>
@@ -73,10 +72,10 @@
 </p>
 
 <app-callout type="info">
-  Please note that (at least for now) the only part of UI state which is handled by
+  Please note that the only part of UI state which is handled by
   <a routerLink="/api/PaneAreaStateManager">PaneAreaStateManager</a> is panes arrangement.
-  If you want to keep other things like
-  selected pane across page reloads, you need to handle it yourself as shown in previous example.
+  If you want to preserve other things (like
+  selected pane) across page reloads, you need to handle it yourself as shown in previous example.
 </app-callout>
 <p>
   Below is a refined version of the previous example, in which unique id is used for all components.
@@ -84,7 +83,7 @@
   to save/restore order and position of panes inside pane groups.
   Go ahead and move third pane to the left side and refresh the page to see how it keeps its position.
 </p>
-<ngx-pane-area id="state-management-demo" style="height: 250px;">
+<ngx-pane-area id="state-management-demo" style="height: 250px;" #paneArea (stateChange)="check(paneArea)">
   <ngx-pane-group align="start" id="group1" [defaultWidth]="200">
     <ngx-pane id="pane1" title="Pane #1" [width]="widths[0]" (widthChange)="setWidth(0,$event)">First Pane</ngx-pane>
     <ngx-pane id="pane2" title="Pane #2" [width]="widths[1]" (widthChange)="setWidth(1,$event)">Second Pane</ngx-pane>
@@ -94,5 +93,26 @@
   </ngx-pane-group>
 </ngx-pane-area>
 
-<h2>Custom PaneAreaStateManager</h2>
-<p>Coming soon!</p>
+<h2>Custom State Manager</h2>
+<p>
+  Creating custom <code>PaneAreaStateManager</code> is simple.
+  All you need to do is to provide an implementation of it!
+  Below is an example of such implementation which uses a <b>user preferences</b> service to save/load pane area
+  state. This user preferences service returns a <b>Promise</b> of the saved state.
+</p>
+
+<app-code-block [source]="sources.customStateManager" language="typescript"></app-code-block>
+
+<p>Now we need to provide it via <code>providers</code> array of an angular module or directive:</p>
+<app-code-block [source]="sources.provider" language="typescript"></app-code-block>
+
+
+<!--<ngx-pane-area id="custom-state-manager" style="height: 250px;" myCustomPaneAreaStateManager>-->
+<!--<ngx-pane-group align="start" id="group1" [defaultWidth]="200">-->
+<!--<ngx-pane id="pane1" title="Pane #1">First Pane</ngx-pane>-->
+<!--<ngx-pane id="pane2" title="Pane #2">Second Pane</ngx-pane>-->
+<!--</ngx-pane-group>-->
+<!--<ngx-pane-group align="end" id="group2" [defaultWidth]="200">-->
+<!--<ngx-pane id="pane3" title="Pane #3">Third Pane</ngx-pane>-->
+<!--</ngx-pane-group>-->
+<!--</ngx-pane-area>-->

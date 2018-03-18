@@ -7,7 +7,7 @@
 </h1>
 
 
-<app-code-block *ngIf="docItem.source" [copy]="false" [flat]="true"
+<app-code-block *ngIf="docItem.source" [copy]="false" [flat]="true" class="flat"
                 language="typescript" [source]="docItem.source"></app-code-block>
 
 <div [innerHtml]="docItem.description"></div>

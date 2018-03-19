@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, HostBinding, OnInit, ViewChild} from '@angular/core';
 import {GuideModel} from '../guide/guides';
 // workaround for importing all guides
 import '../guide/guides/index';
@@ -15,12 +15,19 @@ export class WithSidenavComponent implements OnInit {
   guides: GuideModel[];
   private docs: { modules: any[]; types: any[] } = {modules: [], types: []};
 
-  constructor(private apiDocsService: ApiDocsService, private guideService: GuideService) {
+  @HostBinding('class.hidden-sidenav')
+  private hidden: boolean;
+
+  @ViewChild('index', {read: ElementRef})
+  private sidenav: ElementRef;
+
+  constructor(private apiDocsService: ApiDocsService,
+              private guideService: GuideService) {
   }
 
   ngOnInit() {
+
     this.guides = this.guideService.getAll();
-    // TODO: extract a service for apiDocs
     this.apiDocsService.getDocs().pipe(
       share(),
       map(docs => {
@@ -41,6 +48,14 @@ export class WithSidenavComponent implements OnInit {
     ).subscribe(docs => {
       this.docs = docs;
     });
+  }
+
+  hideSidenav() {
+    this.hidden = true;
+  }
+
+  showSidenav() {
+    this.hidden = false;
   }
 }
 

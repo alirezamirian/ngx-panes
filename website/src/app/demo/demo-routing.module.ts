@@ -18,7 +18,8 @@ export const routes: Routes = [
   {
     path: ':demoId',
     data: {
-      getBreadcrumbItems: routedDemoBreadcrumb
+      getBreadcrumbItems: routedDemoBreadcrumb,
+      noPadding: true
     },
     resolve: {
       demoModel: DemoResolverService

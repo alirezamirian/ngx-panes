@@ -1,0 +1,10 @@
+<div *ngIf="docs">
+  <mat-list>
+    <a *ngFor="let item of docs" mat-list-item mat-ripple
+       [routerLink]="[item.identifier]" class="item">
+      <span mat-list-icon class="icon" [ngClass]="'c-' + item.letterIcon">{{item.letterIcon}}</span>
+      <h4 mat-line>{{item.identifier}}</h4>
+      <div mat-line class="desc">{{item.description | simplifyDescription}}</div>
+    </a>
+  </mat-list>
+</div>

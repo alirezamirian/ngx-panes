@@ -13,10 +13,6 @@ getGuideComponents();
 // TODO: improve this ugly breadcrumb implementation!
 const routes: Routes = [
   {
-    path: 'demos',
-    loadChildren: './demo/demo.module#DemoModule'
-  },
-  {
     path: '',
     component: WithSidenavComponent,
     children: [
@@ -25,6 +21,9 @@ const routes: Routes = [
       },
       {
         path: 'api', loadChildren: './api-docs/api-docs.module#ApiDocsModule'
+      },
+      {
+        path: 'demos', loadChildren: './demo/demo.module#DemoModule'
       }
     ]
   },

@@ -4,6 +4,7 @@ import {Http} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import {Observable} from 'rxjs/Observable';
 import {map, share} from 'rxjs/operators';
+import {DocItemBase} from './doc-item';
 
 @Injectable()
 export class ApiDocsService {
@@ -12,7 +13,7 @@ export class ApiDocsService {
   constructor(private http: Http) {
   }
 
-  getDocs(): Observable<any> {
+  getDocs(): Observable<DocItemBase[]> {
     if (!this.docs$) {
       this.docs$ = this.http.get('assets/api-docs.json').pipe(
         share(),

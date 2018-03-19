@@ -11,6 +11,12 @@
   padding: 0;
   margin-top: 1px;
   overflow: auto;
+  transition: margin-left .2s;
+}
+
+:host.hidden-sidenav .index:not(.hovered) {
+  margin-left: -300px;
+  margin-right: 0;
 }
 
 .wrapper {

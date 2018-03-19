@@ -1,0 +1,40 @@
+@import "~@angular/material/theming";
+
+.item {
+  text-decoration: none;
+  position: relative;
+  &:hover {
+    background: #eee;
+  }
+}
+
+.icon {
+  background: #eee;
+  text-align: center;
+  font-size: 17px !important;
+  color: #eee;
+}
+
+.desc {
+  color: rgba(0, 0, 0, .4);
+}
+
+.c-C {
+  background: map-get($mat-amber, 400);
+}
+
+.c-D {
+  background: map-get($mat-pink, 400);
+}
+
+.c-V {
+  background: map-get($mat-blue, 400);
+}
+
+.c-T {
+  background: map-get($mat-green, 400);
+}
+
+.c-M {
+  background: map-get($mat-brown, 400);
+}

@@ -50,11 +50,14 @@ export class PaneComponent implements OnInit {
    */
   @Input() title: string;
   private _width: number;
-  _openned: boolean;
-
-  get width(): number | null {
-    return this._width || this.paneGroup.defaultWidth;
-  }
+  /**
+   * @private
+   */
+  _opened: boolean;
+  /**
+   * @private
+   */
+  @ViewChild('content', {read: TemplateRef}) content: TemplateRef<any>;
 
   @Output()
   widthChange = new EventEmitter();
@@ -78,7 +81,14 @@ export class PaneComponent implements OnInit {
    */
   @Input() id: string;
   @ContentChild(PaneHeaderComponent) header: PaneHeaderComponent;
-  @ViewChild('content', {read: TemplateRef}) content: TemplateRef<any>;
+
+  /**
+   * @private
+   * @returns {number | null}
+   */
+  get width(): number | null {
+    return this._width || this.paneGroup.defaultWidth;
+  }
 
   /**
    * @private
@@ -113,7 +123,7 @@ export class PaneComponent implements OnInit {
         this.resizable = defaults.resizable;
       }
     }
-    if (this._openned) {
+    if (this._opened) {
       this.paneGroup.open(this);
     }
 

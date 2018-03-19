@@ -1,4 +1,4 @@
-<div [ngClass]="'theme-' + theme" style="height: 100%;">
+<div [ngClass]="'theme-' + selection.theme" style="height: 100%;">
   <ngx-pane-area>
     <ngx-pane-group #panes [defaultWidth]="330">
       <ngx-pane #pane1 id="test" title="Foo">
@@ -18,15 +18,34 @@
                         [source]="'var x = 10;'">
         </app-code-block>-->
 
+        <p>
+          See also <a routerLink="/guides/theming">Theming guide</a>
+        </p>
+
         <div>
           <br/>
-          <button mat-button (click)="theme = 'default'">Default</button>
-          <button mat-button (click)="theme = 'intellij'">Intellij</button>
-          <button mat-button (click)="theme = 'light-orange'">Light Orange</button>
-          <button mat-button (click)="theme = 'bluegrey'">Blue Gray</button>
-          <button mat-button (click)="theme = 'darcula'">Darcula</button>
+          <ng-container *ngFor="let example of examples">
+            <button *ngIf="selection === example" mat-raised-button (click)="selection = example" color="primary">
+              {{example.theme || 'default'}}
+            </button>
+            <button *ngIf="selection !== example" mat-button (click)="selection = example">
+              {{example.theme || 'default'}}
+            </button>
+          </ng-container>
         </div>
 
+        <br/>
+
+        Applied class:
+        <code *ngIf="selection.theme">{{'theme-' + selection.theme}}</code>
+        <span *ngIf="!selection.theme">Nothing</span>
+        <br/>
+        <br/>
+        <ng-container *ngFor="let example of examples">
+          <app-code-block *ngIf="example.theme"
+                          [class.active]="selection === example"
+                          [source]="example.code"></app-code-block>
+        </ng-container>
 
         <!--TODO: add code for demo-->
       </div>

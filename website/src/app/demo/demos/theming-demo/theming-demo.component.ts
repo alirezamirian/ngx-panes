@@ -2,6 +2,13 @@ import {Component, OnInit} from '@angular/core';
 import {Demo} from '../demos';
 
 
+type ThemeName = 'intellij' | 'darcula' | 'light-orange' | 'bluegrey';
+
+interface Example {
+  theme: ThemeName | null;
+  code: string;
+}
+
 @Demo({
   id: 'theming',
   title: 'Theming',
@@ -18,7 +25,50 @@ import {Demo} from '../demos';
 })
 export class ThemingDemoComponent implements OnInit {
 
-  theme: 'intellij' | 'darcula' | 'light-orange' | 'bluegrey' | 'default' = 'bluegrey';
+  examples: [Example] = [
+    {
+      theme: null,
+      code: ''
+    }, {
+      theme: `intellij`,
+      code: `.theme-intellij {
+  @include ngx-panes-theme((
+    primaryColor: #b7b7b7,
+    backgroundColor: #fff,
+    tabsContrast: 9%,
+    headerContrast: 7%,
+    borderContrast: 30%
+  ));
+}`
+    }, {
+      theme: 'light-orange',
+      code: `.theme-light-orange {
+  @include ngx-panes-theme((
+    primaryColor: #ef6c00,
+    backgroundColor: #fff3e0
+  ));
+}`
+    }, {
+      theme: 'bluegrey',
+      code: `.theme-bluegrey {
+  @include ngx-panes-theme((
+    primaryColor: #546e7a,
+    backgroundColor: #eceff1
+  ));
+}`
+    }, {
+      theme: 'darcula',
+      code: `.theme-darcula {
+  @include ngx-panes-theme((
+    primaryColor: #2d2f30,
+    backgroundColor: #3c3f41,
+    tabsContrast: 0%,
+  ));
+}`
+    },
+  ];
+
+  selection: Example = this.examples[0];
 
   constructor() {
   }

@@ -149,7 +149,7 @@ export class PaneGroupComponent implements OnInit {
       this.selectedPane = null;
     }
     if (!this.initialized) {
-      this.selectedPane = this.panes.find(pane => pane._openned) || null;
+      this.selectedPane = this.panes.find(pane => pane._opened) || null;
       if (!this.selectedPane && this.autoOpen && this.panes.length > 0) {
         this.selectedPane = this.panes[0];
       }

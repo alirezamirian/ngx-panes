@@ -30,6 +30,8 @@ import {Observable} from 'rxjs/Observable';
  * {@link PaneState} objects which represents the id of {@link PaneGroupComponent PaneGroup}
  * for this pane and position of the pane inside that paneGroup. So, for `PaneAreaStateManager` to work,
  * **it's necessary to give an id to each pane group and each pane inside it**.
+ *
+ * See also [state management guide](/guides/state-management).
  */
 export abstract class PaneAreaStateManager {
 

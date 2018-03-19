@@ -14,7 +14,7 @@ interface Side {
 
 /**
  * Represents state of {@link PaneComponent pane} position inside a {@link PaneAreaComponent paneArea}.
- * Used in {@link PaneAreaState}, which itself is used in {@link PaneAreaStateManager#getSavedState}
+ * Used in {@link PaneAreaState}.
  */
 export interface PaneState {
   /**
@@ -29,7 +29,8 @@ export interface PaneState {
 
 /**
  * A dictionary from {@link PaneComponent pane} component ids to {@link PaneState} objects.
- * Used to preserve state of panes inside {@link PaneAreaComponent pane area}.
+ * Used to represent state of panes inside {@link PaneAreaComponent pane area}, for overriding default
+ * positioning and ordering based on template.
  */
 export interface PaneAreaState {
   [id: string]: PaneState;
@@ -91,7 +92,12 @@ export class PaneAreaComponent implements AfterContentInit {
   @Output()
   stateChange: EventEmitter<PaneAreaState> = new EventEmitter<PaneAreaState>();
 
-  // TODO make it @Input()
+  /**
+   * Position and order of panes inside pane groups, to override default arrangement based on template.
+   * While it's possible to pass it via inputs, it's normally not the case, and {@link PaneAreaStateManager}
+   * will handle it.
+   */
+  @Input()
   state: PaneAreaState;
 
   constructor(private dragDropContext: PaneTabDragDropContext,
@@ -100,7 +106,7 @@ export class PaneAreaComponent implements AfterContentInit {
 
   ngAfterContentInit(): void {
     this.stateManager.trackChanges(this, this.stateChange);
-    Promise.resolve(this.stateManager.getSavedState(this)).then(state => {
+    Promise.resolve(this.state || this.stateManager.getSavedState(this)).then(state => {
       this.state = state || {};
 
       // TODO: add support for async state initialization and postpone initialization bellow until state got initialized

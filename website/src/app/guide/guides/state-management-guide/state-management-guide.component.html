@@ -54,7 +54,7 @@
   opt out of <a routerLink="/api/PaneAreaComponent" fragment="tabsDraggable">this feature</a>.
   For being able to restore previous pane positions, paneArea accepts a
   <a routerLink="/api/PaneAreaComponent" fragment="state">state</a> input of type
-  <a routerLink="/api/PaneAreaState">PaneAreaState</a> which teaches paneArea how to
+  <a routerLink="/api/PaneAreaState">PaneAreaState</a> which teaches it how to
   arrange panes in different sides, overriding their original arrangement based on template.
   While you can provide this state object as an input, paneArea component looks for an
   injectable object of type
@@ -106,6 +106,10 @@
 <p>Now we need to provide it via <code>providers</code> array of an angular module or directive:</p>
 <app-code-block [source]="sources.provider" language="typescript"></app-code-block>
 
+<app-callout type="info">
+  Setting <code>id</code> for <code>ngx-pane</code> and <code>ngx-pane-group</code> components is
+  necessary, no matter you are using default state manager or providing a custom one.
+</app-callout>
 
 <!--<ngx-pane-area id="custom-state-manager" style="height: 250px;" myCustomPaneAreaStateManager>-->
 <!--<ngx-pane-group align="start" id="group1" [defaultWidth]="200">-->

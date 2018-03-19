@@ -22,6 +22,9 @@ import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 })
 export class PaneHeaderComponent implements OnInit {
 
+  /**
+   * @private
+   */
   @ViewChild('content')
   public templateRef: TemplateRef<any>;
 

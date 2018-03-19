@@ -1,4 +1,7 @@
 @import '../../../../../../lib/theming';
+@import '~@angular/material/theming';
+@import '../../../../styles/theme';
+
 //@import '~ngx-panes/theming'; // for testing production bundle
 
 .theme-intellij {
@@ -41,4 +44,8 @@ mat-card table {
   td:nth-child(4) {
     text-align: center;
   }
+}
+
+app-code-block.active /deep/ mat-card {
+  background: mat-color(map-get($app-theme, background), selected-button);
 }

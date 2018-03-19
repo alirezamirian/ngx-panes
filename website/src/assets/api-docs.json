@@ -1,7 +1,7 @@
 [
   {
     "identifier": "PaneAreaStateManager",
-    "description": "<p>An abstract class, used as DI token for pane area state manager service.\nEach instance of {@link PaneAreaComponent} will look for a provided\n<code>PaneAreaStateManager</code> to use for loading previously saved state and saving\nstate changes whenever a pane is moved to another position or another pane group.</p>\n<p>Currently, this <strong>state</strong> is only limited to position of panes inside pane groups.\nBecause it&#39;s the only tricky part of state management which is hard to handle in\nstatic templates.\nOther things such as <strong>last opened pane in each pane group</strong> or <strong>size of each pane</strong>\nis not currently handled by this state management mechanism and should be handled by\ncorresponding inputs like {@link PaneComponent#width PaneComponent size input}.</p>\n<p>{@link LocalStoragePaneAreaStateManager} is the default implementation, which\nis provided by {@link NgxPanesModule} out of the box.\nYou can provide other implementations to be used instead of local storage.\nA common use case is a service which loads and saves state via a backend API.</p>\n<p>If you want to disable {@link PaneAreaComponent#tabsDraggable tab dragging} or you don&#39;t\nwant to preserve pane positions across page reloads, you can use\n{@link NoHistoryDirective noHistory directive} on your {@link PaneAreaComponent},\nwhich provides a {@link NoopPaneAreaStateManager}.</p>\n<p>{@link PaneAreaState} is a simple map from {@link PaneComponent Pane} ids to\n{@link PaneState} objects which represents the id of {@link PaneGroupComponent PaneGroup}\nfor this pane and position of the pane inside that paneGroup. So, for <code>PaneAreaStateManager</code> to work,\n<strong>it&#39;s necessary to give an id to each pane group and each pane inside it</strong>.</p>\n",
+    "description": "<p>An abstract class, used as DI token for pane area state manager service.\nEach instance of {@link PaneAreaComponent} will look for a provided\n<code>PaneAreaStateManager</code> to use for loading previously saved state and saving\nstate changes whenever a pane is moved to another position or another pane group.</p>\n<p>Currently, this <strong>state</strong> is only limited to position of panes inside pane groups.\nBecause it&#39;s the only tricky part of state management which is hard to handle in\nstatic templates.\nOther things such as <strong>last opened pane in each pane group</strong> or <strong>size of each pane</strong>\nis not currently handled by this state management mechanism and should be handled by\ncorresponding inputs like {@link PaneComponent#width PaneComponent size input}.</p>\n<p>{@link LocalStoragePaneAreaStateManager} is the default implementation, which\nis provided by {@link NgxPanesModule} out of the box.\nYou can provide other implementations to be used instead of local storage.\nA common use case is a service which loads and saves state via a backend API.</p>\n<p>If you want to disable {@link PaneAreaComponent#tabsDraggable tab dragging} or you don&#39;t\nwant to preserve pane positions across page reloads, you can use\n{@link NoHistoryDirective noHistory directive} on your {@link PaneAreaComponent},\nwhich provides a {@link NoopPaneAreaStateManager}.</p>\n<p>{@link PaneAreaState} is a simple map from {@link PaneComponent Pane} ids to\n{@link PaneState} objects which represents the id of {@link PaneGroupComponent PaneGroup}\nfor this pane and position of the pane inside that paneGroup. So, for <code>PaneAreaStateManager</code> to work,\n<strong>it&#39;s necessary to give an id to each pane group and each pane inside it</strong>.</p>\n<p>See also <a href=\"/guides/state-management\">state management guide</a>.</p>\n",
     "methods": [
       {
         "name": "getSavedState",
@@ -79,7 +79,7 @@
   {
     "type": "type",
     "identifier": "PaneState",
-    "description": "<p>Represents state of {@link PaneComponent pane} position inside a {@link PaneAreaComponent paneArea}.\nUsed in {@link PaneAreaState}, which itself is used in {@link PaneAreaStateManager#getSavedState}</p>\n",
+    "description": "<p>Represents state of {@link PaneComponent pane} position inside a {@link PaneAreaComponent paneArea}.\nUsed in {@link PaneAreaState}.</p>\n",
     "methods": [],
     "properties": [
       {
@@ -98,7 +98,7 @@
   {
     "type": "type",
     "identifier": "PaneAreaState",
-    "description": "<p>A dictionary from {@link PaneComponent pane} component ids to {@link PaneState} objects.\nUsed to preserve state of panes inside {@link PaneAreaComponent pane area}.</p>\n",
+    "description": "<p>A dictionary from {@link PaneComponent pane} component ids to {@link PaneState} objects.\nUsed to represent state of panes inside {@link PaneAreaComponent pane area}, for overriding default\npositioning and ordering based on template.</p>\n",
     "methods": [],
     "properties": [],
     "fileName": "lib/pane-area/pane-area.component.ts"
@@ -137,11 +137,6 @@
         "description": ""
       },
       {
-        "name": "state",
-        "type": "PaneAreaState",
-        "description": ""
-      },
-      {
         "name": "top",
         "type": "Side",
         "description": ""
@@ -155,6 +150,11 @@
         "name": "id",
         "type": "string",
         "description": "<p>Unique identifier for this pane area. Used by default {@link LocalStoragePaneAreaStateManager}\nto store state of panes inside pane area.</p>\n"
+      },
+      {
+        "name": "state",
+        "type": "PaneAreaState",
+        "description": "<p>Position and order of panes inside pane groups, to override default arrangement based on template.\nWhile it&#39;s possible to pass it via inputs, it&#39;s normally not the case, and {@link PaneAreaStateManager}\nwill handle it.</p>\n"
       },
       {
         "name": "tabsDraggable",
@@ -242,13 +242,7 @@
     "identifier": "PaneHeaderComponent",
     "description": "<p><code>ngx-pane-header</code> is used for providing custom headers for panes.</p>\n<p>By default the header of the pane consist of a simple text label\n(which is determined by {@link PaneComponent#title PaneComponent title input}).\nYou can override this behaviour, and use custom content as\npane header by using a <code>&lt;ngx-pane-header&gt;...&lt;/ngx-pane-header&gt;</code> inside\n<code>&lt;ngx-pane&gt;...&lt;/ngx-pane&gt;</code> component.</p>\n",
     "methods": [],
-    "properties": [
-      {
-        "name": "templateRef",
-        "type": "TemplateRef<any>",
-        "description": ""
-      }
-    ],
+    "properties": [],
     "type": "directive",
     "isComponent": true,
     "selector": "ngx-pane-header",
@@ -401,24 +395,9 @@
     ],
     "properties": [
       {
-        "name": "_openned",
-        "type": "boolean",
-        "description": ""
-      },
-      {
-        "name": "content",
-        "type": "TemplateRef<any>",
-        "description": ""
-      },
-      {
         "name": "header",
         "type": "PaneHeaderComponent",
         "description": ""
-      },
-      {
-        "name": "width",
-        "type": "number",
-        "description": "<p>Width of the pane. More precisely, <strong>width</strong> for <strong>horizontally</strong> aligned and <strong>height</strong> for <strong>vertically</strong>\naligned panes.\nIf unset, <code>defaultWidth</code> of the host <code>ngx-panes</code> will be used. If both are undefined, the content of the\npane will determine its width. Resizing pane (if enabled) changes the pane&#39;s width.</p>\n"
       }
     ],
     "type": "directive",

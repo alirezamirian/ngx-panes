@@ -20,6 +20,20 @@
     backgroundColor: #3c3f41,
     tabsContrast: 0%,
   ));
+
+  $dark-app-theme: mat-dark-theme($app-primary, $app-accent, $app-warn);
+  /deep/ {
+    @include angular-material-theme($dark-app-theme);
+    .hljs {
+      color: map-get($mat-dark-theme-foreground, secondary-text);
+    }
+    .code {
+      background: #555;
+    }
+  }
+  app-code-block.active /deep/ mat-card {
+    background: mat-color(map-get($dark-app-theme, background), selected-button);
+  }
 }
 
 .theme-light-orange {

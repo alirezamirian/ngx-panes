@@ -1,6 +1,12 @@
+@import '~@angular/material/theming';
+@import '../../../styles/theme';
+
+$background: map-get($app-theme, background);
+
 mat-list-item {
+  background-color: map-get($background, background);
   &:hover {
-    background: #fafafa;
+    background-color: map-get($background, hover);
   }
   border-left: 2px solid transparent;
   border-bottom: 1px solid rgba(0, 0, 0, .1);

@@ -4,7 +4,7 @@ import {Guide} from '../../guides';
 
 @Guide({
   id: 'theming',
-  title: 'Theming Guide',
+  title: 'Theming',
   description: 'Shows how to create a custom theme for ngx-panes and what properties can be set via a theme'
 })
 @Component({

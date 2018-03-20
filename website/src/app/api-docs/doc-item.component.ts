@@ -20,7 +20,7 @@ export class DocItemComponent implements OnInit {
 
   ngOnInit(): void {
     this.apiDocsService.getDocItem(this.identifier).then(docItem => {
-      this.exists = <boolean> docItem && docItem.length;
+      this.exists = !!(docItem && docItem.length);
     });
   }
 }

@@ -149,7 +149,7 @@
       {
         "name": "id",
         "type": "string",
-        "description": "<p>Unique identifier for this pane area. Used by default {@link LocalStoragePaneAreaStateManager}\nto store state of panes inside pane area.</p>\n"
+        "description": "<p>Unique identifier for this pane area. Used by {@link LocalStoragePaneAreaStateManager}\nto store state of panes inside pane area.</p>\n"
       },
       {
         "name": "state",

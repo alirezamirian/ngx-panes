@@ -1,0 +1,31 @@
+@import '~@angular/material/theming';
+@import '../../../styles/theme';
+
+$foreground: map-get($app-theme, foreground);
+$background: map-get($app-theme, background);
+$accent: map-get($app-theme, accent);
+.mat-card {
+  margin: 20px;
+  &:hover {
+    background: map-get($background, hover);
+  }
+}
+
+a {
+  text-decoration: none;
+}
+
+.mat-card-avatar {
+  text-align: center;
+  line-height: 40px;
+  background-color: mat-color($accent);
+  color: mat-contrast($accent, 500);
+}
+
+.mat-card-title {
+  margin-top: 8px;
+}
+
+.mat-card-content {
+  color: map-get($foreground, secondary-text);
+}

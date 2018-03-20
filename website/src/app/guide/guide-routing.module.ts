@@ -9,23 +9,23 @@ import {routedGuideBreadcrumb} from './routed-guide/routed-guide-breadcrumb';
 export const routes: Routes = [
   {
     path: '',
+    pathMatch: 'full',
     component: GuideListComponent,
     data: {
       getBreadcrumbItems: guideListBreadcrumb
+    }
+  },
+  {
+    path: ':id',
+    resolve: {
+      guideModel: GuideResolverService
     },
-    children: [
-      {
-        path: ':id',
-        resolve: {
-          guideModel: GuideResolverService
-        },
-        component: RoutedGuideComponent,
-        data: {
-          getBreadcrumbItems: routedGuideBreadcrumb
-        }
-      }
-    ]
+    component: RoutedGuideComponent,
+    data: {
+      getBreadcrumbItems: routedGuideBreadcrumb
+    }
   }
+
 ];
 
 @NgModule({

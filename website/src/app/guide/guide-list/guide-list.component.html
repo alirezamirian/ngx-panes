@@ -1,1 +1,16 @@
 <router-outlet></router-outlet>
+<div fxLayout="column" fxLayout.gt-md="row" fxLayoutWrap="">
+  <div fxFlex.gt-md="50" *ngFor="let guide of guides">
+    <a [routerLink]="guide.metadata.id">
+      <mat-card>
+        <mat-card-header>
+          <span mat-card-avatar>G</span>
+          <mat-card-title>{{guide.metadata.title}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          {{guide.metadata.description}}
+        </mat-card-content>
+      </mat-card>
+    </a>
+  </div>
+</div>

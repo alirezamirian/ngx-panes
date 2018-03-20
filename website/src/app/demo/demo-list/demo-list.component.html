@@ -10,15 +10,10 @@
       </mat-chip>
     </mat-chip-list>
   </div>
-  <mat-card color="primary">
-    <mat-card-title>Demos</mat-card-title>
-    <mat-card-content>
-      <mat-list>
-        <app-demo-item *ngFor="let demo of filteredDemos"
-                       (tagClicked)="addTag($event)"
-                       [demo]="demo"></app-demo-item>
-      </mat-list>
-    </mat-card-content>
-  </mat-card>
+  <mat-list>
+    <app-demo-item *ngFor="let demo of filteredDemos"
+                   (tagClicked)="addTag($event)"
+                   [demo]="demo"></app-demo-item>
+  </mat-list>
 
 </div>

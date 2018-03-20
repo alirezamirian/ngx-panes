@@ -6,7 +6,11 @@
 - [ ] shortcut support (Alt+1, Alt+2, etc.)
 
 ## Website
-- [ ] Add demo list page and search box for it
+- [ ] Add demos to sidenav
+- [ ] Add homepage
+- [ ] Add "getting started" guide
+- [ ] Add search box to header
+- [ ] Add github icon to header
 - [ ] handle 404 for routed demo
 
 

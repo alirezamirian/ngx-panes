@@ -13,6 +13,7 @@ interface Example {
   id: 'theming',
   title: 'Theming',
   description: 'Demonstrates how to customize ngx-panes appearance',
+  order: 2,
   tags: ['Theming']
 })
 @Component({

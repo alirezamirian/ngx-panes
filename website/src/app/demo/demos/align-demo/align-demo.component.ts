@@ -6,6 +6,7 @@ import {PaneGroupComponent} from '../../../../../../lib/pane-group/pane-group.co
   id: 'align',
   title: 'Alignment',
   description: 'Demonstrates options regarding pane group alignment inside pane-area',
+  order: 1,
   tags: ['Alignment']
 })
 @Component({

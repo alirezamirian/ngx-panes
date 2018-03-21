@@ -5,6 +5,7 @@ import {Demo} from '../demos';
   id: 'github-browser',
   title: 'Github Browser',
   description: 'A small application of ngx-panes for browsing a github repo content',
+  order: 1000,
   tags: ['Basic Usage', 'Resizing']
 })
 @Component({

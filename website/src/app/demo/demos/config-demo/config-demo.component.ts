@@ -6,6 +6,7 @@ import {PANES_DEFAULTS, PanesDefaults} from '../../../../../../lib/panes-config'
   id: 'config',
   title: 'Configuring Defaults',
   description: 'An example of providing default configuration for all child panes',
+  order: 4,
   tags: ['Config']
 })
 @Component({

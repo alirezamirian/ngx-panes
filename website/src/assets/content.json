@@ -1,18 +1,19 @@
 {
   "demos": [
     {
-      "id": "github-browser",
-      "title": "Github Browser",
-      "description": "A small application of ngx-panes for browsing a github repo content",
+      "id": "align",
+      "title": "Alignment",
+      "description": "Demonstrates options regarding pane group alignment inside pane-area",
+      "order": 1,
       "tags": [
-        "Basic Usage",
-        "Resizing"
+        "Alignment"
       ]
     },
     {
       "id": "theming",
       "title": "Theming",
       "description": "Demonstrates how to customize ngx-panes appearance",
+      "order": 2,
       "tags": [
         "Theming"
       ]
@@ -21,38 +22,42 @@
       "id": "resizing",
       "title": "Resizing",
       "description": "Demonstrates options regarding disabling pane resizing",
+      "order": 3,
       "tags": [
         "Resizing"
-      ]
-    },
-    {
-      "id": "align",
-      "title": "Alignment",
-      "description": "Demonstrates options regarding pane group alignment inside pane-area",
-      "tags": [
-        "Alignment"
       ]
     },
     {
       "id": "config",
       "title": "Configuring Defaults",
       "description": "An example of providing default configuration for all child panes",
+      "order": 4,
       "tags": [
         "Config"
+      ]
+    },
+    {
+      "id": "github-browser",
+      "title": "Github Browser",
+      "description": "A small application of ngx-panes for browsing a github repo content",
+      "order": 1000,
+      "tags": [
+        "Basic Usage",
+        "Resizing"
       ]
     }
   ],
   "guides": [
     {
-      "id": "theming",
-      "title": "Theming",
-      "description": "Shows how to create a custom theme for ngx-panes and what properties can be set via a theme"
-    },
-    {
       "id": "getting-started",
       "order": 1,
       "title": "Getting Started",
       "description": "Getting Started with ngx-panes"
+    },
+    {
+      "id": "theming",
+      "title": "Theming",
+      "description": "Shows how to create a custom theme for ngx-panes and what properties can be set via a theme"
     },
     {
       "id": "state-management",

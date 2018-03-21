@@ -5,6 +5,7 @@ import {Demo} from '../demos';
   id: 'resizing',
   title: 'Resizing',
   description: 'Demonstrates options regarding disabling pane resizing',
+  order: 3,
   tags: ['Resizing']
 })
 @Component({

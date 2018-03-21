@@ -6,11 +6,12 @@
 - [ ] shortcut support (Alt+1, Alt+2, etc.)
 
 ## Website
-- [ ] Add demos to sidenav
+- [x] Add demos to sidenav
 - [ ] Add homepage
 - [ ] Add "getting started" guide
 - [ ] Add search box to header
 - [ ] Add github icon to header
+- [ ] Improve github browser demo
 - [ ] handle 404 for routed demo
 
 

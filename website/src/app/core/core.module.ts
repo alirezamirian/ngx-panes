@@ -1,14 +1,15 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {ApiDocsService} from './api-docs.service';
-import {GuideService} from './guide.service';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    HttpClientModule
   ],
   declarations: [],
-  providers: [ApiDocsService, GuideService]
+  providers: [ApiDocsService]
 })
 export class CoreModule {
 }

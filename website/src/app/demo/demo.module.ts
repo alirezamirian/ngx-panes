@@ -1,5 +1,4 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
 
 import {DemoRoutingModule} from './demo-routing.module';
 import {DemoItemComponent} from './demo-item/demo-item.component';
@@ -22,8 +21,6 @@ import {Ng2FileTreeModule} from 'ng2-file-tree';
 import {NoopXSRFStrategy} from './noop-xsrf-strategy';
 import {XSRFStrategy} from '@angular/http';
 import {DemoService} from './demo.service';
-import {ResizeDisabledDemoComponent} from './demos/resizing-demo/resizing-demo.component';
-import {GithubBrowserDemoComponent} from './demos/github-browser-demo/github-browser-demo.component';
 
 import 'codemirror';
 import 'codemirror/mode/javascript/javascript.js';
@@ -34,22 +31,13 @@ import 'codemirror/addon/fold/indent-fold.js';
 import 'codemirror/addon/edit/closebrackets.js';
 import 'codemirror/addon/edit/matchbrackets.js';
 import {CodeEditorComponent} from './code-editor/code-editor.component';
-import {ThemingDemoComponent} from './demos/theming-demo/theming-demo.component';
-import {AlignDemoComponent} from './demos/align-demo/align-demo.component';
-import {ConfigDemoComponent} from './demos/config-demo/config-demo.component';
 import {FormsModule} from '@angular/forms';
+import {getDemoComponents} from './demo-components';
 
-export const entryComponents = [
-  GithubBrowserDemoComponent,
-  ResizeDisabledDemoComponent,
-  ThemingDemoComponent,
-  AlignDemoComponent,
-  ConfigDemoComponent
-];
+const demoComponents = getDemoComponents();
 
 @NgModule({
   imports: [
-    CommonModule,
     SharedModule,
     DemoRoutingModule,
 
@@ -75,8 +63,8 @@ export const entryComponents = [
     GithubIssueListComponent,
     GithubContributorsComponent,
     CodeEditorComponent
-  ].concat(<any>entryComponents),
-  entryComponents: entryComponents,
+  ].concat(demoComponents),
+  entryComponents: demoComponents,
   providers: [
     {provide: XSRFStrategy, useClass: NoopXSRFStrategy},
     DemoService

@@ -6,7 +6,7 @@ import {Tag} from '../tag';
 import {Ordered} from '../../core/core-types';
 
 
-interface Demo extends Ordered {
+export interface Demo extends Ordered {
   /**
    * Defines an identifier to be used by router to the demo at /demos/{id}
    */

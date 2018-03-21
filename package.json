@@ -6,6 +6,8 @@
     "ng": "ng",
     "start": "ng serve --proxy-config website/proxy.conf.js",
     "build": "ng build",
+    "build:website:contents": "webpack --config tools/content/webpack.config",
+    "watch:website:contents": "npm run build:website:contents -- -w",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
@@ -64,6 +66,8 @@
     "protractor": "~5.1.0",
     "sass-bidi": "^1.1.0",
     "scss-bundle": "^2.1.2",
+    "suppress-chunks-webpack-plugin": "0.0.4",
+    "ts-loader": "^3.5.0",
     "ts-node": "~2.0.0",
     "tslint": "~4.5.0",
     "typescript": "^2.6.2"

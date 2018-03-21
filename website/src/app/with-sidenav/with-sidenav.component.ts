@@ -1,10 +1,11 @@
 import {Component, ElementRef, HostBinding, OnInit, ViewChild} from '@angular/core';
-import {GuideModel} from '../guide/guides';
+import {Guide} from '../guide/guides';
 // workaround for importing all guides
 import '../guide/guides/index';
 import {ApiDocsService} from '../core/api-docs.service';
-import {map, share} from 'rxjs/operators';
-import {GuideService} from '../core/guide.service';
+import {catchError, map, share} from 'rxjs/operators';
+import {Demo} from '../demo/demos/demos';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-with-sidenav',
@@ -12,7 +13,6 @@ import {GuideService} from '../core/guide.service';
   styleUrls: ['./with-sidenav.component.scss']
 })
 export class WithSidenavComponent implements OnInit {
-  guides: GuideModel[];
   private docs: { modules: any[]; types: any[] } = {modules: [], types: []};
 
   @HostBinding('class.hidden-sidenav')
@@ -20,14 +20,21 @@ export class WithSidenavComponent implements OnInit {
 
   @ViewChild('index', {read: ElementRef})
   private sidenav: ElementRef;
+  guides: Array<Guide>;
+  private demos: Array<Demo>;
 
-  constructor(private apiDocsService: ApiDocsService,
-              private guideService: GuideService) {
+  constructor(private apiDocsService: ApiDocsService, private httpClient: HttpClient) {
   }
 
   ngOnInit() {
+    this.httpClient.get('assets/content.json').pipe(catchError(e => {
+      console.error('could not fetch list of demos and guides!');
+      return [];
+    })).subscribe(content => {
+      this.demos = content.demos;
+      this.guides = content.guides;
+    });
 
-    this.guides = this.guideService.getAll();
     this.apiDocsService.getDocs().pipe(
       share(),
       map(docs => {

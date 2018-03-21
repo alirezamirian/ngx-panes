@@ -1,9 +1,6 @@
-import {AfterViewInit, Component, HostListener, QueryList, ViewChild, ViewChildren} from '@angular/core';
+import {Component, QueryList, ViewChildren} from '@angular/core';
 import {Demo} from '../demos';
 import {PaneGroupComponent} from '../../../../../../lib/pane-group/pane-group.component';
-import {MatCheckboxChange} from '@angular/material';
-import {PaneAreaStateManager} from '../../../../../../lib/pane-area-state-manager';
-import {PaneAreaComponent} from '../../../../../../lib/pane-area/pane-area.component';
 
 @Demo({
   id: 'align',
@@ -16,51 +13,51 @@ import {PaneAreaComponent} from '../../../../../../lib/pane-area/pane-area.compo
   templateUrl: './align-demo.component.html',
   styleUrls: ['./align-demo.component.scss']
 })
-export class AlignDemoComponent implements AfterViewInit {
+export class AlignDemoComponent {
 
   @ViewChildren(PaneGroupComponent)
   paneGroups: QueryList<PaneGroupComponent>;
 
-  @ViewChild(PaneAreaComponent)
-  paneArea: PaneAreaComponent;
-
-  aligns = ['top', undefined, 'right', 'bottom'];
-  groups = [true, true, true, true];
-  paneGroupsArray: PaneGroupComponent[] = [];
-  private hasHistory: boolean;
-
-  constructor(public historyManager: PaneAreaStateManager) {
-  }
-
-  @HostListener('click')
-  log() {
-    console.log(this.paneGroups);
-  }
-
-  ngAfterViewInit() {
-    this.paneGroupsArray = this.paneGroups.toArray();
-    this.paneGroups.changes.subscribe(() => this.paneGroupsArray = [
-      this.paneGroups.find(paneGroup => paneGroup.id === 'paneGroup1'),
-      this.paneGroups.find(paneGroup => paneGroup.id === 'paneGroup2'),
-      this.paneGroups.find(paneGroup => paneGroup.id === 'paneGroup3'),
-      this.paneGroups.find(paneGroup => paneGroup.id === 'paneGroup4'),
-    ]);
-    setTimeout(() => {
-      this.hasHistory = !!this.historyManager.getSavedState(this.paneArea);
-    });
-  }
-
-  clearHistory() {
-    this.historyManager.clearHistory(this.paneArea);
-    this.hasHistory = false;
-  }
-
-  identity(a) {
-    return a;
-  }
-
-  selectAll(event: MatCheckboxChange) {
-    this.groups = this.groups.map(() => event.checked);
-  }
+  // @ViewChild(PaneAreaComponent)
+  // paneArea: PaneAreaComponent;
+  //
+  // aligns = ['top', undefined, 'right', 'bottom'];
+  // groups = [true, true, true, true];
+  // paneGroupsArray: PaneGroupComponent[] = [];
+  // private hasHistory: boolean;
+  //
+  // constructor(public historyManager: PaneAreaStateManager) {
+  // }
+  //
+  // @HostListener('click')
+  // log() {
+  //   console.log(this.paneGroups);
+  // }
+  //
+  // ngAfterViewInit() {
+  //   this.paneGroupsArray = this.paneGroups.toArray();
+  //   this.paneGroups.changes.subscribe(() => this.paneGroupsArray = [
+  //     this.paneGroups.find(paneGroup => paneGroup.id === 'paneGroup1'),
+  //     this.paneGroups.find(paneGroup => paneGroup.id === 'paneGroup2'),
+  //     this.paneGroups.find(paneGroup => paneGroup.id === 'paneGroup3'),
+  //     this.paneGroups.find(paneGroup => paneGroup.id === 'paneGroup4'),
+  //   ]);
+  //   setTimeout(() => {
+  //     this.hasHistory = !!this.historyManager.getSavedState(this.paneArea);
+  //   });
+  // }
+  //
+  // clearHistory() {
+  //   this.historyManager.clearHistory(this.paneArea);
+  //   this.hasHistory = false;
+  // }
+  //
+  // identity(a) {
+  //   return a;
+  // }
+  //
+  // selectAll(event: MatCheckboxChange) {
+  //   this.groups = this.groups.map(() => event.checked);
+  // }
 
 }

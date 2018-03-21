@@ -2,10 +2,17 @@
   <mat-card class="index" #index>
     <mat-nav-list>
       <h3 matSubheader>Guides</h3>
-      <mat-list-item mat-button *ngFor="let item of guides"
-                    [routerLink]="['/guides', item.metadata.id]">
-        <a [routerLink]="['/guides', item.metadata.id]" routerLinkActive="active">{{item.metadata.title}}</a>
-      </mat-list-item>
+      <a mat-list-item *ngFor="let item of guides" [routerLink]="['/guides', item.id]" routerLinkActive="active">
+        <img matListIcon
+             src="https://ssl.gstatic.com/bt/C3341AA7A1A076756462EE2E5CD71C11/avatars/avatar_tile_g_60.png"/>
+        <span matLine>{{item.title}}</span>
+      </a>
+      <h3 matSubheader>Demos</h3>
+      <a mat-list-item *ngFor="let item of demos" [routerLink]="['/demos', item.id]" routerLinkActive="active">
+        <img matListIcon
+             src="https://ssl.gstatic.com/bt/C3341AA7A1A076756462EE2E5CD71C11/avatars/avatar_tile_d_60.png"/>
+        <span matLine>{{item.title}}</span>
+      </a>
       <h3 matSubheader>API Docs</h3>
       <mat-nav-list dense *ngFor="let item of docs.modules">
         <a [routerLink]="['/api', item.identifier]" routerLinkActive="active">

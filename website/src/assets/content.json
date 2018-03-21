@@ -1,0 +1,63 @@
+{
+  "demos": [
+    {
+      "id": "github-browser",
+      "title": "Github Browser",
+      "description": "A small application of ngx-panes for browsing a github repo content",
+      "tags": [
+        "Basic Usage",
+        "Resizing"
+      ]
+    },
+    {
+      "id": "theming",
+      "title": "Theming",
+      "description": "Demonstrates how to customize ngx-panes appearance",
+      "tags": [
+        "Theming"
+      ]
+    },
+    {
+      "id": "resizing",
+      "title": "Resizing",
+      "description": "Demonstrates options regarding disabling pane resizing",
+      "tags": [
+        "Resizing"
+      ]
+    },
+    {
+      "id": "align",
+      "title": "Alignment",
+      "description": "Demonstrates options regarding pane group alignment inside pane-area",
+      "tags": [
+        "Alignment"
+      ]
+    },
+    {
+      "id": "config",
+      "title": "Configuring Defaults",
+      "description": "An example of providing default configuration for all child panes",
+      "tags": [
+        "Config"
+      ]
+    }
+  ],
+  "guides": [
+    {
+      "id": "theming",
+      "title": "Theming",
+      "description": "Shows how to create a custom theme for ngx-panes and what properties can be set via a theme"
+    },
+    {
+      "id": "getting-started",
+      "order": 1,
+      "title": "Getting Started",
+      "description": "Getting Started with ngx-panes"
+    },
+    {
+      "id": "state-management",
+      "title": "State Management",
+      "description": "Demonstrates pane area state management. What state is handled and why."
+    }
+  ]
+}

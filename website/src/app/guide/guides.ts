@@ -5,7 +5,7 @@ import {Type} from '@angular/core';
 import {Ordered} from '../core/core-types';
 
 
-interface Guide extends Ordered {
+export interface Guide extends Ordered {
   /**
    * Defines an identifier to be used by router to the guide at /guides/{id}
    */

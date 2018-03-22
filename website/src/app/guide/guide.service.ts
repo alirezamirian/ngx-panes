@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {GuideModel, guides} from '../guide/guides';
+import {GuideModel, guides} from './guides';
 import {sortBy} from 'lodash';
 
 @Injectable()

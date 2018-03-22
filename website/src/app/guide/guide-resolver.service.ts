@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
 import {Observable} from 'rxjs/Observable';
 import {GuideModel} from './guides';
-import {GuideService} from '../core/guide.service';
+import {GuideService} from './guide.service';
 
 @Injectable()
 export class GuideResolverService implements Resolve<GuideModel> {

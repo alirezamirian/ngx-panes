@@ -8,7 +8,7 @@ import {Component, DoCheck} from '@angular/core';
 export class AppComponent implements DoCheck {
 
   ngDoCheck(): void {
-    console.log('cheeeeeeck');
+    // console.log('cheeeeeeck');
   }
 
 }

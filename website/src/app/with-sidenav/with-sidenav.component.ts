@@ -6,6 +6,7 @@ import {ApiDocsService} from '../core/api-docs.service';
 import {catchError, map, share} from 'rxjs/operators';
 import {Demo} from '../demo/demos/demos';
 import {HttpClient} from '@angular/common/http';
+import {ContentService} from '../core/content.service';
 
 @Component({
   selector: 'app-with-sidenav',
@@ -23,11 +24,13 @@ export class WithSidenavComponent implements OnInit {
   guides: Array<Guide>;
   private demos: Array<Demo>;
 
-  constructor(private apiDocsService: ApiDocsService, private httpClient: HttpClient) {
+  constructor(private apiDocsService: ApiDocsService,
+              private httpClient: HttpClient,
+              private contentService: ContentService) {
   }
 
   ngOnInit() {
-    this.httpClient.get('assets/content.json').pipe(catchError(e => {
+    this.contentService.getContents().pipe(catchError(e => {
       console.error('could not fetch list of demos and guides!');
       return [];
     })).subscribe(content => {

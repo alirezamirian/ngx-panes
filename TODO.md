@@ -10,7 +10,7 @@
 - [x] Add "getting started" guide
 - [x] Add homepage
 - [x] Add github icon to header
-- [ ] Add search box to header
+- [x] Add search box to header
 - [ ] Add demo for custom label
 - [ ] Improve github browser demo
 - [ ] handle 404 for routed demo

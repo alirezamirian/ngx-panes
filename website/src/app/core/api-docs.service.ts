@@ -1,25 +1,22 @@
 import {Injectable} from '@angular/core';
-import {Http} from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 import {Observable} from 'rxjs/Observable';
 import {map, share} from 'rxjs/operators';
 import {DocItemBase} from './doc-item';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable()
 export class ApiDocsService {
   private docs$: any;
 
-  constructor(private http: Http) {
+  constructor(private http: HttpClient) {
   }
 
   getDocs(): Observable<DocItemBase[]> {
     if (!this.docs$) {
       this.docs$ = this.http.get('assets/api-docs.json').pipe(
         share(),
-        map(response => {
-          return response.json();
-        }),
         map(convertLinksRecursive)
       );
     }

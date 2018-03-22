@@ -1,5 +1,6 @@
 @import '../../styles/scrollbars';
 
+$sidenav-width: 280px;
 :host {
   flex: 1;
   display: flex;
@@ -7,15 +8,15 @@
 
 .index {
   @include scrollbars();
-  min-width: 300px;
+  min-width: $sidenav-width;
   padding: 0;
   margin-top: 1px;
   overflow: auto;
-  transition: margin-left .2s;
+  transition: margin-left .2s .2s;
 }
 
 :host.hidden-sidenav .index:not(.hovered) {
-  margin-left: -300px;
+  margin-left: -$sidenav-width;
   margin-right: 0;
 }
 

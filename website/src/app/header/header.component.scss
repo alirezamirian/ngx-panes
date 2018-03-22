@@ -1,3 +1,4 @@
+@import '../../styles/scrollbars.scss';
 
 mat-toolbar {
   position: relative;
@@ -37,6 +38,19 @@ app-breadcrumb /deep/ a {
   color: #fff !important;
 }
 
+app-breadcrumb {
+  transition: opacity .3s .1s;
+
+}
+
+mat-toolbar app-breadcrumb {
+  opacity: 1;
+}
+
+mat-toolbar.no-breadcrumb app-breadcrumb {
+  opacity: 0;
+}
+
 a {
   margin-right: 20px;
 }
@@ -44,4 +58,75 @@ a {
 .github {
   margin-right: 0;
   display: inline-flex;
+}
+
+.search-box {
+  display: flex;
+  margin: 5px 20px 0;
+  border-radius: 50px;
+  overflow: hidden;
+  transition: min-width 100ms, width 100ms, max-width 100ms, border-radius 100ms;
+  width: 250px;
+  max-width: 70%;
+  .no-breadcrumb & {
+    margin-top: 0;
+  }
+  &.focused {
+    max-width: 600px;
+    width: 90%;
+    background-color: rgba(0, 0, 0, .3);
+    border-radius: 5px;
+  }
+  &.has-result {
+    border-radius: 5px 5px 0 0;
+  }
+  position: relative;
+  .search-icon {
+    position: absolute;
+    left: 10px;
+    top: 7px;
+    color: rgba(255, 255, 255, .5);
+  }
+
+  .search-input {
+    border: none;
+    background-color: rgba(0, 0, 0, .2);
+    padding: 10px 30px 7px 40px;
+    outline: none;
+    width: 100%;
+  }
+
+  mat-spinner {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    pointer-events: none;
+  }
+}
+
+
+.search-result-icon {
+  height: 25px;
+  vertical-align: top;
+  display: inline-block;
+  border-radius: 50%;
+  margin-top: 12px;
+  margin-right: 10px;
+}
+
+.search-result-content {
+  line-height: 1.3;
+  display: inline-block;
+  vertical-align: middle;
+  .description {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: rgba(0, 0, 0, .3);
+    font-size: .7em;
+  }
+}
+
+/deep/ .tiny-scroll {
+  @include scrollbars();
 }

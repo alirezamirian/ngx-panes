@@ -4,6 +4,7 @@ import {ExternalLinksModule} from './external-links/external-links.module';
 import {HttpModule} from '@angular/http';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {
+  MatAutocompleteModule,
   MatButtonModule,
   MatCardModule,
   MatIconModule,
@@ -61,6 +62,7 @@ import {RouterModule} from '@angular/router';
     MatButtonModule,
     MatProgressSpinnerModule,
     MatCardModule,
+    MatAutocompleteModule,
 
     NgxPanesModule,
     AppLoadingComponent,

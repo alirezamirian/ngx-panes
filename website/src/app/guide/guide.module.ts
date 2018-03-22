@@ -9,7 +9,7 @@ import {GettingStartedGuideComponent} from './guides/getting-started-guide/getti
 import {StateManagementGuideComponent} from './guides/state-management-guide/state-management-guide.component';
 import {getGuideComponents} from './guide-components';
 import {CustomPaneAreaStateManagerDirective} from './guides/state-management-guide/directives/custom-pane-area-state-manager.directive';
-import {GuideService} from '../core/guide.service';
+import {GuideService} from './guide.service';
 
 const guideComponents = getGuideComponents();
 

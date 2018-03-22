@@ -5,7 +5,28 @@
       <a routerLink="demos">Demos</a>
       <a routerLink="api">API Docs</a>
       <a routerLink="guides">Guides</a>
-      <span fxFlex></span>
+      <div fxFlex fxLayout="row" [fxLayoutAlign]="searchInputFocused ? 'center' : 'end'">
+        <div class="search-box" [class.focused]="searchInputFocused" [class.has-result]="auto.isOpen">
+          <input #searchInput class="search-input" type="search" placeholder="Search ..."
+                 [matAutocomplete]="auto"
+                 (input)="queries$.next(searchInput.value)" (keydown.esc)="close()"
+                 (focus)="open()" (blur)="close()"/>
+          <mat-icon class="search-icon">search</mat-icon>
+          <mat-spinner [diameter]="25" *ngIf="searching"></mat-spinner>
+          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="select($event)" class="tiny-scroll"
+                            [displayWith]="convertResult">
+            <mat-option *ngFor="let result of results$ | async" [value]="result">
+              <img class="search-result-icon"
+                   src="https://ssl.gstatic.com/bt/C3341AA7A1A076756462EE2E5CD71C11/avatars/avatar_tile_{{result.provider.charAt(0).toLocaleLowerCase()}}_60.png"/>
+              <div class="search-result-content">
+                <div>{{ result.text }}</div>
+                <div class="description">{{ result.description }}</div>
+              </div>
+            </mat-option>
+          </mat-autocomplete>
+        </div>
+      </div>
+
       <a href="https://github.com/alirezamirian/ngx-panes" class="github"
          matTooltip="Code on GitHub" matTooltipPosition="before">
         <img src="../../assets/github-circle-white-transparent.svg"/>

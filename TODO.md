@@ -9,9 +9,9 @@
 - [x] Add demos to sidenav
 - [x] Add "getting started" guide
 - [x] Add homepage
-- [ ] Add demo for custom label
+- [x] Add github icon to header
 - [ ] Add search box to header
-- [ ] Add github icon to header
+- [ ] Add demo for custom label
 - [ ] Improve github browser demo
 - [ ] handle 404 for routed demo
 

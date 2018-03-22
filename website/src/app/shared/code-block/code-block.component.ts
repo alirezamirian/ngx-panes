@@ -40,7 +40,12 @@ export class CodeBlockComponent implements OnInit, AfterContentInit {
   }
 
   get source() {
-    return this._source;
+    let source = this._source;
+    if (!source) {
+      source = this.content.nativeElement.innerText;
+    }
+    console.log('source', source);
+    return source;
   }
 
   constructor() {
@@ -50,14 +55,13 @@ export class CodeBlockComponent implements OnInit, AfterContentInit {
   }
 
   ngAfterContentInit(): void {
-    console.log('content', this.content.nativeElement.innerHTML)
     hljs.highlightBlock(this.content.nativeElement);
   }
 
   copyToClipboard(tooltip: MatTooltip) {
     console.log(tooltip);
     const prevMessage = tooltip.message;
-    const result = copyTextToClipboard(this._source);
+    const result = copyTextToClipboard(this.source);
     setTimeout(() => {
       tooltip.message = result ? 'Copied' : 'Not Copied!';
       tooltip.show();

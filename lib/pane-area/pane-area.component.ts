@@ -63,7 +63,7 @@ export interface PaneAreaState {
 export class PaneAreaComponent implements AfterContentInit {
 
   /**
-   * Unique identifier for this pane area. Used by default {@link LocalStoragePaneAreaStateManager}
+   * Unique identifier for this pane area. Used by {@link LocalStoragePaneAreaStateManager}
    * to store state of panes inside pane area.
    */
   @Input()

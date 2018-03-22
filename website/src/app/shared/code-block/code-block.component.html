@@ -1,6 +1,6 @@
 <mat-card [style.padding.px]="loading ? 30: null">
   <app-loading [loading]="loading">
-    <pre class="hljs" [ngClass]="language" *ngIf="source" [innerHtml]="sourceHtml"></pre>
+    <pre class="hljs" [ngClass]="language" *ngIf="sourceHtml" [innerHtml]="sourceHtml"></pre>
     <div #content [hidden]="sourceHtml">
       <ng-content></ng-content>
     </div>

@@ -24,6 +24,8 @@
   $dark-app-theme: mat-dark-theme($app-primary, $app-accent, $app-warn);
   /deep/ {
     @include angular-material-theme($dark-app-theme);
+    // The following commented line doesn't work! import is not scoped and is kind of hoisted to the top
+    //@import '~highlight.js/styles/darcula.css';
     .hljs {
       color: map-get($mat-dark-theme-foreground, secondary-text);
     }

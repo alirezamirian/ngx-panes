@@ -1,1 +1,41 @@
-Coming Soon!
+<h2>Dependencies</h2>
+<p>
+  <code>ngx-panes</code> depends on <b>Angular@5.x.x</b>. It may also work with older versions of angular
+  but it's not tested.
+</p>
+
+<h2>Installation</h2>
+Install <code>ngx-panes</code> via npm:
+<app-code-block language="bash">
+  npm i --save ngx-panes
+</app-code-block>
+Or via yarn:
+<app-code-block language="bash">
+  yarn add ngx-panes
+</app-code-block>
+
+<h2>Usage</h2>
+Import <code style="padding-right: 0;">NgxPanesModule</code>:
+
+<app-code-block language="typescript" [source]="importCode"></app-code-block>
+
+Use it inside your template:
+<app-code-block language="html" [source]="templateCode"></app-code-block>
+
+And it will result into:
+<ngx-pane-area style="height: 300px">
+  <ngx-pane-group align="start" [defaultWidth]="200">
+    <ngx-pane title="pane #1">First pane</ngx-pane>
+    <ngx-pane title="pane #2">Second pane</ngx-pane>
+  </ngx-pane-group>
+  <ngx-pane-group align="end" [defaultWidth]="200">
+    <ngx-pane title="pane #3">Third pane</ngx-pane>
+    <ngx-pane title="pane #4">Forth pane</ngx-pane>
+  </ngx-pane-group>
+  <div>
+    Main content
+  </div>
+</ngx-pane-area>
+
+A default theme is included by <code>ngx-panes</code> but you can override it by
+<a routerLink="/guides/theming">defining custom themes</a>.

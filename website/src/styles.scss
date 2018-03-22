@@ -9,7 +9,7 @@
 @import '~codemirror/lib/codemirror.css';
 @import '~highlight.js/styles/tomorrow.css';
 
-body{
+body {
   margin: 0;
   color: #777;
   background: #fafafa;
@@ -29,6 +29,10 @@ a:visited {
 
 a:hover {
   text-decoration: underline;
+}
+
+code {
+  background: none;
 }
 
 .mat-padding {

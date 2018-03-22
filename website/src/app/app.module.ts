@@ -10,13 +10,15 @@ import {HeaderComponent} from './header/header.component';
 import {BreadcrumbComponent} from './breadcrumb/breadcrumb.component';
 import {WithSidenavComponent} from './with-sidenav/with-sidenav.component';
 import {CoreModule} from './core/core.module';
+import {HomepageComponent} from './homepage/homepage.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     BreadcrumbComponent,
-    WithSidenavComponent
+    WithSidenavComponent,
+    HomepageComponent
   ],
   imports: [
     SharedModule,

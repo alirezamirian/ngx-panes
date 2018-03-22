@@ -8,6 +8,7 @@ import {
   MatCardModule,
   MatIconModule,
   MatProgressSpinnerModule,
+  MatRippleModule,
   MatTooltipModule
 } from '@angular/material';
 import {NgxPanesModule} from '../../../../lib/panes.module';
@@ -29,6 +30,7 @@ import {RouterModule} from '@angular/router';
     MatButtonModule,
     MatTooltipModule,
     FlexLayoutModule,
+    MatRippleModule,
     MatProgressSpinnerModule, // used in loading.component.ts
     RouterModule
   ],
@@ -53,6 +55,7 @@ import {RouterModule} from '@angular/router';
     /**
      * common angular material modules
      */
+    MatRippleModule,
     MatTooltipModule,
     MatIconModule,
     MatButtonModule,

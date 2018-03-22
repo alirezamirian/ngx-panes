@@ -1,0 +1,56 @@
+@import '../../styles/theme';
+@import '~@angular/material/theming';
+
+$primary: map-get($app-theme, primary);
+$foreground: map-get($app-theme, foreground);
+$background: map-get($app-theme, background);
+
+.header {
+  padding-top: 60px;
+  padding-bottom: 40px;
+  text-align: center;
+  background-color: mat-color($primary, 800);
+  color: mat-contrast($primary, 700);
+  a {
+    position: relative;
+    text-decoration: none;
+    color: map-get($foreground, text);
+  }
+}
+
+.call-to-actions {
+  margin: 50px 0 0;
+  a {
+    margin: 0 10px;
+  }
+}
+
+.title {
+  margin-bottom: 15px;
+  font-weight: 300;
+}
+
+.sub-title {
+  color: transparentize(mat-contrast($primary, 700), .3);
+}
+
+.shadow {
+  text-shadow: 0 0 7px rgba(0, 0, 0, 0.2);
+}
+
+.card-wrapper {
+  padding: 20px;
+  a {
+    text-decoration: none;
+    position: relative;
+  }
+  mat-card:hover {
+    background: map-get($background, hover);
+  }
+  mat-card-header /deep/ .mat-card-title {
+    margin: 0;
+    line-height: 40px;
+    text-indent: 5px;
+    font-size: 24px;
+  }
+}

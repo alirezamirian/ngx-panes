@@ -8,7 +8,7 @@
 ## Website
 - [x] Add demos to sidenav
 - [x] Add "getting started" guide
-- [ ] Add homepage
+- [x] Add homepage
 - [ ] Add demo for custom label
 - [ ] Add search box to header
 - [ ] Add github icon to header

@@ -1,4 +1,7 @@
 
+mat-toolbar {
+  position: relative;
+}
 mat-toolbar.no-breadcrumb {
   min-height: 40px;
   mat-toolbar-row:nth-child(1) {

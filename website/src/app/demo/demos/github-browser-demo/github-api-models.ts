@@ -66,3 +66,57 @@ export interface GithubSearchResult<T> {
   incomplete_results: boolean;
   items: T[];
 }
+
+export namespace Github {
+  export interface Commit {
+    sha: string;
+    url: string;
+  }
+
+  export interface Branch {
+    name: string;
+    commit: Commit;
+    protected: boolean;
+    protection_url: string;
+  }
+}
+
+export declare module GithubRelease {
+
+  export interface Asset {
+    url: string;
+    browser_download_url: string;
+    id: number;
+    name: string;
+    label: string;
+    state: string;
+    content_type: string;
+    size: number;
+    download_count: number;
+    created_at: string;
+    updated_at: string;
+    uploader: GithubUser;
+  }
+
+  export interface Release {
+    url: string;
+    html_url: string;
+    assets_url: string;
+    upload_url: string;
+    tarball_url: string;
+    zipball_url: string;
+    id: number;
+    tag_name: string;
+    target_commitish: string;
+    name: string;
+    body: string;
+    draft: boolean;
+    prerelease: boolean;
+    created_at: string;
+    published_at: string;
+    author: GithubUser;
+    assets: Asset[];
+  }
+
+}
+

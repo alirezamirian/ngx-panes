@@ -52,3 +52,18 @@
     font-size: 90px;
   }
 }
+
+.fixed-select {
+  width: auto;
+  /deep/ .mat-select-value {
+    max-width: initial;
+    display: inline-block;
+    vertical-align: sub;
+  }
+}
+
+.branch-icon {
+  margin: 2px 4px;
+  fill: rgba(0, 0, 0, .5);
+  vertical-align: middle;
+}

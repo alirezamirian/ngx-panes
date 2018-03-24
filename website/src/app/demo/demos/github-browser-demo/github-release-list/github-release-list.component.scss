@@ -1,0 +1,13 @@
+@import "../../../../shared/styles/mat-list";
+@import "../../../../../styles/theme-helpers";
+
+.tag {
+  font-size: 13px;
+  width: auto;
+  height: auto;
+  vertical-align: middle;
+}
+
+.muted {
+  @include color-secondary;
+}

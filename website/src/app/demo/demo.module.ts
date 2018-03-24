@@ -36,6 +36,7 @@ import {getDemoComponents} from './demo-components';
 import {GithubUserSelectorComponent} from './demos/github-browser-demo/github-user-selector/github-user-selector.component';
 import {GithubRepoSelectorComponent} from './demos/github-browser-demo/github-repo-selector/github-repo-selector.component';
 import {GithubRepoCardComponent} from './demos/github-browser-demo/github-repo-card/github-repo-card.component';
+import {GithubReleaseListComponent} from './demos/github-browser-demo/github-release-list/github-release-list.component';
 
 const demoComponents = getDemoComponents();
 
@@ -68,6 +69,7 @@ const demoComponents = getDemoComponents();
     GithubUserSelectorComponent,
     GithubRepoSelectorComponent,
     GithubRepoCardComponent,
+    GithubReleaseListComponent,
     CodeEditorComponent
   ].concat(demoComponents),
   entryComponents: demoComponents,

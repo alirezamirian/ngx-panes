@@ -1,0 +1,21 @@
+<app-loading [loading]="loading">
+  <mat-list>
+    <mat-list-item *ngFor="let release of releases">
+      <mat-icon mat-list-icon [class.muted]="release.prerelease"
+                [matTooltip]="release.prerelease ? 'pre-release' : ''">new_releases
+      </mat-icon>
+      <!--<img [src]="issue.user.avatar_url" mat-list-avatar />-->
+      <h4 matLine matTooltip="{{release.name}}" [matTooltipShowDelay]="400">
+        <a [href]="release.html_url">{{release.name || release.tag_name}}</a>
+      </h4>
+      <p matLine class="second-line">
+        {{release.published_at | date}} &nbsp;
+        <mat-icon class="tag">local_offer</mat-icon>
+        <span>{{release.tag_name}}</span>
+      </p>
+      <a [href]="release.zipball_url" [color]="'primary'" mat-icon-button class="action-btn">
+        <mat-icon>file_download</mat-icon>
+      </a>
+    </mat-list-item>
+  </mat-list>
+</app-loading>

@@ -3,10 +3,11 @@ import {Demo} from '../demos';
 import {ActivatedRoute, Router} from '@angular/router';
 import {GITHUB_BASE_URL} from './github-base-url';
 import {HttpClient} from '@angular/common/http';
-import {GithubRateLimitStat, RateLimit} from './github-api-models';
+import {Github, GithubRateLimitStat, RateLimit} from './github-api-models';
+import Branch = Github.Branch;
 
 @Demo({
-  id: 'github-browser',
+  id: 'github',
   title: 'Github Browser',
   description: 'A small application of ngx-panes for browsing a github repo content',
   order: 1000,
@@ -40,6 +41,8 @@ export class GithubBrowserDemoComponent implements OnInit {
   };
 
   panes = [];
+  selectedBranch: string;
+  branches: Branch[];
 
   get rateLimited() {
     return this.rateLimit && this.rateLimit.remaining <= 0;
@@ -54,6 +57,7 @@ export class GithubBrowserDemoComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.updateBranches();
     this.httpClient.get<GithubRateLimitStat>(`${this.baseUrl}/rate_limit`).subscribe(result => {
       this.rateLimit = result.rate;
     });
@@ -80,6 +84,18 @@ export class GithubBrowserDemoComponent implements OnInit {
 
   setRepo(repo: string) {
     this.router.navigate([repo], {relativeTo: this.route});
+    this.updateBranches();
+  }
+
+  private updateBranches() {
+    if (this.slug) {
+      this.httpClient.get<Branch[]>(`${this.baseUrl}/repos/${this.slug}/branches`)
+        .subscribe((branches: Branch[]) => {
+          this.branches = branches;
+          const masterOrLast = (branch, index) => branch.name === 'master' || index === branches.length - 1;
+          this.selectedBranch = branches.find(masterOrLast).name;
+        });
+    }
   }
 }
 

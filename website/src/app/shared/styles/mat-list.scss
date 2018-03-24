@@ -1,3 +1,5 @@
+@import "../../../styles/theme-helpers";
+
 mat-list {
   margin: 0;
   padding: 0;
@@ -6,20 +8,22 @@ mat-list {
 mat-list-item {
   border-bottom: 1px solid rgba(0, 0, 0, .08);
   background: #fff;
+  height: 64px !important;
   /deep/ {
-    .mat-list-item-content {
-      height: 55px !important;
-    }
     .mat-list-text {
       font-size: 15px !important;
     }
-    .mat-line:nth-child(n+2) {
-      font-size: .7em !important;
-      line-height: 180%;
-    }
+  }
+
+  .mat-line.second-line {
+    @include color-secondary;
+    font-size: .7em;
   }
 
   &:hover {
     background: #f6f6f6;
+  }
+  .action-btn {
+    margin-right: -10px;
   }
 }

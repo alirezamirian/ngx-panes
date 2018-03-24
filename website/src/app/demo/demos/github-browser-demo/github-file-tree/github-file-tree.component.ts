@@ -14,6 +14,9 @@ export class GithubFileTreeComponent implements OnInit, OnChanges {
   @Input()
   slug: string;
 
+  @Input()
+  ref: string;
+
   @Output()
   fileSelected = new EventEmitter();
   @Output()
@@ -26,7 +29,7 @@ export class GithubFileTreeComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.slug && this.slug) {
+    if ((changes.slug || changes.ref) && this.slug) {
       if (!this.fileTree) {
         setTimeout(() => { // due to buggy behaviour of ng-file-tree
           this.fileTree = new TreeNode({
@@ -58,7 +61,11 @@ export class GithubFileTreeComponent implements OnInit, OnChanges {
   }
 
   loadFileTree(parentNode) {
-    this.http.get(`https://api.github.com/repos/${this.slug}/contents${parentNode.getFullPath()}`)
+    this.http.get(`https://api.github.com/repos/${this.slug}/contents${parentNode.getFullPath()}`, {
+      params: {
+        ref: this.ref
+      }
+    })
       .subscribe(res => {
         parentNode.children = res.json().map(
           data => githubContentNodeToTreeNode(parentNode, data)

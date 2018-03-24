@@ -25,6 +25,7 @@ export class PaneResizerComponent implements OnInit {
     if (!this.paneView.pane) {
       return;
     }
+    this._lastSize = undefined;
     this.startPos = {
       x: $event.pageX,
       y: $event.pageY
@@ -61,8 +62,10 @@ export class PaneResizerComponent implements OnInit {
   }
 
   private onMouseUp(event: MouseEvent) {
-    this.paneView.pane.width = this._lastSize;
-    this.paneView.pane.widthChange.emit(this._lastSize);
+    if (this._lastSize != undefined) {
+      this.paneView.pane.width = this._lastSize;
+      this.paneView.pane.widthChange.emit(this._lastSize);
+    }
     document.removeEventListener('mousemove', this.onMouseMove);
     document.removeEventListener('mouseup', this.onMouseUp);
   }

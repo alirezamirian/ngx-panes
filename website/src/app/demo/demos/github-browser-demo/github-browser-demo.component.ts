@@ -3,7 +3,7 @@ import {Demo} from '../demos';
 import {ActivatedRoute, Router} from '@angular/router';
 import {GITHUB_BASE_URL} from './github-base-url';
 import {HttpClient} from '@angular/common/http';
-import {GithubRateLimitStat, RateLimit} from '../../github-api-models';
+import {GithubRateLimitStat, RateLimit} from './github-api-models';
 
 @Demo({
   id: 'github-browser',

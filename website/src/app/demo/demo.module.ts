@@ -13,9 +13,9 @@ import {
   MatListModule,
   MatSelectModule
 } from '@angular/material';
-import {GithubContributorsComponent} from './github-contributors/github-contributors.component';
-import {GithubIssueListComponent} from './github-issue-list/github-issue-list.component';
-import {GithubFileTreeComponent} from './github-file-tree/github-file-tree.component';
+import {GithubContributorsComponent} from './demos/github-browser-demo/github-contributors/github-contributors.component';
+import {GithubIssueListComponent} from './demos/github-browser-demo/github-issue-list/github-issue-list.component';
+import {GithubFileTreeComponent} from './demos/github-browser-demo/github-file-tree/github-file-tree.component';
 import {DemoContentComponent} from './demo-content/demo-content.component';
 import {Ng2FileTreeModule} from 'ng2-file-tree';
 import {NoopXSRFStrategy} from './noop-xsrf-strategy';
@@ -33,9 +33,9 @@ import 'codemirror/addon/edit/matchbrackets.js';
 import {CodeEditorComponent} from './code-editor/code-editor.component';
 import {FormsModule} from '@angular/forms';
 import {getDemoComponents} from './demo-components';
-import {GithubUserSelectorComponent} from './github-user-selector/github-user-selector.component';
-import {GithubRepoSelectorComponent} from './github-repo-selector/github-repo-selector.component';
-import {GithubRepoCardComponent} from './github-repo-card/github-repo-card.component';
+import {GithubUserSelectorComponent} from './demos/github-browser-demo/github-user-selector/github-user-selector.component';
+import {GithubRepoSelectorComponent} from './demos/github-browser-demo/github-repo-selector/github-repo-selector.component';
+import {GithubRepoCardComponent} from './demos/github-browser-demo/github-repo-card/github-repo-card.component';
 
 const demoComponents = getDemoComponents();
 

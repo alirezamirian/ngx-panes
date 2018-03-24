@@ -1,5 +1,6 @@
 import {OnChanges, SimpleChanges} from '@angular/core';
 import {Http} from '@angular/http';
+
 /**
  * Created by alireza on 6/1/17.
  */

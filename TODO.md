@@ -12,7 +12,9 @@
 - [x] Add github icon to header
 - [x] Add search box to header
 - [ ] Add demo for custom label
-- [ ] Improve github browser demo
+- [ ] Add support for showing code for each demo
+- [-] Improve github browser demo
+    - [ ] fix initially loaded code in editor
 - [ ] handle 404 for routed demo
 
 
@@ -26,6 +28,7 @@
 - [x] Update demos to use new pane-area, or ngx-pane-group if it end up being an stand alone component
 - [x] fix ngx-pane-area-content s
 - [ ] Resolve theming issues (also add theming for pane-area. its content)
+- [ ] Add support for scrollbar customization in theme. Use a cool scrollbar like Jetbrain's by default
 - [ ] Clean up styles
 - [ ] Decide for height of ngx-pane-area
 - [ ] Provide necessary outputs (like widthChange for pane and so on), and add outputs to api doc pages

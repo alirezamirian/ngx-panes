@@ -1,0 +1,31 @@
+@import '../../../styles/theme-helpers';
+
+:host {
+  display: block;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.card {
+  margin: 10px;
+  display: block;
+  text-decoration: none;
+  /deep/ mat-card {
+    @include hover-state;
+  }
+}
+
+.suggestion {
+  img {
+    vertical-align: middle;
+    border-radius: 50%;
+    height: 30px;
+  }
+}
+
+.center-card {
+  max-width: 500px;
+  margin: auto;
+}

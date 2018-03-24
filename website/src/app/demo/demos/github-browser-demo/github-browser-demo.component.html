@@ -1,26 +1,39 @@
-<ngx-pane-area>
-  <ngx-pane-group [align]="'start'" [defaultWidth]="280">
-    <ngx-pane #firstPane id="test" title="Files" [width]="330">
-      <ngx-pane-header>custom header {{firstPane.width}}</ngx-pane-header>
-      <app-github-file-tree [slug]="slug" (fileSelected)="setSourceUrl($event)"></app-github-file-tree>
-    </ngx-pane>
-    <ngx-pane title="Issues" [width]="320">
-      <app-github-issue-list [slug]="slug"></app-github-issue-list>
-    </ngx-pane>
-    <ngx-pane title="Contributors">
-      <app-github-contributors [slug]="slug"></app-github-contributors>
-    </ngx-pane>
-    <ngx-pane title="Dummy">
-      <app-demo-content lines="40"></app-demo-content>
-    </ngx-pane>
-    <!--  <ngx-pane title="Structure" [width]="300" [resizable]="false">
-        This pane is not a resizable pane. it's fixed at <code>330px</code> width
-      </ngx-pane>-->
-  </ngx-pane-group>
-  <div fxFlex class="main-content">
-    <app-code-editor [sourceUrl]="sourceUrl"></app-code-editor>
-  </div>
-</ngx-pane-area>
+<div [class.rate-limited]="rateLimited" class="container">
+  <ngx-pane-area *ngIf="slug; else noSlug">
+    <ngx-pane-group [align]="'start'" [defaultWidth]="280">
+      <ngx-pane #firstPane id="test" title="Files" [width]="330">
+        <ngx-pane-header>custom header {{firstPane.width}}</ngx-pane-header>
+        <app-github-file-tree [slug]="slug" (fileSelected)="setSourceUrl($event)"></app-github-file-tree>
+      </ngx-pane>
+      <ngx-pane title="Issues" [width]="320">
+        <app-github-issue-list [slug]="slug"></app-github-issue-list>
+      </ngx-pane>
+      <ngx-pane title="Contributors">
+        <app-github-contributors [slug]="slug"></app-github-contributors>
+      </ngx-pane>
+    </ngx-pane-group>
+    <div fxFlex class="main-content">
+      <app-code-editor [sourceUrl]="sourceUrl"></app-code-editor>
+    </div>
+  </ngx-pane-area>
+</div>
 
+<div *ngIf="rateLimited" class="rate-limit">
+  <mat-icon>hourglass_empty</mat-icon>
+  <p>
+    You have reached your <a href="https://developer.github.com/v3/#rate-limiting">Github API rate limit!</a>
+    <br/>
+    Sorry, please Come back later.
+  </p>
+</div>
 
+<ng-template #noSlug>
+  <app-github-user-selector *ngIf="!owner; else noRepository"
+                            (selected)="setOwner($event)"
+                            class="center-card"></app-github-user-selector>
+</ng-template>
+
+<ng-template #noRepository>
+  <app-github-repo-selector [user]="owner" (selected)="setRepo($event)"></app-github-repo-selector>
+</ng-template>
 

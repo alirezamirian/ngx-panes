@@ -24,6 +24,8 @@ export interface Demo extends Ordered {
    * Defines a set of tags associated with the demo
    */
   tags?: Array<Tag>;
+
+  defaultPath?: string;
 }
 
 export class DemoModel {

@@ -1,0 +1,12 @@
+<mat-card>
+  <mat-card-title>Choose a GitHub user or organization</mat-card-title>
+  <mat-form-field>
+    <input #input autofocus matInput placeholder="Search ..." [matAutocomplete]="autocomplete"/>
+  </mat-form-field>
+  <mat-autocomplete #autocomplete (optionSelected)="selected.emit($event.option.value)">
+    <mat-option *ngFor="let item of suggestions$ | async" class="suggestion" [value]="item.login">
+      <img [src]="item.avatar_url">
+      {{item.login}}
+    </mat-option>
+  </mat-autocomplete>
+</mat-card>

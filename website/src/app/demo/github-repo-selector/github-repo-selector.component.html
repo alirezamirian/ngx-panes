@@ -1,0 +1,22 @@
+<app-loading [loading]="loading">
+  <div class="mat-padding">
+    <div fxLayout="row" fxLayoutWrap>
+      <div *ngFor="let repo of repos" fxFlex="50" fxFlex.gt-xs="33" fxFlex.gt-md="25" fxFlex.gt-lg="20">
+        <a class="card" [routerLink]="[repo.name]">
+          <app-github-repo-card [repo]="repo"></app-github-repo-card>
+        </a>
+      </div>
+    </div>
+    <mat-card class="center-card">
+      <mat-card-title>Search other {{user}} repositories</mat-card-title>
+      <mat-form-field>
+        <input autofocus #input matInput placeholder="Search ..." [matAutocomplete]="autocomplete"/>
+      </mat-form-field>
+      <mat-autocomplete #autocomplete (optionSelected)="selected.emit($event.option.value)">
+        <mat-option *ngFor="let item of suggestions$ | async" class="suggestion" [value]="item.login">
+          {{item.name}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-card>
+  </div>
+</app-loading>

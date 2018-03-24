@@ -33,6 +33,9 @@ import 'codemirror/addon/edit/matchbrackets.js';
 import {CodeEditorComponent} from './code-editor/code-editor.component';
 import {FormsModule} from '@angular/forms';
 import {getDemoComponents} from './demo-components';
+import {GithubUserSelectorComponent} from './github-user-selector/github-user-selector.component';
+import {GithubRepoSelectorComponent} from './github-repo-selector/github-repo-selector.component';
+import {GithubRepoCardComponent} from './github-repo-card/github-repo-card.component';
 
 const demoComponents = getDemoComponents();
 
@@ -62,6 +65,9 @@ const demoComponents = getDemoComponents();
     GithubFileTreeComponent,
     GithubIssueListComponent,
     GithubContributorsComponent,
+    GithubUserSelectorComponent,
+    GithubRepoSelectorComponent,
+    GithubRepoCardComponent,
     CodeEditorComponent
   ].concat(demoComponents),
   entryComponents: demoComponents,

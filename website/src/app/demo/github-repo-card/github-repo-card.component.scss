@@ -1,0 +1,26 @@
+@import '../../../styles/theme-helpers';
+@import '~bootstrap-sass/assets/stylesheets/bootstrap/mixins/text-overflow';
+
+:host {
+  display: block;
+}
+
+mat-card-title {
+  @include text-overflow();
+}
+
+mat-card-content {
+  @include text-overflow();
+}
+
+.icon {
+  vertical-align: middle;
+  fill: currentColor;
+  margin-bottom: 3px;
+}
+
+.meta {
+  padding: 0 20px 10px;
+  font-size: .85em;
+  @include color-secondary();
+}

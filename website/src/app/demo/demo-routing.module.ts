@@ -7,6 +7,17 @@ import {demoListBreadcrumb} from './demo-list/demo-list-breadcrumb';
 import {routedDemoBreadcrumb} from './routed-demo/routed-demo-breadcrumb';
 
 
+const demoRoute = {
+  path: ':demoId',
+  data: {
+    getBreadcrumbItems: routedDemoBreadcrumb,
+    noPadding: true
+  },
+  resolve: {
+    demoModel: DemoResolverService
+  },
+  component: RoutedDemoComponent
+};
 export const routes: Routes = [
   {
     path: '',
@@ -15,17 +26,10 @@ export const routes: Routes = [
       getBreadcrumbItems: demoListBreadcrumb
     }
   },
-  {
-    path: ':demoId',
-    data: {
-      getBreadcrumbItems: routedDemoBreadcrumb,
-      noPadding: true
-    },
-    resolve: {
-      demoModel: DemoResolverService
-    },
-    component: RoutedDemoComponent
-  }
+  demoRoute,
+  // this is absolute hack! can be fixed by changing each demo to be a separate module with each own routing
+  {...demoRoute, ...{path: ':demoId/:p1'}},
+  {...demoRoute, ...{path: ':demoId/:p1/:p2'}},
 ];
 
 @NgModule({

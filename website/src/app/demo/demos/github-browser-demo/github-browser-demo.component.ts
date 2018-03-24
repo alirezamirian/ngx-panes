@@ -1,12 +1,17 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {Demo} from '../demos';
+import {ActivatedRoute, Router} from '@angular/router';
+import {GITHUB_BASE_URL} from './github-base-url';
+import {HttpClient} from '@angular/common/http';
+import {GithubRateLimitStat, RateLimit} from '../../github-api-models';
 
 @Demo({
   id: 'github-browser',
   title: 'Github Browser',
   description: 'A small application of ngx-panes for browsing a github repo content',
   order: 1000,
-  tags: ['Basic Usage', 'Resizing']
+  tags: ['Basic Usage', 'Resizing'],
+  defaultPath: 'alirezamirian/ngx-panes'
 })
 @Component({
   selector: 'app-github-browser-demo',
@@ -14,18 +19,44 @@ import {Demo} from '../demos';
   styleUrls: [
     '../../shared-demo-styles.scss',
     './github-browser-demo.component.scss'
+  ],
+  providers: [
+    {
+      provide: GITHUB_BASE_URL,
+      useValue: 'https://api.github.com'
+    }
   ]
 })
 export class GithubBrowserDemoComponent implements OnInit {
   sourceUrl = '/app/demo/demos/github-browser-demo/github-browser-demo.component.ts';
-  slug = 'angular/angular';
+  repository: string;
+  owner: string;
+  private rateLimit: RateLimit;
+
+  get slug() {
+    if (this.repository && this.owner) {
+      return `${this.owner}/${this.repository}`;
+    }
+  };
 
   panes = [];
 
-  constructor() {
+  get rateLimited() {
+    return this.rateLimit && this.rateLimit.remaining <= 0;
+  };
+
+  constructor(private router: Router,
+              private route: ActivatedRoute,
+              @Inject(GITHUB_BASE_URL) private baseUrl: string,
+              private httpClient: HttpClient) {
+    this.owner = route.snapshot.params.p1;
+    this.repository = route.snapshot.params.p2;
   }
 
   ngOnInit(): void {
+    this.httpClient.get<GithubRateLimitStat>(`${this.baseUrl}/rate_limit`).subscribe(result => {
+      this.rateLimit = result.rate;
+    });
   }
 
   setSourceUrl(githubFileDto) {
@@ -41,6 +72,14 @@ export class GithubBrowserDemoComponent implements OnInit {
 
   removePane(pane) {
     this.panes.splice(this.panes.indexOf(pane), 1);
+  }
+
+  setOwner(owner: string) {
+    this.router.navigate([owner], {relativeTo: this.route});
+  }
+
+  setRepo(repo: string) {
+    this.router.navigate([repo], {relativeTo: this.route});
   }
 }
 

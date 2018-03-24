@@ -14,7 +14,7 @@
           <mat-icon class="search-icon">search</mat-icon>
           <mat-spinner [diameter]="25" *ngIf="searching"></mat-spinner>
           <mat-autocomplete #auto="matAutocomplete" (optionSelected)="select($event)" class="tiny-scroll"
-                            [displayWith]="convertResult">
+                            [displayWith]="convertResult" [autoActiveFirstOption]="true">
             <mat-option *ngFor="let result of results$ | async" [value]="result">
               <img class="search-result-icon"
                    src="https://ssl.gstatic.com/bt/C3341AA7A1A076756462EE2E5CD71C11/avatars/avatar_tile_{{result.provider.charAt(0).toLocaleLowerCase()}}_60.png"/>

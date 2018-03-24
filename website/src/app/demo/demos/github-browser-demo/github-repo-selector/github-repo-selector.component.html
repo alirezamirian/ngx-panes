@@ -12,8 +12,9 @@
       <mat-form-field>
         <input autofocus #input matInput placeholder="Search ..." [matAutocomplete]="autocomplete"/>
       </mat-form-field>
-      <mat-autocomplete #autocomplete (optionSelected)="selected.emit($event.option.value)">
-        <mat-option *ngFor="let item of suggestions$ | async" class="suggestion" [value]="item.login">
+      <mat-autocomplete #autocomplete (optionSelected)="selected.emit($event.option.value)"
+                        [autoActiveFirstOption]="true">
+        <mat-option *ngFor="let item of suggestions$ | async" class="suggestion" [value]="item.name">
           {{item.name}}
         </mat-option>
       </mat-autocomplete>

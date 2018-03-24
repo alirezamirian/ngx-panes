@@ -37,7 +37,7 @@
       ]
     },
     {
-      "id": "github-browser",
+      "id": "github",
       "title": "Github Browser",
       "description": "A small application of ngx-panes for browsing a github repo content",
       "order": 1000,

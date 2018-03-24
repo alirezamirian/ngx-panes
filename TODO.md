@@ -14,7 +14,9 @@
 - [ ] Add demo for custom label
 - [ ] Add support for showing code for each demo
 - [-] Improve github browser demo
-    - [ ] fix initially loaded code in editor
+    - [ ] Fix initially loaded code in editor
+    - [ ] Show a "nothing to show" text when issues, releases, etc., are empty
+    - consider switching default repo back to angular/angular
 - [ ] handle 404 for routed demo
 
 

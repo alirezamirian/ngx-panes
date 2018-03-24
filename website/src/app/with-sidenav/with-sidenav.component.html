@@ -8,7 +8,8 @@
         <span matLine>{{item.title}}</span>
       </a>
       <h3 matSubheader>Demos</h3>
-      <a mat-list-item *ngFor="let item of demos" [routerLink]="['/demos', item.id]" routerLinkActive="active">
+      <a mat-list-item *ngFor="let item of demos"
+         [routerLink]="['/demos', item.id].concat( (item.defaultPath || '').split('/'))" routerLinkActive="active">
         <img matListIcon
              src="https://ssl.gstatic.com/bt/C3341AA7A1A076756462EE2E5CD71C11/avatars/avatar_tile_d_60.png"/>
         <span matLine>{{item.title}}</span>

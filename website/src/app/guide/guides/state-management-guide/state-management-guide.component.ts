@@ -22,7 +22,7 @@ import {
 export class StateManagementGuideComponent implements OnInit {
 
   usageExample =
-    `<ngx-pane-area>
+    `<ngx-pane-area style="height: 265px">
   <ngx-pane-group align="start">
     <ngx-pane title="Pane #1">First Pane</ngx-pane>
     <ngx-pane title="Pane #2">Second Pane</ngx-pane>

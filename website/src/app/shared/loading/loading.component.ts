@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, HostBinding, Input} from '@angular/core';
 
 @Component({
   selector: 'app-loading',
@@ -8,22 +8,11 @@ import {Component, Input} from '@angular/core';
                          *ngIf="loading"></mat-progress-spinner>
     <ng-content *ngIf="!loading"></ng-content>
   `,
-  styles: [
-      `
-      :host {
-        height: 100%;
-        display: block;
-      }
-
-      mat-progress-spinner {
-        margin: auto;
-        width: 50px;
-        height: 100%;
-      }`
-  ]
+  styleUrls: ['./loading.component.scss']
 })
 export class AppLoadingComponent {
 
+  @HostBinding('class.loading')
   @Input() loading;
 
   constructor() {

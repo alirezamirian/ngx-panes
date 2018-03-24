@@ -13,13 +13,14 @@ import {
   MatTooltipModule
 } from '@angular/material';
 import {NgxPanesModule} from '../../../../lib/panes.module';
-import {AppLoadingComponent} from './loading.component';
+import {AppLoadingComponent} from './loading/loading.component';
 import {CalloutComponent} from './callout/callout.component';
 import {CodeBlockComponent} from './code-block/code-block.component';
 import {CodeBlockSourceUrlDirective} from './code-block/source-url.directive';
 import {SideAnchorOwnerDirective} from './side-anchor/side-anchor-owner.directive';
 import {SideAnchorComponent} from './side-anchor/side-anchor.component';
 import {RouterModule} from '@angular/router';
+import {NumberAbbrevPipe} from './number-abbrev.pipe';
 
 // import {NgxPanesModule} from 'ngx-panes'; // for testing production bundle
 
@@ -41,7 +42,8 @@ import {RouterModule} from '@angular/router';
     CodeBlockComponent,
     CodeBlockSourceUrlDirective,
     SideAnchorOwnerDirective,
-    SideAnchorComponent
+    SideAnchorComponent,
+    NumberAbbrevPipe
   ],
   exports: [
     CommonModule,
@@ -70,7 +72,8 @@ import {RouterModule} from '@angular/router';
     CodeBlockComponent,
     CodeBlockSourceUrlDirective,
     SideAnchorOwnerDirective,
-    SideAnchorComponent
+    SideAnchorComponent,
+    NumberAbbrevPipe
   ]
 })
 export class SharedModule {

@@ -1,0 +1,15 @@
+
+:host {
+  height: 100%;
+  display: block;
+  &.loading {
+    padding: 50px 0;
+    overflow: hidden;
+  }
+}
+
+mat-progress-spinner {
+  margin: auto;
+  width: 50px;
+  height: 100%;
+}

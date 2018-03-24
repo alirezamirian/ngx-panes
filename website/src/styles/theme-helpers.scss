@@ -1,0 +1,18 @@
+@import "theme";
+
+$background: map-get($app-theme, background);
+$foreground: map-get($app-theme, foreground);
+
+@mixin hover-state {
+  &:hover {
+    background: map-get($background, hover);
+  }
+}
+
+@mixin color-secondary {
+  color: map-get($foreground, secondary-text);
+}
+
+@mixin color-hint {
+  color: map-get($foreground, hint-text);
+}

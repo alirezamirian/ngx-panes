@@ -61,11 +61,15 @@ export class WithSidenavComponent implements OnInit {
   }
 
   hideSidenav() {
-    this.hidden = true;
+    setTimeout(() => {
+      this.hidden = true;
+    });
   }
 
   showSidenav() {
-    this.hidden = false;
+    setTimeout(() => {
+      this.hidden = false;
+    });
   }
 }
 

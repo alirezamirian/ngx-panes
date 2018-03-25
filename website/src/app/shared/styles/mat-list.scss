@@ -18,6 +18,7 @@ mat-list-item {
   .mat-line.second-line {
     @include color-secondary;
     font-size: .7em;
+    line-height: 2.2;
   }
 
   &:hover {

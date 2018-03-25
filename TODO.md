@@ -15,8 +15,8 @@
 - [ ] Add support for showing code for each demo
 - [-] Improve github browser demo
     - [ ] Fix initially loaded code in editor
-    - [ ] Show a "nothing to show" text when issues, releases, etc., are empty
-    - consider switching default repo back to angular/angular
+    - [x] Show a "nothing to show" text when issues, releases, etc., are empty
+    - [x] consider switching default repo back to angular/material2
 - [ ] handle 404 for routed demo
 
 

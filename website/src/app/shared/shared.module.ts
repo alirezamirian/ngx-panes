@@ -21,6 +21,7 @@ import {SideAnchorOwnerDirective} from './side-anchor/side-anchor-owner.directiv
 import {SideAnchorComponent} from './side-anchor/side-anchor.component';
 import {RouterModule} from '@angular/router';
 import {NumberAbbrevPipe} from './number-abbrev.pipe';
+import {ListWrapperComponent} from './list-wrapper.component';
 
 // import {NgxPanesModule} from 'ngx-panes'; // for testing production bundle
 
@@ -37,6 +38,7 @@ import {NumberAbbrevPipe} from './number-abbrev.pipe';
     RouterModule
   ],
   declarations: [
+    ListWrapperComponent,
     AppLoadingComponent,
     CalloutComponent,
     CodeBlockComponent,
@@ -67,6 +69,7 @@ import {NumberAbbrevPipe} from './number-abbrev.pipe';
     MatAutocompleteModule,
 
     NgxPanesModule,
+    ListWrapperComponent,
     AppLoadingComponent,
     CalloutComponent,
     CodeBlockComponent,

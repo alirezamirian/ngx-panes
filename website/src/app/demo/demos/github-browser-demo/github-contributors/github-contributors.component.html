@@ -1,11 +1,13 @@
 <app-loading [loading]="loading">
-  <mat-list>
-    <a [href]="user.html_url" *ngFor="let user of contributors">
-      <mat-list-item>
-        <img [src]="user.avatar_url" mat-list-avatar/>
-        <h4 matLine>{{user.login}}</h4>
-        <p matLine>{{user.contributions}} contributions</p>
-      </mat-list-item>
-    </a>
-  </mat-list>
+  <app-list-wrapper [items]="contributors">
+    <mat-list>
+      <a [href]="user.html_url" *ngFor="let user of contributors">
+        <mat-list-item>
+          <img [src]="user.avatar_url" mat-list-avatar/>
+          <h4 matLine>{{user.login}}</h4>
+          <p matLine>{{user.contributions}} contributions</p>
+        </mat-list-item>
+      </a>
+    </mat-list>
+  </app-list-wrapper>
 </app-loading>

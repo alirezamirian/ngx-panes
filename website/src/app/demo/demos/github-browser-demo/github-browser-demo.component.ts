@@ -12,7 +12,7 @@ import Branch = Github.Branch;
   description: 'A small application of ngx-panes for browsing a github repo content',
   order: 1000,
   tags: ['Basic Usage', 'Resizing'],
-  defaultPath: 'alirezamirian/ngx-panes'
+  defaultPath: 'angular/material2'
 })
 @Component({
   selector: 'app-github-browser-demo',

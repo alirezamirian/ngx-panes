@@ -13,6 +13,6 @@ $foreground: map-get($app-theme, foreground);
   color: map-get($foreground, secondary-text);
 }
 
-@mixin color-hint {
-  color: map-get($foreground, hint-text);
+@mixin color-hint($theme: $app-theme) {
+  color: map-get(map-get($theme, foreground), hint-text);
 }

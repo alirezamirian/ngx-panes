@@ -60,6 +60,16 @@ a {
   display: inline-flex;
 }
 
+.overlay.active {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, .5);
+  transition: background-color .3s;
+  z-index: 100;
+}
 .search-box {
   display: flex;
   margin: 5px 20px 0;
@@ -76,6 +86,7 @@ a {
     width: 90%;
     background-color: rgba(0, 0, 0, .3);
     border-radius: 5px;
+    z-index: 101;
   }
   &.has-result {
     border-radius: 5px 5px 0 0;

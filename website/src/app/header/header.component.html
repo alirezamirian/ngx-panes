@@ -6,6 +6,7 @@
       <a routerLink="api">API Docs</a>
       <a routerLink="guides">Guides</a>
       <div fxFlex fxLayout="row" [fxLayoutAlign]="searchInputFocused ? 'center' : 'end'">
+        <div class="overlay" [class.active]="searchInputFocused"></div>
         <div class="search-box" [class.focused]="searchInputFocused" [class.has-result]="auto.isOpen">
           <input #searchInput class="search-input" type="search" placeholder="Search ..."
                  [matAutocomplete]="auto"

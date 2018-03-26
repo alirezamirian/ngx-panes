@@ -1,10 +1,7 @@
 <div class="mat-padding">
   <h1 sideAnchorOwner>
     <app-side-anchor></app-side-anchor>
-    <ng-container [ngSwitch]="docItem.type">
-      <ng-container *ngSwitchCase="'directive'">{{docItem.selector}}</ng-container>
-      <ng-container *ngSwitchDefault="">{{docItem.identifier}}</ng-container>
-    </ng-container>
+    {{docItem.identifier}}
   </h1>
 
 
@@ -14,6 +11,15 @@
   <div [innerHtml]="docItem.description"></div>
   <!-- TODO: handle examples -->
   <!-- TODO(api-docs): convert @link elements to correct markdown link -->
+
+
+  <ng-container *ngIf="docItem.type === 'directive'">
+    <h2 id="selector">
+      <app-side-anchor></app-side-anchor>
+      Selector
+    </h2>
+    <code>{{docItem.selector}}</code>
+  </ng-container>
 
 
   <ng-container *ngIf="docItem.usage">

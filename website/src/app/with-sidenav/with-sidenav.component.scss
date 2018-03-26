@@ -4,6 +4,8 @@ $sidenav-width: 280px;
 :host {
   flex: 1;
   display: flex;
+  max-height: 100%;
+  overflow: auto;
 }
 
 .index {

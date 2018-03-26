@@ -5,22 +5,6 @@
 - [x] Implement 'top' and 'bottom' alignment modes
 - [ ] shortcut support (Alt+1, Alt+2, etc.)
 
-## Website
-- [x] Add demos to sidenav
-- [x] Add "getting started" guide
-- [x] Add homepage
-- [x] Add github icon to header
-- [x] Add search box to header
-- [ ] Add demo for custom label
-- [ ] Add support for showing code for each demo
-- [-] Improve github browser demo
-    - [ ] Fix initially loaded code in editor
-    - [x] Show a "nothing to show" text when issues, releases, etc., are empty
-    - [x] consider switching default repo back to angular/material2
-- [ ] handle 404 for routed demo
-
-
-
 # Active TODO list:
 ## high priority
 - [x] Fix and test align options

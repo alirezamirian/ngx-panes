@@ -30,7 +30,7 @@
       <td>
         <mat-icon>{{option.required ? 'check' : 'close'}}</mat-icon>
       </td>
-      <td [innerHtml]="option.description"></td>
+      <td [innerHtml]="option.description" appRouterLinksFromHrefs></td>
       <td class="no-wrap">
         <code *ngIf="option.defaultValue">{{option.defaultValue}}</code>
         <span *ngIf="!option.defaultValue"> - </span>

@@ -1,5 +1,5 @@
-import {Component, HostListener, Inject, OnInit, PLATFORM_ID} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Component, Inject, OnInit, PLATFORM_ID} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-doc-page',
@@ -9,7 +9,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class DocPageComponent implements OnInit {
   public docItem: any;
 
-  constructor(private route: ActivatedRoute, private router: Router, @Inject(PLATFORM_ID) private platformId) {
+  constructor(private route: ActivatedRoute, @Inject(PLATFORM_ID) private platformId) {
   }
 
   ngOnInit() {
@@ -20,15 +20,5 @@ export class DocPageComponent implements OnInit {
     });
   }
 
-  @HostListener('click', ['$event'])
-  handleLinkClicks(event: any) {
-    if (event.target.tagName.toLowerCase() === 'a') {
-      // note that event.target.href is a property which is different with href attribute. href prop is always absolute
-      const href = event.target.getAttribute('href');
-      if (href.indexOf('http') !== 0) {
-        event.preventDefault();
-        this.router.navigateByUrl(href);
-      }
-    }
-  }
+
 }

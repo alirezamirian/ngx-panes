@@ -100,7 +100,10 @@ export class ThemingGuideComponent implements OnInit {
       required: false,
       description: `Options regarding scrollbar styles. It only works on 
 <a href="https://en.wikipedia.org/wiki/List_of_web_browsers#WebKit-based">WebKit-based browsers</a>. <br/>
-Passing <code>null</code> will result in default browser scrollbar styles. <br />
+Passing <code>null</code> will result in default browser scrollbar styles. You can also use
+<a href="/api/DefaultScrollbarsDirective">ngxDefaultScrollbars</a> directive to disable custom
+scrollbar style in an instance basis.
+<br />
 Value should be a map with any subset of the following keys:
 <ul>
   <li><code>width</code>: width of the scrollbar</li>

@@ -23,6 +23,7 @@ import {RouterModule} from '@angular/router';
 import {NumberAbbrevPipe} from './number-abbrev.pipe';
 import {ListWrapperComponent} from './list-wrapper.component';
 import {KebabCasePipe} from './kebab-case.pipe';
+import {RouterLinksFromHrefsDirective} from './router-links-from-hrefs.directive';
 
 // import {NgxPanesModule} from 'ngx-panes'; // for testing production bundle
 
@@ -47,7 +48,8 @@ import {KebabCasePipe} from './kebab-case.pipe';
     SideAnchorOwnerDirective,
     SideAnchorComponent,
     NumberAbbrevPipe,
-    KebabCasePipe
+    KebabCasePipe,
+    RouterLinksFromHrefsDirective
   ],
   exports: [
     CommonModule,
@@ -79,7 +81,8 @@ import {KebabCasePipe} from './kebab-case.pipe';
     SideAnchorOwnerDirective,
     SideAnchorComponent,
     NumberAbbrevPipe,
-    KebabCasePipe
+    KebabCasePipe,
+    RouterLinksFromHrefsDirective
   ]
 })
 export class SharedModule {

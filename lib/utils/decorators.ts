@@ -1,4 +1,4 @@
-export function Boolean(clazz, propName, descriptor) {
+export function CoerceBoolean(clazz, propName, descriptor?) {
   if (descriptor) {
     const originalSetter = descriptor.set;
     return Object.assign({}, descriptor, {

@@ -1,6 +1,7 @@
 @import '../../../../../../lib/theming';
 @import '~@angular/material/theming';
 @import '../../../../styles/theme';
+@import '../../../../styles/theme-helpers';
 
 //@import '~ngx-panes/theming'; // for testing production bundle
 
@@ -36,6 +37,10 @@
   app-code-block.active /deep/ mat-card {
     background: mat-color(map-get($dark-app-theme, background), selected-button);
   }
+  .checkbox-hint {
+    @include color-hint($dark-app-theme);
+  }
+
 }
 
 .theme-light-orange {
@@ -64,4 +69,10 @@ mat-card table {
 
 app-code-block.active /deep/ mat-card {
   background: mat-color(map-get($app-theme, background), selected-button);
+}
+
+.checkbox-hint {
+  font-size: .8em;
+  line-height: 1;
+  @include color-hint;
 }

@@ -71,6 +71,8 @@ export class ThemingDemoComponent implements OnInit {
 
   selection: Example = this.examples[0];
 
+  defaultScrollbars = false;
+
   constructor() {
   }
 

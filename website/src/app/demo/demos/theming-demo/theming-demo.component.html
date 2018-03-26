@@ -1,4 +1,4 @@
-<div [ngClass]="'theme-' + selection.theme" style="height: 100%;">
+<div [ngClass]="'theme-' + selection.theme" style="height: 100%;" [ngxPanesDefaultScrollbars]="defaultScrollbars">
   <ngx-pane-area>
     <ngx-pane-group #panes [defaultWidth]="330">
       <ngx-pane #pane1 id="test" title="Foo">
@@ -17,11 +17,6 @@
         <!--<app-code-block [sourceUrl]="'https://raw.githubusercontent.com/angular/angular/master/gulpfile.js'"
                         [source]="'var x = 10;'">
         </app-code-block>-->
-
-        <p>
-          See also <a routerLink="/guides/theming">Theming guide</a>
-        </p>
-
         <div>
           <br/>
           <ng-container *ngFor="let example of examples">
@@ -33,6 +28,15 @@
             </button>
           </ng-container>
         </div>
+        <br/>
+        <div>
+          <mat-checkbox [(ngModel)]="defaultScrollbars">
+            Default Scrollbars (WebKit-based browsers only)
+            <div class="checkbox-hint">
+              You may need to switch between panes for changes to take effect, due to browser's buggy behaviour.
+            </div>
+          </mat-checkbox>
+        </div>
 
         <br/>
 
@@ -41,6 +45,11 @@
         <span *ngIf="!selection.theme">Nothing</span>
         <br/>
         <br/>
+
+        <p>
+          See also <a routerLink="/guides/theming">Theming guide</a>
+        </p>
+
         <ng-container *ngFor="let example of examples">
           <app-code-block *ngIf="example.theme"
                           [class.active]="selection === example"

@@ -1,5 +1,25 @@
 [
   {
+    "identifier": "DefaultScrollbarsDirective",
+    "description": "<p>Ensures browser default scrollbar style is preserved for child pane windows and main content area.</p>\n<p>You can also pass <code>null</code> to <a href=\"/guides/theming\">ngx-panes-theme mixin</a> to prevent custom scrollbar styles.\nbut it won&#39;t work for nested themes, as css for scrollbar styles is a little tricky.</p>\n",
+    "methods": [],
+    "properties": [],
+    "type": "directive",
+    "isComponent": false,
+    "selector": "[ngxPanesDefaultScrollbars]",
+    "inputs": [
+      {
+        "name": "ngxPanesDefaultScrollbars",
+        "type": "boolean",
+        "description": "<p>Whether browser default scrollbar style is enabled or not</p>\n"
+      }
+    ],
+    "outputs": [],
+    "fileName": "lib/default-scrollbars.directive.ts",
+    "usage": "<ngx-pane-area ngxPanesDefaultScrollbars>\r  ...\r</ngx-pane-area>\ror\r<ngx-pane-area [ngxPanesDefaultScrollbars]=\"isEnabled\">\r  ...\r</ngx-pane-area>",
+    "usageLang": "html"
+  },
+  {
     "identifier": "PaneAreaStateManager",
     "description": "<p>An abstract class, used as DI token for pane area state manager service.\nEach instance of {@link PaneAreaComponent} will look for a provided\n<code>PaneAreaStateManager</code> to use for loading previously saved state and saving\nstate changes whenever a pane is moved to another position or another pane group.</p>\n<p>Currently, this <strong>state</strong> is only limited to position of panes inside pane groups.\nBecause it&#39;s the only tricky part of state management which is hard to handle in\nstatic templates.\nOther things such as <strong>last opened pane in each pane group</strong> or <strong>size of each pane</strong>\nis not currently handled by this state management mechanism and should be handled by\ncorresponding inputs like {@link PaneComponent#width PaneComponent size input}.</p>\n<p>{@link LocalStoragePaneAreaStateManager} is the default implementation, which\nis provided by {@link NgxPanesModule} out of the box.\nYou can provide other implementations to be used instead of local storage.\nA common use case is a service which loads and saves state via a backend API.</p>\n<p>If you want to disable {@link PaneAreaComponent#tabsDraggable tab dragging} or you don&#39;t\nwant to preserve pane positions across page reloads, you can use\n{@link NoHistoryDirective noHistory directive} on your {@link PaneAreaComponent},\nwhich provides a {@link NoopPaneAreaStateManager}.</p>\n<p>{@link PaneAreaState} is a simple map from {@link PaneComponent Pane} ids to\n{@link PaneState} objects which represents the id of {@link PaneGroupComponent PaneGroup}\nfor this pane and position of the pane inside that paneGroup. So, for <code>PaneAreaStateManager</code> to work,\n<strong>it&#39;s necessary to give an id to each pane group and each pane inside it</strong>.</p>\n<p>See also <a href=\"/guides/state-management\">state management guide</a>.</p>\n",
     "methods": [
@@ -428,7 +448,7 @@
       {
         "name": "width",
         "type": "number",
-        "description": "<p>Width of the pane. More precisely, <strong>width</strong> for <strong>horizontally</strong> aligned and <strong>height</strong> for <strong>vertically</strong>\naligned panes.\nIf unset, <code>defaultWidth</code> of the host <code>ngx-panes</code> will be used. If both are undefined, the content of the\npane will determine its width. Resizing pane (if enabled) changes the pane&#39;s width.</p>\n"
+        "description": "<p>Width of the pane. More precisely, <strong>width</strong> for <strong>horizontally</strong> aligned and <strong>height</strong> for <strong>vertically</strong>\naligned panes.\nIf unset, <code>defaultWidth</code> of the host <code>ngx-pane-group</code> will be used. If both are undefined, the content of the\npane will determine its width. Resizing pane (if enabled) changes the pane&#39;s width.</p>\n"
       }
     ],
     "outputs": [
@@ -489,12 +509,31 @@
       "lib/pane-header/pane-header.component#PaneHeaderComponent",
       "lib/pane-area/pane-area.component#PaneAreaComponent",
       "lib/pane-group/pane-group.component#PaneGroupComponent",
-      "lib/pane-area/no-history.directive#NoHistoryDirective"
+      "lib/pane-area/no-history.directive#NoHistoryDirective",
+      "lib/default-scrollbars.directive#DefaultScrollbarsDirective"
     ],
     "services": [],
     "fileName": "lib/panes.module.ts",
     "usage": "@NgModule({\n  imports: [\n    // ...\n    NgxPanesModule\n    //...\n  ]\n})\nexport class AppModule {}\n",
     "usageLang": "typescript"
+  },
+  {
+    "identifier": "ScrollableDirective",
+    "description": "",
+    "methods": [],
+    "properties": [
+      {
+        "name": "applyStyles",
+        "type": "boolean",
+        "description": ""
+      }
+    ],
+    "type": "directive",
+    "isComponent": false,
+    "selector": "[scrollable]",
+    "inputs": [],
+    "outputs": [],
+    "fileName": "lib/scrollable.directive.ts"
   },
   {
     "type": "typeAlias",

@@ -1,0 +1,5 @@
+@import './brightness';
+
+@function isDark($color) {
+  @return brightness($color) < .5;
+}

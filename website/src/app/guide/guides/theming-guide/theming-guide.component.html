@@ -1,6 +1,11 @@
-<h1>Theming</h1>
+<h1 id="theming">
+  <app-side-anchor></app-side-anchor>
+  Theming
+</h1>
 <p>
-  To create a custom theme, you need to import <code>ngx-panes-theme</code> mixin and include it wherever you want.
+  To create a custom theme, you need to import <code>ngx-panes-theme</code> mixin and include it
+  in whatever <a routerLink="." fragment="theme-scope">scope</a> you want it to get applied:
+  <app-code-block language="scss" [source]="samples.basic"></app-code-block>
   <a routerLink="/demos/theming">Theming demo</a> shows it in action.
 </p>
 <p>
@@ -17,77 +22,19 @@
     </tr>
     </thead>
     <tbody>
-    <tr>
-      <td><code>primaryColor</code></td>
-      <td>
-        <mat-icon>check</mat-icon>
+    <tr *ngFor="let option of options">
+      <td id="option-{{option.name | kebabCase}}">
+        <app-side-anchor></app-side-anchor>
+        <code>{{option.name}}</code>
       </td>
       <td>
-        Used for active pane tab
+        <mat-icon>{{option.required ? 'check' : 'close'}}</mat-icon>
       </td>
-      <td> -</td>
-    </tr>
-    <tr>
-      <td><code>backgroundColor</code></td>
-      <td>
-        <mat-icon>check</mat-icon>
+      <td [innerHtml]="option.description"></td>
+      <td class="no-wrap">
+        <code *ngIf="option.defaultValue">{{option.defaultValue}}</code>
+        <span *ngIf="!option.defaultValue"> - </span>
       </td>
-      <td>
-        Used for pane background color. By default, background color of pane tabs and header will be set to a little
-        darkened version of the backgroundColor.
-      </td>
-      <td> -</td>
-    </tr>
-    <tr>
-      <td><code>tabsContrast</code></td>
-      <td>
-        <mat-icon>close</mat-icon>
-      </td>
-      <td>
-        Defines how much tabs background should be darker than background.
-      </td>
-      <td> 3%</td>
-    </tr>
-    <tr>
-      <td><code>headerContrast</code></td>
-      <td>
-        <mat-icon>close</mat-icon>
-      </td>
-      <td>
-        Defines how much pane header background should be darker than background.
-      </td>
-      <td> 5%</td>
-    </tr>
-    <tr>
-      <td><code>borderContrast</code></td>
-      <td>
-        <mat-icon>close</mat-icon>
-      </td>
-      <td>
-        border color is set to foreground color.
-        borderContrast defines how much the opacity of borders.
-      </td>
-      <td> 20%</td>
-    </tr>
-    <tr>
-      <td><code>lightTextColor</code></td>
-      <td>
-        <mat-icon>close</mat-icon>
-      </td>
-      <td>
-        The color to be used for text color, whenever <b>light</b> color is legible.
-      </td>
-      <td>#eee</td>
-    </tr>
-    <tr>
-      <td><code>darkTextColor</code></td>
-      <td>
-        <mat-icon>close</mat-icon>
-      </td>
-      <td>
-        The color to be used for text color, whenever <b>dark</b> color is legible.
-      </td>
-      <td>#333</td>
     </tr>
     </tbody>
   </table>
@@ -98,27 +45,46 @@
 </app-callout>
 
 <app-callout type="info">
-  Wherever <i>ngx-panes-theme</i> is applying a background color to something, it's smart enough to apply a legible
-  <b>light</b> or <b>dark</b> text color based background color.
+  Wherever <code>ngx-panes-theme</code> is applying a background color to something, it's smart enough to apply a
+  legible
+  <a routerLink="." fragment="option-light-text-color">light</a> or
+  <a routerLink="." fragment="option-dark-text-color">dark</a> text color based background color.
 </app-callout>
 
-<h2>Theme scope</h2>
+<h2 id="theme-scope">
+  <app-side-anchor></app-side-anchor>
+  Theme scope
+</h2>
 <p>
-  When you define a theme by including <i>ngx-panes-theme</i> mixin, the scope of the theme depends on
+  When you define a theme by including <code>ngx-panes-theme</code> mixin, the scope of the theme depends on
   the place you are including the mixin.
-  You can define a theme to be applied to all <code>ngx-panes</code> instances, by including the
-  <i>ngx-panes-theme</i> mixin in a globally applied style.
+</p>
+<h3 id="scope-global">
+  <app-side-anchor></app-side-anchor>
+  Single global theme
+</h3>
+<p>
+  You can define a theme to be applied to all <code>ngx-pane-area</code> instances, by including the
+  <code>ngx-panes-theme</code> mixin in a globally applied style.
 </p>
 <app-code-block language="scss" [source]="samples.customTheme1"></app-code-block>
 
+<h3 id="scope-enclosed">
+  <app-side-anchor></app-side-anchor>
+  Multiple themes
+</h3>
 <p>
   If you want to use multiple themes, you can simply wrap mixin inclusion in a class selector wrapper:
 </p>
 <app-code-block language="scss" [source]="samples.customTheme2"></app-code-block>
 
+<h3 id="scope-component-view">
+  <app-side-anchor></app-side-anchor>
+  Scoped to some component view
+</h3>
 <p>
   You can also include the mixin inside styles of a component
-  and it will be applied to all <code>ngx-panes</code> instances inside that component's view (Assuming you are not
+  and it will be applied to all <code>ngx-pane-area</code> instances inside that component's view (Assuming you are not
   disabling Angular's
   <a href="https://angular.io/docs/ts/latest/guide/component-styles.html#view-encapsulation">view encapsulation</a>
   ).

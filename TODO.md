@@ -14,7 +14,7 @@
 - [x] Update demos to use new pane-area, or ngx-pane-group if it end up being an stand alone component
 - [x] fix ngx-pane-area-content s
 - [ ] Resolve theming issues (also add theming for pane-area. its content)
-- [ ] Add support for scrollbar customization in theme. Use a cool scrollbar like Jetbrain's by default
+- [x] Add support for scrollbar customization in theme. Use a cool scrollbar like Jetbrain's by default
 - [ ] Clean up styles
 - [ ] Decide for height of ngx-pane-area
 - [ ] Provide necessary outputs (like widthChange for pane and so on), and add outputs to api doc pages
@@ -26,6 +26,7 @@
 - [ ] Warn user of missing ids
 - [x] Add support for custom state management services
 - [x] Add support for NoHistory directive (which provides a noop paneAreaStateManager)
+- [x] Add support for creating theme out of material theme objects
 
 ## Least priority
 - [ ] Explore onPush change detection possibility

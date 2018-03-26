@@ -1,59 +1,93 @@
 @import 'scss/functions/pick-visible-color';
 @import 'scss/functions/decimalize.scss';
+@import 'scss/functions/is-dark';
 
+@function getContrastColor($color) {
+  @return if(isDark($color), lighten($color, 20%), darken($color, 20%));
+}
 
 @mixin ngx-panes-theme($options: ()) {
-  @if (map_has_key($options, primaryColor) == false) {
-    @error ('primaryColor is necessary to create an ngx-panes theme');
-  }
-  @if (map_has_key($options, backgroundColor) == false) {
-    @error ('bakgroundColor is necessary to create an ngx-panes theme');
-  }
-  $primaryColor: map_get($options, primaryColor);
-  $backgroundColor: map_get($options, backgroundColor);
 
   $options: map-merge((
-    primaryColor: #eee,
-    backgroundColor: #fff,
+    primaryColor: #4756bf,
+    backgroundColor: #f0f0f0,
     tabsContrast: 3%,
     headerContrast: 5%,
     borderContrast: 20%,
     lightTextColor: #eee,
-    darkTextColor: #333
+    darkTextColor: #333,
+    scrollbarOptions: (
+      width: 10px,
+    ),
   ), $options);
 
+  $primaryColor: map_get($options, primaryColor);
+  $backgroundColor: map_get($options, backgroundColor);
+  $bgContrast: getContrastColor($backgroundColor);
+
+  $scrollbarOptions: map-get($options, scrollbarOptions);
   $light-text-color: map_get($options, lightTextColor);
   $dark-text-color: map_get($options, darkTextColor);
   $tab-fg-color: lighten($light-text-color, 10%);
   $fgColor: pick-visible-color($backgroundColor, $dark-text-color, $tab-fg-color);
 
-  /deep/ ngx-pane-area {
+  ngx-pane-area {
     $bg: lighten($backgroundColor, 5%);
     background: $bg;
     color: pick-visible-color($bg, $dark-text-color, $light-text-color);
+    /deep/ {
+      .tab.active {
+        background: $primaryColor;
+        color: pick-visible-color($primaryColor, $dark-text-color, $tab-fg-color);
+      }
+      .tabs {
+        background: darken($backgroundColor, map-get($options, tabsContrast));
+        color: $fgColor;
+        &.can-drop {
+          box-shadow: 0 0 40px -10px transparentize($fgColor, .6) inset;
+        }
+      }
+      .header {
+        $bg: darken($backgroundColor, map-get($options, headerContrast));
+        background: $bg;
+        color: pick-visible-color($bg, $dark-text-color, $light-text-color);
+      }
+      .wrapper {
+        background: $backgroundColor;
+        color: pick-visible-color($backgroundColor, $dark-text-color, $light-text-color);
+      }
+      .tabs, .header, .wrapper {
+        border-color: transparentize($fgColor, 1 - decimalize(map-get($options, borderContrast))) !important;
+      }
+      @if ($scrollbarOptions) {
+        .ngx-panes-scrollbars {
+          $options: $scrollbarOptions;
+          $width: map-get($options, width);
+          $thumbColor: if(map-has_key($options, thumbColor), map-get($options, thumbColor), $bgContrast);
+          $trackColor: if(map-has_key($options, trackColor), map-get($options, trackColor), $backgroundColor);
+          $trackHoverColor: transparentize($thumbColor, .8);
 
-    .tab.active {
-      background: $primaryColor;
-      color: pick-visible-color($primaryColor, $dark-text-color, $tab-fg-color);
-    }
-    .tabs {
-      background: darken($backgroundColor, map-get($options, tabsContrast));
-      color: $fgColor;
-      &.can-drop {
-        box-shadow: 0 0 40px -10px transparentize($fgColor, .6) inset;
+          &::-webkit-scrollbar {
+            width: $width;
+          }
+
+          &::-webkit-scrollbar-thumb {
+            background: transparentize($thumbColor, .3);
+            border: .5px solid $trackColor;
+            &:hover {
+              background: $thumbColor;
+            }
+          }
+
+          &::-webkit-scrollbar-track {
+            background: transparent;
+            &:hover {
+              background: $trackHoverColor;
+            }
+          }
+        }
       }
     }
-    .header {
-      $bg: darken($backgroundColor, map-get($options, headerContrast));
-      background: $bg;
-      color: pick-visible-color($bg, $dark-text-color, $light-text-color);
-    }
-    .wrapper {
-      background: $backgroundColor;
-      color: pick-visible-color($backgroundColor, $dark-text-color, $light-text-color);
-    }
-    .tabs, .header, .wrapper {
-      border-color: transparentize($fgColor, 1 - decimalize(map-get($options, borderContrast))) !important;
-    }
+
   }
 }

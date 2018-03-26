@@ -22,6 +22,7 @@ import {SideAnchorComponent} from './side-anchor/side-anchor.component';
 import {RouterModule} from '@angular/router';
 import {NumberAbbrevPipe} from './number-abbrev.pipe';
 import {ListWrapperComponent} from './list-wrapper.component';
+import {KebabCasePipe} from './kebab-case.pipe';
 
 // import {NgxPanesModule} from 'ngx-panes'; // for testing production bundle
 
@@ -45,7 +46,8 @@ import {ListWrapperComponent} from './list-wrapper.component';
     CodeBlockSourceUrlDirective,
     SideAnchorOwnerDirective,
     SideAnchorComponent,
-    NumberAbbrevPipe
+    NumberAbbrevPipe,
+    KebabCasePipe
   ],
   exports: [
     CommonModule,
@@ -76,7 +78,8 @@ import {ListWrapperComponent} from './list-wrapper.component';
     CodeBlockSourceUrlDirective,
     SideAnchorOwnerDirective,
     SideAnchorComponent,
-    NumberAbbrevPipe
+    NumberAbbrevPipe,
+    KebabCasePipe
   ]
 })
 export class SharedModule {

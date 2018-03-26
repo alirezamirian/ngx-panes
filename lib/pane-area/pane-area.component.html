@@ -10,7 +10,7 @@
       <pane-view *ngIf="top.paneGroup?.selectedPane as pane" [pane]="pane" [align]="'top'"></pane-view>
       <div class="content-inner-wrapper flex">
         <pane-view *ngIf="left.paneGroup?.selectedPane as pane" [pane]="pane" [align]="'left'"></pane-view>
-        <div class="flex content">
+        <div class="flex content" scrollable>
           <ng-content></ng-content>
         </div>
         <pane-view *ngIf="right.paneGroup?.selectedPane  as pane" [pane]="pane" [align]="'right'"></pane-view>

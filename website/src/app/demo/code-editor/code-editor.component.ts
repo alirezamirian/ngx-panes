@@ -1,6 +1,7 @@
 import {AfterViewInit, Component, ElementRef, Input, NgZone, OnInit, ViewChild} from '@angular/core';
 import {Http} from '@angular/http';
 import * as CodeMirror from 'codemirror';
+import 'codemirror/addon/scroll/simplescrollbars';
 
 @Component({
   selector: 'app-code-editor',
@@ -62,6 +63,7 @@ export class CodeEditorComponent implements OnInit, AfterViewInit {
           name: 'javascript',
           typescript: true
         },
+        scrollbarStyle: 'simple',
         foldGutter: true,
         gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
         lineNumbers: true,

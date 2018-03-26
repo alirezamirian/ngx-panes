@@ -9,7 +9,7 @@
     <ng-container #header></ng-container>
     <ng-container *ngIf="!pane?.header">{{pane?.title}}</ng-container>
   </div>
-  <div class="content">
+  <div class="content" scrollable>
     <ng-container #content></ng-container>
   </div>
   <pane-resizer *ngIf="pane?.resizable"></pane-resizer>

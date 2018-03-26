@@ -11,7 +11,7 @@ import {
   ViewChild
 } from '@angular/core';
 import {PaneHeaderComponent} from '../pane-header/pane-header.component';
-import {Boolean} from '../utils/decorators';
+import {CoerceBoolean} from '../utils/decorators';
 import {PANES_DEFAULTS, PanesDefaults} from '../panes-config';
 import {PaneGroupComponent} from '../pane-group/pane-group.component';
 
@@ -65,7 +65,7 @@ export class PaneComponent implements OnInit {
   /**
    * Width of the pane. More precisely, **width** for **horizontally** aligned and **height** for **vertically**
    * aligned panes.
-   * If unset, `defaultWidth` of the host `ngx-panes` will be used. If both are undefined, the content of the
+   * If unset, `defaultWidth` of the host `ngx-pane-group` will be used. If both are undefined, the content of the
    * pane will determine its width. Resizing pane (if enabled) changes the pane's width.
    */
   @Input() set width(w: number | null) {
@@ -105,7 +105,7 @@ export class PaneComponent implements OnInit {
    * and whenever it changes to `false` this pane will be closed if it's currently open.
    */
   @Input()
-  @Boolean
+  @CoerceBoolean
   set opened(value: boolean) {
     if (value) {
       this.open();

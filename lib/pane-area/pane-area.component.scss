@@ -6,10 +6,7 @@
 }
 
 /deep/ {
-  @include ngx-panes-theme((
-    primaryColor: #4756bf,
-    backgroundColor: #f0f0f0
-  ));
+  @include ngx-panes-theme();
 }
 
 .outer-wrapper {

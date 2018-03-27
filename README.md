@@ -1,7 +1,4 @@
 # NgxPanes
-Panes for Angular!
+Pane windows (aka tool windows)for Angular!
 
-## Important
-For now, lib and demo and all related stuff are included in this repo and in an angular cli project.
-This should change before publishing
-
+Comming soon...

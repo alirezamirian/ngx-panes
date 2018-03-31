@@ -1,5 +1,8 @@
 <div class="tab" role="button" [class.active]="active" [ngClass]="[align, direction]">
   <span class="rotated">
-    {{pane.title}}
+    <ng-container *ngIf="pane.titleTemplate; else title">
+      <ng-container *ngTemplateOutlet="pane.titleTemplate.templateRef"></ng-container>
+    </ng-container>
+    <ng-template #title>{{pane.title}}</ng-template>
   </span>
 </div>

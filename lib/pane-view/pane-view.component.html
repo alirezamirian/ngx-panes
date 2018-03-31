@@ -6,8 +6,17 @@
      [style.height.px]="!isHorizontal() ? pane.width : null"
      [style.maxHeight.px]="!isHorizontal() ? pane.maxSize : null">
   <div class="header">
-    <ng-container #header></ng-container>
-    <ng-container *ngIf="!pane?.header">{{pane?.title}}</ng-container>
+    <ng-container *ngTemplateOutlet="pane?.header?.templateRef"></ng-container>
+    <ng-container *ngIf="!pane?.header">
+      <!--
+        FIXME: The following 4 lines of code is duplicated in pane-tab.html. it can be extracted into a component
+        but with the cost of an intermediate tag which may or may not introduce layout problems.
+      -->
+      <ng-container *ngIf="pane.titleTemplate; else title">
+        <ng-container *ngTemplateOutlet="pane.titleTemplate.templateRef"></ng-container>
+      </ng-container>
+      <ng-template #title>{{pane.title}}</ng-template>
+    </ng-container>
   </div>
   <div class="content" scrollable>
     <ng-container #content></ng-container>

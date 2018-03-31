@@ -14,6 +14,7 @@ import {PaneHeaderComponent} from '../pane-header/pane-header.component';
 import {CoerceBoolean} from '../utils/decorators';
 import {PANES_DEFAULTS, PanesDefaults} from '../panes-config';
 import {PaneGroupComponent} from '../pane-group/pane-group.component';
+import {PaneTitleDirective} from './pane-title.directive';
 
 
 /**
@@ -46,7 +47,8 @@ export class PaneComponent implements OnInit {
 
   /**
    * Title of the pane to be shown in pane's tab.
-   * It will also appear in pane's header in the absence of `{@link PaneHeaderComponent ngx-pane-header}`.
+   * It will also appear in pane header in the absence of `{@link PaneHeaderComponent ngx-pane-header}`.
+   * Use {@link PaneTitleDirective ngxPaneTitle directive} if you need more control over pane title.
    */
   @Input() title: string;
   private _width: number;
@@ -80,7 +82,10 @@ export class PaneComponent implements OnInit {
    * unique identifier of the pane.
    */
   @Input() id: string;
+
   @ContentChild(PaneHeaderComponent) header: PaneHeaderComponent;
+
+  @ContentChild(PaneTitleDirective) titleTemplate: PaneTitleDirective;
 
   /**
    * @private

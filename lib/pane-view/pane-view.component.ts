@@ -24,9 +24,6 @@ export class PaneViewComponent implements OnInit, OnChanges {
   @ViewChild('content', {read: ViewContainerRef})
   private viewContainerRef: ViewContainerRef;
 
-  @ViewChild('header', {read: ViewContainerRef})
-  private headerContainerRef: ViewContainerRef;
-
   @Input()
   public align: Align;
   @ViewChild('contentContainer') private _contentContainer: ElementRef;
@@ -46,10 +43,6 @@ export class PaneViewComponent implements OnInit, OnChanges {
         setTimeout(() => {
           // This setTimeout seems to be necessary sometimes (e.g. in swapping pane groups). I don't know why exactly
           this.viewContainerRef.createEmbeddedView(this.pane.content);
-          this.headerContainerRef.clear();
-          if (this.pane.header) {
-            this.headerContainerRef.createEmbeddedView(this.pane.header.templateRef);
-          }
         });
       }
     }

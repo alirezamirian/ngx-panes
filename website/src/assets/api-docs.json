@@ -397,6 +397,20 @@
     "fileName": "lib/pane-view/pane-view.component.ts"
   },
   {
+    "identifier": "PaneTitleDirective",
+    "description": "<p>A directive for using custom content as title of panes, shown in pane tab. It can be used instead of\n{@link PaneComponent#title title input} when the title is not a simple text.</p>\n",
+    "methods": [],
+    "properties": [],
+    "type": "directive",
+    "isComponent": false,
+    "selector": "[ngxPaneTitle]",
+    "inputs": [],
+    "outputs": [],
+    "fileName": "lib/pane/pane-title.directive.ts",
+    "usage": "<ngx-pane>\r  <ng-template ngxPaneTitle>\r    ...\r  </ng-template>\r  <!-- pane content goes here -->\r</ngx-pane>\r\ror:\r<ngx-pane>\r  <any *ngxPaneTitle>\r    ...\r  </any>\r  <!-- pane content goes here -->\r</ngx-pane>",
+    "usageLang": "html"
+  },
+  {
     "identifier": "PaneComponent",
     "description": "<p>Pane components, are used inside {@link PaneGroupComponent}. Each pane should have a title which is shown\nin side tabs area. By default, the title is used for <strong>pane header</strong> also.</p>\n<p>Pane header is a thin bar on top of the selected pane which shows a label and also contains\nsome default ui controls for the pane (in future!).</p>\n",
     "methods": [
@@ -417,6 +431,11 @@
       {
         "name": "header",
         "type": "PaneHeaderComponent",
+        "description": ""
+      },
+      {
+        "name": "titleTemplate",
+        "type": "PaneTitleDirective",
         "description": ""
       }
     ],
@@ -443,7 +462,7 @@
       {
         "name": "title",
         "type": "string",
-        "description": "<p>Title of the pane to be shown in pane&#39;s tab.\nIt will also appear in pane&#39;s header in the absence of <code>{@link PaneHeaderComponent ngx-pane-header}</code>.</p>\n"
+        "description": "<p>Title of the pane to be shown in pane&#39;s tab.\nIt will also appear in pane header in the absence of <code>{@link PaneHeaderComponent ngx-pane-header}</code>.\nUse {@link PaneTitleDirective ngxPaneTitle directive} if you need more control over pane title.</p>\n"
       },
       {
         "name": "width",
@@ -507,6 +526,7 @@
     "declarations": [
       "lib/pane/pane.component#PaneComponent",
       "lib/pane-header/pane-header.component#PaneHeaderComponent",
+      "lib/pane/pane-title.directive#PaneTitleDirective",
       "lib/pane-area/pane-area.component#PaneAreaComponent",
       "lib/pane-group/pane-group.component#PaneGroupComponent",
       "lib/pane-area/no-history.directive#NoHistoryDirective",

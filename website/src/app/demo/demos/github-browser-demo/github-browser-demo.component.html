@@ -1,7 +1,11 @@
 <div [class.rate-limited]="rateLimited" class="container">
   <ngx-pane-area *ngIf="slug; else noSlug">
     <ngx-pane-group [align]="'start'" [defaultWidth]="280">
-      <ngx-pane #firstPane id="test" title="Files" [width]="330">
+      <ngx-pane #firstPane id="test" [width]="330">
+        <ng-template ngxPaneTitle>
+          <mat-icon class="title-icon">code</mat-icon>
+          Code
+        </ng-template>
         <ngx-pane-header>
           <div fxLayout="row">
             <span>Files</span>
@@ -17,13 +21,25 @@
         <app-github-file-tree [slug]="slug" (fileSelected)="setSourceUrl($event)"
                               [ref]="selectedBranch"></app-github-file-tree>
       </ngx-pane>
-      <ngx-pane title="Issues" [width]="320">
+      <ngx-pane [width]="320">
+        <ng-template ngxPaneTitle>
+          <mat-icon class="title-icon">error_outline</mat-icon>
+          Issues
+        </ng-template>
         <app-github-issue-list [slug]="slug"></app-github-issue-list>
       </ngx-pane>
-      <ngx-pane title="Contributors">
+      <ngx-pane>
+        <ng-template ngxPaneTitle>
+          <mat-icon class="title-icon">people</mat-icon>
+          Contributors
+        </ng-template>
         <app-github-contributors [slug]="slug"></app-github-contributors>
       </ngx-pane>
-      <ngx-pane title="Releases">
+      <ngx-pane>
+        <ng-template ngxPaneTitle>
+          <mat-icon class="title-icon">local_offer</mat-icon>
+          Releases
+        </ng-template>
         <app-github-release-list [slug]="slug"></app-github-release-list>
       </ngx-pane>
     </ngx-pane-group>

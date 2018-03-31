@@ -15,7 +15,7 @@ export class AppComponent implements DoCheck, OnInit {
   }
 
   ngDoCheck(): void {
-    // console.log('cheeeeeeck');
+    console.log('cheeeeeeck');
   }
 
   ngOnInit() {

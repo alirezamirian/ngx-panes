@@ -22,13 +22,16 @@
   </ng-container>
 
 
-  <ng-container *ngIf="docItem.usage">
+  <ng-container *ngIf="docItem.usage?.length > 0">
     <h2 id="usage">
       <app-side-anchor></app-side-anchor>
       Usage
     </h2>
-    <app-code-block [source]="docItem.usage"
-                    [language]="docItem.usageLang"></app-code-block>
+    <ng-container *ngFor="let usage of docItem.usage; let index = index;">
+      <div *ngIf="index > 0">or</div>
+      <app-code-block [source]="usage.code"
+                      [language]="usage.lang"></app-code-block>
+    </ng-container>
   </ng-container>
 
   <ng-container *ngIf="docItem.inputs?.length">

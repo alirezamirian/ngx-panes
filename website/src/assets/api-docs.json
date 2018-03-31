@@ -16,8 +16,12 @@
     ],
     "outputs": [],
     "fileName": "lib/default-scrollbars.directive.ts",
-    "usage": "<ngx-pane-area ngxPanesDefaultScrollbars>\r  ...\r</ngx-pane-area>\ror\r<ngx-pane-area [ngxPanesDefaultScrollbars]=\"isEnabled\">\r  ...\r</ngx-pane-area>",
-    "usageLang": "html"
+    "usage": [
+      {
+        "code": "<ngx-pane-area ngxPanesDefaultScrollbars>\r  ...\r</ngx-pane-area>\ror\r<ngx-pane-area [ngxPanesDefaultScrollbars]=\"isEnabled\">\r  ...\r</ngx-pane-area>",
+        "lang": "html"
+      }
+    ]
   },
   {
     "identifier": "PaneAreaStateManager",
@@ -93,8 +97,12 @@
     "inputs": [],
     "outputs": [],
     "fileName": "lib/pane-area/no-history.directive.ts",
-    "usage": "<ngx-pane-area noHistory>\r  ...\r</ngx-pane-area>",
-    "usageLang": "html"
+    "usage": [
+      {
+        "code": "<ngx-pane-area noHistory>\r  ...\r</ngx-pane-area>",
+        "lang": "html"
+      }
+    ]
   },
   {
     "type": "type",
@@ -190,8 +198,12 @@
       }
     ],
     "fileName": "lib/pane-area/pane-area.component.ts",
-    "usage": "<ngx-pane-area>\r  <ngx-pane-group> ... </ngx-pane-group>\r  <ngx-pane-group> ... </ngx-pane-group>\r  <div>\r    <!-- will be projected as main content -->\r  </div>\r</ngx-pane-area>",
-    "usageLang": "html"
+    "usage": [
+      {
+        "code": "<ngx-pane-area>\r  <ngx-pane-group> ... </ngx-pane-group>\r  <ngx-pane-group> ... </ngx-pane-group>\r  <div>\r    <!-- will be projected as main content -->\r  </div>\r</ngx-pane-area>",
+        "lang": "html"
+      }
+    ]
   },
   {
     "identifier": "PaneGroupComponent",
@@ -255,8 +267,12 @@
     ],
     "outputs": [],
     "fileName": "lib/pane-group/pane-group.component.ts",
-    "usage": "<ngx-pane-area>\r  <ngx-pane-group>\r    <!-- ngx-pane components -->\r  </ngx-pane-group>\r</ngx-pane-area>",
-    "usageLang": "html"
+    "usage": [
+      {
+        "code": "<ngx-pane-area>\r  <ngx-pane-group>\r    <!-- ngx-pane components -->\r  </ngx-pane-group>\r</ngx-pane-area>",
+        "lang": "html"
+      }
+    ]
   },
   {
     "identifier": "PaneHeaderComponent",
@@ -269,8 +285,12 @@
     "inputs": [],
     "outputs": [],
     "fileName": "lib/pane-header/pane-header.component.ts",
-    "usage": "<ngx-pane title=\"First Pane\">\r  <ngx-pane-header>this is a <b>special</b> header</ngx-pane-header>\r  <!-- pane content goes here -->\r</ngx-pane>\r<ngx-pane title=\"will be used for header in absense of ngx-pane-header\">...</ngx-pane>",
-    "usageLang": "html"
+    "usage": [
+      {
+        "code": "<ngx-pane title=\"First Pane\">\r  <ngx-pane-header>this is a <b>special</b> header</ngx-pane-header>\r  <!-- pane content goes here -->\r</ngx-pane>\r<ngx-pane title=\"will be used for header in absense of ngx-pane-header\">...</ngx-pane>",
+        "lang": "html"
+      }
+    ]
   },
   {
     "identifier": "PaneResizerComponent",
@@ -407,8 +427,16 @@
     "inputs": [],
     "outputs": [],
     "fileName": "lib/pane/pane-title.directive.ts",
-    "usage": "<ngx-pane>\r  <ng-template ngxPaneTitle>\r    ...\r  </ng-template>\r  <!-- pane content goes here -->\r</ngx-pane>\r\ror:\r<ngx-pane>\r  <any *ngxPaneTitle>\r    ...\r  </any>\r  <!-- pane content goes here -->\r</ngx-pane>",
-    "usageLang": "html"
+    "usage": [
+      {
+        "code": "<ngx-pane>\r  <ng-template ngxPaneTitle>\r    ...\r  </ng-template>\r  <!-- pane content goes here -->\r</ngx-pane>",
+        "lang": "html"
+      },
+      {
+        "code": "<ngx-pane>\r  <any *ngxPaneTitle>\r    ...\r  </any>\r  <!-- pane content goes here -->\r</ngx-pane>",
+        "lang": "html"
+      }
+    ]
   },
   {
     "identifier": "PaneComponent",
@@ -477,16 +505,24 @@
       }
     ],
     "fileName": "lib/pane/pane.component.ts",
-    "usage": "<ngx-pane-area>\r  <ngx-pane-group>\r    <!-- Simple pane with a title -->\r    <ngx-pane title=\"project\">...</ngx-pane>\r\r    <!-- Different title and header. Header is used in top of the selected pane, title is used inside pane's tab -->\r    <ngx-pane title=\"structure\">\r      <div ngx-pane-header>custom header</div>\r      ...\r    </ngx-pane>\r  </ngx-pane-group>\r</ngx-pane-area>",
-    "usageLang": "html"
+    "usage": [
+      {
+        "code": "<ngx-pane-area>\r  <ngx-pane-group>\r    <!-- Simple pane with a title -->\r    <ngx-pane title=\"project\">...</ngx-pane>\r\r    <!-- Different title and header. Header is used in top of the selected pane, title is used inside pane's tab -->\r    <ngx-pane title=\"structure\">\r      <div ngx-pane-header>custom header</div>\r      ...\r    </ngx-pane>\r  </ngx-pane-group>\r</ngx-pane-area>",
+        "lang": "html"
+      }
+    ]
   },
   {
     "type": "variable",
     "identifier": "PANES_DEFAULTS",
     "description": "<p>Injection token for providing defaults for some input parameters of {@link PaneGroupComponent pane components}.\nThe value of this injection token must be of type {@link PanesDefaults}.</p>\n<p>See also <a href=\"/demos/config\">configuration demo</a>.</p>\n",
     "fileName": "lib/panes-config.ts",
-    "usage": "const panesDefaults: PanesDefaults = { resizable: false };\n\n// Configuring global defaults for all panes in the app.\n@NgModule({\n  //...\n  providers: [\n    // ...\n    { provide: PANES_DEFAULTS, useValue: panesDefaults }\n  ]\n})\nexport class AppModule {}\n\n// Configuring defaults for all child panes of some component.\n@Component({\n  // ...\n  providers: [{ provide: PANES_DEFAULTS, useValue: panesDefaults }]\n})\nclass SomeComponent {}\n",
-    "usageLang": "typescript"
+    "usage": [
+      {
+        "code": "const panesDefaults: PanesDefaults = { resizable: false };\n\n// Configuring global defaults for all panes in the app.\n@NgModule({\n  //...\n  providers: [\n    // ...\n    { provide: PANES_DEFAULTS, useValue: panesDefaults }\n  ]\n})\nexport class AppModule {}\n\n// Configuring defaults for all child panes of some component.\n@Component({\n  // ...\n  providers: [{ provide: PANES_DEFAULTS, useValue: panesDefaults }]\n})\nclass SomeComponent {}\n",
+        "lang": "typescript"
+      }
+    ]
   },
   {
     "type": "type",
@@ -534,8 +570,12 @@
     ],
     "services": [],
     "fileName": "lib/panes.module.ts",
-    "usage": "@NgModule({\n  imports: [\n    // ...\n    NgxPanesModule\n    //...\n  ]\n})\nexport class AppModule {}\n",
-    "usageLang": "typescript"
+    "usage": [
+      {
+        "code": "@NgModule({\n  imports: [\n    // ...\n    NgxPanesModule\n    //...\n  ]\n})\nexport class AppModule {}\n",
+        "lang": "typescript"
+      }
+    ]
   },
   {
     "identifier": "ScrollableDirective",

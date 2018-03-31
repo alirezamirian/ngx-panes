@@ -12,7 +12,7 @@ import {Directive, TemplateRef} from '@angular/core';
  *   <!-- pane content goes here -->
  * </ngx-pane>
  *
- * or:
+ * @usage
  * <ngx-pane>
  *   <any *ngxPaneTitle>
  *     ...

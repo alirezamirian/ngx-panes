@@ -36,7 +36,7 @@ export class GettingStartedGuideComponent implements OnInit {
 
   ngOnInit() {
     this.apiDocsService.getDocItem('NgxPanesModule').then(docs => {
-      this.importCode = docs[0].usage;
+      this.importCode = docs[0].usage[0].code;
     });
   }
 

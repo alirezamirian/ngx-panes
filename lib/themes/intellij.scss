@@ -1,0 +1,9 @@
+@import '../theming';
+
+@include ngx-panes-theme((
+  primaryColor: #b7b7b7,
+  backgroundColor: #fff,
+  tabsContrast: 9%,
+  headerContrast: 7%,
+  borderContrast: 30%
+));

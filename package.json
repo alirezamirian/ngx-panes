@@ -11,9 +11,10 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build:lib": "npm run build:lib:ts && npm run build:lib:scss",
+    "build:lib": "npm run build:lib:ts && npm run build:lib:scss && build:lib:themes",
     "build:lib:ts": "ng-packagr -p lib/package.json",
-    "build:lib:scss": "scss-bundle -c lib/scss-bundle.config.json"
+    "build:lib:scss": "scss-bundle -c lib/scss-bundle.config.json",
+    "build:lib:themes": "node-sass lib/themes -o=node_modules/ngx-panes/themes --source-map=true --output-style=compressed"
   },
   "private": true,
   "dependencies": {

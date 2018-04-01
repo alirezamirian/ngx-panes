@@ -8,3 +8,13 @@ $options: (
 );
 
 @include ngx-panes-theme($options);`;
+
+export const themeMixinMinimalUsage = `@import '~ngx-panes/theming.scss';
+@include ngx-panes-theme();
+`;
+
+export const breBuildThemeUsage = `@import '~ngx-panes/themes/default.css';`;
+
+
+export const themeFromMaterialTheme = `@import '~ngx-panes/theming.scss';
+@include ngx-panes-theme(from-material-theme($your-angular-material-theme));`;

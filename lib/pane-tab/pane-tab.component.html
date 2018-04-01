@@ -1,4 +1,4 @@
-<div class="tab" role="button" [class.active]="active" [ngClass]="[align, direction]">
+<div class="ngxp-tab" role="button" [class.active]="active" [ngClass]="[align, direction]">
   <span class="rotated">
     <ng-container *ngIf="pane.titleTemplate; else title">
       <ng-container *ngTemplateOutlet="pane.titleTemplate.templateRef"></ng-container>

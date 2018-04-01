@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Guide} from '../../guides';
 import {ApiDocsService} from '../../../core/api-docs.service';
+import {breBuildThemeUsage, themeMixinMinimalUsage} from '../../../../samples';
 
 @Guide({
   id: 'getting-started',
@@ -16,6 +17,8 @@ import {ApiDocsService} from '../../../core/api-docs.service';
 export class GettingStartedGuideComponent implements OnInit {
 
   importCode: string;
+  themeCode = themeMixinMinimalUsage;
+  prebuildTheme = breBuildThemeUsage;
   templateCode =
     `<ngx-pane-area style="height: 300px">
   <ngx-pane-group align="start" [defaultWidth]="200">

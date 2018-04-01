@@ -6,24 +6,28 @@
 //@import '~ngx-panes/theming'; // for testing production bundle
 
 .theme-intellij {
-  @include ngx-panes-theme((
-    primaryColor: #b7b7b7,
-    backgroundColor: #fff,
-    tabsContrast: 9%,
-    headerContrast: 7%,
-    borderContrast: 30%
-  ));
+  ::ng-deep {
+    @include ngx-panes-theme((
+      primaryColor: #b7b7b7,
+      backgroundColor: #fff,
+      tabsContrast: 9%,
+      headerContrast: 7%,
+      borderContrast: 30%
+    ));
+  }
 }
 
 .theme-darcula {
-  @include ngx-panes-theme((
-    primaryColor: #2d2f30,
-    backgroundColor: #3c3f41,
-    tabsContrast: 0%,
-  ));
+  ::ng-deep {
+    @include ngx-panes-theme((
+      primaryColor: #2d2f30,
+      backgroundColor: #3c3f41,
+      tabsContrast: 0%,
+    ));
+  }
 
   $dark-app-theme: mat-dark-theme($app-primary, $app-accent, $app-warn);
-  /deep/ {
+  ::ng-deep {
     @include angular-material-theme($dark-app-theme);
     // The following commented line doesn't work! import is not scoped and is kind of hoisted to the top
     //@import '~highlight.js/styles/darcula.css';
@@ -34,7 +38,7 @@
       background: #555;
     }
   }
-  app-code-block.active /deep/ mat-card {
+  app-code-block.active ::ng-deep mat-card {
     background: mat-color(map-get($dark-app-theme, background), selected-button);
   }
   .checkbox-hint {
@@ -44,17 +48,21 @@
 }
 
 .theme-light-orange {
-  @include ngx-panes-theme((
-    primaryColor: #ef6c00,
-    backgroundColor: #fff3e0
-  ));
+  ::ng-deep {
+    @include ngx-panes-theme((
+      primaryColor: #ef6c00,
+      backgroundColor: #fff3e0
+    ));
+  }
 }
 
 .theme-bluegrey {
-  @include ngx-panes-theme((
-    primaryColor: #546e7a,
-    backgroundColor: #eceff1
-  ));
+  ::ng-deep {
+    @include ngx-panes-theme((
+      primaryColor: #546e7a,
+      backgroundColor: #eceff1
+    ));
+  }
 }
 
 mat-card table {
@@ -67,7 +75,7 @@ mat-card table {
   }
 }
 
-app-code-block.active /deep/ mat-card {
+app-code-block.active ::ng-deep mat-card {
   background: mat-color(map-get($app-theme, background), selected-button);
 }
 

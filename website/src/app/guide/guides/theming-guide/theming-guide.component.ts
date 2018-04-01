@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Guide} from '../../guides';
-import {themeMixinBasicUsage} from '../../../../samples';
+import {themeFromMaterialTheme, themeMixinBasicUsage} from '../../../../samples';
 
 interface ThemeOption {
   name: string;
@@ -23,6 +23,9 @@ export class ThemingGuideComponent implements OnInit {
 
   static samples = {
     basic: themeMixinBasicUsage,
+    material: themeFromMaterialTheme,
+    preDefinedTheme: `// inside a globally applied style file (e.g. styles.scss if you are using angular-cli)
+@import '~ngx-panes/themes/darcula.css';`,
     customTheme1: `// inside a globally applied style file (e.g. styles.scss if you are using angular-cli)
 @import '~ngx-panes/theming.scss';
 
@@ -32,14 +35,14 @@ export class ThemingGuideComponent implements OnInit {
   ));`,
     customTheme2: `@import '~ngx-panes/theming.scss';
 
-.ngx-theme-custom-1{
+.ngx-theme-custom-1 {
   // will be applied to all ngx-panes inside an element with ngx-theme-custom-1 class
   @include ngx-panes-theme((
     primaryColor: #d2d123,
     backgroundColor: #fafafa
   ));
 }
-.ngx-theme-custom-2{
+.ngx-theme-custom-2 {
   // will be applied to all ngx-panes inside an element with ngx-theme-custom-2 class
   @include ngx-panes-theme((
     primaryColor: #ff99da,

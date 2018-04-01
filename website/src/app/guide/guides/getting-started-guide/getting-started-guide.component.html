@@ -15,11 +15,18 @@ Or via yarn:
 </app-code-block>
 
 <h2>Usage</h2>
-Import <code style="padding-right: 0;">NgxPanesModule</code>:
+1. Import <code style="padding-right: 0;">NgxPanesModule</code>:
 
 <app-code-block language="typescript" [source]="importCode"></app-code-block>
 
-Use it inside your template:
+2. Include a theme by either including <code>ngx-pane-theme</code> mixin in a globally applied style.
+<a routerLink="/guides/theming">Learn more about theming options</a>.
+<app-code-block language="scss" [source]="themeCode"></app-code-block>
+
+Or use a pre-built theme:
+<app-code-block language="scss" [source]="prebuildTheme"></app-code-block>
+
+3. Use it inside your template:
 <app-code-block language="html" [source]="templateCode"></app-code-block>
 
 And it will result into:
@@ -36,6 +43,3 @@ And it will result into:
     Main content
   </div>
 </ngx-pane-area>
-
-A default theme is included by <code>ngx-panes</code> but you can override it by
-<a routerLink="/guides/theming">defining custom themes</a>.

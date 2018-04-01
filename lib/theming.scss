@@ -35,59 +35,65 @@
     $bg: lighten($backgroundColor, 5%);
     background: $bg;
     color: pick-visible-color($bg, $dark-text-color, $light-text-color);
-    /deep/ {
-      .tab.active {
-        background: $primaryColor;
-        color: pick-visible-color($primaryColor, $dark-text-color, $tab-fg-color);
+
+    .ngxp-tab.active {
+      background: $primaryColor;
+      color: pick-visible-color($primaryColor, $dark-text-color, $tab-fg-color);
+    }
+    .ngxp-tabs {
+      background: darken($backgroundColor, map-get($options, tabsContrast));
+      color: $fgColor;
+      &.can-drop {
+        box-shadow: 0 0 40px -10px transparentize($fgColor, .6) inset;
       }
-      .tabs {
-        background: darken($backgroundColor, map-get($options, tabsContrast));
-        color: $fgColor;
-        &.can-drop {
-          box-shadow: 0 0 40px -10px transparentize($fgColor, .6) inset;
+    }
+    .ngxp-header {
+      $bg: darken($backgroundColor, map-get($options, headerContrast));
+      background: $bg;
+      color: pick-visible-color($bg, $dark-text-color, $light-text-color);
+    }
+    .ngxp-pane-wrapper {
+      background: $backgroundColor;
+      color: pick-visible-color($backgroundColor, $dark-text-color, $light-text-color);
+    }
+    .ngxp-tabs, .ngxp-header, .ngxp-pane-wrapper {
+      border-color: transparentize($fgColor, 1 - decimalize(map-get($options, borderContrast))) !important;
+    }
+    @if ($scrollbarOptions) {
+      .ngxp-scrollbars {
+        $options: $scrollbarOptions;
+        $width: map-get($options, width);
+        $thumbColor: if(map-has_key($options, thumbColor), map-get($options, thumbColor), $bgContrast);
+        $trackColor: if(map-has_key($options, trackColor), map-get($options, trackColor), $backgroundColor);
+        $trackHoverColor: transparentize($thumbColor, .8);
+
+        &::-webkit-scrollbar {
+          width: $width;
         }
-      }
-      .header {
-        $bg: darken($backgroundColor, map-get($options, headerContrast));
-        background: $bg;
-        color: pick-visible-color($bg, $dark-text-color, $light-text-color);
-      }
-      .wrapper {
-        background: $backgroundColor;
-        color: pick-visible-color($backgroundColor, $dark-text-color, $light-text-color);
-      }
-      .tabs, .header, .wrapper {
-        border-color: transparentize($fgColor, 1 - decimalize(map-get($options, borderContrast))) !important;
-      }
-      @if ($scrollbarOptions) {
-        .ngx-panes-scrollbars {
-          $options: $scrollbarOptions;
-          $width: map-get($options, width);
-          $thumbColor: if(map-has_key($options, thumbColor), map-get($options, thumbColor), $bgContrast);
-          $trackColor: if(map-has_key($options, trackColor), map-get($options, trackColor), $backgroundColor);
-          $trackHoverColor: transparentize($thumbColor, .8);
 
-          &::-webkit-scrollbar {
-            width: $width;
+        &::-webkit-scrollbar-thumb {
+          background: transparentize($thumbColor, .3);
+          border: .5px solid $trackColor;
+          &:hover {
+            background: $thumbColor;
           }
+        }
 
-          &::-webkit-scrollbar-thumb {
-            background: transparentize($thumbColor, .3);
-            border: .5px solid $trackColor;
-            &:hover {
-              background: $thumbColor;
-            }
-          }
-
-          &::-webkit-scrollbar-track {
-            background: transparent;
-            &:hover {
-              background: $trackHoverColor;
-            }
+        &::-webkit-scrollbar-track {
+          background: transparent;
+          &:hover {
+            background: $trackHoverColor;
           }
         }
       }
     }
 
   }
+}
+
+@function from-material-theme($theme) {
+  $primary: map-get($theme, primary);
+  $background: map-get($theme, background);
+  $options: (primaryColor: map-get($primary, 500), backgroundColor: map-get($background, background));
+  @return $options;
 }

@@ -7,7 +7,7 @@ import {DefaultScrollbarsDirective} from './default-scrollbars.directive';
 })
 export class ScrollableDirective {
 
-  @HostBinding('class.ngx-panes-scrollbars')
+  @HostBinding('class.ngxp-scrollbars')
   get applyStyles(): boolean {
     return !this.defaultScrollbars || !this.defaultScrollbars.enabled;
   }

@@ -1,5 +1,6 @@
 @import '~@angular/material/theming';
 @import "theme";
+@import "../../../lib/theming";
 @import '../app/shared/callout/callout-component.theme';
 
 // Include the common styles for Angular Material. We include this here so that you only
@@ -20,3 +21,5 @@
 
 // custom component themes
 @include app-callout-theme($app-theme);
+
+@include ngx-panes-theme(from-material-theme($app-theme));

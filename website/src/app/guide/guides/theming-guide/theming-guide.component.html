@@ -68,24 +68,48 @@
   <code>ngx-panes-theme</code> mixin in a globally applied style.
 </p>
 <app-code-block language="scss" [source]="samples.customTheme1"></app-code-block>
+<p>
+  If you are using Angular CLI, you can put it inside <b>styles.scss</b> (which is created by Angular CLI by default),
+  or any other file which is included in <i><b>styles</b></i> property of your app inside
+  <i><b>.angular-cli.json</b></i> file.
+  <a href="https://github.com/angular/angular-cli/wiki/stories-global-styles">Learn more</a>.
+</p>
+<p>
+  You can also use on of the pre-defined themes. Simply import them inside a globally applied style:
+</p>
+<app-code-block language="scss" [source]="samples.preDefinedTheme"></app-code-block>
 
 <h3 id="scope-enclosed">
   <app-side-anchor></app-side-anchor>
-  Multiple themes
+  Multiple global themes
 </h3>
 <p>
-  If you want to use multiple themes, you can simply wrap mixin inclusion in a class selector wrapper:
+  If you want to use multiple themes, you can simply wrap mixin inclusion in a class selector:
 </p>
 <app-code-block language="scss" [source]="samples.customTheme2"></app-code-block>
 
-<h3 id="scope-component-view">
+<h3 id="scope-component">
   <app-side-anchor></app-side-anchor>
-  Scoped to some component view
+  Inside component styles
 </h3>
 <p>
-  You can also include the mixin inside styles of a component
-  and it will be applied to all <code>ngx-pane-area</code> instances inside that component's view (Assuming you are not
-  disabling Angular's
-  <a href="https://angular.io/docs/ts/latest/guide/component-styles.html#view-encapsulation">view encapsulation</a>
-  ).
+  You can also include <code>ngx-pane-theme</code> mixin inside
+  <a href="https://angular.io/guide/component-styles">styles of some component</a>, But note that the generated style
+  is subject to that component's
+  <a href="https://angular.io/docs/ts/latest/guide/component-styles.html#view-encapsulation">view encapsulation</a>.
+  Unless the view encapsulation is set to <code>None</code>, you need to include the mixin inside a
+  <a href="https://angular.io/guide/component-styles#deprecated-deep--and-ng-deep">Shadow Piercing combinator</a>
+  (<code>::ng-deep</code>, <code>/deep/</code> or <code>&gt;&gt;&gt;</code>).
+  However it's deprecated and you don't need to take this approach in most cases.
 </p>
+
+
+<h3 id="angular-material-theme">
+  <app-side-anchor></app-side-anchor>
+  Using Angular Material theme
+</h3>
+If you are using <a href="https://material.angular.io">Angular Material</a>, and you are using a
+<a href="https://material.angular.io/guide/theming#defining-a-custom-theme">custom theme</a>,
+you can use it to create an ngx-pane theme, using <code>from-material-theme</code> function:
+
+<app-code-block language="scss" [source]="samples.material"></app-code-block>

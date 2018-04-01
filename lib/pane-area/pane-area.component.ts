@@ -7,7 +7,7 @@ import {Subscription} from 'rxjs/Subscription';
 import {PaneAreaStateManager} from '../pane-area-state-manager';
 
 
-interface Side {
+export interface Side {
   paneGroup: PaneGroupComponent;
   subscriptions?: Subscription[];
 }

@@ -13,6 +13,7 @@ import {Align, RelativeAlign, toAlign, toRelativeAlign} from '../utils/rtl-utils
 import {PANES_DEFAULTS, PanesDefaults} from '../panes-config';
 import {PaneComponent} from '../pane/pane.component';
 import {Subject} from 'rxjs/Subject';
+import {Observable} from 'rxjs/Observable';
 
 
 /**
@@ -47,7 +48,7 @@ export class PaneGroupComponent implements OnInit {
   /**
    * @private
    */
-  align$ = this.alignChangesSubject.asObservable();
+  align$: Observable<Align> = this.alignChangesSubject.asObservable();
 
   @Input()
   id: string;

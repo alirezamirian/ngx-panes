@@ -26,21 +26,21 @@
           <mat-icon class="title-icon">error_outline</mat-icon>
           Issues
         </ng-template>
-        <app-github-issue-list [slug]="slug"></app-github-issue-list>
+        <app-github-issue-list *ngxPaneContent [slug]="slug"></app-github-issue-list>
       </ngx-pane>
       <ngx-pane>
         <ng-template ngxPaneTitle>
           <mat-icon class="title-icon">people</mat-icon>
           Contributors
         </ng-template>
-        <app-github-contributors [slug]="slug"></app-github-contributors>
+        <app-github-contributors *ngxPaneContent [slug]="slug"></app-github-contributors>
       </ngx-pane>
       <ngx-pane>
         <ng-template ngxPaneTitle>
           <mat-icon class="title-icon">local_offer</mat-icon>
           Releases
         </ng-template>
-        <app-github-release-list [slug]="slug"></app-github-release-list>
+        <app-github-release-list *ngxPaneContent [slug]="slug"></app-github-release-list>
       </ngx-pane>
     </ngx-pane-group>
     <div fxFlex class="main-content">

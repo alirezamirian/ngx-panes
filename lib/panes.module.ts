@@ -17,6 +17,7 @@ import {NoHistoryDirective} from './pane-area/no-history.directive';
 import {ScrollableDirective} from './scrollable.directive';
 import {DefaultScrollbarsDirective} from './default-scrollbars.directive';
 import {PaneTitleDirective} from './pane/pane-title.directive';
+import {PaneContentDirective} from './pane/pane-content.directive';
 
 /**
  * The main module for ngx-panes. Add it to `imports` of your module.
@@ -42,6 +43,7 @@ import {PaneTitleDirective} from './pane/pane-title.directive';
     PaneViewComponent,
     PaneHeaderComponent,
     PaneTitleDirective,
+    PaneContentDirective,
     PaneTabsComponent,
     PaneTabComponent,
     PaneAreaComponent,
@@ -58,6 +60,7 @@ import {PaneTitleDirective} from './pane/pane-title.directive';
     PaneComponent,
     PaneHeaderComponent,
     PaneTitleDirective,
+    PaneContentDirective,
     PaneAreaComponent,
     PaneGroupComponent,
     NoHistoryDirective,

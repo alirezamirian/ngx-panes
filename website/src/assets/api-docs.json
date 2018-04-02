@@ -106,6 +106,25 @@
   },
   {
     "type": "type",
+    "identifier": "Side",
+    "description": "",
+    "methods": [],
+    "properties": [
+      {
+        "name": "paneGroup",
+        "type": "PaneGroupComponent",
+        "description": ""
+      },
+      {
+        "name": "subscriptions",
+        "type": "Subscription[]",
+        "description": ""
+      }
+    ],
+    "fileName": "lib/pane-area/pane-area.component.ts"
+  },
+  {
+    "type": "type",
     "identifier": "PaneState",
     "description": "<p>Represents state of {@link PaneComponent pane} position inside a {@link PaneAreaComponent paneArea}.\nUsed in {@link PaneAreaState}.</p>\n",
     "methods": [],
@@ -417,6 +436,28 @@
     "fileName": "lib/pane-view/pane-view.component.ts"
   },
   {
+    "identifier": "PaneContentDirective",
+    "description": "<p>A directive for lazy loading content of pane.</p>\n<p>By default, content of all panes inside pane area are\ninstantiated eagerly. You can delay instantiation of pane content, until\nit&#39;s opened, by wrapping it inside\nan <code>ng-template</code> with <code>ngxPaneContent</code> on it. Similar to any other\n<a href=\"https://angular.io/guide/structural-directives#the-asterisk--prefix\">structural directive</a>,\nyou can also use it without <code>ng-template</code> by adding <code>*ngxPaneContent</code> directly on the root of\nthe pane content.</p>\n<p>Please note that, by using <code>ngxPaneContent</code>, content of the pane are instantiated <strong>every time</strong> it&#39;s opened.\nIt means life cycle hooks like <code>ngOnInit</code> will be called every time the pane is opened.</p>\n",
+    "methods": [],
+    "properties": [],
+    "type": "directive",
+    "isComponent": false,
+    "selector": "[ngxPaneContent]",
+    "inputs": [],
+    "outputs": [],
+    "fileName": "lib/pane/pane-content.directive.ts",
+    "usage": [
+      {
+        "code": "<ngx-pane>\r  <ng-template ngxPaneContent>\r    ...\r  </ng-template>\r</ngx-pane>",
+        "lang": "html"
+      },
+      {
+        "code": "<ngx-pane>\r  <any *ngxPaneContent>\r    ...\r  </any>\r</ngx-pane>",
+        "lang": "html"
+      }
+    ]
+  },
+  {
     "identifier": "PaneTitleDirective",
     "description": "<p>A directive for using custom content as title of panes, shown in pane tab. It can be used instead of\n{@link PaneComponent#title title input} when the title is not a simple text.</p>\n",
     "methods": [],
@@ -440,7 +481,7 @@
   },
   {
     "identifier": "PaneComponent",
-    "description": "<p>Pane components, are used inside {@link PaneGroupComponent}. Each pane should have a title which is shown\nin side tabs area. By default, the title is used for <strong>pane header</strong> also.</p>\n<p>Pane header is a thin bar on top of the selected pane which shows a label and also contains\nsome default ui controls for the pane (in future!).</p>\n",
+    "description": "<p>Pane components, are used inside {@link PaneGroupComponent}. Each pane should have a\n{@link PaneComponent#title title} which is shown\nin side tabs area. By default, the title is used for <strong>pane header</strong> also.\nPane header is a thin bar on top of the selected pane which shows a label and also contains\nsome default ui controls for the pane (in future!).</p>\n<h4 id=\"custom-pane-header\">Custom pane header</h4>\n<p>You can specify custom header via {@link PaneHeaderComponent ngx-pane-header}.</p>\n<h4 id=\"lazy-loading\">lazy loading</h4>\n<p>Content of the pane can be instantiated whenever pane is opened by using\n{@link PaneContentDirective ngxPaneContent directive}</p>\n",
     "methods": [
       {
         "name": "open",
@@ -456,6 +497,11 @@
       }
     ],
     "properties": [
+      {
+        "name": "content",
+        "type": "TemplateRef<any>",
+        "description": ""
+      },
       {
         "name": "header",
         "type": "PaneHeaderComponent",
@@ -507,7 +553,7 @@
     "fileName": "lib/pane/pane.component.ts",
     "usage": [
       {
-        "code": "<ngx-pane-area>\r  <ngx-pane-group>\r    <!-- Simple pane with a title -->\r    <ngx-pane title=\"project\">...</ngx-pane>\r\r    <!-- Different title and header. Header is used in top of the selected pane, title is used inside pane's tab -->\r    <ngx-pane title=\"structure\">\r      <div ngx-pane-header>custom header</div>\r      ...\r    </ngx-pane>\r  </ngx-pane-group>\r</ngx-pane-area>",
+        "code": "<ngx-pane-area>\r  <ngx-pane-group>\r    <!-- Simple pane with a title -->\r    <ngx-pane title=\"project\">...</ngx-pane>\r\r    <!-- Different title and header. Header is used in top of the selected pane, title is used inside pane's tab -->\r    <ngx-pane title=\"structure\">\r      <ngx-pane-header>custom header</ngx-pane-header>\r      ...\r    </ngx-pane>\r    <!-- Lazy loaded content -->\r    <ngx-pane title=\"issues\">\r      <div *ngxPaneContent>lazy loaded content</div>\r    </ngx-pane>\r  </ngx-pane-group>\r</ngx-pane-area>",
         "lang": "html"
       }
     ]
@@ -563,6 +609,7 @@
       "lib/pane/pane.component#PaneComponent",
       "lib/pane-header/pane-header.component#PaneHeaderComponent",
       "lib/pane/pane-title.directive#PaneTitleDirective",
+      "lib/pane/pane-content.directive#PaneContentDirective",
       "lib/pane-area/pane-area.component#PaneAreaComponent",
       "lib/pane-group/pane-group.component#PaneGroupComponent",
       "lib/pane-area/no-history.directive#NoHistoryDirective",

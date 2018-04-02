@@ -15,15 +15,22 @@ import {CoerceBoolean} from '../utils/decorators';
 import {PANES_DEFAULTS, PanesDefaults} from '../panes-config';
 import {PaneGroupComponent} from '../pane-group/pane-group.component';
 import {PaneTitleDirective} from './pane-title.directive';
+import {PaneContentDirective} from './pane-content.directive';
 
 
 /**
- * Pane components, are used inside {@link PaneGroupComponent}. Each pane should have a title which is shown
+ * Pane components, are used inside {@link PaneGroupComponent}. Each pane should have a
+ * {@link PaneComponent#title title} which is shown
  * in side tabs area. By default, the title is used for **pane header** also.
- *
  * Pane header is a thin bar on top of the selected pane which shows a label and also contains
  * some default ui controls for the pane (in future!).
  *
+ * #### Custom pane header
+ * You can specify custom header via {@link PaneHeaderComponent ngx-pane-header}.
+ *
+ * #### lazy loading
+ * Content of the pane can be instantiated whenever pane is opened by using
+ * {@link PaneContentDirective ngxPaneContent directive}
  * @usage
  * <ngx-pane-area>
  *   <ngx-pane-group>
@@ -32,8 +39,12 @@ import {PaneTitleDirective} from './pane-title.directive';
  *
  *     <!-- Different title and header. Header is used in top of the selected pane, title is used inside pane's tab -->
  *      <ngx-pane title="structure">
- *        <div ngx-pane-header>custom header</div>
+ *        <ngx-pane-header>custom header</ngx-pane-header>
  *        ...
+ *      </ngx-pane>
+ *      <!-- Lazy loaded content -->
+ *      <ngx-pane title="issues">
+ *        <div *ngxPaneContent>lazy loaded content</div>
  *      </ngx-pane>
  *   </ngx-pane-group>
  * </ngx-pane-area>
@@ -59,7 +70,13 @@ export class PaneComponent implements OnInit {
   /**
    * @private
    */
-  @ViewChild('content', {read: TemplateRef}) content: TemplateRef<any>;
+  @ViewChild('content', {read: TemplateRef}) private implicitContent: TemplateRef<any>;
+
+  @ContentChild(PaneContentDirective, {read: TemplateRef}) private explicitContent: TemplateRef<any>;
+
+  get content() {
+    return this.explicitContent || this.implicitContent;
+  }
 
   @Output()
   widthChange = new EventEmitter();

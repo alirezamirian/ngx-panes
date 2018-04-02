@@ -37,7 +37,6 @@ export class PaneViewComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.pane) {
-      console.log('panes changed for pane view', this.align);
       this.viewContainerRef.clear();
       if (this.pane) {
         setTimeout(() => {
@@ -53,7 +52,6 @@ export class PaneViewComponent implements OnInit, OnChanges {
       this._contentContainer.nativeElement.style.width = size + 'px';
     } else {
       this._contentContainer.nativeElement.style.height = size + 'px';
-
     }
   }
 

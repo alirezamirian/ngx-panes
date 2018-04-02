@@ -1,0 +1,42 @@
+<ngx-pane-area>
+  <ngx-pane-group [defaultWidth]="300">
+    <ngx-pane title="Eager 1">
+      <app-lifecycle-logger name="Eager 1">
+        <app-demo-content [lines]="40"></app-demo-content>
+      </app-lifecycle-logger>
+    </ngx-pane>
+    <ngx-pane title="Eager 2">
+      <app-lifecycle-logger name="Eager 2">
+        <app-demo-content [lines]="40"></app-demo-content>
+      </app-lifecycle-logger>
+    </ngx-pane>
+    <ngx-pane title="Lazy 1">
+      <app-lifecycle-logger name="Lazy 1" *ngxPaneContent>
+        <app-demo-content [lines]="40"></app-demo-content>
+      </app-lifecycle-logger>
+    </ngx-pane>
+    <ngx-pane title="Lazy 2">
+      <app-lifecycle-logger name="Lazy 2" *ngxPaneContent>
+        <app-demo-content [lines]="40"></app-demo-content>
+      </app-lifecycle-logger>
+    </ngx-pane>
+  </ngx-pane-group>
+
+  <div>
+    <div fxFlex class="mat-padding">
+      <!--TODO: add code for demo-->
+      <p>
+        Content of eager panes are created initially, even when they are not open.
+        <br/>
+        Content of lazy panes are created when they are opened, and destroyed when they are closed.
+      </p>
+      <p>
+        <code>OnInit</code>, and <code>OnDestroy</code> lifecycle hooks are logged for content of each pane:
+      </p>
+      <div *ngFor="let log of logs">{{log}}</div>
+    </div>
+  </div>
+</ngx-pane-area>
+
+
+

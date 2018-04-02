@@ -4,6 +4,7 @@ import {ResizeDisabledDemoComponent} from './demos/resizing-demo/resizing-demo.c
 import {AlignDemoComponent} from './demos/align-demo/align-demo.component';
 import {ConfigDemoComponent} from './demos/config-demo/config-demo.component';
 import {Type} from '@angular/core';
+import {LazyLoadingDemoComponent} from './demos/lazy-loading-demo/lazy-loading-demo.component';
 
 
 export function getDemoComponents(): Array<Type<any>> {
@@ -12,6 +13,7 @@ export function getDemoComponents(): Array<Type<any>> {
     ResizeDisabledDemoComponent,
     ThemingDemoComponent,
     AlignDemoComponent,
-    ConfigDemoComponent
+    ConfigDemoComponent,
+    LazyLoadingDemoComponent
   ];
 }

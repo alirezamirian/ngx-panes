@@ -28,6 +28,15 @@
       ]
     },
     {
+      "id": "lazy-loading",
+      "title": "Lazy Loading",
+      "description": "An example of using ngxPaneContent to lazy load pane content.",
+      "order": 3,
+      "tags": [
+        "Lazy Loading"
+      ]
+    },
+    {
       "id": "config",
       "title": "Configuring Defaults",
       "description": "An example of providing default configuration for all child panes",

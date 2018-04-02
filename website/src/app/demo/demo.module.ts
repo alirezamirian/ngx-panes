@@ -37,6 +37,7 @@ import {GithubUserSelectorComponent} from './demos/github-browser-demo/github-us
 import {GithubRepoSelectorComponent} from './demos/github-browser-demo/github-repo-selector/github-repo-selector.component';
 import {GithubRepoCardComponent} from './demos/github-browser-demo/github-repo-card/github-repo-card.component';
 import {GithubReleaseListComponent} from './demos/github-browser-demo/github-release-list/github-release-list.component';
+import {LifecycleLoggerComponent} from './demos/lazy-loading-demo/lifecycle-logger.component';
 
 const demoComponents = getDemoComponents();
 
@@ -70,7 +71,9 @@ const demoComponents = getDemoComponents();
     GithubRepoSelectorComponent,
     GithubRepoCardComponent,
     GithubReleaseListComponent,
-    CodeEditorComponent
+    CodeEditorComponent,
+
+    LifecycleLoggerComponent
   ].concat(demoComponents),
   entryComponents: demoComponents,
   providers: [

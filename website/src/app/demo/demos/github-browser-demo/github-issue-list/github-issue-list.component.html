@@ -1,14 +1,16 @@
 <app-loading [loading]="loading">
-  <mat-list>
-    <mat-list-item *ngFor="let issue of issues">
-      <mat-icon mat-list-icon>{{issue.state === 'open' ? 'info_outline' : 'close'}}</mat-icon>
-      <!--<img [src]="issue.user.avatar_url" mat-list-avatar />-->
-      <h4 matLine matTooltip="{{issue.title}}" [matTooltipShowDelay]="400">{{issue.title}}</h4>
-      <p matLine>
-        <a [href]="issue.html_url">#{{issue.number}}</a>
-        <span *ngIf="issue.closed_at; else openedAt">closed at {{issue.closed_at | date}}</span>
-        <ng-template #openedAt>opened at {{issue.created_at | date}}</ng-template>
-      </p>
-    </mat-list-item>
-  </mat-list>
+  <app-list-wrapper [items]="issues">
+    <mat-list>
+      <mat-list-item *ngFor="let issue of issues">
+        <mat-icon mat-list-icon>{{issue.state === 'open' ? 'info_outline' : 'close'}}</mat-icon>
+        <!--<img [src]="issue.user.avatar_url" mat-list-avatar />-->
+        <h4 matLine matTooltip="{{issue.title}}" [matTooltipShowDelay]="400">{{issue.title}}</h4>
+        <p matLine>
+          <a [href]="issue.html_url">#{{issue.number}}</a>
+          <span *ngIf="issue.closed_at; else openedAt">closed at {{issue.closed_at | date}}</span>
+          <ng-template #openedAt>opened at {{issue.created_at | date}}</ng-template>
+        </p>
+      </mat-list-item>
+    </mat-list>
+  </app-list-wrapper>
 </app-loading>

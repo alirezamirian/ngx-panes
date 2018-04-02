@@ -30,16 +30,15 @@
   ::ng-deep {
     @include angular-material-theme($dark-app-theme);
     // The following commented line doesn't work! import is not scoped and is kind of hoisted to the top
-    //@import '~highlight.js/styles/darcula.css';
+    @import 'hljs_darcula';
     .hljs {
+      background: none;
       color: map-get($mat-dark-theme-foreground, secondary-text);
     }
-    .code {
+    code {
       background: #555;
+      color: #ff9eb7;
     }
-  }
-  app-code-block.active ::ng-deep mat-card {
-    background: mat-color(map-get($dark-app-theme, background), selected-button);
   }
   .checkbox-hint {
     @include color-hint($dark-app-theme);
@@ -75,9 +74,6 @@ mat-card table {
   }
 }
 
-app-code-block.active ::ng-deep mat-card {
-  background: mat-color(map-get($app-theme, background), selected-button);
-}
 
 .checkbox-hint {
   font-size: .8em;

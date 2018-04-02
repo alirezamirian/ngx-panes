@@ -44,17 +44,13 @@
         <code *ngIf="selection.theme">{{'theme-' + selection.theme}}</code>
         <span *ngIf="!selection.theme">Nothing</span>
         <br/>
-        <br/>
 
-        <p>
+        <app-code-block *ngIf="selection.theme"
+                        [source]="selection.code"></app-code-block>
+
+        <p style="padding-top: 7px;">
           See also <a routerLink="/guides/theming">Theming guide</a>
         </p>
-
-        <ng-container *ngFor="let example of examples">
-          <app-code-block *ngIf="example.theme"
-                          [class.active]="selection === example"
-                          [source]="example.code"></app-code-block>
-        </ng-container>
 
         <!--TODO: add code for demo-->
       </div>

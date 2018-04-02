@@ -8,7 +8,7 @@
   <app-code-block *ngIf="docItem.source" [copy]="false" [flat]="true" class="flat"
                   language="typescript" [source]="docItem.source"></app-code-block>
 
-  <div [innerHtml]="docItem.description"></div>
+  <div [innerHtml]="docItem.description" class="markdown"></div>
   <!-- TODO: handle examples -->
   <!-- TODO(api-docs): convert @link elements to correct markdown link -->
 

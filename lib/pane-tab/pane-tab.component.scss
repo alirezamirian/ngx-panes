@@ -4,6 +4,10 @@
   user-select: none;
   direction: ltr;
   font-size: .9em;
+  font-weight: lighter;
+  &.active {
+    font-weight: normal;
+  }
 
   &.v {
     padding: 10px 0;

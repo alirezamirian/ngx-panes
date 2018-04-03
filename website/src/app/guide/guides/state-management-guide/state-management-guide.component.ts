@@ -7,6 +7,7 @@ import {
   CustomPaneAreaStateManager,
   UserPreferencesService
 } from './directives/custom-pane-area-state-manager.directive';
+import {customStateManagerExample} from '../../../../samples';
 
 @Guide({
   id: 'state-management',
@@ -32,28 +33,20 @@ export class StateManagementGuideComponent implements OnInit {
   </ngx-pane-group>  
 </ngx-pane-area>`;
 
+  usageExample2 =
+    `<ngx-pane-area style="height: 265px" id="state-management-demo" 
+                    ngxLocalStorageStateManager>
+  <ngx-pane-group align="start" id="group1">
+    <ngx-pane title="Pane #1" id="pane1">First Pane</ngx-pane>
+    <ngx-pane title="Pane #2" id="pane2">Second Pane</ngx-pane>
+  </ngx-pane-group>  
+  <ngx-pane-group align="end" id="group2">
+    <ngx-pane title="Pane #3" id="pane3">Third Pane</ngx-pane>
+  </ngx-pane-group>  
+</ngx-pane-area>`;
+
   sources = {
-    customStateManager:
-      `@Injectable()
-export class CustomPaneAreaStateManager extends PaneAreaStateManager {
-  constructor(private userPreferencesService: UserPreferencesService) {
-    super();
-  }
-
-  getSavedState(paneArea: PaneAreaComponent): Promise<PaneAreaState> {
-    return this.userPreferencesService.getPaneAreaState();
-  }
-
-  trackChanges(paneArea: PaneAreaComponent, state$: Observable<PaneAreaState>): void {
-    state$.subscribe(state => {
-      this.userPreferencesService.setPaneAreaState(state);
-    });
-  }
-
-  clearHistory(paneArea: PaneAreaComponent): void {
-    this.userPreferencesService.clearPaneAreaState();
-  }
-}`,
+    customStateManager: customStateManagerExample,
     provider:
       `providers: [{provide: PaneAreaStateManager, useClass: CustomPaneAreaStateManager}]`
   };

@@ -25,6 +25,8 @@
 .content-outer-wrapper {
   display: flex;
   flex-direction: column;
+  flex-basis: 100%;
+  min-width: 0;
 }
 
 .content-inner-wrapper {

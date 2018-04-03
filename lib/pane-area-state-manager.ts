@@ -1,4 +1,3 @@
-import {Injectable} from '@angular/core';
 import {PaneAreaComponent, PaneAreaState} from './pane-area/pane-area.component';
 import {Observable} from 'rxjs/Observable';
 
@@ -16,15 +15,11 @@ import {Observable} from 'rxjs/Observable';
  * is not currently handled by this state management mechanism and should be handled by
  * corresponding inputs like {@link PaneComponent#width PaneComponent size input}.
  *
- * {@link LocalStoragePaneAreaStateManager} is the default implementation, which
- * is provided by {@link NgxPanesModule} out of the box.
- * You can provide other implementations to be used instead of local storage.
- * A common use case is a service which loads and saves state via a backend API.
- *
- * If you want to disable {@link PaneAreaComponent#tabsDraggable tab dragging} or you don't
- * want to preserve pane positions across page reloads, you can use
- * {@link NoHistoryDirective noHistory directive} on your {@link PaneAreaComponent},
- * which provides a {@link NoopPaneAreaStateManager}.
+ * {@link LocalStoragePaneAreaStateManager} is the default implementation of
+ * `PaneAreaStateManager`, which is shipped with the library but not provided by `NgxPanesModule`.
+ * You can provide it (or some other implementation) for `PanePaneAreaStateManager` DI token.
+ * You can alternatively use {@link LocalStorageStateManagerDirective localStorageStateManager directive}
+ * on `ngx-pane-area`, which provides an instance of {@link LocalStoragePaneAreaStateManager} to pane area.
  *
  * {@link PaneAreaState} is a simple map from {@link PaneComponent Pane} ids to
  * {@link PaneState} objects which represents the id of {@link PaneGroupComponent PaneGroup}
@@ -63,54 +58,3 @@ export abstract class PaneAreaStateManager {
   abstract clearHistory(paneArea: PaneAreaComponent): void;
 }
 
-/**
- * Default {@link PaneAreaStateManager} service provided by {@link NgxPanesModule},
- * which saves/loads pane area state in
- * [browser's local storage](https://developer.mozilla.org/en-US/docs/Web/API/Storage/LocalStorage).
- * It requires pane areas to have a unique {@link PaneAreaComponent#id id}.
- *
- * It can be overridden by providing a custom implementation as {@link PaneAreaStateManager}, or by using
- * {@link NoHistoryDirective} on {@link PaneAreaComponent}, which provides a {@link NoopPaneAreaStateManager}
- * which actually does nothing as its name implies!
- */
-@Injectable()
-export class LocalStoragePaneAreaStateManager extends PaneAreaStateManager {
-
-  getSavedState(paneArea: PaneAreaComponent): PaneAreaState | null {
-    return JSON.parse(localStorage.getItem(this.getKey(paneArea)));
-  }
-
-  clearHistory(paneArea: PaneAreaComponent) {
-    localStorage.removeItem(this.getKey(paneArea));
-  }
-
-  trackChanges(paneArea: PaneAreaComponent, state$: Observable<PaneAreaState>) {
-    state$.subscribe(history => {
-      localStorage.setItem(this.getKey(paneArea), JSON.stringify(history));
-    });
-  }
-
-  private getKey(paneArea: PaneAreaComponent) {
-    return `__NGX_PANES_HISTORY_${paneArea.id}`;
-  }
-
-}
-
-
-/**
- * An state manager which does nothing!
- * Using {@link NoHistoryDirective noHistory directive} on {@link PaneAreaComponent pane-area},
- * will provides an instance of `NoopPaneAreaStateManager` to it.
- */
-export class NoopPaneAreaStateManager extends PaneAreaStateManager {
-
-  getSavedState(paneArea: PaneAreaComponent): null {
-    return null;
-  }
-
-  trackChanges(paneArea: PaneAreaComponent, state$: Observable<PaneAreaState>): void {
-  }
-
-  clearHistory(paneArea: PaneAreaComponent): void {
-  }
-}

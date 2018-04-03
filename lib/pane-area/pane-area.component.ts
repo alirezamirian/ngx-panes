@@ -1,4 +1,13 @@
-import {AfterContentInit, Component, ContentChildren, EventEmitter, Input, Output, QueryList} from '@angular/core';
+import {
+  AfterContentInit,
+  Component,
+  ContentChildren,
+  EventEmitter,
+  Input,
+  Optional,
+  Output,
+  QueryList
+} from '@angular/core';
 import {Align} from '../utils/rtl-utils';
 import {PaneGroupComponent} from '../pane-group/pane-group.component';
 import {Move, PaneTabDragDropContext} from '../pane-tab-drag-drop-context';
@@ -98,29 +107,35 @@ export class PaneAreaComponent implements AfterContentInit {
    * will handle it.
    */
   @Input()
-  state: PaneAreaState;
+  state: PaneAreaState = {};
 
   constructor(private dragDropContext: PaneTabDragDropContext,
-              private stateManager: PaneAreaStateManager) {
+              @Optional() private stateManager: PaneAreaStateManager) {
   }
 
   ngAfterContentInit(): void {
-    this.stateManager.trackChanges(this, this.stateChange);
-    Promise.resolve(this.state || this.stateManager.getSavedState(this)).then(state => {
-      this.state = state || {};
-
-      // TODO: add support for async state initialization and postpone initialization bellow until state got initialized
-      this.paneGroups.changes.subscribe(() => this.syncGroups());
-      this.syncGroups();
-      this.dragDropContext.moves$.subscribe((move: Move) => {
-        if (move.from === move.to) {
-          this.movePane(move.from, move.pane, move.toIndex);
-        } else {
-          this.addPane(move.to, move.pane, move.toIndex);
-          this.removePane(move.from, move.pane);
-        }
-        move.pane.open();
+    if (this.stateManager) {
+      this.stateManager.trackChanges(this, this.stateChange);
+      Promise.resolve(this.stateManager.getSavedState(this)).then(state => {
+        this.state = state || {};
+        this.initialize();
       });
+    } else {
+      this.initialize();
+    }
+  }
+
+  private initialize() {
+    this.paneGroups.changes.subscribe(() => this.syncGroups());
+    this.syncGroups();
+    this.dragDropContext.moves$.subscribe((move: Move) => {
+      if (move.from === move.to) {
+        this.movePane(move.from, move.pane, move.toIndex);
+      } else {
+        this.addPane(move.to, move.pane, move.toIndex);
+        this.removePane(move.from, move.pane);
+      }
+      move.pane.open();
     });
   }
 

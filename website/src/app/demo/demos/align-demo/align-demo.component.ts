@@ -4,6 +4,7 @@ import {PaneGroupComponent} from '../../../../../../lib/pane-group/pane-group.co
 import {PaneAreaComponent} from '../../../../../../lib/pane-area/pane-area.component';
 import {PaneAreaStateManager} from '../../../../../../lib/pane-area-state-manager';
 import {MatCheckboxChange} from '@angular/material';
+import {LocalStoragePaneAreaStateManager} from '../../../../../../lib/state-managers/local-storage-state-manager.service';
 
 @Demo({
   id: 'align',
@@ -15,7 +16,10 @@ import {MatCheckboxChange} from '@angular/material';
 @Component({
   selector: 'app-align-demo',
   templateUrl: './align-demo.component.html',
-  styleUrls: ['./align-demo.component.scss']
+  styleUrls: ['./align-demo.component.scss'],
+  providers: [
+    {provide: PaneAreaStateManager, useClass: LocalStoragePaneAreaStateManager}
+  ]
 })
 export class AlignDemoComponent implements AfterViewInit {
 

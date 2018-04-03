@@ -52,38 +52,40 @@
   By default, users can <b>reorder</b> panes inside each side or even <b>move</b>
   them from one side to another, unless you
   opt out of <a routerLink="/api/PaneAreaComponent" fragment="tabsDraggable">this feature</a>.
-  For being able to restore previous pane positions, paneArea accepts a
+  For being able to restore previous pane positions, <code>ngx-pane-area</code> accepts a
   <a routerLink="/api/PaneAreaComponent" fragment="state">state</a> input of type
   <a routerLink="/api/PaneAreaState">PaneAreaState</a> which teaches it how to
   arrange panes in different sides, overriding their original arrangement based on template.
-  While you can provide this state object as an input, paneArea component looks for an
+  <br/>
+  While you can provide this state object as an input, <code>ngx-pane-area</code> component looks for an
   injectable object of type
   <a routerLink="/api/PaneAreaStateManager">PaneAreaStateManager</a> which is responsible for saving/restoring
-  such state when needed. A default implementation of
+  such state when needed.
+  <br/>
+  A default implementation of
   <a routerLink="/api/PaneAreaStateManager">PaneAreaStateManager</a> which is based on local storage
   (<a routerLink="/api/LocalStoragePaneAreaStateManager">LocalStoragePaneAreaStateManager</a>)
-  is provided by <a routerLink="/api/NgxPanesModule">NgxPanesModule</a> by default.
+  is shipped with the library but not provided by default.
+  You can provide it in your own module or use
+  <a routerLink="/api/LocalStorageStateManagerDirective">localStorageStateManagement directive</a>
+  on <code>ngx-pane-area</code>. It provides
+  an instance of <code>LocalStoragePaneAreaStateManager</code> to pane area.
 
-  All you need to do in order to make use of this default
-  <a routerLink="/api/PaneAreaStateManager">PaneAreaStateManager</a>, is to use a <b>unique id</b> for each
-  <a routerLink="/api/PaneAreaComponent" fragment="id">ngx-pane-area</a>,
-  <a routerLink="/api/PaneGroupComponent" fragment="id">ngx-pane-group</a> and
-  <a routerLink="/api/PaneComponent" fragment="id">ngx-pane</a> component.
 </p>
 
 <app-callout type="info">
   The only part of UI state which is handled by
   <a routerLink="/api/PaneAreaStateManager">PaneAreaStateManager</a> is arrangement of panes.
   If you want to preserve other things (like
-  selected pane) across page reloads, you need to handle it yourself as shown in previous example.
+  selected pane) across page reloads, you need to handle it yourself as shown in the previous example.
 </app-callout>
 <p>
-  Below is a refined version of the previous example, in which unique id is used for all components.
-  This allows default <a routerLink="/api/LocalStoragePaneAreaStateManager">LocalStoragePaneAreaStateManager</a>
-  to save/restore order and position of panes inside pane groups.
+  Below is a refined version of the previous example, in which a unique id is used for each component and
+  <code>localStorageStateManager</code> directive is added to <code>ngx-pane-area</code> component.
   Go ahead and move third pane to the left side and refresh the page to see how it keeps its position.
 </p>
-<ngx-pane-area id="state-management-demo" style="height: 250px;" #paneArea (stateChange)="check(paneArea)">
+<ngx-pane-area id="state-management-demo" ngxLocalStorageStateManager
+               style="height: 270px;" #paneArea (stateChange)="check(paneArea)">
   <ngx-pane-group align="start" id="group1" [defaultWidth]="200">
     <ngx-pane id="pane1" title="Pane #1" [width]="widths[0]" (widthChange)="setWidth(0,$event)">First Pane</ngx-pane>
     <ngx-pane id="pane2" title="Pane #2" [width]="widths[1]" (widthChange)="setWidth(1,$event)">Second Pane</ngx-pane>
@@ -91,7 +93,22 @@
   <ngx-pane-group align="end" id="group2" [defaultWidth]="200">
     <ngx-pane id="pane3" title="Pane #3" [width]="widths[2]" (widthChange)="setWidth(2,$event)">Third Pane</ngx-pane>
   </ngx-pane-group>
+  <div class="mat-padding">
+    Code for this pane area is something like this:
+    <app-code-block [flat]="true" [language]="'html'" [copy]="false" [source]="usageExample2"></app-code-block>
+  </div>
 </ngx-pane-area>
+
+
+<app-callout type="info">
+  Setting <code>id</code> for <code>ngx-pane-area</code> is required for
+  <a routerLink="/api/LocalStoragePaneAreaStateManager">LocalStoragePaneAreaStateManager</a> to work.
+</app-callout>
+
+<app-callout type="info">
+  Setting <code>id</code> for <code>ngx-pane</code> and <code>ngx-pane-group</code> components is
+  necessary, no matter you are using default state manager or providing a custom one.
+</app-callout>
 
 <h2>Custom State Manager</h2>
 <p>
@@ -103,13 +120,9 @@
 
 <app-code-block [source]="sources.customStateManager" language="typescript"></app-code-block>
 
-<p>Now we need to provide it via <code>providers</code> array of an angular module or directive:</p>
+<p>Now we need to provide it via <code>providers</code> array of our angular module or directive:</p>
 <app-code-block [source]="sources.provider" language="typescript"></app-code-block>
 
-<app-callout type="info">
-  Setting <code>id</code> for <code>ngx-pane</code> and <code>ngx-pane-group</code> components is
-  necessary, no matter you are using default state manager or providing a custom one.
-</app-callout>
 
 <!--<ngx-pane-area id="custom-state-manager" style="height: 250px;" myCustomPaneAreaStateManager>-->
 <!--<ngx-pane-group align="start" id="group1" [defaultWidth]="200">-->

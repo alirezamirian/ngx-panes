@@ -25,7 +25,7 @@
   },
   {
     "identifier": "PaneAreaStateManager",
-    "description": "<p>An abstract class, used as DI token for pane area state manager service.\nEach instance of {@link PaneAreaComponent} will look for a provided\n<code>PaneAreaStateManager</code> to use for loading previously saved state and saving\nstate changes whenever a pane is moved to another position or another pane group.</p>\n<p>Currently, this <strong>state</strong> is only limited to position of panes inside pane groups.\nBecause it&#39;s the only tricky part of state management which is hard to handle in\nstatic templates.\nOther things such as <strong>last opened pane in each pane group</strong> or <strong>size of each pane</strong>\nis not currently handled by this state management mechanism and should be handled by\ncorresponding inputs like {@link PaneComponent#width PaneComponent size input}.</p>\n<p>{@link LocalStoragePaneAreaStateManager} is the default implementation, which\nis provided by {@link NgxPanesModule} out of the box.\nYou can provide other implementations to be used instead of local storage.\nA common use case is a service which loads and saves state via a backend API.</p>\n<p>If you want to disable {@link PaneAreaComponent#tabsDraggable tab dragging} or you don&#39;t\nwant to preserve pane positions across page reloads, you can use\n{@link NoHistoryDirective noHistory directive} on your {@link PaneAreaComponent},\nwhich provides a {@link NoopPaneAreaStateManager}.</p>\n<p>{@link PaneAreaState} is a simple map from {@link PaneComponent Pane} ids to\n{@link PaneState} objects which represents the id of {@link PaneGroupComponent PaneGroup}\nfor this pane and position of the pane inside that paneGroup. So, for <code>PaneAreaStateManager</code> to work,\n<strong>it&#39;s necessary to give an id to each pane group and each pane inside it</strong>.</p>\n<p>See also <a href=\"/guides/state-management\">state management guide</a>.</p>\n",
+    "description": "<p>An abstract class, used as DI token for pane area state manager service.\nEach instance of {@link PaneAreaComponent} will look for a provided\n<code>PaneAreaStateManager</code> to use for loading previously saved state and saving\nstate changes whenever a pane is moved to another position or another pane group.</p>\n<p>Currently, this <strong>state</strong> is only limited to position of panes inside pane groups.\nBecause it&#39;s the only tricky part of state management which is hard to handle in\nstatic templates.\nOther things such as <strong>last opened pane in each pane group</strong> or <strong>size of each pane</strong>\nis not currently handled by this state management mechanism and should be handled by\ncorresponding inputs like {@link PaneComponent#width PaneComponent size input}.</p>\n<p>{@link LocalStoragePaneAreaStateManager} is the default implementation of\n<code>PaneAreaStateManager</code>, which is shipped with the library but not provided by <code>NgxPanesModule</code>.\nYou can provide it (or some other implementation) for <code>PanePaneAreaStateManager</code> DI token.\nYou can alternatively use {@link LocalStorageStateManagerDirective localStorageStateManager directive}\non <code>ngx-pane-area</code>, which provides an instance of {@link LocalStoragePaneAreaStateManager} to pane area.</p>\n<p>{@link PaneAreaState} is a simple map from {@link PaneComponent Pane} ids to\n{@link PaneState} objects which represents the id of {@link PaneGroupComponent PaneGroup}\nfor this pane and position of the pane inside that paneGroup. So, for <code>PaneAreaStateManager</code> to work,\n<strong>it&#39;s necessary to give an id to each pane group and each pane inside it</strong>.</p>\n<p>See also <a href=\"/guides/state-management\">state management guide</a>.</p>\n",
     "methods": [
       {
         "name": "getSavedState",
@@ -71,38 +71,6 @@
     ],
     "properties": [],
     "fileName": "lib/pane-area-state-manager.ts"
-  },
-  {
-    "identifier": "LocalStoragePaneAreaStateManager",
-    "description": "<p>Default {@link PaneAreaStateManager} service provided by {@link NgxPanesModule},\nwhich saves/loads pane area state in\n<a href=\"https://developer.mozilla.org/en-US/docs/Web/API/Storage/LocalStorage\">browser&#39;s local storage</a>.\nIt requires pane areas to have a unique {@link PaneAreaComponent#id id}.</p>\n<p>It can be overridden by providing a custom implementation as {@link PaneAreaStateManager}, or by using\n{@link NoHistoryDirective} on {@link PaneAreaComponent}, which provides a {@link NoopPaneAreaStateManager}\nwhich actually does nothing as its name implies!</p>\n",
-    "methods": [],
-    "properties": [],
-    "fileName": "lib/pane-area-state-manager.ts"
-  },
-  {
-    "identifier": "NoopPaneAreaStateManager",
-    "description": "<p>An state manager which does nothing!\nUsing {@link NoHistoryDirective noHistory directive} on {@link PaneAreaComponent pane-area},\nwill provides an instance of <code>NoopPaneAreaStateManager</code> to it.</p>\n",
-    "methods": [],
-    "properties": [],
-    "fileName": "lib/pane-area-state-manager.ts"
-  },
-  {
-    "identifier": "NoHistoryDirective",
-    "description": "<p>Overrides default {@link LocalStoragePaneAreaStateManager} (or any other provided\n{@link PaneAreaStateManager}) and provides a {@link NoopPaneAreaStateManager}\nfor pane-area. Use it on {@link PaneAreaComponent pane-area} to disable state\nhistory tracking.</p>\n",
-    "methods": [],
-    "properties": [],
-    "type": "directive",
-    "isComponent": false,
-    "selector": "ngx-pane-area[noHistory]",
-    "inputs": [],
-    "outputs": [],
-    "fileName": "lib/pane-area/no-history.directive.ts",
-    "usage": [
-      {
-        "code": "<ngx-pane-area noHistory>\r  ...\r</ngx-pane-area>",
-        "lang": "html"
-      }
-    ]
   },
   {
     "type": "type",
@@ -612,7 +580,7 @@
       "lib/pane/pane-content.directive#PaneContentDirective",
       "lib/pane-area/pane-area.component#PaneAreaComponent",
       "lib/pane-group/pane-group.component#PaneGroupComponent",
-      "lib/pane-area/no-history.directive#NoHistoryDirective",
+      "lib/state-managers/local-storage-state-manager.directive#LocalStorageStateManagerDirective",
       "lib/default-scrollbars.directive#DefaultScrollbarsDirective"
     ],
     "services": [],
@@ -641,6 +609,37 @@
     "inputs": [],
     "outputs": [],
     "fileName": "lib/scrollable.directive.ts"
+  },
+  {
+    "identifier": "LocalStorageStateManagerDirective",
+    "description": "<p>Provides an instance of {@link LocalStoragePaneAreaStateManager} to be used by the\n{@link PaneAreaComponent pane-area} as {@link PaneAreaStateManager}.</p>\n",
+    "methods": [],
+    "properties": [],
+    "type": "directive",
+    "isComponent": false,
+    "selector": "ngx-pane-area[ngxLocalStorageStateManager]",
+    "inputs": [],
+    "outputs": [],
+    "fileName": "lib/state-managers/local-storage-state-manager.directive.ts",
+    "usage": [
+      {
+        "code": "<ngx-pane-area ngxLocalStorageStateManager>\r  ...\r</ngx-pane-area>",
+        "lang": "html"
+      }
+    ]
+  },
+  {
+    "identifier": "LocalStoragePaneAreaStateManager",
+    "description": "<p>A {@link PaneAreaStateManager} service, which saves/loads pane area state in\n<a href=\"https://developer.mozilla.org/en-US/docs/Web/API/Storage/LocalStorage\">browser&#39;s local storage</a>.\nIt requires pane areas to have a unique {@link PaneAreaComponent#id id}.</p>\n<p>It&#39;s <strong>not provider</strong> by default by {@link NgxPanesModule}, but you can provide it in your own angular\nmodule and it will be used by all <code>ngx-pane-area</code> components.\nAlternatively you can use {@link LocalStorageStateManagerDirective ngxLocalStorageStateManager}\non <code>ngx-pane-area</code>. It will provide an instance of {@link LocalStoragePaneAreaStateManager} to pane area.</p>\n",
+    "methods": [],
+    "properties": [],
+    "fileName": "lib/state-managers/local-storage-state-manager.service.ts",
+    "usage": [
+      {
+        "code": "",
+        "lang": "typescript"
+      }
+    ]
   },
   {
     "type": "typeAlias",

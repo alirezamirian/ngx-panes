@@ -1,4 +1,8 @@
 export function CoerceBoolean(clazz, propName, descriptor?) {
+  if (arguments.length === 0) {
+    // support usage of the form @CoerceBoolean()
+    return CoerceBoolean;
+  }
   if (descriptor) {
     const originalSetter = descriptor.set;
     return Object.assign({}, descriptor, {
@@ -7,15 +11,13 @@ export function CoerceBoolean(clazz, propName, descriptor?) {
       }
     });
   } else {
-    let _value;
-    return Object.assign({}, descriptor, {
+    return Object.assign({}, {
       set: function (value) {
-        _value = value != null && `${value}` !== 'false';
+        this[`__${propName}`] = value != null && `${value}` !== 'false';
       },
       get: function () {
-        return _value;
+        return this[`__${propName}`] || false;
       }
     });
-
   }
-}
+};

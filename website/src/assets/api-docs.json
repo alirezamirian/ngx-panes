@@ -25,7 +25,7 @@
   },
   {
     "identifier": "PaneAreaStateManager",
-    "description": "<p>An abstract class, used as DI token for pane area state manager service.\nEach instance of {@link PaneAreaComponent} will look for a provided\n<code>PaneAreaStateManager</code> to use for loading previously saved state and saving\nstate changes whenever a pane is moved to another position or another pane group.</p>\n<p>Currently, this <strong>state</strong> is only limited to position of panes inside pane groups.\nBecause it&#39;s the only tricky part of state management which is hard to handle in\nstatic templates.\nOther things such as <strong>last opened pane in each pane group</strong> or <strong>size of each pane</strong>\nis not currently handled by this state management mechanism and should be handled by\ncorresponding inputs like {@link PaneComponent#width PaneComponent size input}.</p>\n<p>{@link LocalStoragePaneAreaStateManager} is the default implementation of\n<code>PaneAreaStateManager</code>, which is shipped with the library but not provided by <code>NgxPanesModule</code>.\nYou can provide it (or some other implementation) for <code>PanePaneAreaStateManager</code> DI token.\nYou can alternatively use {@link LocalStorageStateManagerDirective localStorageStateManager directive}\non <code>ngx-pane-area</code>, which provides an instance of {@link LocalStoragePaneAreaStateManager} to pane area.</p>\n<p>{@link PaneAreaState} is a simple map from {@link PaneComponent Pane} ids to\n{@link PaneState} objects which represents the id of {@link PaneGroupComponent PaneGroup}\nfor this pane and position of the pane inside that paneGroup. So, for <code>PaneAreaStateManager</code> to work,\n<strong>it&#39;s necessary to give an id to each pane group and each pane inside it</strong>.</p>\n<p>See also <a href=\"/guides/state-management\">state management guide</a>.</p>\n",
+    "description": "<p>An abstract class, used as DI token for pane area state manager service.\nEach instance of {@link PaneAreaComponent} will look for a provided\n<code>PaneAreaStateManager</code> to use for loading previously saved state and saving\nstate changes whenever a pane is moved to another position or another pane group.</p>\n<p>Currently, this <strong>state</strong> is only limited to position of panes inside pane groups.\nBecause it&#39;s the only tricky part of state management which is hard to handle in\nstatic templates.\nOther things such as <strong>last opened pane in each pane group</strong> or <strong>size of each pane</strong>\nis not currently handled by this state management mechanism and should be handled by\ncorresponding inputs like {@link PaneComponent#size PaneComponent size input}.</p>\n<p>{@link LocalStoragePaneAreaStateManager} is the default implementation of\n<code>PaneAreaStateManager</code>, which is shipped with the library but not provided by <code>NgxPanesModule</code>.\nYou can provide it (or some other implementation) for <code>PanePaneAreaStateManager</code> DI token.\nYou can alternatively use {@link LocalStorageStateManagerDirective localStorageStateManager directive}\non <code>ngx-pane-area</code>, which provides an instance of {@link LocalStoragePaneAreaStateManager} to pane area.</p>\n<p>{@link PaneAreaState} is a simple map from {@link PaneComponent Pane} ids to\n{@link PaneState} objects which represents the id of {@link PaneGroupComponent PaneGroup}\nfor this pane and position of the pane inside that paneGroup. So, for <code>PaneAreaStateManager</code> to work,\n<strong>it&#39;s necessary to give an id to each pane group and each pane inside it</strong>.</p>\n<p>See also <a href=\"/guides/state-management\">state management guide</a>.</p>\n",
     "methods": [
       {
         "name": "getSavedState",
@@ -236,9 +236,9 @@
         "description": "<p>Whether or not the last pane should be opened if no pane is marked initially as opened.</p>\n"
       },
       {
-        "name": "defaultWidth",
+        "name": "defaultSize",
         "type": "number",
-        "description": "<p>Default width (in pixels) to be used for any child pane with an undefined width.\nIf you don&#39;t specify a default width, child panes will <strong>wrap they content</strong>.</p>\n"
+        "description": "<p>Default size (in pixels) to be used for any child pane with an undefined size.\nIf you don&#39;t specify a default size, child panes with undefined {@link PaneComponent#size size}\nwill <strong>wrap they content</strong>.</p>\n"
       },
       {
         "name": "id",
@@ -502,19 +502,19 @@
         "description": "<p>Whether user can resize pane or not.</p>\n"
       },
       {
+        "name": "size",
+        "type": "number",
+        "description": "<p>Size of the pane. More precisely, <strong>width</strong> for <strong>horizontally</strong> aligned and <strong>height</strong> for <strong>vertically</strong>\naligned panes.\nIf unset, <code>defaultSize</code> of the host <code>ngx-pane-group</code> will be used. If both are undefined, the content of the\npane will determine its size. Resizing pane (if enabled) changes the pane&#39;s size.</p>\n"
+      },
+      {
         "name": "title",
         "type": "string",
         "description": "<p>Title of the pane to be shown in pane&#39;s tab.\nIt will also appear in pane header in the absence of <code>{@link PaneHeaderComponent ngx-pane-header}</code>.\nUse {@link PaneTitleDirective ngxPaneTitle directive} if you need more control over pane title.</p>\n"
-      },
-      {
-        "name": "width",
-        "type": "number",
-        "description": "<p>Width of the pane. More precisely, <strong>width</strong> for <strong>horizontally</strong> aligned and <strong>height</strong> for <strong>vertically</strong>\naligned panes.\nIf unset, <code>defaultWidth</code> of the host <code>ngx-pane-group</code> will be used. If both are undefined, the content of the\npane will determine its width. Resizing pane (if enabled) changes the pane&#39;s width.</p>\n"
       }
     ],
     "outputs": [
       {
-        "name": "widthChange",
+        "name": "sizeChange",
         "description": ""
       }
     ],
@@ -550,9 +550,9 @@
         "description": "<p>Default value for {@link PaneGroupComponent#autoOpen} input.</p>\n"
       },
       {
-        "name": "defaultWidth",
+        "name": "defaultSize",
         "type": "number",
-        "description": "<p>Default value for {@link PaneGroupComponent#defaultWidth} input.</p>\n"
+        "description": "<p>Default value for {@link PaneGroupComponent#defaultSize} input.</p>\n"
       },
       {
         "name": "resizable",

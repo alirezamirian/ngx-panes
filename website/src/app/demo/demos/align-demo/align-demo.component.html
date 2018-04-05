@@ -1,5 +1,5 @@
 <ngx-pane-area #paneArea id="alignDemo">
-  <ngx-pane-group id="paneGroup1" [defaultWidth]="200" [align]="aligns[0]" [autoOpen]="false"
+  <ngx-pane-group id="paneGroup1" [defaultSize]="200" [align]="aligns[0]" [autoOpen]="false"
                   *ngIf="groups[0]">
     <ngx-pane title="First group - 1" id="pane1">
       <div class="padding">
@@ -15,7 +15,7 @@
       <app-demo-content [lines]="20"></app-demo-content>
     </ngx-pane>
   </ngx-pane-group>
-  <ngx-pane-group id="paneGroup2" [defaultWidth]="300" [align]="aligns[1]" *ngIf="groups[1]">
+  <ngx-pane-group id="paneGroup2" [defaultSize]="300" [align]="aligns[1]" *ngIf="groups[1]">
     <ngx-pane title="Second group - 1" id="pane4">
       <div class="padding">
         Initial alignment of this pane group is not set.
@@ -27,7 +27,7 @@
       <app-demo-content [lines]="22"></app-demo-content>
     </ngx-pane>
   </ngx-pane-group>
-  <ngx-pane-group id="paneGroup3" [align]="aligns[2]" [defaultWidth]="250" *ngIf="groups[2]">
+  <ngx-pane-group id="paneGroup3" [align]="aligns[2]" [defaultSize]="250" *ngIf="groups[2]">
     <ngx-pane title="Third group - 1" id="pane6">
       <div class="padding">
         Initial alignment of this pane group is set to right.
@@ -36,7 +36,7 @@
       </div>
     </ngx-pane>
   </ngx-pane-group>
-  <ngx-pane-group id="paneGroup4" [align]="aligns[3]" [defaultWidth]="150" *ngIf="groups[3]">
+  <ngx-pane-group id="paneGroup4" [align]="aligns[3]" [defaultSize]="150" *ngIf="groups[3]">
     <ngx-pane title="Forth group - 1" id="pane7">
       <div class="padding">
         Initial alignment of this pane group is not set.

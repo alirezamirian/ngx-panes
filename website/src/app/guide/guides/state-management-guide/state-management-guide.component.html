@@ -7,12 +7,12 @@
 </p>
 
 <ngx-pane-area style="height: 265px;">
-  <ngx-pane-group align="start" [defaultWidth]="200">
-    <ngx-pane title="Pane #1" [width]="widths[0]" (widthChange)="setWidth(0,$event, true)">First Pane</ngx-pane>
-    <ngx-pane title="Pane #2" [width]="widths[1]" (widthChange)="setWidth(1,$event, true)">Second Pane</ngx-pane>
+  <ngx-pane-group align="start" [defaultSize]="200">
+    <ngx-pane title="Pane #1" [size]="sizes[0]" (sizeChange)="setSize(0,$event, true)">First Pane</ngx-pane>
+    <ngx-pane title="Pane #2" [size]="sizes[1]" (sizeChange)="setSize(1,$event, true)">Second Pane</ngx-pane>
   </ngx-pane-group>
-  <ngx-pane-group align="end" [defaultWidth]="200">
-    <ngx-pane title="Pane #3" [width]="widths[2]" (widthChange)="setWidth(2,$event, true)">Third Pane</ngx-pane>
+  <ngx-pane-group align="end" [defaultSize]="200">
+    <ngx-pane title="Pane #3" [size]="sizes[2]" (sizeChange)="setSize(2,$event, true)">Third Pane</ngx-pane>
   </ngx-pane-group>
   <div class="mat-padding">
     Code for this pane area is something like this:
@@ -23,17 +23,17 @@
 
 <br/>
 <p>
-  <b>State</b> of these components, e.g width of each pane, selected pane in each pane group, etc., is determined
+  <b>State</b> of these components, e.g size of each pane, selected pane in each pane group, etc., is determined
   by inputs and also may change by <b>user interaction</b>. A resizable pane for example lets user change
-  width of the pane.
-  You can keep track of each part of this state via outputs and keep its latest value somewhere to restore it next time
-  this component is rendered.
+  size of the pane.
+  You can track changes to each part of this state via outputs and keep its latest value somewhere
+  to restore it next time this component is rendered.
 </p>
 
 <p>
-  In the example above, width of each pane is synchronized with a dedicated query parameter, via
-  <a routerLink="/api/PaneComponent" fragment="width">width input</a> and
-  <a routerLink="/api/PaneComponent" fragment="widthChange">widthChange output</a>.
+  In the example above, size of each pane is synchronized with a dedicated query parameter, via
+  <a routerLink="/api/PaneComponent" fragment="size">size input</a> and
+  <a routerLink="/api/PaneComponent" fragment="sizeChange">sizeChange output</a>.
   Go ahead and resize a pane and refresh the page to see it in action.
 </p>
 
@@ -41,7 +41,7 @@
   We could keep (no matter in url, cookies, local storage,
   or even on the server as a user preference) other parts of UI state such as
   <a routerLink="/api/PaneGroupComponent" fragment="selectedPane">selected pane</a>
-  and restore it on initialization, via inputs in the same fashion as we did for widths.
+  and restore it on initialization, via inputs in the same fashion as we did for sizes.
   However there is a tricky part of the UI state which is not so
   trivial to deal with, specially if we are using a static template for defining panes,
   which is the case in most scenarios.
@@ -86,12 +86,12 @@
 </p>
 <ngx-pane-area id="state-management-demo" ngxLocalStorageStateManager
                style="height: 270px;" #paneArea (stateChange)="check(paneArea)">
-  <ngx-pane-group align="start" id="group1" [defaultWidth]="200">
-    <ngx-pane id="pane1" title="Pane #1" [width]="widths[0]" (widthChange)="setWidth(0,$event)">First Pane</ngx-pane>
-    <ngx-pane id="pane2" title="Pane #2" [width]="widths[1]" (widthChange)="setWidth(1,$event)">Second Pane</ngx-pane>
+  <ngx-pane-group align="start" id="group1" [defaultSize]="200">
+    <ngx-pane id="pane1" title="Pane #1" [size]="sizes[0]" (sizeChange)="setSize(0,$event)">First Pane</ngx-pane>
+    <ngx-pane id="pane2" title="Pane #2" [size]="sizes[1]" (sizeChange)="setSize(1,$event)">Second Pane</ngx-pane>
   </ngx-pane-group>
-  <ngx-pane-group align="end" id="group2" [defaultWidth]="200">
-    <ngx-pane id="pane3" title="Pane #3" [width]="widths[2]" (widthChange)="setWidth(2,$event)">Third Pane</ngx-pane>
+  <ngx-pane-group align="end" id="group2" [defaultSize]="200">
+    <ngx-pane id="pane3" title="Pane #3" [size]="sizes[2]" (sizeChange)="setSize(2,$event)">Third Pane</ngx-pane>
   </ngx-pane-group>
   <div class="mat-padding">
     Code for this pane area is something like this:
@@ -125,11 +125,11 @@
 
 
 <!--<ngx-pane-area id="custom-state-manager" style="height: 250px;" myCustomPaneAreaStateManager>-->
-<!--<ngx-pane-group align="start" id="group1" [defaultWidth]="200">-->
+<!--<ngx-pane-group align="start" id="group1" [defaultSize]="200">-->
 <!--<ngx-pane id="pane1" title="Pane #1">First Pane</ngx-pane>-->
 <!--<ngx-pane id="pane2" title="Pane #2">Second Pane</ngx-pane>-->
 <!--</ngx-pane-group>-->
-<!--<ngx-pane-group align="end" id="group2" [defaultWidth]="200">-->
+<!--<ngx-pane-group align="end" id="group2" [defaultSize]="200">-->
 <!--<ngx-pane id="pane3" title="Pane #3">Third Pane</ngx-pane>-->
 <!--</ngx-pane-group>-->
 <!--</ngx-pane-area>-->

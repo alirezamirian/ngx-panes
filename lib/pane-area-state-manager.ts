@@ -13,7 +13,7 @@ import {Observable} from 'rxjs/Observable';
  * static templates.
  * Other things such as **last opened pane in each pane group** or **size of each pane**
  * is not currently handled by this state management mechanism and should be handled by
- * corresponding inputs like {@link PaneComponent#width PaneComponent size input}.
+ * corresponding inputs like {@link PaneComponent#size PaneComponent size input}.
  *
  * {@link LocalStoragePaneAreaStateManager} is the default implementation of
  * `PaneAreaStateManager`, which is shipped with the library but not provided by `NgxPanesModule`.

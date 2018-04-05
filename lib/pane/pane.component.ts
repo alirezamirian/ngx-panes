@@ -62,7 +62,8 @@ export class PaneComponent implements OnInit {
    * Use {@link PaneTitleDirective ngxPaneTitle directive} if you need more control over pane title.
    */
   @Input() title: string;
-  private _width: number;
+  @Output()
+  sizeChange = new EventEmitter();
   /**
    * @private
    */
@@ -78,18 +79,15 @@ export class PaneComponent implements OnInit {
     return this.explicitContent || this.implicitContent;
   }
 
-  @Output()
-  widthChange = new EventEmitter();
+  private _size: number;
 
   /**
-   * Width of the pane. More precisely, **width** for **horizontally** aligned and **height** for **vertically**
-   * aligned panes.
-   * If unset, `defaultWidth` of the host `ngx-pane-group` will be used. If both are undefined, the content of the
-   * pane will determine its width. Resizing pane (if enabled) changes the pane's width.
+   * @private
+   * @returns {number | null}
    */
-  @Input() set width(w: number | null) {
-    this._width = w;
-  };
+  get size(): number | null {
+    return this._size || this.paneGroup.defaultSize;
+  }
 
   /**
    * Whether user can resize pane or not.
@@ -105,12 +103,14 @@ export class PaneComponent implements OnInit {
   @ContentChild(PaneTitleDirective) titleTemplate: PaneTitleDirective;
 
   /**
-   * @private
-   * @returns {number | null}
+   * Size of the pane. More precisely, **width** for **horizontally** aligned and **height** for **vertically**
+   * aligned panes.
+   * If unset, `defaultSize` of the host `ngx-pane-group` will be used. If both are undefined, the content of the
+   * pane will determine its size. Resizing pane (if enabled) changes the pane's size.
    */
-  get width(): number | null {
-    return this._width || this.paneGroup.defaultWidth;
-  }
+  @Input() set size(w: number | null) {
+    this._size = w;
+  };
 
   /**
    * @private

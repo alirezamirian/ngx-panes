@@ -1,6 +1,6 @@
 <div [ngClass]="'theme-' + selection.theme" style="height: 100%;" [ngxPanesDefaultScrollbars]="defaultScrollbars">
   <ngx-pane-area>
-    <ngx-pane-group #panes [defaultWidth]="330">
+    <ngx-pane-group #panes [defaultSize]="330">
       <ngx-pane #pane1 id="test" title="Foo">
         <app-demo-content [lines]="40"></app-demo-content>
       </ngx-pane>

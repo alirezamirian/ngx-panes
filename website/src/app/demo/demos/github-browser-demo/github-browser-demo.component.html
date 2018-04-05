@@ -1,7 +1,7 @@
 <div [class.rate-limited]="rateLimited" class="container">
   <ngx-pane-area *ngIf="slug; else noSlug">
-    <ngx-pane-group [align]="'start'" [defaultWidth]="280">
-      <ngx-pane #firstPane id="test" [width]="330">
+    <ngx-pane-group [align]="'start'" [defaultSize]="280">
+      <ngx-pane #firstPane id="test" [size]="330">
         <ng-template ngxPaneTitle>
           <mat-icon class="title-icon">code</mat-icon>
           Code
@@ -21,7 +21,7 @@
         <app-github-file-tree [slug]="slug" (fileSelected)="setSourceUrl($event)"
                               [ref]="selectedBranch"></app-github-file-tree>
       </ngx-pane>
-      <ngx-pane [width]="320">
+      <ngx-pane [size]="320">
         <ng-template ngxPaneTitle>
           <mat-icon class="title-icon">error_outline</mat-icon>
           Issues

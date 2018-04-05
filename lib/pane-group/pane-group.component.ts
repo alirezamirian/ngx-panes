@@ -54,12 +54,13 @@ export class PaneGroupComponent implements OnInit {
   id: string;
 
   /**
-   * Default width (in pixels) to be used for any child pane with an undefined width.
-   * If you don't specify a default width, child panes will **wrap they content**.
+   * Default size (in pixels) to be used for any child pane with an undefined size.
+   * If you don't specify a default size, child panes with undefined {@link PaneComponent#size size}
+   * will **wrap they content**.
    * @default null
    * @type {number|null}
    */
-  @Input() defaultWidth: number | null;
+  @Input() defaultSize: number | null;
 
   /**
    * Whether clicking on tabs toggles the selected panes or not. If toggleable is false, clicking on currently open
@@ -127,8 +128,8 @@ export class PaneGroupComponent implements OnInit {
       if (defaults.autoOpen != null) {
         this.autoOpen = defaults.autoOpen;
       }
-      if (defaults.defaultWidth != null) {
-        this.defaultWidth = defaults.defaultWidth;
+      if (defaults.defaultSize != null) {
+        this.defaultSize = defaults.defaultSize;
       }
       if (defaults.toggleable != null) {
         this.toggleable = defaults.toggleable;

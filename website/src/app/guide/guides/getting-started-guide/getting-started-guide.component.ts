@@ -21,16 +21,16 @@ export class GettingStartedGuideComponent implements OnInit {
   prebuildTheme = breBuildThemeUsage;
   templateCode =
     `<ngx-pane-area style="height: 400px">
-  <ngx-pane-group align="start" [defaultWidth]="200">
+  <ngx-pane-group align="start" [defaultSize]="200">
     <ngx-pane title="pane #1">First pane</ngx-pane>
     <ngx-pane title="pane #2">Second pane</ngx-pane>
   </ngx-pane-group>
-  <ngx-pane-group align="end" [defaultWidth]="200" [autoOpen]="false">
+  <ngx-pane-group align="end" [defaultSize]="200" [autoOpen]="false">
     <ngx-pane title="pane #3">Third pane</ngx-pane>
     <ngx-pane title="pane #4">Forth pane</ngx-pane>
   </ngx-pane-group>
   <ngx-pane-group align="bottom" [autoOpen]="false">
-    <ngx-pane title="pane #5" [width]="100">Fifth pane</ngx-pane>
+    <ngx-pane title="pane #5" [size]="100">Fifth pane</ngx-pane>
   </ngx-pane-group>
   <div>
     Main content

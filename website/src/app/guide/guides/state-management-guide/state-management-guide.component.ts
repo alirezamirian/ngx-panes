@@ -50,21 +50,21 @@ export class StateManagementGuideComponent implements OnInit {
     provider:
       `providers: [{provide: PaneAreaStateManager, useClass: CustomPaneAreaStateManager}]`
   };
-  private widths: (number | undefined)[];
+  private sizes: (number | undefined)[];
   private positionChanged = false;
-  private widthChanged = false;
+  private sizeChanged = false;
 
   constructor(private route: ActivatedRoute, private router: Router, private snackbar: MatSnackBar) {
   }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
-      this.widths = [
+      this.sizes = [
         parseInt(params.w1, 10) || undefined,
         parseInt(params.w2, 10) || undefined,
         parseInt(params.w3, 10) || undefined,
       ];
-      this.widthChanged = this.widths.some(i => !!i);
+      this.sizeChanged = this.sizes.some(i => !!i);
     });
   }
 
@@ -75,17 +75,17 @@ export class StateManagementGuideComponent implements OnInit {
     }
   }
 
-  setWidth(index, width, notify) {
-    if (!this.widthChanged && notify) {
-      this.widthChanged = true;
-      this.showSnackbar(`Nice! Now refresh the page to see width will remain ${width} pixels`);
+  setSize(index, size, notify) {
+    if (!this.sizeChanged && notify) {
+      this.sizeChanged = true;
+      this.showSnackbar(`Nice! Now refresh the page to see size will remain ${size} pixels`);
     }
     this.router.navigate(['.'], {
       replaceUrl: true,
       relativeTo: this.route,
       queryParamsHandling: 'merge',
       queryParams: {
-        [`w${index + 1}`]: width
+        [`s${index + 1}`]: size
       }
     });
   }

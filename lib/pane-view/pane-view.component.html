@@ -1,9 +1,9 @@
 <!-- TODO: use ngStyles-->
 <div class="ngxp-pane-wrapper" [ngClass]="[align]" [class.open]="!!pane"
      #contentContainer
-     [style.width.px]="isHorizontal() ? pane.width : null"
+     [style.width.px]="isHorizontal() ? pane.size : null"
      [style.maxWidth.px]="isHorizontal() ? pane.maxSize : null"
-     [style.height.px]="!isHorizontal() ? pane.width : null"
+     [style.height.px]="!isHorizontal() ? pane.size : null"
      [style.maxHeight.px]="!isHorizontal() ? pane.maxSize : null">
   <div class="ngxp-header">
     <ng-container *ngTemplateOutlet="pane?.header?.templateRef"></ng-container>

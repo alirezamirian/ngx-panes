@@ -58,7 +58,7 @@ export interface PanesDefaults {
    */
   toggleable?: boolean;
   /**
-   * Default value for {@link PaneGroupComponent#defaultWidth} input.
+   * Default value for {@link PaneGroupComponent#defaultSize} input.
    */
-  defaultWidth?: number;
+  defaultSize?: number;
 }

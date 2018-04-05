@@ -9,7 +9,7 @@ import {PaneViewComponent} from '../pane-view/pane-view.component';
 export class PaneResizerComponent implements OnInit {
 
   private startPos: { x: number, y: number };
-  private initialWidth: number;
+  private initialSize: number;
   private _lastSize: number;
 
   constructor(private paneView: PaneViewComponent, private zone: NgZone) {
@@ -30,7 +30,7 @@ export class PaneResizerComponent implements OnInit {
       x: $event.pageX,
       y: $event.pageY
     };
-    this.initialWidth = this.paneView.getSize();
+    this.initialSize = this.paneView.getSize();
     $event.preventDefault();
     this.zone.runOutsideAngular(() => {
       document.addEventListener('mousemove', this.onMouseMove);
@@ -56,15 +56,15 @@ export class PaneResizerComponent implements OnInit {
           movement = this.startPos.y - event.pageY;
           break;
       }
-      this._lastSize = this.initialWidth + movement;
+      this._lastSize = this.initialSize + movement;
       this.paneView.directResize(this._lastSize);
     }
   }
 
   private onMouseUp(event: MouseEvent) {
     if (this._lastSize != undefined) {
-      this.paneView.pane.width = this._lastSize;
-      this.paneView.pane.widthChange.emit(this._lastSize);
+      this.paneView.pane.size = this._lastSize;
+      this.paneView.pane.sizeChange.emit(this._lastSize);
     }
     document.removeEventListener('mousemove', this.onMouseMove);
     document.removeEventListener('mouseup', this.onMouseUp);

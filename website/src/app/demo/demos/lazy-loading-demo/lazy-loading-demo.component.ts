@@ -27,7 +27,7 @@ export class LazyLoadingDemoComponent implements OnInit, OnDestroy {
 
   constructor(public logger: LoggerService) {
     this.logs$ = logger.logs$.pipe(
-      filter(i => i),
+      filter(i => !!i),
       scan<string, string[]>((acc, item) => [].concat(acc).concat([item])),
       map(item => Array.isArray(item) ? item : [item]));
   }

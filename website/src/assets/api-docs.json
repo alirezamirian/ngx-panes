@@ -108,7 +108,8 @@
         "description": "<p>Position (index) of the pane inside the parent {@link PaneGroupComponent paneGroup}</p>\n"
       }
     ],
-    "fileName": "lib/pane-area/pane-area.component.ts"
+    "fileName": "lib/pane-area/pane-area.component.ts",
+    "usage": []
   },
   {
     "type": "type",
@@ -116,7 +117,8 @@
     "description": "<p>A dictionary from {@link PaneComponent pane} component ids to {@link PaneState} objects.\nUsed to represent state of panes inside {@link PaneAreaComponent pane area}, for overriding default\npositioning and ordering based on template.</p>\n",
     "methods": [],
     "properties": [],
-    "fileName": "lib/pane-area/pane-area.component.ts"
+    "fileName": "lib/pane-area/pane-area.component.ts",
+    "usage": []
   },
   {
     "identifier": "PaneAreaComponent",
@@ -181,7 +183,8 @@
     "outputs": [
       {
         "name": "stateChange",
-        "description": ""
+        "type": "EventEmitter<PaneAreaState>",
+        "description": "<p>Event emitted when arrangement of panes has changed.</p>\n"
       }
     ],
     "fileName": "lib/pane-area/pane-area.component.ts",
@@ -252,7 +255,13 @@
         "description": "<p>Whether clicking on tabs toggles the selected panes or not. If toggleable is false, clicking on currently open\npane&#39;s tab will do nothing.</p>\n"
       }
     ],
-    "outputs": [],
+    "outputs": [
+      {
+        "name": "selectedPaneChange",
+        "type": "EventEmitter<PaneComponent>",
+        "description": "<p>Event emitted when selected pane has changed via pane area UI. It&#39;s not emitted when selected pane is changed\nvia inputs or programmatically.</p>\n"
+      }
+    ],
     "fileName": "lib/pane-group/pane-group.component.ts",
     "usage": [
       {
@@ -330,6 +339,7 @@
     "outputs": [
       {
         "name": "dragStarted",
+        "type": "EventEmitter<{}>",
         "description": ""
       }
     ],
@@ -515,7 +525,8 @@
     "outputs": [
       {
         "name": "sizeChange",
-        "description": ""
+        "type": "EventEmitter<{}>",
+        "description": "<p>Event emitted when pane size is changed via UI. It&#39;s not emitted when size is changed via inputs\nor programmatically.</p>\n"
       }
     ],
     "fileName": "lib/pane/pane.component.ts",

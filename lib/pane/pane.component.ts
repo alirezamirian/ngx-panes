@@ -62,12 +62,14 @@ export class PaneComponent implements OnInit {
    * Use {@link PaneTitleDirective ngxPaneTitle directive} if you need more control over pane title.
    */
   @Input() title: string;
+  /**
+   * Event emitted when pane size is changed via UI. It's not emitted when size is changed via inputs
+   * or programmatically.
+   * @type {EventEmitter<any>}
+   */
   @Output()
   sizeChange = new EventEmitter();
-  /**
-   * @private
-   */
-  _opened: boolean;
+
   /**
    * @private
    */
@@ -145,7 +147,7 @@ export class PaneComponent implements OnInit {
         this.resizable = defaults.resizable;
       }
     }
-    if (this._opened) {
+    if (this.opened) {
       this.paneGroup.open(this);
     }
 

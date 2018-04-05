@@ -236,6 +236,7 @@ class APIDocVisitor {
     const outArgs = outDecorator.expression.arguments;
     return {
       name: outArgs.length ? outArgs[0].text : property.name.text,
+      type: this.visitType(property),
       description: getDocumentation(property)
     };
   }

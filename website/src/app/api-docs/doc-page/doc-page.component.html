@@ -42,6 +42,14 @@
     <app-params [params]="docItem.inputs"></app-params>
   </ng-container>
 
+  <ng-container *ngIf="docItem.outputs?.length">
+    <h2 id="outputs">
+      <app-side-anchor></app-side-anchor>
+      Outputs
+    </h2>
+    <app-params [params]="docItem.outputs"></app-params>
+  </ng-container>
+
   <ng-container *ngIf="docItem.properties?.length">
     <h2 id="properties">
       <app-side-anchor></app-side-anchor>

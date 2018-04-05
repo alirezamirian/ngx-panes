@@ -24,6 +24,7 @@ export interface Side {
 /**
  * Represents state of {@link PaneComponent pane} position inside a {@link PaneAreaComponent paneArea}.
  * Used in {@link PaneAreaState}.
+ * @experimental
  */
 export interface PaneState {
   /**
@@ -40,6 +41,7 @@ export interface PaneState {
  * A dictionary from {@link PaneComponent pane} component ids to {@link PaneState} objects.
  * Used to represent state of panes inside {@link PaneAreaComponent pane area}, for overriding default
  * positioning and ordering based on template.
+ * @experimental
  */
 export interface PaneAreaState {
   [id: string]: PaneState;
@@ -98,6 +100,12 @@ export class PaneAreaComponent implements AfterContentInit {
   paneGroups: QueryList<PaneGroupComponent>;
   private aligns: Align[] = ['left', 'right', 'bottom', 'top'];
 
+
+  /**
+   * Event emitted when arrangement of panes has changed.
+   * @type {EventEmitter<PaneAreaState>}
+   * @experimental
+   */
   @Output()
   stateChange: EventEmitter<PaneAreaState> = new EventEmitter<PaneAreaState>();
 
@@ -105,6 +113,7 @@ export class PaneAreaComponent implements AfterContentInit {
    * Position and order of panes inside pane groups, to override default arrangement based on template.
    * While it's possible to pass it via inputs, it's normally not the case, and {@link PaneAreaStateManager}
    * will handle it.
+   * @experimental
    */
   @Input()
   state: PaneAreaState = {};

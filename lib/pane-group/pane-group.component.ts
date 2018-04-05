@@ -2,11 +2,13 @@ import {
   Component,
   ContentChildren,
   ElementRef,
+  EventEmitter,
   forwardRef,
   Inject,
   Input,
   OnInit,
   Optional,
+  Output,
   QueryList
 } from '@angular/core';
 import {Align, RelativeAlign, toAlign, toRelativeAlign} from '../utils/rtl-utils';
@@ -108,7 +110,15 @@ export class PaneGroupComponent implements OnInit {
     this.alignChangesSubject.next(this._align);
   }
 
-  private _selectedPane: PaneComponent | null;
+  /**
+   * Event emitted when selected pane has changed via pane area UI. It's not emitted when selected pane is changed
+   * via inputs or programmatically.
+   * @type {EventEmitter<PaneComponent | null>}
+   */
+  @Output()
+  readonly selectedPaneChange = new EventEmitter<PaneComponent | null>();
+
+  private _selectedPane: PaneComponent | null = null;
 
   /**
    * returns currently selected pane
@@ -151,7 +161,6 @@ export class PaneGroupComponent implements OnInit {
       this.selectedPane = null;
     }
     if (!this.initialized) {
-      this.selectedPane = this.panes.find(pane => pane._opened) || null;
       if (!this.selectedPane && this.autoOpen && this.panes.length > 0) {
         this.selectedPane = this.panes[0];
       }

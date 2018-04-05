@@ -189,4 +189,12 @@ export class PaneTabsComponent implements OnDestroy {
     const to = this.getEnd(this.dragState.panesRect);
     return (this.getEnd(rect) >= from) && this.getStart(rect) <= to;
   }
+
+  tabClicked(pane: PaneComponent) {
+    const selectedPane = this.paneGroup.selectedPane;
+    this.paneGroup.toggle(pane);
+    if (selectedPane !== this.paneGroup.selectedPane) {
+      this.paneGroup.selectedPaneChange.emit(this.paneGroup.selectedPane);
+    }
+  }
 }

@@ -40,6 +40,9 @@
       background: $primaryColor;
       color: pick-visible-color($primaryColor, $dark-text-color, $tab-fg-color);
     }
+    pane-tab.disabled {
+      opacity: .5;
+    }
     .ngxp-tabs {
       background: darken($backgroundColor, map-get($options, tabsContrast));
       color: $fgColor;

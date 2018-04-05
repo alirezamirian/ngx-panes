@@ -1,8 +1,8 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ElementRef,
   EventEmitter,
+  HostBinding,
   Inject,
   Input,
   NgZone,
@@ -52,8 +52,8 @@ const DRAG_TRHESHOLD = 7;
 @Component({
   selector: 'pane-tab',
   templateUrl: './pane-tab.component.html',
-  styleUrls: ['./pane-tab.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./pane-tab.component.scss']
+  // changeDetectionStrategy cannot be OnPush, because it depends on non-input values (this.panes.xxx)
 })
 export class PaneTabComponent implements OnInit, OnDestroy {
 
@@ -68,6 +68,11 @@ export class PaneTabComponent implements OnInit, OnDestroy {
 
   @Input()
   align: Align;
+
+  @HostBinding('class.disabled')
+  get disabled() {
+    return this.pane.disabled;
+  }
 
   @Input()
   pane: PaneComponent;

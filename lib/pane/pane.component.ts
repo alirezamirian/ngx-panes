@@ -71,6 +71,13 @@ export class PaneComponent implements OnInit {
   sizeChange = new EventEmitter();
 
   /**
+   * Whether pane is disabled.
+   */
+  @Input()
+  @CoerceBoolean
+  disabled: boolean;
+
+  /**
    * @private
    */
   @ViewChild('content', {read: TemplateRef}) private implicitContent: TemplateRef<any>;

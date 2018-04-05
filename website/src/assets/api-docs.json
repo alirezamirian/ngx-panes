@@ -236,7 +236,7 @@
         "name": "autoOpen",
         "defaultValue": "true",
         "type": "boolean",
-        "description": "<p>Whether or not the last pane should be opened if no pane is marked initially as opened.</p>\n"
+        "description": "<p>Whether or not the first non-disabled pane should be opened if no pane is marked initially as opened.</p>\n"
       },
       {
         "name": "defaultSize",
@@ -304,7 +304,13 @@
     "identifier": "PaneTabComponent",
     "description": "",
     "methods": [],
-    "properties": [],
+    "properties": [
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "description": ""
+      }
+    ],
     "type": "directive",
     "isComponent": true,
     "selector": "pane-tab",
@@ -495,6 +501,11 @@
     "isComponent": true,
     "selector": "ngx-pane",
     "inputs": [
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "description": "<p>Whether pane is disabled.</p>\n"
+      },
       {
         "name": "id",
         "type": "string",

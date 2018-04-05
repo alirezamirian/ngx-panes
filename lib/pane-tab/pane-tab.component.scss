@@ -1,4 +1,8 @@
 
+:host.disabled {
+  pointer-events: none;
+}
+
 .ngxp-tab {
   cursor: default;
   user-select: none;

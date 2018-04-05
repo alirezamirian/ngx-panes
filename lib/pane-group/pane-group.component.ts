@@ -73,7 +73,7 @@ export class PaneGroupComponent implements OnInit {
   @Input() toggleable = true;
 
   /**
-   * Whether or not the last pane should be opened if no pane is marked initially as opened.
+   * Whether or not the first non-disabled pane should be opened if no pane is marked initially as opened.
    * @type {boolean}
    * @default true
    */
@@ -161,8 +161,11 @@ export class PaneGroupComponent implements OnInit {
       this.selectedPane = null;
     }
     if (!this.initialized) {
-      if (!this.selectedPane && this.autoOpen && this.panes.length > 0) {
-        this.selectedPane = this.panes[0];
+      if (!this.selectedPane && this.autoOpen) {
+        const avaialablePanes = this.panes.filter(pane => !pane.disabled);
+        if (avaialablePanes.length > 0) {
+          this.selectedPane = avaialablePanes[0];
+        }
       }
     }
     panes.forEach(pane => pane.paneGroup = this);

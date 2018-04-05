@@ -14,6 +14,7 @@ import {Move, PaneTabDragDropContext} from '../pane-tab-drag-drop-context';
 import {PaneComponent} from '../pane/pane.component';
 import {Subscription} from 'rxjs/Subscription';
 import {PaneAreaStateManager} from '../pane-area-state-manager';
+import {libLogger} from '../utils/lib-logger';
 
 
 export interface Side {
@@ -212,6 +213,12 @@ export class PaneAreaComponent implements AfterContentInit {
       this.addGroup(paneGroup);
     });
     this.syncPanes();
+
+    const hasMissingId = group => !group.id || group.panes.some(pane => !pane.id);
+    if (this.stateManager && this.paneGroups.some(hasMissingId)) {
+      libLogger.warn(`state managed pane area is used but there is at least one pane or pane group without id.
+      things may not work as expected`);
+    }
   }
 
   private syncPanes() {

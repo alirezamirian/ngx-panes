@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {PaneAreaComponent, PaneAreaState} from '../pane-area/pane-area.component';
 import {Observable} from 'rxjs/Observable';
 import {PaneAreaStateManager} from '../pane-area-state-manager';
+import {libLogger} from '../utils/lib-logger';
 
 /**
  * A {@link PaneAreaStateManager} service, which saves/loads pane area state in
@@ -19,6 +20,10 @@ import {PaneAreaStateManager} from '../pane-area-state-manager';
 export class LocalStoragePaneAreaStateManager extends PaneAreaStateManager {
 
   getSavedState(paneArea: PaneAreaComponent): PaneAreaState | null {
+    if (!paneArea.id) {
+      libLogger.warn(`LocalStoragePaneAreaStateManager needs paneArea to have an id. It's not going to work!`);
+      return;
+    }
     return JSON.parse(localStorage.getItem(this.getKey(paneArea)));
   }
 
@@ -28,7 +33,9 @@ export class LocalStoragePaneAreaStateManager extends PaneAreaStateManager {
 
   trackChanges(paneArea: PaneAreaComponent, state$: Observable<PaneAreaState>) {
     state$.subscribe(history => {
-      localStorage.setItem(this.getKey(paneArea), JSON.stringify(history));
+      if (paneArea.id) {
+        localStorage.setItem(this.getKey(paneArea), JSON.stringify(history));
+      }
     });
   }
 

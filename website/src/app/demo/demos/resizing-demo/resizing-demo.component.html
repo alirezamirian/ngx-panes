@@ -13,7 +13,7 @@
 
   <div>
     <div fxFlex class="mat-padding">
-      <div [ngSwitch]="panes.paneGroup?.snapshot.selectedPane">
+      <div [ngSwitch]="panes.selectedPane">
         <div *ngSwitchCase="pane1">
           This pane is resizable with an initial size of <code>330px</code>.
           <br/>

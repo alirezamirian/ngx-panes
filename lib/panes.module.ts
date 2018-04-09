@@ -17,6 +17,7 @@ import {DefaultScrollbarsDirective} from './default-scrollbars.directive';
 import {PaneTitleDirective} from './pane/pane-title.directive';
 import {PaneContentDirective} from './pane/pane-content.directive';
 import {LocalStorageStateManagerDirective} from './state-managers/local-storage-state-manager.directive';
+import {FullHeightDirective} from './pane-area/full-height.directive';
 
 /**
  * The main module for ngx-panes. Add it to `imports` of your module.
@@ -49,7 +50,8 @@ import {LocalStorageStateManagerDirective} from './state-managers/local-storage-
     PaneGroupComponent,
     LocalStorageStateManagerDirective,
     ScrollableDirective,
-    DefaultScrollbarsDirective
+    DefaultScrollbarsDirective,
+    FullHeightDirective
   ],
   exports: [
     PaneComponent,
@@ -59,7 +61,8 @@ import {LocalStorageStateManagerDirective} from './state-managers/local-storage-
     PaneAreaComponent,
     PaneGroupComponent,
     LocalStorageStateManagerDirective,
-    DefaultScrollbarsDirective
+    DefaultScrollbarsDirective,
+    FullHeightDirective
   ]
 })
 export class NgxPanesModule {

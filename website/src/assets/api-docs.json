@@ -73,6 +73,37 @@
     "fileName": "lib/pane-area-state-manager.ts"
   },
   {
+    "identifier": "FullHeightDirective",
+    "description": "<p>Makes <code>pane-area</code> fill entire remaining window height. The more preferred way to achieve this is with pure\ncss (with flexbox or other approaches). However css solution might not be available in some cases or it may\nrequire a lot of <code>height: 100%</code> styles on all descendants back to body.</p>\n",
+    "methods": [],
+    "properties": [],
+    "type": "directive",
+    "isComponent": false,
+    "selector": "ngx-pane-area[ngxFullHeight]",
+    "inputs": [
+      {
+        "name": "ngxFullHeight",
+        "defaultValue": "true",
+        "type": "boolean",
+        "description": "<p>Whether directive is active or not.</p>\n"
+      },
+      {
+        "name": "ngxFullHeightOffset",
+        "defaultValue": "1",
+        "type": "number",
+        "description": "<p>Offset to consider when sizing pane-area. The offset is subtracted from the calculated height</p>\n"
+      }
+    ],
+    "outputs": [],
+    "fileName": "lib/pane-area/full-height.directive.ts",
+    "usage": [
+      {
+        "code": "<ngx-pane-area ngxFullHeight>\n  ...\n</ngx-pane-area>",
+        "lang": "html"
+      }
+    ]
+  },
+  {
     "type": "type",
     "identifier": "Side",
     "description": "",
@@ -603,7 +634,8 @@
       "lib/pane-area/pane-area.component#PaneAreaComponent",
       "lib/pane-group/pane-group.component#PaneGroupComponent",
       "lib/state-managers/local-storage-state-manager.directive#LocalStorageStateManagerDirective",
-      "lib/default-scrollbars.directive#DefaultScrollbarsDirective"
+      "lib/default-scrollbars.directive#DefaultScrollbarsDirective",
+      "lib/pane-area/full-height.directive#FullHeightDirective"
     ],
     "services": [],
     "fileName": "lib/panes.module.ts",

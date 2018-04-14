@@ -1,5 +1,5 @@
-<div fxLayout="column" fxLayout.gt-sm="row" class="wrapper">
-  <mat-card class="index" #index>
+<div fxLayout="row" class="wrapper">
+  <mat-card class="index" fxHide.xs fxHide.sm #index>
     <mat-nav-list>
       <h3 matSubheader>Guides</h3>
       <a mat-list-item *ngFor="let item of guides" [routerLink]="['/guides', item.id]" routerLinkActive="active">

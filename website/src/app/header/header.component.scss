@@ -1,7 +1,20 @@
 @import '../../styles/scrollbars.scss';
 
+@mixin media-larger-than-xs { // FIXME
+  @media(min-width: 600px) {
+    @content;
+  }
+}
+
+@mixin media-xs { // FIXME
+  @media(max-width: 599px) {
+    @content;
+  }
+}
+
 mat-toolbar {
   position: relative;
+  overflow: hidden;
 }
 
 mat-toolbar.no-breadcrumb {
@@ -52,7 +65,15 @@ mat-toolbar.no-breadcrumb app-breadcrumb {
 }
 
 a {
-  margin-right: 20px;
+  margin-right: 15px;
+  @include media-larger-than-xs {
+    margin-right: 20px;
+  }
+  @include media-xs {
+    .searching & {
+      display: none;
+    }
+  }
 }
 
 .github {
@@ -70,13 +91,21 @@ a {
   transition: background-color .3s;
   z-index: 100;
 }
+
 .search-box {
   display: flex;
-  margin: 5px 20px 0;
+  margin: 5px 10px 0;
+  @include media-larger-than-xs {
+    margin: 5px 20px 0;
+  }
   border-radius: 50px;
   overflow: hidden;
   transition: min-width 100ms, width 100ms, max-width 100ms, border-radius 100ms;
-  width: 250px;
+
+  width: 40px;
+  @include media-larger-than-xs {
+    width: 250px;
+  }
   max-width: 70%;
   .no-breadcrumb & {
     margin-top: 0;
@@ -101,7 +130,10 @@ a {
 
   .search-input {
     border: none;
-    background-color: rgba(0, 0, 0, .2);
+    background-color: transparent;
+    @include media-larger-than-xs {
+      background-color: rgba(0, 0, 0, .2);
+    }
     padding: 10px 30px 7px 40px;
     outline: none;
     width: 100%;
@@ -114,7 +146,6 @@ a {
     pointer-events: none;
   }
 }
-
 
 .search-result-icon {
   height: 25px;

@@ -1,6 +1,6 @@
 <div class="theme-darker">
   <mat-toolbar color="primary" class="mat-elevation-z1" [class.no-breadcrumb]="breadcrumb.breadcrumbs.length === 0">
-    <mat-toolbar-row>
+    <mat-toolbar-row [class.searching]="searchInputFocused">
       <a routerLink="">Home</a>
       <a routerLink="demos">Demos</a>
       <a routerLink="api">API Docs</a>
@@ -12,7 +12,7 @@
                  [matAutocomplete]="auto"
                  (input)="queries$.next(searchInput.value)" (keydown.esc)="close()"
                  (focus)="open()" (blur)="close()"/>
-          <mat-icon class="search-icon">search</mat-icon>
+          <mat-icon class="search-icon" (click)="searchInput.focus()">search</mat-icon>
           <mat-spinner [diameter]="25" *ngIf="searching"></mat-spinner>
           <mat-autocomplete #auto="matAutocomplete" (optionSelected)="select($event)" class="tiny-scroll"
                             [displayWith]="convertResult" [autoActiveFirstOption]="true">

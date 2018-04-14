@@ -24,6 +24,19 @@ $background: map-get($app-theme, background);
   }
 }
 
+.version-tag {
+  font-size: 11px;
+  letter-spacing: 0;
+  opacity: .3;
+  font-style: italic;
+  font-family: monospace;
+  border-radius: 5px;
+  padding: 1px 4px;
+  margin-left: -5px;
+  margin-right: -40px;
+  border: 1px solid;
+}
+
 .call-to-actions {
   margin: 50px 0 0;
   a {

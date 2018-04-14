@@ -1,10 +1,10 @@
 class LibLogger {
-  warn() {
-    this.log('warn', arguments);
+  warn(...args) {
+    this.log('warn', args);
   }
 
-  error() {
-    this.log('error', arguments);
+  error(...args) {
+    this.log('error', args);
   }
 
   private log(type, args) {

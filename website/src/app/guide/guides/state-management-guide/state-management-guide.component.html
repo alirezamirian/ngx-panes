@@ -85,7 +85,7 @@
   Go ahead and move third pane to the left side and refresh the page to see how it keeps its position.
 </p>
 <ngx-pane-area id="state-management-demo" ngxLocalStorageStateManager
-               style="height: 270px;" #paneArea (stateChange)="check(paneArea)">
+               style="height: 280px;" #paneArea (stateChange)="check(paneArea)">
   <ngx-pane-group align="start" id="group1" [defaultSize]="200">
     <ngx-pane id="pane1" title="Pane #1" [size]="sizes[0]" (sizeChange)="setSize(0,$event)">First Pane</ngx-pane>
     <ngx-pane id="pane2" title="Pane #2" [size]="sizes[1]" (sizeChange)="setSize(1,$event)">Second Pane</ngx-pane>

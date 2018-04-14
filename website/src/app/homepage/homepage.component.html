@@ -7,9 +7,51 @@
   </div>
 </div>
 
-<div class="mat-padding">
-  <div fxLayout.gt-sm="row" fxLayout="column">
-    <div class="card-wrapper" fxFlex.gt-sm="33">
+<div class="mat-padding content">
+  <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutAlign="space-around">
+    <div fxFlex.gt-sm="30" class="section">
+      <h2>
+        <i class="icon-theme"></i>
+        Themeable
+      </h2>
+      <p>
+        Changing theme is as easy as including a scss mixin with necessary options.
+        There are also a couple of pre-built themes shipped as css files with the library.
+        <br/>
+        <a routerLink="/guides/theming">Learn more</a>.
+      </p>
+    </div>
+    <div fxFlex.gt-sm="30" class="section">
+      <h2>
+        <i class="icon-config"></i>
+        Configurable
+      </h2>
+      <p>
+        You can provide default values for almost every configuration parameter and input that make sense,
+        in every level of components DI hierarchy.
+        <br/>
+        <a routerLink="/api/PANES_DEFAULTS">Learn more</a>.
+      </p>
+    </div>
+    <div fxFlex.gt-sm="30" class="section">
+      <h2>
+        <i class="icon-docs"></i>
+        Documented
+      </h2>
+      <p>
+        Although the whole library is currently no more than a handful of components, directives, etc.,
+        all of them are <a routerLink="/api">documented</a> in details, backed by a bunch of
+        <a routerLink="/demos">demos</a> and <a routerLink="/guides">guides</a>.
+      </p>
+    </div>
+  </div>
+
+  <!--<div class="divider"></div>-->
+  <br>
+  <br>
+
+  <div fxLayout.gt-sm="row" fxLayout="column" fxLayoutAlign="space-around">
+    <div class="card-wrapper" fxFlex.gt-sm="30">
       <a routerLink="/demos">
         <mat-card matRipple>
           <mat-card-header>
@@ -20,7 +62,7 @@
         </mat-card>
       </a>
     </div>
-    <div class="card-wrapper" fxFlex.gt-sm="33">
+    <div class="card-wrapper" fxFlex.gt-sm="30">
       <a routerLink="/guides">
         <mat-card matRipple>
           <mat-card-header>
@@ -31,7 +73,7 @@
         </mat-card>
       </a>
     </div>
-    <div class="card-wrapper" fxFlex.gt-sm="33">
+    <div class="card-wrapper" fxFlex.gt-sm="30">
       <a routerLink="/api">
         <mat-card matRipple>
           <mat-card-header>

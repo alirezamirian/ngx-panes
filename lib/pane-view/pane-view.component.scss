@@ -5,6 +5,12 @@
 
 :host {
   position: relative;
+  display: flex;
+  flex-direction: row;
+  &.horizontal {
+    flex-direction: column;
+    max-height: 100%;
+  }
 }
 
 .content {

@@ -19,6 +19,7 @@
   display: flex;
   flex-direction: row;
   width: 100%;
+  min-height: 0; // necessary. see discussion here: https://bugzilla.mozilla.org/show_bug.cgi?id=1108514#c2
   max-height: 100%;
 }
 
@@ -32,6 +33,7 @@
 .content-inner-wrapper {
   display: flex;
   flex-direction: row;
+  min-height: 0; // necessary. see discussion here: https://bugzilla.mozilla.org/show_bug.cgi?id=1108514#c2
   max-height: 100%;
 }
 

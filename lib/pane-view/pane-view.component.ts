@@ -2,6 +2,7 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
+  HostBinding,
   Input,
   OnChanges,
   OnInit,
@@ -63,6 +64,7 @@ export class PaneViewComponent implements OnInit, OnChanges {
     }
   }
 
+  @HostBinding('class.horizontal')
   public isHorizontal(): boolean {
     return this.align === 'left' || this.align === 'right';
   }

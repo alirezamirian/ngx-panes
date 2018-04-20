@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 
 import 'rxjs/add/operator/toPromise';
 import {Observable} from 'rxjs/Observable';
-import {map, share} from 'rxjs/operators';
+import {map, shareReplay} from 'rxjs/operators';
 import {DocItemBase} from './doc-item';
 import {HttpClient} from '@angular/common/http';
 
@@ -16,7 +16,7 @@ export class ApiDocsService {
   getDocs(includeInternals?: boolean): Observable<DocItemBase[]> {
     if (!this.docs$) {
       this.docs$ = this.http.get('assets/api-docs.json').pipe(
-        share(), // it doesn't seem to be working!
+        shareReplay(),
         map(convertLinksRecursive),
         map(addFqns)
       );

@@ -13,19 +13,27 @@ export class ApiDocsService {
   constructor(private http: HttpClient) {
   }
 
-  getDocs(): Observable<DocItemBase[]> {
+  getDocs(includeInternals?: boolean): Observable<DocItemBase[]> {
     if (!this.docs$) {
       this.docs$ = this.http.get('assets/api-docs.json').pipe(
-        share(),
-        map(convertLinksRecursive)
+        share(), // it doesn't seem to be working!
+        map(convertLinksRecursive),
+        map(addFqns)
       );
+    }
+    if (!includeInternals) {
+      return this.docs$.pipe(map((docs: DocItemBase[]) => {
+        const modules = docs.filter(doc => doc.type === 'ngModule');
+        const exports = docItem => module => module.exports.some(declaration => docItem.fqn === declaration);
+        return docs.filter(doc => !isDeclaration(doc) || modules.some(exports(doc)));
+      }));
     }
     return this.docs$;
   }
 
   /**
    * Returns promise for the doc objects with the specified symbol, which is basically an
-   * exported symbol (className for directives and services). In normal course of events, this
+   * exported symbol (className for directives and injectables). In normal course of events, this
    * is a single item list. If more than one exported symbol exists for that symbol, doc
    * object for all of them are returned.
    *
@@ -44,6 +52,16 @@ export class ApiDocsService {
     return this.getDocs().toPromise().then(docs => docs.filter(doc => doc.identifier === symbol));
   }
 
+}
+
+
+/**
+ * adds FQN (Fully Qualified Name) to each do item
+ * @param {DocItemBase[]} docItems
+ * @returns {{type?: string; identifier: string; description: string; fileName: string; [p: string]: any; fqn: string}[]}
+ */
+function addFqns(docItems: DocItemBase[]) {
+  return docItems.map(docItem => ({...docItem, fqn: getFqn(docItem)}));
 }
 
 function convertLinksRecursive(docItem) {
@@ -69,4 +87,13 @@ function convertLinks(html) {
   return html.replace(/{@link (.*?)(\#(.*?))?( (.*?))?}/g, (whole, identifier, ignored, property, ignored2, linkText) => {
     return `<a href="/api/${identifier}${property ? ('#' + property) : ''}">${linkText || property || identifier}</a>`;
   });
+}
+
+
+export function getFqn(doc: DocItemBase) {
+  return `${doc.fileName.replace(/\.[^/.]+$/, '')}#${doc.identifier}`;
+}
+
+export function isDeclaration(doc: DocItemBase) {
+  return doc.type === 'directive' || doc.type === 'pipe';
 }

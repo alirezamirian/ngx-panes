@@ -131,8 +131,8 @@ class APIDocVisitor {
           const ngModuleInfo = this.visitModuleDecorator(classDeclaration.decorators[i]);
           typeSpecificDoc = {
             type: 'ngModule',
-            declarations: ngModuleInfo.declarations,
-            services: ngModuleInfo.services
+            exports: ngModuleInfo.exports,
+            injectables: ngModuleInfo.injectables
             //  TODO: add dependencies (imports)
           }
         }
@@ -270,15 +270,15 @@ class APIDocVisitor {
     const statement = decorator.parent;
     const properties = decorator.expression.arguments[0].properties;
     const result = {
-      declarations: [],
-      services: []
+      exports: [],
+      injectables: []
     };
 
     properties.forEach(property => {
       if (property.name.text === 'exports') {
         // TODO: this only work when exports is a literal array
         if (property.initializer.kind === ts.SyntaxKind.ArrayLiteralExpression) {
-          result.declarations = property.initializer.elements
+          result.exports = property.initializer.elements
             .filter(elem => elem.kind === ts.SyntaxKind.Identifier)
             .map(getFullyQualifiedName)
         }

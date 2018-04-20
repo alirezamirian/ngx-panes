@@ -626,7 +626,7 @@
     "methods": [],
     "properties": [],
     "type": "ngModule",
-    "declarations": [
+    "exports": [
       "lib/pane/pane.component#PaneComponent",
       "lib/pane-header/pane-header.component#PaneHeaderComponent",
       "lib/pane/pane-title.directive#PaneTitleDirective",
@@ -637,7 +637,7 @@
       "lib/default-scrollbars.directive#DefaultScrollbarsDirective",
       "lib/pane-area/full-height.directive#FullHeightDirective"
     ],
-    "services": [],
+    "injectables": [],
     "fileName": "lib/panes.module.ts",
     "usage": [
       {

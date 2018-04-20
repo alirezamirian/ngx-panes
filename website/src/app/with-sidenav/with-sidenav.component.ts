@@ -43,16 +43,16 @@ export class WithSidenavComponent implements OnInit {
       map(docs => {
         const modules = docs.filter(doc => doc.type === 'ngModule').map(module => {
           const allDirectives = docs.filter(doc => {
-            return doc.type === 'directive' && module.declarations.indexOf(getFqn(doc)) > -1;
+            return doc.type === 'directive' && module.exports.indexOf(doc.fqn) > -1;
           });
-          const services = docs.filter(doc => {
-            return doc.type === 'service' && module.services.indexOf(getFqn(doc)) > -1;
+          const injectables = docs.filter(doc => {
+            return doc.type === 'injectable' && module.injectables.indexOf(doc.fqn) > -1;
           });
           const components = allDirectives.filter(directive => directive.isComponent);
           const directives = allDirectives.filter(directive => !directive.isComponent);
-          return Object.assign({}, module, {services, components, directives});
+          return Object.assign({}, module, {injectables, components, directives});
         });
-        const types = docs.filter(doc => ['ngModule', 'directive', 'service'].indexOf(doc.type) < 0);
+        const types = docs.filter(doc => ['ngModule', 'directive', 'injectable'].indexOf(doc.type) < 0);
         return {modules, types};
       })
     ).subscribe(docs => {
@@ -71,8 +71,4 @@ export class WithSidenavComponent implements OnInit {
       this.hidden = false;
     });
   }
-}
-
-function getFqn(doc) {
-  return `${doc.fileName.replace(/\.[^/.]+$/, '')}#${doc.identifier}`;
 }

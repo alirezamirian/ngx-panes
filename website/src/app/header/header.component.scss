@@ -78,6 +78,10 @@ a {
 
 .github {
   margin-right: 0;
+  margin-top: 3px;
+  @include media-larger-than-xs {
+    margin-top: 7px;
+  }
   display: inline-flex;
 }
 
@@ -96,7 +100,7 @@ a {
   display: flex;
   margin: 0 10px;
   @include media-larger-than-xs {
-    margin: 5px 20px 0;
+    margin: 10px 20px 0;
   }
   border-radius: 50px;
   overflow: hidden;

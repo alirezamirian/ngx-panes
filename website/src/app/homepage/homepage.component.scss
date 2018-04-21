@@ -6,6 +6,7 @@ $foreground: map-get($app-theme, foreground);
 $background: map-get($app-theme, background);
 
 .content {
+  padding-top: 70px;
   max-width: 1250px;
   margin: auto;
   line-height: 1.5;

@@ -12,7 +12,7 @@ import {
 } from '@angular/core';
 import {PaneHeaderComponent} from '../pane-header/pane-header.component';
 import {CoerceBoolean} from '../utils/decorators';
-import {PANES_DEFAULTS, PanesDefaults} from '../panes-config';
+import {NGX_PANES_DEFAULTS, NgxPanesDefaults} from '../panes-config';
 import {PaneGroupComponent} from '../pane-group/pane-group.component';
 import {PaneTitleDirective} from './pane-title.directive';
 import {PaneContentDirective} from './pane-content.directive';
@@ -148,7 +148,7 @@ export class PaneComponent implements OnInit {
   };
 
   constructor(public paneGroup: PaneGroupComponent,
-              @Optional() @Inject(PANES_DEFAULTS) defaults: PanesDefaults) {
+              @Optional() @Inject(NGX_PANES_DEFAULTS) defaults: NgxPanesDefaults) {
     if (defaults) {
       if (defaults.resizable != null) {
         this.resizable = defaults.resizable;

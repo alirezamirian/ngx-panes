@@ -2,7 +2,7 @@ import {
   AfterContentInit,
   Component,
   ContentChildren,
-  EventEmitter,
+  EventEmitter, Inject,
   Input,
   Optional,
   Output,
@@ -15,6 +15,7 @@ import {PaneComponent} from '../pane/pane.component';
 import {Subscription} from 'rxjs/Subscription';
 import {PaneAreaStateManager} from '../pane-area-state-manager';
 import {libLogger} from '../utils/lib-logger';
+import {NGX_PANES_DEFAULTS, NgxPanesDefaults} from '../panes-config';
 
 
 export interface Side {
@@ -120,7 +121,13 @@ export class PaneAreaComponent implements AfterContentInit {
   state: PaneAreaState = {};
 
   constructor(private dragDropContext: PaneTabDragDropContext,
+              @Optional() @Inject(NGX_PANES_DEFAULTS) defaults: NgxPanesDefaults,
               @Optional() private stateManager: PaneAreaStateManager) {
+    if (defaults) {
+      if (defaults.draggable != null) {
+        this.tabsDraggable = defaults.draggable;
+      }
+    }
   }
 
   ngAfterContentInit(): void {

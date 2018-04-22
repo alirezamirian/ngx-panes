@@ -12,7 +12,7 @@ import {
   QueryList
 } from '@angular/core';
 import {Align, RelativeAlign, toAlign, toRelativeAlign} from '../utils/rtl-utils';
-import {PANES_DEFAULTS, PanesDefaults} from '../panes-config';
+import {NGX_PANES_DEFAULTS, NgxPanesDefaults} from '../panes-config';
 import {PaneComponent} from '../pane/pane.component';
 import {Subject} from 'rxjs/Subject';
 import {Observable} from 'rxjs/Observable';
@@ -133,7 +133,7 @@ export class PaneGroupComponent implements OnInit {
   }
 
   constructor(private $el: ElementRef,
-              @Optional() @Inject(PANES_DEFAULTS) defaults: PanesDefaults) {
+              @Optional() @Inject(NGX_PANES_DEFAULTS) defaults: NgxPanesDefaults) {
     if (defaults) {
       if (defaults.autoOpen != null) {
         this.autoOpen = defaults.autoOpen;

@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {Demo} from '../demos';
-import {PANES_DEFAULTS, PanesDefaults} from '../../../../../../lib/panes-config';
+import {NGX_PANES_DEFAULTS, NgxPanesDefaults} from '../../../../../../lib/panes-config';
 
 @Demo({
   id: 'config',
@@ -14,7 +14,7 @@ import {PANES_DEFAULTS, PanesDefaults} from '../../../../../../lib/panes-config'
   templateUrl: './config-demo.component.html',
   styleUrls: ['./config-demo.component.scss'],
   providers: [
-    {provide: PANES_DEFAULTS, useValue: {resizable: false, toggleable: false} as PanesDefaults}
+    {provide: NGX_PANES_DEFAULTS, useValue: {resizable: false, toggleable: false} as NgxPanesDefaults}
   ]
 })
 export class ConfigDemoComponent {

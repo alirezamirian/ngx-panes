@@ -1,13 +1,14 @@
 import {InjectionToken} from '@angular/core';
 
 /**
- * Injection token for providing defaults for some input parameters of {@link PaneGroupComponent pane components}.
- * The value of this injection token must be of type {@link PanesDefaults}.
+ * Injection token for providing defaults for input parameters of ngx-panes components
+ * such as {@link PaneGroupComponent} or {@link PaneAreaComponent}.
+ * The value of this injection token must be of type {@link NgxPanesDefaults}.
  *
  * See also [configuration demo](/demos/config).
  * @usage
  *
- * const panesDefaults: PanesDefaults = {
+ * const panesDefaults: NgxPanesDefaults = {
  *   resizable: false
  * };
  *
@@ -17,34 +18,38 @@ import {InjectionToken} from '@angular/core';
  *    providers: [
  *      // ...
  *      {
- *        provide: PANES_DEFAULTS,
+ *        provide: NGX_PANES_DEFAULTS,
  *        useValue: panesDefaults
  *      }
  *    ]
  * })
  * export class AppModule {}
  *
- * // Configuring defaults for all child panes of some component.
+ * // Configuring defaults for all child panes of SomeComponent.
  * &#64;Component({
  *  // ...
  *  providers: [
  *    {
- *        provide: PANES_DEFAULTS,
+ *        provide: NGX_PANES_DEFAULTS,
  *        useValue: panesDefaults
  *    }
  *  ]
  * })
  * class SomeComponent{}
- * @type {InjectionToken<PanesDefaults>}
+ * @type {InjectionToken<NgxPanesDefaults>}
  */
-export const PANES_DEFAULTS = new InjectionToken<PanesDefaults>('ngx-panes configuration object');
+export const NGX_PANES_DEFAULTS = new InjectionToken<NgxPanesDefaults>('ngx-panes configuration object');
 
 /**
- * Configuration to be provided as default parameters for all `ngx-panes` child components.
- * Object of this type provided as {@link PANES_DEFAULTS} injection token will be picked up
- * {@link PaneGroupComponent} to use them for default values of some configuration inputs.
+ * Configuration to be provided to set default values for some inputs.
+ * Object of this type provided as {@link NGX_PANES_DEFAULTS} injection token will be picked up
+ * related components (such as {@link PaneGroupComponent} and {@link PaneAreaComponent}).
  */
-export interface PanesDefaults {
+export interface NgxPanesDefaults {
+  /**
+   * Default value for {@link PaneAreaComponent#tabsDraggable} input.
+   */
+  draggable: boolean;
   /**
    * Default value for {@link PaneGroupComponent#resizable} input.
    */

@@ -581,20 +581,20 @@
   },
   {
     "type": "variable",
-    "identifier": "PANES_DEFAULTS",
-    "description": "<p>Injection token for providing defaults for some input parameters of {@link PaneGroupComponent pane components}.\nThe value of this injection token must be of type {@link PanesDefaults}.</p>\n<p>See also <a href=\"/demos/config\">configuration demo</a>.</p>\n",
+    "identifier": "NGX_PANES_DEFAULTS",
+    "description": "<p>Injection token for providing defaults for input parameters of ngx-panes components\nsuch as {@link PaneGroupComponent} or {@link PaneAreaComponent}.\nThe value of this injection token must be of type {@link NgxPanesDefaults}.</p>\n<p>See also <a href=\"/demos/config\">configuration demo</a>.</p>\n",
     "fileName": "lib/panes-config.ts",
     "usage": [
       {
-        "code": "const panesDefaults: PanesDefaults = { resizable: false };\n\n// Configuring global defaults for all panes in the app.\n@NgModule({\n  //...\n  providers: [\n    // ...\n    { provide: PANES_DEFAULTS, useValue: panesDefaults }\n  ]\n})\nexport class AppModule {}\n\n// Configuring defaults for all child panes of some component.\n@Component({\n  // ...\n  providers: [{ provide: PANES_DEFAULTS, useValue: panesDefaults }]\n})\nclass SomeComponent {}\n",
+        "code": "const panesDefaults: NgxPanesDefaults = { resizable: false };\n\n// Configuring global defaults for all panes in the app.\n@NgModule({\n  //...\n  providers: [\n    // ...\n    { provide: NGX_PANES_DEFAULTS, useValue: panesDefaults }\n  ]\n})\nexport class AppModule {}\n\n// Configuring defaults for all child panes of SomeComponent.\n@Component({\n  // ...\n  providers: [{ provide: NGX_PANES_DEFAULTS, useValue: panesDefaults }]\n})\nclass SomeComponent {}\n",
         "lang": "typescript"
       }
     ]
   },
   {
     "type": "type",
-    "identifier": "PanesDefaults",
-    "description": "<p>Configuration to be provided as default parameters for all <code>ngx-panes</code> child components.\nObject of this type provided as {@link PANES_DEFAULTS} injection token will be picked up\n{@link PaneGroupComponent} to use them for default values of some configuration inputs.</p>\n",
+    "identifier": "NgxPanesDefaults",
+    "description": "<p>Configuration to be provided to set default values for some inputs.\nObject of this type provided as {@link NGX_PANES_DEFAULTS} injection token will be picked up\nrelated components (such as {@link PaneGroupComponent} and {@link PaneAreaComponent}).</p>\n",
     "methods": [],
     "properties": [
       {
@@ -606,6 +606,11 @@
         "name": "defaultSize",
         "type": "number",
         "description": "<p>Default value for {@link PaneGroupComponent#defaultSize} input.</p>\n"
+      },
+      {
+        "name": "draggable",
+        "type": "boolean",
+        "description": "<p>Default value for {@link PaneAreaComponent#tabsDraggable} input.</p>\n"
       },
       {
         "name": "resizable",

@@ -1,4 +1,12 @@
-import {Component, ComponentFactoryResolver, OnDestroy, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
+import {
+  Component,
+  ComponentFactoryResolver,
+  ComponentRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  ViewContainerRef
+} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {DemoModel} from '../demos/demos';
 import {WithSidenavComponent} from '../../with-sidenav/with-sidenav.component';
@@ -11,6 +19,8 @@ import {WithSidenavComponent} from '../../with-sidenav/with-sidenav.component';
 export class RoutedDemoComponent implements OnInit, OnDestroy {
 
   @ViewChild('outlet', {read: ViewContainerRef}) private outlet: ViewContainerRef;
+  demoComponentRef: ComponentRef<{}>;
+  demoModel: DemoModel;
 
   constructor(private route: ActivatedRoute,
               private withSidenav: WithSidenavComponent,
@@ -23,7 +33,8 @@ export class RoutedDemoComponent implements OnInit, OnDestroy {
       .subscribe((data: { demoModel: DemoModel }) => {
         this.outlet.clear();
         const componentFactory = this.componentFactoryResolver.resolveComponentFactory(data.demoModel.component);
-        this.outlet.createComponent(componentFactory);
+        this.demoComponentRef = this.outlet.createComponent(componentFactory);
+        this.demoModel = data.demoModel;
       });
   }
 

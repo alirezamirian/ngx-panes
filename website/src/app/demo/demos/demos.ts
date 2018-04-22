@@ -28,16 +28,20 @@ export interface Demo extends Ordered {
   defaultPath?: string;
 }
 
+export interface DemoMeta extends Demo {
+  className: string;
+}
+
 export class DemoModel {
-  constructor(private _component: Type<{}>, private _metadata: Demo) {
+  get metadata(): DemoMeta {
+    return this._metadata;
   }
 
   get component(): Type<{}> {
     return this._component;
   }
 
-  get metadata(): Demo {
-    return this._metadata;
+  constructor(private _component: Type<{}>, private _metadata: DemoMeta) {
   }
 }
 
@@ -52,7 +56,7 @@ export function Demo(demo: Demo) {
     if (demos.find(aDemo => aDemo.metadata.id === demo.id)) {
       throw new DuplicateDemoError(`A demo with id ${demo.id} is already declared`);
     }
-    demos.push(new DemoModel(demoComponent, demo));
+    demos.push(new DemoModel(demoComponent, {...demo, className: null}));
   };
 }
 

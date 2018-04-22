@@ -1,0 +1,17 @@
+<app-fab-expandable icon="code" tooltip="View demo source">
+  <!-- TODO: use lazy loading tab content when upgrated angular material-->
+  <mat-tab-group>
+    <mat-tab label="Typescript">
+      <app-code-block language="typescript" [autoFormat]="true" [flat]="true"
+                      [sourceUrl]="getPath(demoMeta, 'ts')"></app-code-block>
+    </mat-tab>
+    <mat-tab label="HTML">
+      <app-code-block language="html" [autoFormat]="true" [flat]="true"
+                      [sourceUrl]="getPath(demoMeta, 'html')"></app-code-block>
+    </mat-tab>
+    <mat-tab label="SCSS">
+      <app-code-block language="scss" [autoFormat]="true" [flat]="true"
+                      [sourceUrl]="getPath(demoMeta, 'scss')"></app-code-block>
+    </mat-tab>
+  </mat-tab-group>
+</app-fab-expandable>

@@ -7,7 +7,8 @@
       "order": 1,
       "tags": [
         "Alignment"
-      ]
+      ],
+      "className": "AlignDemoComponent"
     },
     {
       "id": "theming",
@@ -16,7 +17,8 @@
       "order": 2,
       "tags": [
         "Theming"
-      ]
+      ],
+      "className": "ThemingDemoComponent"
     },
     {
       "id": "resizing",
@@ -25,7 +27,8 @@
       "order": 3,
       "tags": [
         "Resizing"
-      ]
+      ],
+      "className": "ResizingDemoComponent"
     },
     {
       "id": "lazy-loading",
@@ -34,7 +37,8 @@
       "order": 3,
       "tags": [
         "Lazy Loading"
-      ]
+      ],
+      "className": "LazyLoadingDemoComponent"
     },
     {
       "id": "config",
@@ -43,7 +47,8 @@
       "order": 4,
       "tags": [
         "Config"
-      ]
+      ],
+      "className": "ConfigDemoComponent"
     },
     {
       "id": "github",
@@ -54,7 +59,8 @@
         "Basic Usage",
         "Resizing"
       ],
-      "defaultPath": "angular/material2"
+      "defaultPath": "angular/material2",
+      "className": "GithubBrowserDemoComponent"
     }
   ],
   "guides": [

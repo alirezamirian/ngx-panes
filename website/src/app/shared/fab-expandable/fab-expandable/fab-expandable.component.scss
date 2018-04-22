@@ -1,0 +1,44 @@
+@import '~@angular/material/theming';
+@import '../../../../styles/theme';
+
+.fab {
+  $duration: .3s;
+  position: absolute;
+  right: 30px;
+  bottom: 20px;
+  z-index: 11111;
+  opacity: 1;
+  transition: padding $duration, bottom $duration, right $duration, background-color $duration, opacity $duration .5*$duration;
+  &.expanded {
+    //animation: fab-expandable-animation;
+    padding: 100%;
+    bottom: -50%;
+    right: -50%;
+    opacity: 0;
+    pointer-events: none;
+    mat-icon {
+      transition: none;
+      opacity: 0;
+    }
+  }
+  mat-icon {
+    transition: opacity 10ms $duration;
+  }
+}
+
+.content {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  overflow: auto;
+  background-color: map-get(map-get($app-theme, background), background);
+  z-index: 100;
+}
+
+@keyframes fab-expandable-animation {
+  0% {
+
+  }
+}

@@ -2,6 +2,7 @@ import {AfterContentInit, Component, ElementRef, HostBinding, Input, OnInit, Vie
 
 import * as hljs from 'highlight.js';
 import {MatTooltip} from '@angular/material';
+import {HttpClient} from '@angular/common/http';
 
 hljs.configure({
   useBR: true
@@ -39,6 +40,15 @@ export class CodeBlockComponent implements OnInit, AfterContentInit {
     this.language = result.language;
   }
 
+  @Input() set sourceUrl(value: string) {
+    if (value) {
+      this.loading = true;
+      this.httpClient.get(value, {responseType: 'text'}).subscribe(source => {
+        this.source = source;
+      }, null, () => this.loading = false);
+    }
+  }
+
   get source() {
     let source = this._source;
     if (!source) {
@@ -48,7 +58,7 @@ export class CodeBlockComponent implements OnInit, AfterContentInit {
     return source;
   }
 
-  constructor() {
+  constructor(private httpClient: HttpClient) {
   }
 
   ngOnInit() {

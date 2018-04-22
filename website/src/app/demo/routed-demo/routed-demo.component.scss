@@ -4,9 +4,11 @@
 
 .demo-container {
   max-width: 100%;
+  position: relative;
+  overflow: hidden;
 }
 .demo-container /deep/ {
-  > * {
+  > *:not(app-demo-source-fab) {
     width: 100%;
   }
 }

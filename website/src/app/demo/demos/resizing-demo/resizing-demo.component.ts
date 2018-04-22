@@ -13,7 +13,7 @@ import {Demo} from '../demos';
   templateUrl: './resizing-demo.component.html',
   styleUrls: ['./resizing-demo.component.scss']
 })
-export class ResizeDisabledDemoComponent implements OnInit {
+export class ResizingDemoComponent implements OnInit {
 
   constructor() {
   }

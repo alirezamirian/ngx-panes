@@ -11,49 +11,40 @@
         <app-demo-content style="min-width: 200px" [lines]="40"></app-demo-content>
       </ngx-pane>
     </ngx-pane-group>
-    <div>
-      <div fxFlex class="mat-padding main-content">
-
-        <!--<app-code-block [sourceUrl]="'https://raw.githubusercontent.com/angular/angular/master/gulpfile.js'"
-                        [source]="'var x = 10;'">
-        </app-code-block>-->
-        <div>
-          <br/>
-          <ng-container *ngFor="let example of examples">
-            <button *ngIf="selection === example" mat-raised-button (click)="selection = example" color="primary">
-              {{example.theme || 'default'}}
-            </button>
-            <button *ngIf="selection !== example" mat-button (click)="selection = example">
-              {{example.theme || 'default'}}
-            </button>
-          </ng-container>
-        </div>
+    <div fxFlex class="mat-padding main-content">
+      <div>
         <br/>
-        <div>
-          <mat-checkbox [(ngModel)]="defaultScrollbars">
-            Default Scrollbars (WebKit-based browsers only)
-            <div class="checkbox-hint">
-              You may need to switch between panes for changes to take effect, due to browser's buggy behaviour.
-            </div>
-          </mat-checkbox>
-        </div>
-
-        <br/>
-
-        Applied class:
-        <code *ngIf="selection.theme">{{'theme-' + selection.theme}}</code>
-        <span *ngIf="!selection.theme">Nothing</span>
-        <br/>
-
-        <app-code-block *ngIf="selection.theme"
-                        [source]="selection.code"></app-code-block>
-
-        <p style="padding-top: 7px;">
-          See also <a routerLink="/guides/theming">Theming guide</a>
-        </p>
-
-        <!--TODO: add code for demo-->
+        <ng-container *ngFor="let example of examples">
+          <button *ngIf="selection === example" mat-raised-button (click)="selection = example" color="primary">
+            {{example.theme || 'default'}}
+          </button>
+          <button *ngIf="selection !== example" mat-button (click)="selection = example">
+            {{example.theme || 'default'}}
+          </button>
+        </ng-container>
       </div>
+      <br/>
+      <div>
+        <mat-checkbox [(ngModel)]="defaultScrollbars">
+          Default Scrollbars (WebKit-based browsers only)
+          <div class="checkbox-hint">
+            You may need to switch between panes for changes to take effect, due to browser's buggy behaviour.
+          </div>
+        </mat-checkbox>
+      </div>
+
+      <br/>
+
+      Applied class:
+      <code *ngIf="selection.theme">{{'theme-' + selection.theme}}</code>
+      <span *ngIf="!selection.theme">Nothing</span>
+      <br/>
+
+      <app-code-block *ngIf="selection.theme"
+                      [source]="selection.code"></app-code-block>
+      <p style="padding-top: 7px;">
+        See also <a routerLink="/guides/theming">Theming guide</a>
+      </p>
     </div>
   </ngx-pane-area>
 

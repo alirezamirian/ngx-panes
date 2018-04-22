@@ -11,7 +11,7 @@ import {
   MatChipsModule,
   MatInputModule,
   MatListModule,
-  MatSelectModule
+  MatSelectModule, MatTabsModule
 } from '@angular/material';
 import {GithubContributorsComponent} from './demos/github-browser-demo/github-contributors/github-contributors.component';
 import {GithubIssueListComponent} from './demos/github-browser-demo/github-issue-list/github-issue-list.component';
@@ -38,6 +38,8 @@ import {GithubRepoSelectorComponent} from './demos/github-browser-demo/github-re
 import {GithubRepoCardComponent} from './demos/github-browser-demo/github-repo-card/github-repo-card.component';
 import {GithubReleaseListComponent} from './demos/github-browser-demo/github-release-list/github-release-list.component';
 import {LifecycleLoggerComponent} from './demos/lazy-loading-demo/lifecycle-logger.component';
+import {FabExpandableModule} from '../shared/fab-expandable/fab-expandable.module';
+import {DemoSourceFabComponent} from './demo-source-fab/demo-source-fab.component';
 
 const demoComponents = getDemoComponents();
 
@@ -53,6 +55,8 @@ const demoComponents = getDemoComponents();
     MatCheckboxModule,
     MatInputModule,
     FormsModule,
+    FabExpandableModule,
+    MatTabsModule, // for demo-source-fab
 
     Ng2FileTreeModule, // used in GithubFileTreeComponent
 
@@ -60,6 +64,7 @@ const demoComponents = getDemoComponents();
   declarations: [
 
     RoutedDemoComponent,
+    DemoSourceFabComponent,
     DemoListComponent,
     DemoItemComponent,
 

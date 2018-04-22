@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
-import {Demo} from '../demo/demos/demos';
+import {DemoMeta} from '../demo/demos/demos';
 import {Guide} from '../guide/guides';
 import {map} from 'rxjs/operators';
 
 interface Content {
-  demos: Array<Demo>;
+  demos: Array<DemoMeta>;
   guides: Array<Guide>;
 }
 
@@ -21,8 +21,8 @@ export class ContentService {
     return this.getContentObservable();
   }
 
-  getDemos(): Observable<Array<Demo>> {
-    return this.getContentObservable().pipe(map<Content, Demo[]>(assets => assets.demos));
+  getDemos(): Observable<Array<DemoMeta>> {
+    return this.getContentObservable().pipe(map<Content, DemoMeta[]>(assets => assets.demos));
   }
 
   getGuides(): Observable<Array<Guide>> {

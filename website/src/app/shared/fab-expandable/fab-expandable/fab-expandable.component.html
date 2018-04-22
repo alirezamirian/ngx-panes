@@ -1,0 +1,10 @@
+<button mat-fab class="fab" [matTooltip]="tooltip" matTooltipPosition="before"
+        (click)="expanded = !expanded" [class.expanded]="expanded">
+  <mat-icon>{{icon}}</mat-icon>
+</button>
+<button mat-fab color="warn" *ngIf="expanded" class="fab" (click)="expanded = false" @closeBtn>
+  <mat-icon>close</mat-icon>
+</button>
+<div class="content" *ngIf="expanded" @content>
+  <ng-content></ng-content>
+</div>

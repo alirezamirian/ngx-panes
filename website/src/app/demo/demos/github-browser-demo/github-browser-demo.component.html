@@ -21,13 +21,6 @@
         <app-github-file-tree [slug]="slug" (fileSelected)="setSourceUrl($event)"
                               [ref]="selectedBranch"></app-github-file-tree>
       </ngx-pane>
-      <ngx-pane [size]="320">
-        <ng-template ngxPaneTitle>
-          <mat-icon class="title-icon">error_outline</mat-icon>
-          Issues
-        </ng-template>
-        <app-github-issue-list *ngxPaneContent [slug]="slug"></app-github-issue-list>
-      </ngx-pane>
       <ngx-pane>
         <ng-template ngxPaneTitle>
           <mat-icon class="title-icon">people</mat-icon>
@@ -45,7 +38,22 @@
     </ngx-pane-group>
     <ngx-pane-group align="end" [defaultSize]="300"></ngx-pane-group>
     <ngx-pane-group align="top" [defaultSize]="200"></ngx-pane-group>
-    <ngx-pane-group align="bottom" [defaultSize]="200"></ngx-pane-group>
+    <ngx-pane-group align="bottom" [defaultSize]="190">
+      <ngx-pane>
+        <ng-template ngxPaneTitle>
+          <mat-icon class="title-icon">error_outline</mat-icon>
+          Issues
+        </ng-template>
+        <app-github-issue-list *ngxPaneContent [slug]="slug"></app-github-issue-list>
+      </ngx-pane>
+      <ngx-pane>
+        <ng-template ngxPaneTitle>
+          <mat-icon class="title-icon" svgIcon="pull_request"></mat-icon>
+          Pull Requests
+        </ng-template>
+        <app-github-pull-requests *ngxPaneContent [slug]="slug"></app-github-pull-requests>
+      </ngx-pane>
+    </ngx-pane-group>
     <div fxFlex class="main-content">
       <app-code-editor [sourceUrl]="sourceUrl"></app-code-editor>
     </div>

@@ -8,7 +8,7 @@ import {SharedModule} from '../shared/shared.module';
 import {
   MatCardModule,
   MatCheckboxModule,
-  MatChipsModule,
+  MatChipsModule, MatIconRegistry,
   MatInputModule,
   MatListModule,
   MatSelectModule, MatTabsModule
@@ -40,9 +40,13 @@ import {GithubReleaseListComponent} from './demos/github-browser-demo/github-rel
 import {LifecycleLoggerComponent} from './demos/lazy-loading-demo/lifecycle-logger.component';
 import {FabExpandableModule} from '../shared/fab-expandable/fab-expandable.module';
 import {DemoSourceFabComponent} from './demo-source-fab/demo-source-fab.component';
+import {GithubPullRequestsComponent} from './demos/github-browser-demo/github-pull-requests/github-pull-requests.component';
+import {GithubLabelComponent} from './demos/github-browser-demo/github-label/github-label.component';
+import {DomSanitizer} from '@angular/platform-browser';
 
 const demoComponents = getDemoComponents();
 
+// TODO: create a separate module for each demo.
 @NgModule({
   imports: [
     SharedModule,
@@ -76,6 +80,8 @@ const demoComponents = getDemoComponents();
     GithubRepoSelectorComponent,
     GithubRepoCardComponent,
     GithubReleaseListComponent,
+    GithubPullRequestsComponent,
+    GithubLabelComponent,
     CodeEditorComponent,
 
     LifecycleLoggerComponent
@@ -87,4 +93,8 @@ const demoComponents = getDemoComponents();
   ]
 })
 export class DemoModule {
+  constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
+    iconRegistry.addSvgIcon('pull_request',
+      sanitizer.bypassSecurityTrustResourceUrl('/assets/icons/pr.svg'));
+  }
 }

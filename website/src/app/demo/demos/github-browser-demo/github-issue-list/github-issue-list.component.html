@@ -1,6 +1,6 @@
 <app-loading [loading]="loading">
   <app-list-wrapper [items]="issues">
-    <mat-list>
+    <mat-list dense>
       <mat-list-item *ngFor="let issue of issues">
         <mat-icon mat-list-icon>{{issue.state === 'open' ? 'info_outline' : 'close'}}</mat-icon>
         <!--<img [src]="issue.user.avatar_url" mat-list-avatar />-->
@@ -10,6 +10,9 @@
           <span *ngIf="issue.closed_at; else openedAt">closed at {{issue.closed_at | date}}</span>
           <ng-template #openedAt>opened at {{issue.created_at | date}}</ng-template>
         </p>
+        <div matLine *ngIf="issue.labels.length">
+          <app-github-label *ngFor="let label of issue.labels" [label]="label"></app-github-label>
+        </div>
       </mat-list-item>
     </mat-list>
   </app-list-wrapper>

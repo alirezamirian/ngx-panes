@@ -1,6 +1,6 @@
 <app-loading [loading]="loading">
   <app-list-wrapper [items]="releases">
-    <mat-list>
+    <mat-list dense>
       <mat-list-item *ngFor="let release of releases">
         <mat-icon mat-list-icon [class.muted]="release.prerelease"
                   [matTooltip]="release.prerelease ? 'pre-release' : ''">new_releases

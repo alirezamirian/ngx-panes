@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Input} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {Http} from '@angular/http';
 import {AbstractGithubComponent} from '../abstract-github-component';
 
@@ -7,7 +7,7 @@ import {AbstractGithubComponent} from '../abstract-github-component';
   templateUrl: './github-issue-list.component.html',
   styleUrls: ['./github-issue-list.component.scss']
 })
-export class GithubIssueListComponent extends AbstractGithubComponent implements AfterViewInit {
+export class GithubIssueListComponent extends AbstractGithubComponent {
 
   issues;
 
@@ -16,12 +16,6 @@ export class GithubIssueListComponent extends AbstractGithubComponent implements
 
   constructor(http: Http) {
     super(http, 'issues');
-    console.log('issues, constructor');
-  }
-
-
-  ngAfterViewInit(): void {
-    console.log('issues, afterViewInit');
   }
 
   setItems(items: any[]): void {

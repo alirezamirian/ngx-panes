@@ -8,7 +8,9 @@ mat-list {
 mat-list-item {
   border-bottom: 1px solid rgba(0, 0, 0, .08);
   background: #fff;
-  height: 64px !important;
+  &.mat-2-line {
+    height: 64px !important;
+  }
   /deep/ {
     .mat-list-text {
       font-size: 15px !important;

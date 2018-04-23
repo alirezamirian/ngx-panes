@@ -1,6 +1,6 @@
 <app-loading [loading]="loading">
   <app-list-wrapper [items]="contributors">
-    <mat-list>
+    <mat-list dense>
       <a [href]="user.html_url" *ngFor="let user of contributors">
         <mat-list-item>
           <img [src]="user.avatar_url" mat-list-avatar/>

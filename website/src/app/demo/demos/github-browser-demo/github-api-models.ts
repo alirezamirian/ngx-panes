@@ -118,5 +118,86 @@ export declare module GithubRelease {
     assets: Asset[];
   }
 
+  export interface PullRequest {
+    id: number;
+    url: string;
+    html_url: string;
+    diff_url: string;
+    patch_url: string;
+    issue_url: string;
+    commits_url: string;
+    review_comments_url: string;
+    review_comment_url: string;
+    comments_url: string;
+    statuses_url: string;
+    number: number;
+    state: string;
+    title: string;
+    body: string;
+    assignee: GithubUser;
+    labels: Label[];
+    milestone: Milestone;
+    locked: boolean;
+    active_lock_reason: string;
+    created_at: Date;
+    updated_at: Date;
+    closed_at: Date;
+    merged_at: Date;
+    head: PullRef;
+    base: PullRef;
+    _links: Links;
+    user: GithubUser;
+  }
+
+  interface Link {
+    href: string;
+  }
+
+  interface PullRef {
+    label: string;
+    ref: string;
+    sha: string;
+    user: GithubUser;
+    repo: GithubRepo;
+  }
+
+  interface Links {
+    self: Link;
+    html: Link;
+    issue: Link;
+    comments: Link;
+    review_comments: Link;
+    review_comment: Link;
+    commits: Link;
+    statuses: Link;
+  }
+
+
+  export interface Milestone {
+    url: string;
+    html_url: string;
+    labels_url: string;
+    id: number;
+    number: number;
+    state: string;
+    title: string;
+    description: string;
+    creator: GithubUser;
+    open_issues: number;
+    closed_issues: number;
+    created_at: Date;
+    updated_at: Date;
+    closed_at: Date;
+    due_on: Date;
+  }
+
+  export interface Label {
+    id: number;
+    url: string;
+    name: string;
+    description: string;
+    color: string;
+    default: boolean;
+  }
 }
 

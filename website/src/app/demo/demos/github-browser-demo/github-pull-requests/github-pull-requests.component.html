@@ -1,0 +1,19 @@
+<app-loading [loading]="loading">
+  <app-list-wrapper [items]="items">
+    <mat-list dense>
+      <mat-list-item *ngFor="let pr of items">
+        <mat-icon mat-list-icon svgIcon="pull_request"></mat-icon>
+        <!--<img [src]="pr.user.avatar_url" mat-list-avatar />-->
+        <h4 matLine matTooltip="{{pr.title}}" [matTooltipShowDelay]="400">{{pr.title}}</h4>
+        <p matLine>
+          <a [href]="pr.html_url">#{{pr.number}}</a>
+          <span *ngIf="pr.closed_at; else openedAt">closed at {{pr.closed_at | date}}</span>
+          <ng-template #openedAt>opened at {{pr.created_at | date}}</ng-template>
+        </p>
+        <div matLine *ngIf="pr.labels.length">
+          <app-github-label *ngFor="let label of pr.labels" [label]="label"></app-github-label>
+        </div>
+      </mat-list-item>
+    </mat-list>
+  </app-list-wrapper>
+</app-loading>

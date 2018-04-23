@@ -73,4 +73,9 @@
   width: auto;
   height: auto;
   margin-right: 3px;
+  vertical-align: middle;
+  &[svgicon] {
+    height: 16px;
+    width: 12px;
+  }
 }

@@ -7,7 +7,7 @@ import {MatButtonModule, MatIconModule, MatTooltipModule} from '@angular/materia
   imports: [
     CommonModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
     MatTooltipModule
   ],
   declarations: [FabExpandableComponent],

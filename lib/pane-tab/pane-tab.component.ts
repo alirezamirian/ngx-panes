@@ -137,7 +137,6 @@ export class PaneTabComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.ngZone.runOutsideAngular(() => {
       this.subscription = this.dragStart$.subscribe((dragStartEvent: DragStartEvent) => {
-        console.log('drag start');
         this.ngZone.run(() => {
           this.dragStarted.emit(dragStartEvent);
         });

@@ -8,7 +8,7 @@ import {Observable} from 'rxjs/Observable';
  * `PaneAreaStateManager` to use for loading previously saved state and saving
  * state changes whenever a pane is moved to another position or another pane group.
  *
- * Currently, this **state** is only limited to position of panes inside pane groups.
+ * Currently, this **state** is limited to position of panes inside pane groups.
  * Because it's the only tricky part of state management which is hard to handle in
  * static templates.
  * Other things such as **last opened pane in each pane group** or **size of each pane**

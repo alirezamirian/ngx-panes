@@ -19,7 +19,7 @@ import {PaneContentDirective} from './pane-content.directive';
 
 
 /**
- * Pane components, are used inside {@link PaneGroupComponent}. Each pane should have a
+ * Pane components, are used inside {@link PaneGroupComponent ngx-pane-group}. Each pane should have a
  * {@link PaneComponent#title title} which is shown
  * in side tabs area. By default, the title is used for **pane header** also.
  * Pane header is a thin bar on top of the selected pane which shows a label and also contains

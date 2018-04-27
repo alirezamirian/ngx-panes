@@ -36,9 +36,19 @@
         <app-github-release-list *ngxPaneContent [slug]="slug"></app-github-release-list>
       </ngx-pane>
     </ngx-pane-group>
-    <ngx-pane-group align="end" [defaultSize]="300"></ngx-pane-group>
+    <ngx-pane-group align="end" [defaultSize]="300" [autoOpen]="false">
+      <ngx-pane [size]="380">
+        <ng-template ngxPaneTitle>
+          <mat-icon class="title-icon">event</mat-icon>
+          Events
+        </ng-template>
+        <div *ngxPaneContent>
+          <app-github-event-list [slug]="slug"></app-github-event-list>
+        </div>
+      </ngx-pane>
+    </ngx-pane-group>
     <ngx-pane-group align="top" [defaultSize]="200"></ngx-pane-group>
-    <ngx-pane-group align="bottom" [defaultSize]="190">
+    <ngx-pane-group align="bottom" [defaultSize]="180" [autoOpen]="false">
       <ngx-pane>
         <ng-template ngxPaneTitle>
           <mat-icon class="title-icon">error_outline</mat-icon>

@@ -43,6 +43,7 @@ import {DemoSourceFabComponent} from './demo-source-fab/demo-source-fab.componen
 import {GithubPullRequestsComponent} from './demos/github-browser-demo/github-pull-requests/github-pull-requests.component';
 import {GithubLabelComponent} from './demos/github-browser-demo/github-label/github-label.component';
 import {DomSanitizer} from '@angular/platform-browser';
+import {GithubEventListComponent} from './demos/github-browser-demo/github-event-list/github-event-list.component';
 
 const demoComponents = getDemoComponents();
 
@@ -81,6 +82,7 @@ const demoComponents = getDemoComponents();
     GithubRepoCardComponent,
     GithubReleaseListComponent,
     GithubPullRequestsComponent,
+    GithubEventListComponent,
     GithubLabelComponent,
     CodeEditorComponent,
 

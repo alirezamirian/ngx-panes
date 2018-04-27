@@ -1,0 +1,14 @@
+<app-loading [loading]="loading">
+  <app-list-wrapper [items]="events">
+    <mat-list dense>
+      <mat-list-item *ngFor="let event of events">
+        <img matListAvatar [src]="event.actor.avatar_url"/>
+        <p matLine [innerHtml]="getEventText(event)"></p>
+        <p matLine *ngIf="getEventSummary(event)" [innerHtml]="getEventSummary(event)"></p>
+        <p matLine>
+          <small>{{event.created_at | date}}</small>
+        </p>
+      </mat-list-item>
+    </mat-list>
+  </app-list-wrapper>
+</app-loading>

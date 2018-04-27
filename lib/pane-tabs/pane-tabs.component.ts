@@ -69,7 +69,10 @@ export class PaneTabsComponent implements OnDestroy {
   @ViewChildren(PaneTabComponent, {read: ElementRef})
   private tabElementRefs: QueryList<ElementRef>;
 
-  private dragState: DragState | null;
+  /**
+   * @private
+   */
+  dragState: DragState | null;
 
   constructor(private changeDetector: ChangeDetectorRef,
               private ngZone: NgZone,

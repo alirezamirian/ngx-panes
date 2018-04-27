@@ -147,6 +147,11 @@ export class PaneComponent implements OnInit {
     }
   };
 
+  /**
+   * @private
+   */
+  maxSize: number;
+
   constructor(public paneGroup: PaneGroupComponent,
               @Optional() @Inject(NGX_PANES_DEFAULTS) defaults: NgxPanesDefaults) {
     if (defaults) {

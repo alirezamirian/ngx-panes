@@ -26,7 +26,7 @@ export class PaneViewComponent implements OnInit, OnChanges {
   private viewContainerRef: ViewContainerRef;
 
   @Input()
-  public align: Align;
+  align: Align;
   @ViewChild('contentContainer') private _contentContainer: ElementRef;
 
 

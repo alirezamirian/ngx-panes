@@ -29,7 +29,7 @@ import Branch = Github.Branch;
   ]
 })
 export class GithubBrowserDemoComponent implements OnInit {
-  sourceUrl = '/app/demo/demos/github-browser-demo/github-browser-demo.component.ts';
+  sourceUrl: string;
   repository: string;
   owner: string;
   private rateLimit: RateLimit;

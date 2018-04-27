@@ -1,4 +1,4 @@
-<div #code [hidden]="loading"></div>
+<div #code [hidden]="loading || !source"></div>
 <div *ngIf="loading">
   <mat-progress-spinner mode="indeterminate" [strokeWidth]="4"></mat-progress-spinner>
 </div>

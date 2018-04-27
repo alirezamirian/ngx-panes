@@ -1,5 +1,7 @@
 :host {
   position: relative;
+  display: block;
+  height: 100%;
 }
 
 .container {
@@ -79,4 +81,8 @@
     height: 16px;
     width: 12px;
   }
+}
+
+app-github-file-viewer {
+  height: 100%;
 }

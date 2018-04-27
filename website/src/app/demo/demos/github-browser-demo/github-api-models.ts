@@ -68,6 +68,10 @@ export interface GithubSearchResult<T> {
 }
 
 export namespace Github {
+  interface GithubResource {
+    html_url: string;
+  }
+
   export interface Commit {
     sha: string;
     url: string;
@@ -130,6 +134,22 @@ export namespace Github {
     TeamEvent = 'TeamEvent',
     TeamAddEvent = 'TeamAddEvent',
     WatchEvent = 'WatchEvent',
+  }
+
+  export interface GithubContent extends GithubResource {
+    type: 'file' | 'dir';
+    'size': number;
+    'name': string;
+    'path': string;
+    'sha': string;
+    'url': string;
+    'git_url': string;
+    'download_url': string;
+    '_links': {
+      'git': string,
+      'self': string,
+      'html': string
+    };
   }
 }
 

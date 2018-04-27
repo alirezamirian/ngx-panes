@@ -1,6 +1,8 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {FileType, TreeNode} from 'ng2-file-tree';
-import {Http} from '@angular/http';
+import {HttpClient} from '@angular/common/http';
+import {Github} from '../github-api-models';
+import GithubContent = Github.GithubContent;
 
 @Component({
   selector: 'app-github-file-tree',
@@ -18,11 +20,14 @@ export class GithubFileTreeComponent implements OnInit, OnChanges {
   ref: string;
 
   @Output()
-  fileSelected = new EventEmitter();
+  fileSelected = new EventEmitter<GithubContent>();
   @Output()
-  fileOpened = new EventEmitter();
+  fileOpened = new EventEmitter<GithubContent>();
 
-  constructor(private http: Http) {
+  @Input()
+  autoSelectReadme = true;
+
+  constructor(private httpClient: HttpClient) {
   }
 
   ngOnInit() {
@@ -61,13 +66,14 @@ export class GithubFileTreeComponent implements OnInit, OnChanges {
   }
 
   loadFileTree(parentNode) {
-    this.http.get(`https://api.github.com/repos/${this.slug}/contents${parentNode.getFullPath()}`, {
+    const url = `https://api.github.com/repos/${this.slug}/contents${parentNode.getFullPath()}`;
+    this.httpClient.get<GithubContent[]>(url, {
       params: {
         ref: this.ref
       }
     })
-      .subscribe(res => {
-        parentNode.children = res.json().map(
+      .subscribe((files: GithubContent[]) => {
+        parentNode.children = files.map(
           data => githubContentNodeToTreeNode(parentNode, data)
         );
         parentNode.children.forEach(treeNode => {
@@ -75,9 +81,16 @@ export class GithubFileTreeComponent implements OnInit, OnChanges {
           treeNode.parent = parentNode;
         });
         parentNode.loaded = true;
+        files.some(file => {
+          if (file.name.toLowerCase() === 'readme.md') {
+            this.fileSelected.emit(file);
+            return true;
+          }
+        });
       });
   }
 }
+
 function githubContentNodeToTreeNode(parentNode: TreeNode, contentNode) {
   const treeNode = new TreeNode({
     name: contentNode.name,

@@ -9,24 +9,24 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let input of params">
-      <td *ngIf="keys.name" [id]="input.name">
+    <tr *ngFor="let param of params">
+      <td *ngIf="keys.name" [id]="(anchorPrefix || '') + param.name">
         <app-side-anchor></app-side-anchor>
-        <b>{{input.name}}</b>
+        <b>{{param.name}}</b>
       </td>
       <td *ngIf="keys.type">
-        <ng-container *ngFor="let type of input.type.split('|'); let index = index">
+        <ng-container *ngFor="let type of param.type.split('|'); let index = index">
           <i class="type">
             <app-doc-item [identifier]="type"></app-doc-item>
           </i>
           <span *ngIf="index > 0">|</span>
         </ng-container>
       </td>
-      <td *ngIf="keys.description" [innerHtml]="input.description">
+      <td *ngIf="keys.description" [innerHtml]="param.description">
       </td>
       <td *ngIf="keys.defaultValue">
-        <code *ngIf="input.defaultValue">{{input.defaultValue}}</code>
-        <span *ngIf="!input.defaultValue">-</span>
+        <code *ngIf="param.defaultValue">{{param.defaultValue}}</code>
+        <span *ngIf="!param.defaultValue">-</span>
       </td>
     </tr>
     </tbody>

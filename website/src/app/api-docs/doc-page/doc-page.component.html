@@ -82,7 +82,8 @@
       </h3>
       <div [innerHtml]="method.description"></div>
       <ng-container *ngIf="method.args.length > 0">
-        <app-params [params]="method.args" [strings]="{name: 'Parameter Name'}"></app-params>
+        <app-params [params]="method.args" [strings]="{name: 'Parameter Name'}"
+                    [anchorPrefix]="method.name + '_'"></app-params>
       </ng-container>
     </mat-card>
   </ng-container>

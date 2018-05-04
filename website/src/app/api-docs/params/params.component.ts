@@ -24,6 +24,9 @@ export class ParamsComponent implements OnInit, OnChanges {
   strings: Partial<Param> = {};
   private keys: any & {};
 
+  @Input()
+  anchorPrefix: string;
+
 
   constructor() {
   }

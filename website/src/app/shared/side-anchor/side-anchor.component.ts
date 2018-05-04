@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, HostBinding, Optional} from '@angular/core';
 import {SideAnchorOwnerDirective} from './side-anchor-owner.directive';
 import {Location} from '@angular/common';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-side-anchor',
@@ -15,6 +15,7 @@ export class SideAnchorComponent implements AfterViewInit {
 
   constructor(@Optional() public sideAnchorOwner: SideAnchorOwnerDirective,
               private route: ActivatedRoute,
+              private router: Router,
               private location: Location) {
     if (!sideAnchorOwner) {
       throw new Error('SideAnchorComponent is used without any descendant element having an id or sideAnchorOwner');
@@ -24,7 +25,8 @@ export class SideAnchorComponent implements AfterViewInit {
   }
 
   getPath() {
-    return this.location.path(false);
+    return this.router.url;
+    // return this.location.path(false);
   }
 
   ngAfterViewInit(): void {

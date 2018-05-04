@@ -5,19 +5,22 @@ import {Observable} from 'rxjs/Observable';
 import {map, shareReplay} from 'rxjs/operators';
 import {DocItemBase} from './doc-item';
 import {HttpClient} from '@angular/common/http';
+import {Router} from '@angular/router';
+import {LocationStrategy} from '@angular/common';
 
 @Injectable()
 export class ApiDocsService {
   private docs$: any;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router, private locationStrategy: LocationStrategy) {
+    this.convertLinksRecursive = this.convertLinksRecursive.bind(this);
   }
 
   getDocs(includeInternals?: boolean): Observable<DocItemBase[]> {
     if (!this.docs$) {
       this.docs$ = this.http.get('assets/api-docs.json').pipe(
         shareReplay(),
-        map(convertLinksRecursive),
+        map(this.convertLinksRecursive),
         map(addFqns)
       );
     }
@@ -52,6 +55,38 @@ export class ApiDocsService {
     return this.getDocs().toPromise().then(docs => docs.filter(doc => doc.identifier === symbol));
   }
 
+  private convertLinksRecursive(docItem) {
+    if (Array.isArray(docItem)) {
+      return docItem.map(this.convertLinksRecursive);
+    } else if (typeof docItem === 'object') {
+      const result = {};
+      Object.keys(docItem).forEach(key => {
+        const includedProperties = ['description'];
+        if (typeof docItem[key] === 'string' && includedProperties.indexOf(key) > -1) {
+          result[key] = this.convertLinks(docItem[key]);
+        } else {
+          result[key] = this.convertLinksRecursive(docItem[key]);
+        }
+      });
+      return result;
+    } else {
+      return docItem;
+    }
+  }
+
+  private convertLinks(html) {
+    return html.replace(/{@link (.*?)(\#(.*?))?( (.*?))?}/g, (whole, identifier, ignored, property, ignored2, linkText) => {
+      const internalUrl = this.router.serializeUrl(this.router.createUrlTree(['/api', identifier], {
+        fragment: property || undefined,
+      }));
+      return `<a href="${internalUrl}">${linkText || property || identifier}</a>`;
+    }).replace(/<a.*?href="(.*?)".*?>/g, (whole, url) => {
+      const finalUrl = url.indexOf('http') === 0 ? url : this.locationStrategy.prepareExternalUrl(url);
+      return whole.replace(/href="(.*?)"/, `href="${finalUrl}"`);
+    });
+  }
+
+
 }
 
 
@@ -63,32 +98,6 @@ export class ApiDocsService {
 function addFqns(docItems: DocItemBase[]) {
   return docItems.map(docItem => ({...docItem, fqn: getFqn(docItem)}));
 }
-
-function convertLinksRecursive(docItem) {
-  if (Array.isArray(docItem)) {
-    return docItem.map(convertLinksRecursive);
-  } else if (typeof docItem === 'object') {
-    const result = {};
-    Object.keys(docItem).forEach(key => {
-      const includedProperties = ['description'];
-      if (typeof docItem[key] === 'string' && includedProperties.indexOf(key) > -1) {
-        result[key] = convertLinks(docItem[key]);
-      } else {
-        result[key] = convertLinksRecursive(docItem[key]);
-      }
-    });
-    return result;
-  } else {
-    return docItem;
-  }
-}
-
-function convertLinks(html) {
-  return html.replace(/{@link (.*?)(\#(.*?))?( (.*?))?}/g, (whole, identifier, ignored, property, ignored2, linkText) => {
-    return `<a href="/api/${identifier}${property ? ('#' + property) : ''}">${linkText || property || identifier}</a>`;
-  });
-}
-
 
 export function getFqn(doc: DocItemBase) {
   return `${doc.fileName.replace(/\.[^/.]+$/, '')}#${doc.identifier}`;

@@ -4,9 +4,9 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --aot --proxy-config website/proxy.conf.js",
+    "start": "ng serve --proxy-config website/proxy.conf.js",
     "website:build": "ng build --prod --aot=false --output-path=website-build",
-    "website:deploy": "gh-pages -d website-build --dest=master -n",
+    "website:deploy": "gh-pages -d website-build --dest=master",
     "website:clean": "gh-pages-clean",
     "website:build:contents": "webpack --config tools/content/webpack.config",
     "website:watch:contents": "npm run build:website:contents -- -w",

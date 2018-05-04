@@ -16,7 +16,7 @@ export class RouterLinksFromHrefsDirective {
       const href = event.target.getAttribute('href');
       if (href.indexOf('http') !== 0) {
         event.preventDefault();
-        this.router.navigateByUrl(href);
+        this.router.navigateByUrl(href[0] === '#' ? href.substring(1) : href);
       }
     }
   }

@@ -11,6 +11,9 @@
 @import '~highlight.js/styles/github-gist.css';
 @import '~github-markdown-css/github-markdown.css'; // all styles are scoped to .markdown-body
 
+.hljs {
+  font-family: $font-family-monospace;
+}
 
 body {
   margin: 0;

@@ -1,2 +1,2 @@
 <app-code-editor *ngIf="!isMarkdown" [source]="source$ | async"></app-code-editor>
-<div *ngIf="isMarkdown" [innerHtml]="source$ | async" class="mat-padding"></div>
+<div *ngIf="isMarkdown" [innerHtml]="source$ | async" class="mat-padding markdown-body"></div>

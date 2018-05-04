@@ -83,6 +83,9 @@ a {
     margin-top: 7px;
   }
   display: inline-flex;
+  .no-breadcrumb & {
+    margin-top: 0;
+  }
 }
 
 .overlay.active {

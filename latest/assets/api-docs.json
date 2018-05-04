@@ -1,0 +1,717 @@
+[
+  {
+    "identifier": "DefaultScrollbarsDirective",
+    "description": "<p>Ensures browser default scrollbar style is preserved for child pane windows and main content area.</p>\n<p>You can also pass <code>null</code> to <a href=\"/guides/theming\">ngx-panes-theme mixin</a> to prevent custom scrollbar styles.\nbut it won&#39;t work for nested themes, as css for scrollbar styles is a little tricky.</p>\n",
+    "methods": [],
+    "properties": [],
+    "type": "directive",
+    "isComponent": false,
+    "selector": "[ngxPanesDefaultScrollbars]",
+    "inputs": [
+      {
+        "name": "ngxPanesDefaultScrollbars",
+        "type": "boolean",
+        "description": "<p>Whether browser default scrollbar style is enabled or not</p>\n"
+      }
+    ],
+    "outputs": [],
+    "fileName": "lib/default-scrollbars.directive.ts",
+    "usage": [
+      {
+        "code": "<ngx-pane-area ngxPanesDefaultScrollbars>\r  ...\r</ngx-pane-area>\ror\r<ngx-pane-area [ngxPanesDefaultScrollbars]=\"isEnabled\">\r  ...\r</ngx-pane-area>",
+        "lang": "html"
+      }
+    ]
+  },
+  {
+    "identifier": "PaneAreaStateManager",
+    "description": "<p>An abstract class, used as DI token for pane area state manager service.\nEach instance of {@link PaneAreaComponent} will look for a provided\n<code>PaneAreaStateManager</code> to use for loading previously saved state and saving\nstate changes whenever a pane is moved to another position or another pane group.</p>\n<p>Currently, this <strong>state</strong> is limited to position of panes inside pane groups.\nBecause it&#39;s the only tricky part of state management which is hard to handle in\nstatic templates.\nOther things such as <strong>last opened pane in each pane group</strong> or <strong>size of each pane</strong>\nis not currently handled by this state management mechanism and should be handled by\ncorresponding inputs like {@link PaneComponent#size PaneComponent size input}.</p>\n<p>{@link LocalStoragePaneAreaStateManager} is the default implementation of\n<code>PaneAreaStateManager</code>, which is shipped with the library but not provided by <code>NgxPanesModule</code>.\nYou can provide it (or some other implementation) for <code>PanePaneAreaStateManager</code> DI token.\nYou can alternatively use {@link LocalStorageStateManagerDirective localStorageStateManager directive}\non <code>ngx-pane-area</code>, which provides an instance of {@link LocalStoragePaneAreaStateManager} to pane area.</p>\n<p>{@link PaneAreaState} is a simple map from {@link PaneComponent Pane} ids to\n{@link PaneState} objects which represents the id of {@link PaneGroupComponent PaneGroup}\nfor this pane and position of the pane inside that paneGroup. So, for <code>PaneAreaStateManager</code> to work,\n<strong>it&#39;s necessary to give an id to each pane group and each pane inside it</strong>.</p>\n<p>See also <a href=\"/guides/state-management\">state management guide</a>.</p>\n",
+    "methods": [
+      {
+        "name": "getSavedState",
+        "description": "<p>Sync or Async method used for retrieving previously saved state of the given pane area.</p>\n",
+        "args": [
+          {
+            "name": "paneArea",
+            "type": "PaneAreaComponent",
+            "description": ""
+          }
+        ],
+        "returnType": "PaneAreaState | Promise<PaneAreaState>"
+      },
+      {
+        "name": "trackChanges",
+        "description": "<p>Given a <code>paneArea</code> and an observable of its state changes, this method is responsible for\nstoring and loading its state. Whether it stores every emitted changed state or a subset of them using\nRxjs operators like\n<a href=\"http://reactivex.io/rxjs/class/es6/Observable.js~Observable.html#instance-method-last\">last</a> or,\n<a href=\"http://reactivex.io/rxjs/class/es6/Observable.js~Observable.html#instance-method-debounceTime\">debounceTime</a>,\nis an implementation decision, left to\nactual implementor, to be taken based on costs or other considerations. Default\n{@link LocalStoragePaneAreaStateManager} stores every changed state.</p>\n",
+        "args": [
+          {
+            "name": "paneArea",
+            "type": "PaneAreaComponent",
+            "description": "<p>The pane area component to track its changes.</p>\n"
+          },
+          {
+            "name": "state$",
+            "type": "Observable<PaneAreaState>",
+            "description": "<p>Observable of changes.</p>\n"
+          }
+        ],
+        "returnType": "void"
+      },
+      {
+        "name": "clearHistory",
+        "description": "<p>clears previously stored pane area state.</p>\n",
+        "args": [
+          {
+            "name": "paneArea",
+            "type": "PaneAreaComponent",
+            "description": ""
+          }
+        ],
+        "returnType": "void"
+      }
+    ],
+    "properties": [],
+    "fileName": "lib/pane-area-state-manager.ts"
+  },
+  {
+    "identifier": "FullHeightDirective",
+    "description": "<p>Makes <code>pane-area</code> fill entire remaining window height. The more preferred way to achieve this is with pure\ncss (with flexbox or other approaches). However css solution might not be available in some cases or it may\nrequire a lot of <code>height: 100%</code> styles on all descendants back to body.</p>\n",
+    "methods": [],
+    "properties": [],
+    "type": "directive",
+    "isComponent": false,
+    "selector": "ngx-pane-area[ngxFullHeight]",
+    "inputs": [
+      {
+        "name": "ngxFullHeight",
+        "defaultValue": "true",
+        "type": "boolean",
+        "description": "<p>Whether directive is active or not.</p>\n"
+      },
+      {
+        "name": "ngxFullHeightOffset",
+        "defaultValue": "1",
+        "type": "number",
+        "description": "<p>Offset to consider when sizing pane-area. The offset is subtracted from the calculated height</p>\n"
+      }
+    ],
+    "outputs": [],
+    "fileName": "lib/pane-area/full-height.directive.ts",
+    "usage": [
+      {
+        "code": "<ngx-pane-area ngxFullHeight>\n  ...\n</ngx-pane-area>",
+        "lang": "html"
+      }
+    ]
+  },
+  {
+    "type": "type",
+    "identifier": "Side",
+    "description": "",
+    "methods": [],
+    "properties": [
+      {
+        "name": "paneGroup",
+        "type": "PaneGroupComponent",
+        "description": ""
+      },
+      {
+        "name": "subscriptions",
+        "type": "Subscription[]",
+        "description": ""
+      }
+    ],
+    "fileName": "lib/pane-area/pane-area.component.ts"
+  },
+  {
+    "type": "type",
+    "identifier": "PaneState",
+    "description": "<p>Represents state of {@link PaneComponent pane} position inside a {@link PaneAreaComponent paneArea}.\nUsed in {@link PaneAreaState}.</p>\n",
+    "methods": [],
+    "properties": [
+      {
+        "name": "groupId",
+        "type": "string",
+        "description": "<p>Id of the {@link PaneGroupComponent paneGroup} this pane should be placed into.</p>\n"
+      },
+      {
+        "name": "index",
+        "type": "number",
+        "description": "<p>Position (index) of the pane inside the parent {@link PaneGroupComponent paneGroup}</p>\n"
+      }
+    ],
+    "fileName": "lib/pane-area/pane-area.component.ts",
+    "usage": []
+  },
+  {
+    "type": "type",
+    "identifier": "PaneAreaState",
+    "description": "<p>A dictionary from {@link PaneComponent pane} component ids to {@link PaneState} objects.\nUsed to represent state of panes inside {@link PaneAreaComponent pane area}, for overriding default\npositioning and ordering based on template.</p>\n",
+    "methods": [],
+    "properties": [],
+    "fileName": "lib/pane-area/pane-area.component.ts",
+    "usage": []
+  },
+  {
+    "identifier": "PaneAreaComponent",
+    "description": "<p>Defines an area consisted of a centered main content surrounded by\nup to 4 side pane groups (aka tool windows).</p>\n<p>Children of ngx-pane-area except for {@link PaneGroupComponent ngx-pane-group}s are\nprojected as main content.</p>\n",
+    "methods": [
+      {
+        "name": "getAlign",
+        "description": "<p>Returns align value of the input paneGroup, or null if pane group doesn&#39;t exist in this pane area.</p>\n",
+        "args": [
+          {
+            "name": "paneGroup",
+            "type": "PaneGroupComponent",
+            "description": ""
+          }
+        ],
+        "returnType": "Align"
+      }
+    ],
+    "properties": [
+      {
+        "name": "bottom",
+        "type": "Side",
+        "description": ""
+      },
+      {
+        "name": "left",
+        "type": "Side",
+        "description": ""
+      },
+      {
+        "name": "right",
+        "type": "Side",
+        "description": ""
+      },
+      {
+        "name": "top",
+        "type": "Side",
+        "description": ""
+      }
+    ],
+    "type": "directive",
+    "isComponent": true,
+    "selector": "ngx-pane-area",
+    "inputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "description": "<p>Unique identifier for this pane area. Used by {@link LocalStoragePaneAreaStateManager}\nto store state of panes inside pane area.</p>\n"
+      },
+      {
+        "name": "state",
+        "type": "PaneAreaState",
+        "description": "<p>Position and order of panes inside pane groups, to override default arrangement based on template.\nWhile it&#39;s possible to pass it via inputs, it&#39;s normally not the case, and {@link PaneAreaStateManager}\nwill handle it.</p>\n"
+      },
+      {
+        "name": "tabsDraggable",
+        "defaultValue": "true",
+        "type": "boolean",
+        "description": "<p>Whether user should be able to reorder panes in a pane group (or move panes between\npane groups) by dragging their tabs.\nFor now there is no separate options for reordering and moving to another pane group, as\nsuch option doesn&#39;t seem to be necessary.</p>\n"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "stateChange",
+        "type": "EventEmitter<PaneAreaState>",
+        "description": "<p>Event emitted when arrangement of panes has changed.</p>\n"
+      }
+    ],
+    "fileName": "lib/pane-area/pane-area.component.ts",
+    "usage": [
+      {
+        "code": "<ngx-pane-area>\r  <ngx-pane-group> ... </ngx-pane-group>\r  <ngx-pane-group> ... </ngx-pane-group>\r  <div>\r    <!-- will be projected as main content -->\r  </div>\r</ngx-pane-area>",
+        "lang": "html"
+      }
+    ]
+  },
+  {
+    "identifier": "PaneGroupComponent",
+    "description": "<p>Pane groups are used inside {@link PaneAreaComponent ngx-pane-area}.\nEach group of panes is align in of the the four\npossible sides of the pane-area, which is determined by\n{@link PaneGroupComponent#align align} input. if align is not specified,\nfirst unused align with the following order will be used:</p>\n<ul>\n<li><code>start</code> (<code>left</code> in ltr, <code>right</code> in rtl)</li>\n<li><code>end</code> (<code>right</code> in ltr, <code>left</code> in rtl)</li>\n<li><code>bottom</code></li>\n<li><code>top</code></li>\n</ul>\n<p>See also <a href=\"/demos/align\">Alignment demo</a>.</p>\n",
+    "methods": [
+      {
+        "name": "close",
+        "description": "<p>Closes currently selected pane. Does nothing if already closed.</p>\n",
+        "args": [],
+        "returnType": "void"
+      }
+    ],
+    "properties": [
+      {
+        "name": "align",
+        "type": "\"left\" | \"right\" | \"top\" | \"bottom\" | \"start\" | \"end\"",
+        "description": "<p>Position of the pane group inside {@link PaneAreaComponent pane area}.\nIt can be a {@link RelativeAlign} or an {@link Align}.</p>\n"
+      },
+      {
+        "name": "panes",
+        "type": "PaneComponent[]",
+        "description": ""
+      },
+      {
+        "name": "selectedPane",
+        "type": "PaneComponent",
+        "description": "<p>returns currently selected pane</p>\n"
+      }
+    ],
+    "type": "directive",
+    "isComponent": true,
+    "selector": "ngx-pane-group",
+    "inputs": [
+      {
+        "name": "align",
+        "type": "\"left\" | \"right\" | \"top\" | \"bottom\" | \"start\" | \"end\"",
+        "description": "<p>Position of the pane group inside {@link PaneAreaComponent pane area}.\nIt can be a {@link RelativeAlign} or an {@link Align}.</p>\n"
+      },
+      {
+        "name": "autoOpen",
+        "defaultValue": "true",
+        "type": "boolean",
+        "description": "<p>Whether or not the first non-disabled pane should be opened if no pane is marked initially as opened.</p>\n"
+      },
+      {
+        "name": "defaultSize",
+        "type": "number",
+        "description": "<p>Default size (in pixels) to be used for any child pane with an undefined size.\nIf you don&#39;t specify a default size, child panes with undefined {@link PaneComponent#size size}\nwill <strong>wrap they content</strong>.</p>\n"
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "description": ""
+      },
+      {
+        "name": "toggleable",
+        "defaultValue": "true",
+        "type": "boolean",
+        "description": "<p>Whether clicking on tabs toggles the selected panes or not. If toggleable is false, clicking on currently open\npane&#39;s tab will do nothing.</p>\n"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "selectedPaneChange",
+        "type": "EventEmitter<PaneComponent>",
+        "description": "<p>Event emitted when selected pane has changed via pane area UI. It&#39;s not emitted when selected pane is changed\nvia inputs or programmatically.</p>\n"
+      }
+    ],
+    "fileName": "lib/pane-group/pane-group.component.ts",
+    "usage": [
+      {
+        "code": "<ngx-pane-area>\r  <ngx-pane-group>\r    <!-- ngx-pane components -->\r  </ngx-pane-group>\r</ngx-pane-area>",
+        "lang": "html"
+      }
+    ]
+  },
+  {
+    "identifier": "PaneHeaderComponent",
+    "description": "<p><code>ngx-pane-header</code> is used for providing custom headers for panes.</p>\n<p>By default the header of the pane consist of a simple text label\n(which is determined by {@link PaneComponent#title PaneComponent title input}).\nYou can override this behaviour, and use custom content as\npane header by using a <code>&lt;ngx-pane-header&gt;...&lt;/ngx-pane-header&gt;</code> inside\n<code>&lt;ngx-pane&gt;...&lt;/ngx-pane&gt;</code> component.</p>\n",
+    "methods": [],
+    "properties": [],
+    "type": "directive",
+    "isComponent": true,
+    "selector": "ngx-pane-header",
+    "inputs": [],
+    "outputs": [],
+    "fileName": "lib/pane-header/pane-header.component.ts",
+    "usage": [
+      {
+        "code": "<ngx-pane title=\"First Pane\">\r  <ngx-pane-header>this is a <b>special</b> header</ngx-pane-header>\r  <!-- pane content goes here -->\r</ngx-pane>\r<ngx-pane title=\"will be used for header in absense of ngx-pane-header\">...</ngx-pane>",
+        "lang": "html"
+      }
+    ]
+  },
+  {
+    "identifier": "PaneResizerComponent",
+    "description": "",
+    "methods": [],
+    "properties": [],
+    "type": "directive",
+    "isComponent": true,
+    "selector": "pane-resizer",
+    "inputs": [],
+    "outputs": [],
+    "fileName": "lib/pane-resizer/pane-resizer.component.ts"
+  },
+  {
+    "identifier": "PaneTabComponent",
+    "description": "",
+    "methods": [],
+    "properties": [
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "description": ""
+      }
+    ],
+    "type": "directive",
+    "isComponent": true,
+    "selector": "pane-tab",
+    "inputs": [
+      {
+        "name": "active",
+        "type": "boolean",
+        "description": ""
+      },
+      {
+        "name": "align",
+        "type": "Align",
+        "description": ""
+      },
+      {
+        "name": "direction",
+        "type": "\"h\" | \"v\"",
+        "description": ""
+      },
+      {
+        "name": "draggable",
+        "defaultValue": "true",
+        "type": "boolean",
+        "description": ""
+      },
+      {
+        "name": "pane",
+        "type": "PaneComponent",
+        "description": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "dragStarted",
+        "type": "EventEmitter<{}>",
+        "description": ""
+      }
+    ],
+    "fileName": "lib/pane-tab/pane-tab.component.ts"
+  },
+  {
+    "identifier": "PaneTabsComponent",
+    "description": "",
+    "methods": [],
+    "properties": [
+      {
+        "name": "canAnimate",
+        "type": "boolean",
+        "description": ""
+      }
+    ],
+    "type": "directive",
+    "isComponent": true,
+    "selector": "pane-tabs",
+    "inputs": [
+      {
+        "name": "align",
+        "type": "Align",
+        "description": ""
+      },
+      {
+        "name": "direction",
+        "type": "\"h\" | \"v\"",
+        "description": ""
+      },
+      {
+        "name": "draggable",
+        "defaultValue": "true",
+        "type": "boolean",
+        "description": ""
+      },
+      {
+        "name": "paneGroup",
+        "type": "PaneGroupComponent",
+        "description": ""
+      },
+      {
+        "name": "relativeAlign",
+        "type": "RelativeAlign",
+        "description": ""
+      }
+    ],
+    "outputs": [],
+    "fileName": "lib/pane-tabs/pane-tabs.component.ts"
+  },
+  {
+    "identifier": "PaneViewComponent",
+    "description": "",
+    "methods": [],
+    "properties": [],
+    "type": "directive",
+    "isComponent": true,
+    "selector": "pane-view",
+    "inputs": [
+      {
+        "name": "align",
+        "type": "Align",
+        "description": ""
+      },
+      {
+        "name": "pane",
+        "type": "PaneComponent",
+        "description": ""
+      }
+    ],
+    "outputs": [],
+    "fileName": "lib/pane-view/pane-view.component.ts"
+  },
+  {
+    "identifier": "PaneContentDirective",
+    "description": "<p>A directive for lazy loading content of pane.</p>\n<p>By default, content of all panes inside pane area are\ninstantiated eagerly. You can delay instantiation of pane content, until\nit&#39;s opened, by wrapping it inside\nan <code>ng-template</code> with <code>ngxPaneContent</code> on it. Similar to any other\n<a href=\"https://angular.io/guide/structural-directives#the-asterisk--prefix\">structural directive</a>,\nyou can also use it without <code>ng-template</code> by adding <code>*ngxPaneContent</code> directly on the root of\nthe pane content.</p>\n<p>Please note that, by using <code>ngxPaneContent</code>, content of the pane are instantiated <strong>every time</strong> it&#39;s opened.\nIt means life cycle hooks like <code>ngOnInit</code> will be called every time the pane is opened.</p>\n",
+    "methods": [],
+    "properties": [],
+    "type": "directive",
+    "isComponent": false,
+    "selector": "[ngxPaneContent]",
+    "inputs": [],
+    "outputs": [],
+    "fileName": "lib/pane/pane-content.directive.ts",
+    "usage": [
+      {
+        "code": "<ngx-pane>\r  <ng-template ngxPaneContent>\r    ...\r  </ng-template>\r</ngx-pane>",
+        "lang": "html"
+      },
+      {
+        "code": "<ngx-pane>\r  <any *ngxPaneContent>\r    ...\r  </any>\r</ngx-pane>",
+        "lang": "html"
+      }
+    ]
+  },
+  {
+    "identifier": "PaneTitleDirective",
+    "description": "<p>A directive for using custom content as title of panes, shown in pane tab. It can be used instead of\n{@link PaneComponent#title title input} when the title is not a simple text.</p>\n",
+    "methods": [],
+    "properties": [],
+    "type": "directive",
+    "isComponent": false,
+    "selector": "[ngxPaneTitle]",
+    "inputs": [],
+    "outputs": [],
+    "fileName": "lib/pane/pane-title.directive.ts",
+    "usage": [
+      {
+        "code": "<ngx-pane>\r  <ng-template ngxPaneTitle>\r    ...\r  </ng-template>\r  <!-- pane content goes here -->\r</ngx-pane>",
+        "lang": "html"
+      },
+      {
+        "code": "<ngx-pane>\r  <any *ngxPaneTitle>\r    ...\r  </any>\r  <!-- pane content goes here -->\r</ngx-pane>",
+        "lang": "html"
+      }
+    ]
+  },
+  {
+    "identifier": "PaneComponent",
+    "description": "<p>Pane components, are used inside {@link PaneGroupComponent ngx-pane-group}. Each pane should have a\n{@link PaneComponent#title title} which is shown\nin side tabs area. By default, the title is used for <strong>pane header</strong> also.\nPane header is a thin bar on top of the selected pane which shows a label and also contains\nsome default ui controls for the pane (in future!).</p>\n<h4 id=\"custom-pane-header\">Custom pane header</h4>\n<p>You can specify custom header via {@link PaneHeaderComponent ngx-pane-header}.</p>\n<h4 id=\"lazy-loading\">lazy loading</h4>\n<p>Content of the pane can be instantiated whenever pane is opened by using\n{@link PaneContentDirective ngxPaneContent directive}</p>\n",
+    "methods": [
+      {
+        "name": "open",
+        "description": "<p>Opens this pane. Does nothing if already opened.</p>\n",
+        "args": [],
+        "returnType": "void"
+      },
+      {
+        "name": "close",
+        "description": "<p>Closes this pane. Does nothing if it&#39;s not opened.</p>\n",
+        "args": [],
+        "returnType": "void"
+      }
+    ],
+    "properties": [
+      {
+        "name": "content",
+        "type": "TemplateRef<any>",
+        "description": ""
+      },
+      {
+        "name": "header",
+        "type": "PaneHeaderComponent",
+        "description": ""
+      },
+      {
+        "name": "titleTemplate",
+        "type": "PaneTitleDirective",
+        "description": ""
+      }
+    ],
+    "type": "directive",
+    "isComponent": true,
+    "selector": "ngx-pane",
+    "inputs": [
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "description": "<p>Whether pane is disabled.</p>\n"
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "description": "<p>unique identifier of the pane.</p>\n"
+      },
+      {
+        "name": "opened",
+        "type": "boolean",
+        "description": "<p>Whether this pane should be opened or not. Usually used for initialization.\nWhenever it changes to <code>true</code>, this pane will be opened (if not already opened)\nand whenever it changes to <code>false</code> this pane will be closed if it&#39;s currently open.</p>\n"
+      },
+      {
+        "name": "resizable",
+        "defaultValue": "true",
+        "type": "boolean",
+        "description": "<p>Whether user can resize pane or not.</p>\n"
+      },
+      {
+        "name": "size",
+        "type": "number",
+        "description": "<p>Size of the pane. More precisely, <strong>width</strong> for <strong>horizontally</strong> aligned and <strong>height</strong> for <strong>vertically</strong>\naligned panes.\nIf unset, <code>defaultSize</code> of the host <code>ngx-pane-group</code> will be used. If both are undefined, the content of the\npane will determine its size. Resizing pane (if enabled) changes the pane&#39;s size.</p>\n"
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "description": "<p>Title of the pane to be shown in pane&#39;s tab.\nIt will also appear in pane header in the absence of <code>{@link PaneHeaderComponent ngx-pane-header}</code>.\nUse {@link PaneTitleDirective ngxPaneTitle directive} if you need more control over pane title.</p>\n"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "sizeChange",
+        "type": "EventEmitter<{}>",
+        "description": "<p>Event emitted when pane size is changed via UI. It&#39;s not emitted when size is changed via inputs\nor programmatically.</p>\n"
+      }
+    ],
+    "fileName": "lib/pane/pane.component.ts",
+    "usage": [
+      {
+        "code": "<ngx-pane-area>\r  <ngx-pane-group>\r    <!-- Simple pane with a title -->\r    <ngx-pane title=\"project\">...</ngx-pane>\r\r    <!-- Different title and header. Header is used in top of the selected pane, title is used inside pane's tab -->\r    <ngx-pane title=\"structure\">\r      <ngx-pane-header>custom header</ngx-pane-header>\r      ...\r    </ngx-pane>\r    <!-- Lazy loaded content -->\r    <ngx-pane title=\"issues\">\r      <div *ngxPaneContent>lazy loaded content</div>\r    </ngx-pane>\r  </ngx-pane-group>\r</ngx-pane-area>",
+        "lang": "html"
+      }
+    ]
+  },
+  {
+    "type": "variable",
+    "identifier": "NGX_PANES_DEFAULTS",
+    "description": "<p>Injection token for providing defaults for input parameters of ngx-panes components\nsuch as {@link PaneGroupComponent} or {@link PaneAreaComponent}.\nThe value of this injection token must be of type {@link NgxPanesDefaults}.</p>\n<p>See also <a href=\"/demos/config\">configuration demo</a>.</p>\n",
+    "fileName": "lib/panes-config.ts",
+    "usage": [
+      {
+        "code": "const panesDefaults: NgxPanesDefaults = { resizable: false };\n\n// Configuring global defaults for all panes in the app.\n@NgModule({\n  //...\n  providers: [\n    // ...\n    { provide: NGX_PANES_DEFAULTS, useValue: panesDefaults }\n  ]\n})\nexport class AppModule {}\n\n// Configuring defaults for all child panes of SomeComponent.\n@Component({\n  // ...\n  providers: [{ provide: NGX_PANES_DEFAULTS, useValue: panesDefaults }]\n})\nclass SomeComponent {}\n",
+        "lang": "typescript"
+      }
+    ]
+  },
+  {
+    "type": "type",
+    "identifier": "NgxPanesDefaults",
+    "description": "<p>Configuration to be provided to set default values for some inputs.\nObject of this type provided as {@link NGX_PANES_DEFAULTS} injection token will be picked up\nrelated components (such as {@link PaneGroupComponent} and {@link PaneAreaComponent}).</p>\n",
+    "methods": [],
+    "properties": [
+      {
+        "name": "autoOpen",
+        "type": "boolean",
+        "description": "<p>Default value for {@link PaneGroupComponent#autoOpen} input.</p>\n"
+      },
+      {
+        "name": "defaultSize",
+        "type": "number",
+        "description": "<p>Default value for {@link PaneGroupComponent#defaultSize} input.</p>\n"
+      },
+      {
+        "name": "draggable",
+        "type": "boolean",
+        "description": "<p>Default value for {@link PaneAreaComponent#tabsDraggable} input.</p>\n"
+      },
+      {
+        "name": "resizable",
+        "type": "boolean",
+        "description": "<p>Default value for {@link PaneGroupComponent#resizable} input.</p>\n"
+      },
+      {
+        "name": "toggleable",
+        "type": "boolean",
+        "description": "<p>Default value for {@link PaneGroupComponent#toggleable} input.</p>\n"
+      }
+    ],
+    "fileName": "lib/panes-config.ts"
+  },
+  {
+    "identifier": "NgxPanesModule",
+    "description": "<p>The main module for ngx-panes. Add it to <code>imports</code> of your module.</p>\n",
+    "methods": [],
+    "properties": [],
+    "type": "ngModule",
+    "exports": [
+      "lib/pane/pane.component#PaneComponent",
+      "lib/pane-header/pane-header.component#PaneHeaderComponent",
+      "lib/pane/pane-title.directive#PaneTitleDirective",
+      "lib/pane/pane-content.directive#PaneContentDirective",
+      "lib/pane-area/pane-area.component#PaneAreaComponent",
+      "lib/pane-group/pane-group.component#PaneGroupComponent",
+      "lib/state-managers/local-storage-state-manager.directive#LocalStorageStateManagerDirective",
+      "lib/default-scrollbars.directive#DefaultScrollbarsDirective",
+      "lib/pane-area/full-height.directive#FullHeightDirective"
+    ],
+    "injectables": [],
+    "fileName": "lib/panes.module.ts",
+    "usage": [
+      {
+        "code": "@NgModule({\n  imports: [\n    // ...\n    NgxPanesModule\n    //...\n  ]\n})\nexport class AppModule {}\n",
+        "lang": "typescript"
+      }
+    ]
+  },
+  {
+    "identifier": "ScrollableDirective",
+    "description": "",
+    "methods": [],
+    "properties": [
+      {
+        "name": "applyStyles",
+        "type": "boolean",
+        "description": ""
+      }
+    ],
+    "type": "directive",
+    "isComponent": false,
+    "selector": "[scrollable]",
+    "inputs": [],
+    "outputs": [],
+    "fileName": "lib/scrollable.directive.ts"
+  },
+  {
+    "identifier": "LocalStorageStateManagerDirective",
+    "description": "<p>Provides an instance of {@link LocalStoragePaneAreaStateManager} to be used by the\n{@link PaneAreaComponent pane-area} as {@link PaneAreaStateManager}.</p>\n",
+    "methods": [],
+    "properties": [],
+    "type": "directive",
+    "isComponent": false,
+    "selector": "ngx-pane-area[ngxLocalStorageStateManager]",
+    "inputs": [],
+    "outputs": [],
+    "fileName": "lib/state-managers/local-storage-state-manager.directive.ts",
+    "usage": [
+      {
+        "code": "<ngx-pane-area ngxLocalStorageStateManager>\r  ...\r</ngx-pane-area>",
+        "lang": "html"
+      }
+    ]
+  },
+  {
+    "identifier": "LocalStoragePaneAreaStateManager",
+    "description": "<p>A {@link PaneAreaStateManager} service, which saves/loads pane area state in\n<a href=\"https://developer.mozilla.org/en-US/docs/Web/API/Storage/LocalStorage\">browser&#39;s local storage</a>.\nIt requires pane areas to have a unique {@link PaneAreaComponent#id id}.</p>\n<p>It&#39;s <strong>not provider</strong> by default by {@link NgxPanesModule}, but you can provide it in your own angular\nmodule and it will be used by all <code>ngx-pane-area</code> components.\nAlternatively you can use {@link LocalStorageStateManagerDirective ngxLocalStorageStateManager}\non <code>ngx-pane-area</code>. It will provide an instance of {@link LocalStoragePaneAreaStateManager} to pane area.</p>\n",
+    "methods": [],
+    "properties": [],
+    "fileName": "lib/state-managers/local-storage-state-manager.service.ts",
+    "usage": [
+      {
+        "code": "",
+        "lang": "typescript"
+      }
+    ]
+  },
+  {
+    "type": "typeAlias",
+    "identifier": "RelativeAlign",
+    "description": "<p>Direction independent alignment. See also {@link Align}.</p>\n",
+    "source": "export type RelativeAlign = 'start'|'end'|'top'|'bottom';",
+    "fileName": "lib/utils/rtl-utils.ts"
+  },
+  {
+    "type": "typeAlias",
+    "identifier": "Align",
+    "description": "<p>See also {@link RelativeAlign}</p>\n",
+    "source": "export type Align = 'left'|'right'|'top'|'bottom';",
+    "fileName": "lib/utils/rtl-utils.ts"
+  }
+]

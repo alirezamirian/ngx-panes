@@ -1,0 +1,84 @@
+{
+  "demos": [
+    {
+      "id": "align",
+      "title": "Alignment",
+      "description": "Demonstrates options regarding pane group alignment inside pane-area",
+      "order": 1,
+      "tags": [
+        "Alignment"
+      ],
+      "className": "AlignDemoComponent"
+    },
+    {
+      "id": "theming",
+      "title": "Theming",
+      "description": "Demonstrates how to customize ngx-panes appearance",
+      "order": 2,
+      "tags": [
+        "Theming"
+      ],
+      "className": "ThemingDemoComponent"
+    },
+    {
+      "id": "resizing",
+      "title": "Resizing",
+      "description": "Demonstrates options regarding disabling pane resizing",
+      "order": 3,
+      "tags": [
+        "Resizing"
+      ],
+      "className": "ResizingDemoComponent"
+    },
+    {
+      "id": "lazy-loading",
+      "title": "Lazy Loading",
+      "description": "An example of using ngxPaneContent to lazy load pane content.",
+      "order": 3,
+      "tags": [
+        "Lazy Loading"
+      ],
+      "className": "LazyLoadingDemoComponent"
+    },
+    {
+      "id": "config",
+      "title": "Configuring Defaults",
+      "description": "An example of providing default configuration for all child panes",
+      "order": 4,
+      "tags": [
+        "Config"
+      ],
+      "className": "ConfigDemoComponent"
+    },
+    {
+      "id": "github",
+      "title": "Github Browser",
+      "description": "A small application of ngx-panes for browsing a github repo content",
+      "order": 1000,
+      "tags": [
+        "Basic Usage",
+        "Resizing"
+      ],
+      "defaultPath": "angular/material2",
+      "className": "GithubBrowserDemoComponent"
+    }
+  ],
+  "guides": [
+    {
+      "id": "getting-started",
+      "order": 1,
+      "title": "Getting Started",
+      "description": "Getting Started with ngx-panes"
+    },
+    {
+      "id": "theming",
+      "title": "Theming",
+      "description": "Shows how to create a custom theme for ngx-panes and what properties can be set via a theme"
+    },
+    {
+      "id": "state-management",
+      "title": "State Management",
+      "description": "Demonstrates pane area state management. What state is handled and why."
+    }
+  ]
+}

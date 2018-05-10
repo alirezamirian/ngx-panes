@@ -142,6 +142,7 @@ export class PaneTabComponent implements OnInit, OnDestroy {
         });
         if (this.ghost) {
           this.renderer.removeChild(this.document.body, this.ghost);
+          this.ghost.remove();
         }
         this.ghost = this.elRef.nativeElement.cloneNode(true);
         // FIXME: remove when theming issues are resolved
@@ -157,9 +158,9 @@ export class PaneTabComponent implements OnInit, OnDestroy {
           this.renderer.setStyle(this.ghost, 'left', (rect.left + dragEvent.movement.x) + 'px');
         }, null, () => {
           if (this.ghost) {
-            // doesn't work as expected, so we call ghost.remove() manually
             this.renderer.removeChild(this.document.body, this.ghost);
-            this.ghost.remove();
+            this.ghost.remove(); // doesn't work when animation module is imported, so we call ghost.remove() manually
+            this.ghost = null;
           }
         });
       });

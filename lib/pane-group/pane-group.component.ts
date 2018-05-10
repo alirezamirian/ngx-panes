@@ -20,8 +20,8 @@ import {Observable} from 'rxjs/Observable';
 
 /**
  * Pane groups are used inside {@link PaneAreaComponent ngx-pane-area}.
- * Each group of panes is align in of the the four
- * possible sides of the pane-area, which is determined by
+ * Each group of panes is align in one of the the four
+ * possible sides, which is determined by
  * {@link PaneGroupComponent#align align} input. if align is not specified,
  * first unused align with the following order will be used:
  * - `start` (`left` in ltr, `right` in rtl)

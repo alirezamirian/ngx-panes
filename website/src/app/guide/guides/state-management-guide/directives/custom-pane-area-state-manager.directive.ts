@@ -1,7 +1,8 @@
 import {Directive, Injectable} from '@angular/core';
 import {PaneAreaStateManager} from '../../../../../../../lib/pane-area-state-manager';
-import {PaneAreaComponent, PaneAreaState} from '../../../../../../../lib/pane-area/pane-area.component';
+import {PaneAreaComponent} from '../../../../../../../lib/pane-area/pane-area.component';
 import {Observable} from 'rxjs/Observable';
+import {PaneAreaState, PanePositions} from '../../../../../../../lib/pane-area/types';
 
 
 let globalState = null;

@@ -2,7 +2,8 @@ import {
   AfterContentInit,
   Component,
   ContentChildren,
-  EventEmitter, Inject,
+  EventEmitter,
+  Inject,
   Input,
   Optional,
   Output,
@@ -12,48 +13,18 @@ import {Align} from '../utils/rtl-utils';
 import {PaneGroupComponent} from '../pane-group/pane-group.component';
 import {Move, PaneTabDragDropContext} from '../pane-tab-drag-drop-context';
 import {PaneComponent} from '../pane/pane.component';
-import {Subscription} from 'rxjs/Subscription';
 import {PaneAreaStateManager} from '../pane-area-state-manager';
 import {libLogger} from '../utils/lib-logger';
 import {NGX_PANES_DEFAULTS, NgxPanesDefaults} from '../panes-config';
+import {PaneAreaState, PanePosition, PanePositions, Side} from './types';
+import {map} from 'rxjs/operators';
 
-
-export interface Side {
-  paneGroup: PaneGroupComponent;
-  subscriptions?: Subscription[];
-}
-
-/**
- * Represents state of {@link PaneComponent pane} position inside a {@link PaneAreaComponent paneArea}.
- * Used in {@link PaneAreaState}.
- * @experimental
- */
-export interface PaneState {
-  /**
-   * Id of the {@link PaneGroupComponent paneGroup} this pane should be placed into.
-   */
-  groupId: string;
-  /**
-   * Position (index) of the pane inside the parent {@link PaneGroupComponent paneGroup}
-   */
-  index: number;
-}
-
-/**
- * A dictionary from {@link PaneComponent pane} component ids to {@link PaneState} objects.
- * Used to represent state of panes inside {@link PaneAreaComponent pane area}, for overriding default
- * positioning and ordering based on template.
- * @experimental
- */
-export interface PaneAreaState {
-  [id: string]: PaneState;
-}
 
 /**
  * Defines an area consisted of a centered main content surrounded by
  * up to 4 side pane groups (aka tool windows).
  *
- * Children of ngx-pane-area except for {@link PaneGroupComponent ngx-pane-group}s are
+ * Any child element which is not {@link PaneGroupComponent ngx-pane-group} is
  * projected as main content.
  *
  * @usage
@@ -77,7 +48,7 @@ export class PaneAreaComponent implements AfterContentInit {
 
   /**
    * Unique identifier for this pane area. Used by {@link LocalStoragePaneAreaStateManager}
-   * to store state of panes inside pane area.
+   * to store pane area state.
    */
   @Input()
   id: string;
@@ -91,9 +62,13 @@ export class PaneAreaComponent implements AfterContentInit {
   @Input()
   tabsDraggable = true;
 
+  /** @private */
   left: Side = {paneGroup: null};
+  /** @private */
   right: Side = {paneGroup: null};
+  /** @private */
   bottom: Side = {paneGroup: null};
+  /** @private */
   top: Side = {paneGroup: null};
   /**
    * @private
@@ -105,11 +80,11 @@ export class PaneAreaComponent implements AfterContentInit {
 
   /**
    * Event emitted when arrangement of panes has changed.
-   * @type {EventEmitter<PaneAreaState>}
+   * @type {EventEmitter<PanePositions>}
    * @experimental
    */
   @Output()
-  stateChange: EventEmitter<PaneAreaState> = new EventEmitter<PaneAreaState>();
+  panePositionsChange: EventEmitter<PanePositions> = new EventEmitter<PanePositions>();
 
   /**
    * Position and order of panes inside pane groups, to override default arrangement based on template.
@@ -118,7 +93,7 @@ export class PaneAreaComponent implements AfterContentInit {
    * @experimental
    */
   @Input()
-  state: PaneAreaState = {};
+  panePositions: PanePositions = {};
 
   constructor(private dragDropContext: PaneTabDragDropContext,
               @Optional() @Inject(NGX_PANES_DEFAULTS) defaults: NgxPanesDefaults,
@@ -132,9 +107,12 @@ export class PaneAreaComponent implements AfterContentInit {
 
   ngAfterContentInit(): void {
     if (this.stateManager) {
-      this.stateManager.trackChanges(this, this.stateChange);
-      Promise.resolve(this.stateManager.getSavedState(this)).then(state => {
-        this.state = state || {};
+      const stateChanges = this.panePositionsChange.pipe(
+        map<PanePositions, PaneAreaState>(panePositions => ({panePositions}))
+      );
+      this.stateManager.trackChanges(this, stateChanges);
+      Promise.resolve(this.stateManager.getSavedState(this)).then((state: PaneAreaState) => {
+        this.panePositions = state ? state.panePositions || {} : {};
         this.initialize();
       });
     } else {
@@ -203,11 +181,11 @@ export class PaneAreaComponent implements AfterContentInit {
     }
   }
 
-  private updateState(paneId: string, updates: Partial<PaneState>) {
-    this.state = Object.assign({}, this.state, {
-      [paneId]: Object.assign({}, this.state[paneId] || {}, updates)
+  private updateState(paneId: string, updates: Partial<PanePosition>) {
+    this.panePositions = Object.assign({}, this.panePositions, {
+      [paneId]: Object.assign({}, this.panePositions[paneId] || {}, updates)
     });
-    this.stateChange.emit(this.state);
+    this.panePositionsChange.emit(this.panePositions);
   }
 
   private syncGroups(): void {
@@ -245,7 +223,7 @@ export class PaneAreaComponent implements AfterContentInit {
       paneGroup.childPanes.forEach((childPane, index) => {
         if (allPanes.indexOf(childPane) < 0) {
           // add the ones that are not yet added.
-          const paneHistory = this.state[childPane.id];
+          const paneHistory = this.panePositions[childPane.id];
           let targetGroup = paneGroup, targetIndex = index;
           if (paneHistory) {
             const previousGroup = this.paneGroups.find(group => group.id === paneHistory.groupId);

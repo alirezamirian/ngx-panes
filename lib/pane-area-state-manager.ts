@@ -1,14 +1,15 @@
-import {PaneAreaComponent, PaneAreaState} from './pane-area/pane-area.component';
+import {PaneAreaComponent} from './pane-area/pane-area.component';
 import {Observable} from 'rxjs/Observable';
+import {PaneAreaState} from './pane-area/types';
 
 
 /**
  * An abstract class, used as DI token for pane area state manager service.
  * Each instance of {@link PaneAreaComponent} will look for a provided
  * `PaneAreaStateManager` to use for loading previously saved state and saving
- * state changes whenever a pane is moved to another position or another pane group.
+ * state changes.
  *
- * Currently, this **state** is limited to position of panes inside pane groups.
+ * Currently, {@link PaneAreaState this **state**} is limited to position of panes inside pane groups.
  * Because it's the only tricky part of state management which is hard to handle in
  * static templates.
  * Other things such as **last opened pane in each pane group** or **size of each pane**
@@ -21,9 +22,11 @@ import {Observable} from 'rxjs/Observable';
  * You can alternatively use {@link LocalStorageStateManagerDirective localStorageStateManager directive}
  * on `ngx-pane-area`, which provides an instance of {@link LocalStoragePaneAreaStateManager} to pane area.
  *
- * {@link PaneAreaState} is a simple map from {@link PaneComponent Pane} ids to
- * {@link PaneState} objects which represents the id of {@link PaneGroupComponent PaneGroup}
- * for this pane and position of the pane inside that paneGroup. So, for `PaneAreaStateManager` to work,
+ * {@link PaneAreaState} has a {@link PaneAreaState#panePositions} property which is a simple map from
+ * {@link PaneComponent Pane} ids to
+ * {@link PanePosition} objects.
+ *
+ * For `PaneAreaStateManager` to work,
  * **it's necessary to give an id to each pane group and each pane inside it**.
  *
  * See also [state management guide](/guides/state-management).
@@ -39,7 +42,7 @@ export abstract class PaneAreaStateManager {
 
   /**
    * Given a `paneArea` and an observable of its state changes, this method is responsible for
-   * storing and loading its state. Whether it stores every emitted changed state or a subset of them using
+   * storing and loading its state. Whether it stores every emitted state change or a subset of them using
    * Rxjs operators like
    * [last](http://reactivex.io/rxjs/class/es6/Observable.js~Observable.html#instance-method-last) or,
    * [debounceTime](http://reactivex.io/rxjs/class/es6/Observable.js~Observable.html#instance-method-debounceTime),

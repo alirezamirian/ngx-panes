@@ -37,7 +37,7 @@ export class CustomPaneAreaStateManager extends PaneAreaStateManager {
 
   /**
    * Given the observable of state changes for an specific instance of PaneAreaComponent, 
-   * \`trackChanges\` is responsible for preserving that state.
+   * \`trackChanges\` is responsible for persisting latest state.
    * @param {PaneAreaComponent} paneArea
    * @param {Observable<PaneAreaState>} state$
    */

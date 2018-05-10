@@ -1,9 +1,9 @@
 /**
- * Direction independent alignment. See also {@link Align}.
+ * Direction independent alignment. See also {@link Align}, {@link PaneGroupComponent#align pane group align input}.
  */
 export type RelativeAlign = 'start'|'end'|'top'|'bottom';
 /**
- * See also {@link RelativeAlign}
+ * See also {@link RelativeAlign}, {@link PaneGroupComponent#align pane group align input}
  */
 export type Align = 'left'|'right'|'top'|'bottom';
 /**

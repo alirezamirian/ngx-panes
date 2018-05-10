@@ -21,9 +21,9 @@ import {PaneContentDirective} from './pane-content.directive';
 /**
  * Pane components, are used inside {@link PaneGroupComponent ngx-pane-group}. Each pane should have a
  * {@link PaneComponent#title title} which is shown
- * in side tabs area. By default, the title is used for **pane header** also.
- * Pane header is a thin bar on top of the selected pane which shows a label and also contains
- * some default ui controls for the pane (in future!).
+ * in its tab. By default, the title is used for **pane header** also.
+ * Pane header is a thin bar on top of the selected pane which shows a label and also will contain
+ * some default ui controls for the pane in future versions.
  *
  * #### Custom pane header
  * You can specify custom header via {@link PaneHeaderComponent ngx-pane-header}.
@@ -103,7 +103,7 @@ export class PaneComponent implements OnInit {
    */
   @Input() resizable = true;
   /**
-   * unique identifier of the pane.
+   * Unique identifier of the pane.
    */
   @Input() id: string;
 
@@ -132,8 +132,7 @@ export class PaneComponent implements OnInit {
 
   /**
    * Whether this pane should be opened or not. Usually used for initialization.
-   * Whenever it changes to `true`, this pane will be opened (if not already opened)
-   * and whenever it changes to `false` this pane will be closed if it's currently open.
+   * Whenever it changes to `true`/`false`, this pane is opened/closed.
    */
   @Input()
   @CoerceBoolean

@@ -33,8 +33,15 @@
 <p>
   In the example above, size of each pane is synchronized with a dedicated query parameter, via
   <a routerLink="/api/PaneComponent" fragment="size">size input</a> and
-  <a routerLink="/api/PaneComponent" fragment="sizeChange">sizeChange output</a>.
-  Go ahead and resize a pane and refresh the page to see it in action.
+  <a routerLink="/api/PaneComponent" fragment="sizeChange">sizeChange output</a>:
+  <app-code-block [source]="codeBlock3"></app-code-block>
+  <code>setSize</code> code is something like this:
+  <app-code-block [source]="codeBlock1"></app-code-block>
+  We also initiate size of each pane from corresponding query param in <code>OnInit</code>
+  lifecycle hook:
+  <app-code-block [source]="codeBlock2"></app-code-block>
+
+  Scroll up, resize a pane and refresh the page to see it in action.
 </p>
 
 <p>
@@ -53,8 +60,8 @@
   them from one side to another, unless you
   opt out of <a routerLink="/api/PaneAreaComponent" fragment="tabsDraggable">this feature</a>.
   For being able to restore previous pane positions, <code>ngx-pane-area</code> accepts a
-  <a routerLink="/api/PaneAreaComponent" fragment="state">state</a> input of type
-  <a routerLink="/api/PaneAreaState">PaneAreaState</a> which teaches it how to
+  <a routerLink="/api/PaneAreaComponent" fragment="panePositions">panePositions input</a> of type
+  <a routerLink="/api/PanePositions">PanePositions</a> which teaches pane-area how to
   arrange panes in different sides, overriding their original arrangement based on template.
   <br/>
   While you can provide this state object as an input, <code>ngx-pane-area</code> component looks for an
@@ -65,16 +72,16 @@
   A default implementation of
   <a routerLink="/api/PaneAreaStateManager">PaneAreaStateManager</a> which is based on local storage
   (<a routerLink="/api/LocalStoragePaneAreaStateManager">LocalStoragePaneAreaStateManager</a>)
-  is shipped with the library but not provided by default.
+  is shipped with the library but <b>not provided by default</b>.
   You can provide it in your own module or use
   <a routerLink="/api/LocalStorageStateManagerDirective">localStorageStateManagement directive</a>
   on <code>ngx-pane-area</code>. It provides
-  an instance of <code>LocalStoragePaneAreaStateManager</code> to pane area.
+  an instance of <code>LocalStoragePaneAreaStateManager</code> to that pane area.
 
 </p>
 
 <app-callout type="info">
-  The only part of UI state which is handled by
+  For now, the only part of UI state which is handled by
   <a routerLink="/api/PaneAreaStateManager">PaneAreaStateManager</a> is arrangement of panes.
   If you want to preserve other things (like
   selected pane) across page reloads, you need to handle it yourself as shown in the previous example.
@@ -82,10 +89,10 @@
 <p>
   Below is a refined version of the previous example, in which a unique id is used for each component and
   <code>localStorageStateManager</code> directive is added to <code>ngx-pane-area</code> component.
-  Go ahead and move third pane to the left side and refresh the page to see how it keeps its position.
+  Go ahead and move <b><i>pane #3</i></b> to the left side and refresh the page to see how it keeps its position.
 </p>
 <ngx-pane-area id="state-management-demo" ngxLocalStorageStateManager
-               style="height: 280px;" #paneArea (stateChange)="check(paneArea)">
+               style="height: 280px;" #paneArea (panePositionsChange)="check(paneArea)">
   <ngx-pane-group align="start" id="group1" [defaultSize]="200">
     <ngx-pane id="pane1" title="Pane #1" [size]="sizes[0]" (sizeChange)="setSize(0,$event)">First Pane</ngx-pane>
     <ngx-pane id="pane2" title="Pane #2" [size]="sizes[1]" (sizeChange)="setSize(1,$event)">Second Pane</ngx-pane>

@@ -1,7 +1,7 @@
 import {InjectionToken} from '@angular/core';
 
 /**
- * Injection token for providing defaults for input parameters of ngx-panes components
+ * Injection token for providing defaults for input parameters of components
  * such as {@link PaneGroupComponent} or {@link PaneAreaComponent}.
  * The value of this injection token must be of type {@link NgxPanesDefaults}.
  *

@@ -3,7 +3,7 @@ import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 /**
  * `ngx-pane-header` is used for providing custom headers for panes.
  *
- * By default the header of the pane consist of a simple text label
+ * By default pane header consists of a simple text label
  * (which is determined by {@link PaneComponent#title PaneComponent title input}).
  * You can override this behaviour, and use custom content as
  * pane header by using a `<ngx-pane-header>...</ngx-pane-header>` inside
@@ -13,7 +13,7 @@ import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
  *     <ngx-pane-header>this is a <b>special</b> header</ngx-pane-header>
  *     <!-- pane content goes here -->
  *   </ngx-pane>
- *  <ngx-pane title="will be used for header in absense of ngx-pane-header">...</ngx-pane>
+ *  <ngx-pane title="will be used for both title and header">...</ngx-pane>
  */
 @Component({
   selector: 'ngx-pane-header',

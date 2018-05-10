@@ -45,6 +45,30 @@ export class StateManagementGuideComponent implements OnInit {
   </ngx-pane-group>  
 </ngx-pane-area>`;
 
+  codeBlock1 = `
+  setSize(index, size) {
+    this.router.navigate(['.'], {
+      replaceUrl: true,
+      relativeTo: this.route,
+      queryParamsHandling: 'merge',
+      queryParams: {
+        [\`s\${index + 1}\`]: size
+      }
+    });
+  }
+    `;
+  codeBlock2 = `
+  ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      this.sizes = [
+        parseInt(params.w1, 10) || undefined,
+        parseInt(params.w2, 10) || undefined,
+        parseInt(params.w3, 10) || undefined,
+      ];
+    });
+  }  
+  `;
+  codeBlock3 = `<ngx-pane title="Pane #1" [size]="sizes[0]" (sizeChange)="setSize(0,$event, true)">Third Pane</ngx-pane>`;
   sources = {
     customStateManager: customStateManagerExample,
     provider:

@@ -10,11 +10,11 @@
     "website:deploy:latest": "gh-pages -d website-build --dest=latest",
     "website:clean": "gh-pages-clean",
     "website:build:contents": "webpack --config tools/content/webpack.config",
-    "website:watch:contents": "npm run build:website:contents -- -w",
+    "website:watch:contents": "npm run website:build:contents -- -w",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "lib:build": "npm run build:lib:ts && npm run build:lib:scss && build:lib:themes",
+    "lib:build": "npm run lib:build:ts && npm run lib:build:scss && npm run lib:build:themes",
     "lib:build:ts": "ng-packagr -p lib/package.json",
     "lib:build:scss": "scss-bundle -c lib/scss-bundle.config.json",
     "lib:build:themes": "node-sass lib/themes -o=node_modules/ngx-panes/themes --source-map=true --output-style=compressed"

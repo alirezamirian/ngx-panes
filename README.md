@@ -8,9 +8,11 @@ Pane windows (aka tool windows) for Angular. [See a demo][github-demo]
 - [Homepage][homepage]
 - [Getting started][getting-started]
 - [Demos][demos]
+- [API Docs][apiDocs]
 
 [homepage]: https://alirezamirian.github.io/ngx-panes/latest
 [github-demo]: https://alirezamirian.github.io/ngx-panes/latest/#/demos/github/angular/material2
 [getting-started]: https://alirezamirian.github.io/ngx-panes/latest/#/guides/getting-started
 [demos]: https://alirezamirian.github.io/ngx-panes/latest/#/demos
 [demoGif]: https://user-images.githubusercontent.com/3150694/39648819-d0caedda-4ff8-11e8-99bf-be53862806ba.gif
+[apiDocs]: https://alirezamirian.github.io/ngx-panes/latest/#/api

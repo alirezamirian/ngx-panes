@@ -15,12 +15,12 @@ import {DragStartEvent, PaneTabComponent} from '../pane-tab/pane-tab.component';
 import {PaneTabDragDropContext} from '../pane-tab-drag-drop-context';
 import {PaneGroupComponent} from '../pane-group/pane-group.component';
 
-interface Range {
+export interface Range {
   from;
   to: any;
 }
 
-interface DragState {
+export interface DragState {
   draggingPane: PaneComponent;
   draggingPaneIndex: number;
   panesRect: any | ClientRect;

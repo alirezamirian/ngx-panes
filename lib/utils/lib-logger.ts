@@ -1,3 +1,4 @@
+/** @private */
 export class LibLogger {
   warn(...args) {
     this.log('warn', args);

@@ -5,7 +5,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --proxy-config website/proxy.conf.js",
-    "website:build": "ng build --prod --aot=false --output-path=website-build",
+    "website:build": "ng build --prod --aot=false --base-href=ngx-panes --output-path=website-build",
     "website:deploy:master": "gh-pages -d website-build --dest=master",
     "website:deploy:latest": "gh-pages -d website-build --dest=latest",
     "website:clean": "gh-pages-clean",

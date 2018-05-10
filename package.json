@@ -14,6 +14,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
+    "lib:publish": "npm publish node_modules/ngx-panes",
     "lib:build": "npm run lib:build:ts && npm run lib:build:scss && npm run lib:build:themes",
     "lib:build:ts": "ng-packagr -p lib/package.json",
     "lib:build:scss": "scss-bundle -c lib/scss-bundle.config.json",

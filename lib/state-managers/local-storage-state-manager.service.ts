@@ -3,7 +3,7 @@ import {PaneAreaComponent} from '../pane-area/pane-area.component';
 import {Observable} from 'rxjs/Observable';
 import {PaneAreaStateManager} from '../pane-area-state-manager';
 import {libLogger} from '../utils/lib-logger';
-import {PaneAreaState, PanePositions} from '../pane-area/types';
+import {PaneAreaState} from '../pane-area/types';
 
 /**
  * A {@link PaneAreaStateManager} service, which saves/loads pane area state in

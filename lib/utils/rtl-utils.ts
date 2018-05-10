@@ -1,15 +1,15 @@
 /**
  * Direction independent alignment. See also {@link Align}, {@link PaneGroupComponent#align pane group align input}.
  */
-export type RelativeAlign = 'start'|'end'|'top'|'bottom';
+export type RelativeAlign = 'start' | 'end' | 'top' | 'bottom';
 /**
  * See also {@link RelativeAlign}, {@link PaneGroupComponent#align pane group align input}
  */
-export type Align = 'left'|'right'|'top'|'bottom';
+export type Align = 'left' | 'right' | 'top' | 'bottom';
 /**
  * @private
  */
-export type Dir = 'rtl'|'ltr';
+export type Dir = 'rtl' | 'ltr';
 
 const _toRelativeAlignMap = {
   rtl: {
@@ -52,13 +52,13 @@ const _toAlignMap = {
 /**
  * @private
  */
-export const toRelativeAlign = function(align: Align|RelativeAlign, dir: Dir): RelativeAlign{
+export const toRelativeAlign = function (align: Align | RelativeAlign, dir: Dir): RelativeAlign {
   return <RelativeAlign> _toRelativeAlignMap[dir][align];
 };
 
 /**
  * @private
  */
-export const toAlign = function(relativeAlign: RelativeAlign|Align, dir: Dir): Align{
+export const toAlign = function (relativeAlign: RelativeAlign | Align, dir: Dir): Align {
   return <Align> _toAlignMap[dir][relativeAlign];
 };
